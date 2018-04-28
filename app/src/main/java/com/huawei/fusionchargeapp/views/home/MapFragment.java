@@ -38,6 +38,7 @@ import com.corelibs.base.BaseFragment;
 import com.corelibs.common.AppManager;
 import com.corelibs.subscriber.RxBusSubscriber;
 import com.corelibs.utils.PreferencesHelper;
+import com.corelibs.utils.ToastMgr;
 import com.corelibs.utils.rxbus.RxBus;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.huawei.fusionchargeapp.MainActivity;
@@ -113,13 +114,32 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
     LinearLayout ll_appontment;
     @Bind(R.id.rl_charger_order)
     RelativeLayout rl_charger_order;
-
+    @Bind(R.id.tv_appointment_address)
+    TextView tv_appointment_address;
+    @Bind(R.id.tv_appointment_time)
+    TextView tv_appointment_time;
+    @Bind(R.id.iv_hint)
+    ImageView iv_hint;
+    @Bind(R.id.ll_hint)
+    LinearLayout ll_hint;
+    @Bind(R.id.tv_pile_num)
+    TextView tv_pile_num;
+    @Bind(R.id.tv_pile_name)
+    TextView tv_pile_name;
+    @Bind(R.id.tv_gun_num)
+    TextView tv_gun_num;
+    @Bind(R.id.ll_time)
+    LinearLayout ll_time;
 
     private AMap aMap;
+    //预约超时提示 和计时器
     private AppointmentTimeOutDialog appointmentTimeOutDialog;
     private Timer timerAppointment;
-
-
+    private long appointmentTime;
+    //对应充电桩的费率信息
+    private List<ChargeFeeBean> list_fee;
+    //首页地图桩站信息
+    private List<MapDataBean> list;
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_main;
@@ -136,16 +156,19 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                 rl_bottom_detail.setVisibility(View.GONE);
             }
         });
+
         timerAppointment = new Timer();
         Intent intent = new Intent(getContext(), TimerService.class);
         getContext().bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+
         location();
         initMapData();
+        initRxBus();
 
+        //控制预约信息的显示隐藏
         ll_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("yzh", "---" + (ll_hint.getVisibility() == View.VISIBLE));
                 if (ll_hint.getVisibility() == View.VISIBLE) {
                     ll_hint.setVisibility(View.GONE);
                     tv_appointment_address.setText(getString(R.string.home_appointment_hint));
@@ -153,113 +176,17 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                     ll_hint.setVisibility(View.VISIBLE);
                     if (homeAppointmentBean != null) {
                         tv_appointment_address.setText(homeAppointmentBean.chargingAddress);
-                        Log.e("yzh", "-----");
                     }
 
                 }
-//                CommonDialog dialog=new CommonDialog(getContext(),"","222222222",2);
-//                dialog.show();
             }
         });
         appointmentTimeOutDialog = new AppointmentTimeOutDialog(getContext());
 
-        RxBus.getDefault().toObservable(HomeRefreshBean.class, Constant.HOME_STATUE_REFRESH)
-                .compose(this.<HomeRefreshBean>bindToLifecycle())
-                .subscribe(new RxBusSubscriber<HomeRefreshBean>() {
-
-                    @Override
-                    public void receive(HomeRefreshBean data) {
-
-                        //支付成功了 屏蔽未支付提示
-                        if (data.type == 0) {
-                            rl_not_pay.setVisibility(View.GONE);
-                            ActionControl.getInstance(getViewContext()).setHasNoPayOrder(false, null);
-                        } else if (data.type == 1) {
-                            //预约结束
-                            ll_appontment.setVisibility(View.GONE);
-                            ActionControl.getInstance(getViewContext()).setHasAppointment(false, null);
-                        }
-
-                    }
-                });
-        RxBus.getDefault().toObservable(Object.class, Constant.APPOINTMENT_TIME_OUT)
-                .compose(this.bindToLifecycle())
-                .subscribe(new RxBusSubscriber<Object>() {
-                    @Override
-                    public void receive(Object data) {
-                        if (AppManager.getAppManager().currentActivity().getClass().equals(MainActivity.class)) {
-                            appointmentTimeOutDialog.show();
-                            appointmentTimeOutDialog.setIvDeleteListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    appointmentTimeOutDialog.dismiss();
-                                }
-                            });
-                            appointmentTimeOutDialog.setReAppointment(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    appointmentTimeOutDialog.dismiss();
-                                }
-                            });
-                        }
-                    }
-                });
-        RxBus.getDefault().toObservable(Object.class, Constant.REFRESH_MAP_OR_LIST_DATA)
-                .compose(this.<Object>bindToLifecycle())
-                .subscribe(new RxBusSubscriber<Object>() {
-
-                    @Override
-                    public void receive(Object data) {
-                        presenter.getData();
-                    }
-                });
-        RxBus.getDefault().toObservable(Object.class, Constant.REFRESH_HOME_STATUE)
-                .compose(this.bindToLifecycle())
-                .subscribe(new RxBusSubscriber<Object>() {
-
-                    @Override
-                    public void receive(Object data) {
-                        if (UserHelper.getSavedUser() != null && !Tools.isNull(UserHelper.getSavedUser().token)) {
-                            getHomeStatue();
-                        }
-                    }
-                });
-
-        RxBus.getDefault().toObservable(Object.class, Constant.REFRESH_APPOINTMENT_TIME)
-                .compose(this.bindToLifecycle())
-                .subscribe(new RxBusSubscriber<Object>() {
-                    @Override
-                    public void receive(Object data) {
-                        Log.e("yzh", "receive--" + Tools.formatMinute(Long.parseLong(PreferencesHelper.getData(Constant.TIME_APPOINTMENT))));
-                        tv_appointment_time.setText(Tools.formatMinute(Long.parseLong(PreferencesHelper.getData(Constant.TIME_APPOINTMENT))));
-                    }
-                });
         if (UserHelper.getSavedUser() != null && !Tools.isNull(UserHelper.getSavedUser().token)) {
             getHomeStatue();
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-
-//            // 检查该权限是否已经获取
-//            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.READ_PHONE_STATE}, 10);
-//            // 权限是否已经 授权 GRANTED---授权  DINIED---拒绝
-////            if (i != PackageManager.PERMISSION_GRANTED) {
-////                // 如果没有授予该权限，就去提示用户请求
-//////                showDialogTipUserRequestPermission();
-////            }
-            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED
-                    || ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED
-                    || ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_PHONE_STATE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(getContext(), "没有权限,请手动开启定位权限", Toast.LENGTH_SHORT).show();
-                // 申请一个（或多个）权限，并提供用于回调返回的获取码（用户定义）
-                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.READ_PHONE_STATE}, 10);
-
-            }
-
-        }
         timerAppointment.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -301,7 +228,50 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
         }, 1000, 1000);
     }
 
-    private long appointmentTime;
+    //初始化通知接收
+    private void initRxBus() {
+        RxBus.getDefault().toObservable(HomeRefreshBean.class, Constant.HOME_STATUE_REFRESH)
+                .compose(this.<HomeRefreshBean>bindToLifecycle())
+                .subscribe(new RxBusSubscriber<HomeRefreshBean>() {
+
+                    @Override
+                    public void receive(HomeRefreshBean data) {
+                        //支付成功了 屏蔽未支付提示
+                        if (data.type == 0) {
+                            rl_not_pay.setVisibility(View.GONE);
+                            ActionControl.getInstance(getViewContext()).setHasNoPayOrder(false, null);
+                        } else if (data.type == 1) {
+                            //预约结束 屏蔽预约提示
+                            ll_appontment.setVisibility(View.GONE);
+                            ActionControl.getInstance(getViewContext()).setHasAppointment(false, null);
+                        }
+
+                    }
+                });
+        //刷新界面地图或者列表站点数据
+        RxBus.getDefault().toObservable(Object.class, Constant.REFRESH_MAP_OR_LIST_DATA)
+                .compose(this.<Object>bindToLifecycle())
+                .subscribe(new RxBusSubscriber<Object>() {
+
+                    @Override
+                    public void receive(Object data) {
+                        presenter.getData();
+                    }
+                });
+        //刷新首页获取未支付订单，充电中订单， 预约中订单
+        RxBus.getDefault().toObservable(Object.class, Constant.REFRESH_HOME_STATUE)
+                .compose(this.bindToLifecycle())
+                .subscribe(new RxBusSubscriber<Object>() {
+
+                    @Override
+                    public void receive(Object data) {
+                        if (UserHelper.getSavedUser() != null && !Tools.isNull(UserHelper.getSavedUser().token)) {
+                            getHomeStatue();
+                        }
+                    }
+                });
+
+    }
 
     //获取未支付 充电  预约情况
     private void getHomeStatue() {
@@ -310,6 +280,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
         presenter.getUserAppointment();
     }
 
+    //获取地图数据
     private void initMapData() {
         presenter.getData();
     }
@@ -336,7 +307,6 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
         ImageView imageView = new ImageView(getContext());
         imageView.setImageResource(R.mipmap.location);
         BitmapDescriptor markerIcon = BitmapDescriptorFactory
-
                 .fromView(imageView);
         myLocationStyle.myLocationIcon(markerIcon);
         myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE_NO_CENTER);//连续定位、蓝点不会移动到地图中心点，地图依照设备方向旋转，并且蓝点会跟随设备移动。
@@ -368,42 +338,30 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
     public void showFee() {
         ChargeFeeDialog dialog = new ChargeFeeDialog(getContext());
         dialog.show();
-//        List<ChargeFeeBean> list=new ArrayList<>();
-//        ChargeFeeBean bean=new ChargeFeeBean();
-//        bean.time="00:00~06:00";
-//        bean.unit="0.0030度";
-//        list.add(bean);
-//        list.add(bean);
-//        list.add(bean);
-//        list.add(bean);
-        dialog.setFeeDatas(list_fee);
-
+        if (list_fee != null && list_fee.size() != 0) {
+            dialog.setFeeDatas(list_fee);
+        }
     }
 
     //Android6.0申请权限的回调方法
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        Log.e("yzh", "1111232312312===" + requestCode);
         switch (requestCode) {
-
             // requestCode即所声明的权限获取码，在checkSelfPermission时传入
             case 10:
-                Log.e("yzh", "1111111111111");
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // 获取到权限，作相应处理（调用定位SDK应当确保相关权限均被授权，否则可能引起定位失败）
-                    Log.e("yzh", "eeeeeeeeeeeeeee");
                     presenter.getData();
                 } else {
                     // 没有获取到权限，做特殊处理
-                    Toast.makeText(getContext(), "获取位置权限失败，请手动开启", Toast.LENGTH_SHORT).show();
+                    ToastMgr.show(getString(R.string.get_location_permission_fail));
                 }
                 break;
             default:
                 break;
         }
     }
-
 
     @OnClick(R.id.tv_pay)
     public void goPay() {
@@ -429,18 +387,22 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
     public void onResume() {
         super.onResume();
         map.onResume();
-        Log.e("yzh", "onResume");
-//        if (Build.VERSION.SDK_INT >= 23
-//                && getContext().getApplicationInfo().targetSdkVersion >= 23) {
-//            if (isNeedCheck) {
-//                Log.e("yzh","checkPerminssions");
-//                checkPermissions(needPermissions);
-//            }
-//        }
 
+        //动态请求权限
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED
+                    || ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED
+                    || ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_PHONE_STATE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(getContext(), "没有权限,请手动开启定位权限", Toast.LENGTH_SHORT).show();
+                // 申请一个（或多个）权限，并提供用于回调返回的获取码（用户定义）
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.READ_PHONE_STATE}, 10);
+            }
+        }
 
     }
-
 
     @Override
     public void onPause() {
@@ -507,21 +469,11 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                     presenter.getData();
                 }
             } else {
-                String errText = "定位失败," + aMapLocation.getErrorCode() + ": " + aMapLocation.getErrorInfo();
-                Log.e("AmapErr", errText);
+                String errText = "location_fail," + aMapLocation.getErrorCode() + ": " + aMapLocation.getErrorInfo();
+                Log.e("yzh", errText);
             }
         }
     }
-
-    protected String[] needPermissions = {
-            Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.READ_PHONE_STATE
-    };
-    private static final int PERMISSON_REQUESTCODE = 0;
-    private boolean isNeedCheck = true;
 
     @Override
     public void onTouch(MotionEvent motionEvent) {
@@ -536,8 +488,6 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
         //进入对应的充电桩详情
 
     }
-
-    private List<MapDataBean> list;
 
     @Override
     public void renderMapData(List<MapDataBean> list) {
@@ -566,7 +516,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
 
     @Override
     public void getMarkInfo(long id, MapInfoBean mapInfoBean) {
-        //获取费率数据
+        //充电桩获取费率数据
         if (mapInfoBean.objType.equals("pile")) {
             presenter.getFeeInfo(id);
         }
@@ -593,8 +543,6 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
         tv_map_info_free_num.setText(mapInfoBean.freeNum + "");
     }
 
-    private List<ChargeFeeBean> list_fee;
-
     @Override
     public void showPileFeeInfo(PileFeeBean bean) {
         list_fee = bean.feeList;
@@ -616,46 +564,22 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
     }
 
     private HomeOrderBean homeOrderBean;
-
     @Override
     public void hasNoPayOrder(boolean has, HomeOrderBean bean) {
         ActionControl.getInstance(getContext()).setHasNoPayOrder(has, bean);
         if (has) {
             rl_not_pay.setVisibility(View.VISIBLE);
             homeOrderBean = bean;
-
         } else {
             rl_not_pay.setVisibility(View.GONE);
         }
-
     }
 
-
-    @Bind(R.id.tv_appointment_address)
-    TextView tv_appointment_address;
-    @Bind(R.id.tv_appointment_time)
-    TextView tv_appointment_time;
-    @Bind(R.id.iv_hint)
-    ImageView iv_hint;
-    @Bind(R.id.ll_hint)
-    LinearLayout ll_hint;
-    @Bind(R.id.tv_pile_num)
-    TextView tv_pile_num;
-    @Bind(R.id.tv_pile_name)
-    TextView tv_pile_name;
-    @Bind(R.id.tv_gun_num)
-    TextView tv_gun_num;
-    @Bind(R.id.ll_time)
-    LinearLayout ll_time;
-
     private HomeAppointmentBean homeAppointmentBean;
-
     @Override
     public void renderAppoinmentInfo(boolean has, HomeAppointmentBean bean) {
-
         ActionControl.getInstance(getContext()).setHasAppointment(has, bean);
         homeAppointmentBean = bean;
-
         if (has) {
             tv_pile_num.setText(bean.runCode);
             tv_pile_name.setText(bean.chargingPileName);
@@ -670,20 +594,15 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                 PreferencesHelper.saveData(Constant.TIME_APPOINTMENT, surplusTime + "");
                 PreferencesHelper.saveData(Constant.APPOINTMENT_DURING, bean.reserveDuration);
                 tv_appointment_time.setText(Tools.formatMinute(surplusTime));
-
             }
             ll_appontment.setVisibility(View.VISIBLE);
-//            TimeServiceManager.getInstance().getTimerService().timeAppointment();
         } else {
             ll_appontment.setVisibility(View.GONE);
         }
 
-
     }
 
-
     private HomeChargeOrderBean homeChargeOrderBean;
-
     @Override
     public void renderHomeChargerOrder(boolean has, HomeChargeOrderBean bean) {
         ActionControl.getInstance(getContext()).setHasCharging(has, bean);
@@ -697,13 +616,11 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
 
     }
 
-    //    private TimerService timerService;
     private ServiceConnection mConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             TimerService.ServiceBinder binder = (TimerService.ServiceBinder) service;
             TimeServiceManager.getInstance().setTimerService(binder.getService());
-//            TimeServiceManager.getInstance().getTimerService().timerHour();
         }
 
         @Override
@@ -732,9 +649,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                 choiceNotAppointment = false;
             }
             startActivity(GuildActivity.getLauncher(getContext(), currentMapDataBean.latitude, currentMapDataBean.longitude, null, choiceNotAppointment));
-//            startActivity(ParkActivity.getLauncher(getContext()));
         }
-
     }
 
     @OnClick(R.id.enter_charge_station_iv)
@@ -745,7 +660,6 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
         } else {
             startActivity(ChargeDetailsActivity.getLauncher(getActivity(), currentMapDataBean.id + "", currentMapDataBean.type));
         }
-
     }
 
     @OnClick(R.id.iv_scan)
@@ -757,7 +671,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
             //进入扫一扫界面
             new IntentIntegrator(getActivity())
                     .setCaptureActivity(ChargeCaptureActivity.class)
-                    .setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)// 扫码的类型,可选：一维码，二维码，一/二维码
+                    .setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES)// 扫码的类型,可选：一维码，二维码，一/二维码
                     .setPrompt(getString(R.string.please_take_qrcode))// 设置提示语
                     .setCameraId(0)// 选择摄像头,可使用前置或者后置
                     .setBeepEnabled(true)// 是否开启声音,扫完码之后会"哔"的一声
