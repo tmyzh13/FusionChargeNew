@@ -422,20 +422,7 @@ public class GuildActivity  extends BaseActivity<GuaildView,GuaildPresenter> imp
 
     private TimerService timerService;
 
-    private ServiceConnection mConnection =new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            TimerService.ServiceBinder binder =(TimerService.ServiceBinder)service;
-            timerService=binder.getService();
-            timerService.timeAppointment();
-        }
 
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            timerService.cancelTimerAppointment();
-            timerService=null;
-        }
-    };
 
     @Override
     public void goLogin() {

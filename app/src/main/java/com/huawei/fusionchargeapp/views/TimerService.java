@@ -82,6 +82,8 @@ public class TimerService extends Service{
             isAppointmentCharge=false;
         }
     }
+
+
     //更新充电时间
     public void timerHour(){
         //一分钟更新一次时间

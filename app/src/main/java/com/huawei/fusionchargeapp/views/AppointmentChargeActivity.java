@@ -18,6 +18,7 @@ import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.beans.AppointResponseBean;
 import com.huawei.fusionchargeapp.model.beans.UserBean;
 import com.huawei.fusionchargeapp.presenter.AppointPresenter;
+import com.huawei.fusionchargeapp.utils.ActionControl;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.interfaces.AppointView;
 import com.huawei.fusionchargeapp.weights.NavBar;
@@ -94,12 +95,14 @@ public class AppointmentChargeActivity extends BaseActivity<AppointView, Appoint
             case R.id.complete_appoint_tv:
                 showLoading();
 
-
                 if(UserHelper.getSavedUser()==null|| Tools.isNull(UserHelper.getSavedUser().token)){
                     startActivity(LoginActivity.getLauncher(this));
                     return;
                 }
-                presenter.appointAocation(gunCode,chargingPileId,chargingPileName,getNowTime(),getEndTime(),appointTime);
+                if(ActionControl.getInstance(AppointmentChargeActivity.this).canAction()){
+                    presenter.appointAocation(gunCode,chargingPileId,chargingPileName,getNowTime(),getEndTime(),appointTime);
+                }
+
                 break;
         }
     }
