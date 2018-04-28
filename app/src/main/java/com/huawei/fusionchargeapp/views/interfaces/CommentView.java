@@ -1,0 +1,20 @@
+package com.huawei.fusionchargeapp.views.interfaces;
+
+import com.corelibs.base.BaseView;
+import com.huawei.fusionchargeapp.model.beans.CommentSortBean;
+import com.huawei.fusionchargeapp.model.beans.CommentsBean;
+import com.huawei.fusionchargeapp.model.beans.PayInfoBean;
+
+import java.util.List;
+
+/**
+ * Created by issuser on 2018/4/25.
+ */
+
+public interface CommentView extends BaseView {
+    void commentPublished();
+    void getCommentSortAndTimes(List<CommentSortBean> times);
+    void queryCommentInfo(List<CommentsBean> infos);
+    void queryCommentSortType(List<CommentSortBean> sorts);
+    void renderData(PayInfoBean bean);
+}

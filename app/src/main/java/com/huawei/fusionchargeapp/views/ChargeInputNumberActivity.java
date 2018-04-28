@@ -1,0 +1,183 @@
+package com.huawei.fusionchargeapp.views;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.corelibs.api.ApiFactory;
+import com.corelibs.api.ResponseTransformer;
+import com.corelibs.base.BaseActivity;
+import com.corelibs.base.BasePresenter;
+import com.corelibs.subscriber.ResponseSubscriber;
+import com.corelibs.utils.ToastMgr;
+import com.google.gson.Gson;
+import com.huawei.fusionchargeapp.R;
+import com.huawei.fusionchargeapp.model.UserHelper;
+import com.huawei.fusionchargeapp.model.apis.ScanApi;
+import com.huawei.fusionchargeapp.model.beans.BaseData;
+import com.huawei.fusionchargeapp.model.beans.MyOrderData;
+import com.huawei.fusionchargeapp.model.beans.RequestMyOrderBean;
+import com.huawei.fusionchargeapp.model.beans.RequestMyOrderChildBean;
+import com.huawei.fusionchargeapp.model.beans.RequestScanBean;
+import com.huawei.fusionchargeapp.model.beans.ScanChargeInfo;
+import com.huawei.fusionchargeapp.model.beans.UserBean;
+import com.huawei.fusionchargeapp.utils.Tools;
+import com.huawei.fusionchargeapp.weights.NavBar;
+import com.trello.rxlifecycle.ActivityEvent;
+
+import butterknife.Bind;
+import butterknife.OnClick;
+
+public class ChargeInputNumberActivity extends BaseActivity {
+
+    private ScanApi api;
+
+    @Bind(R.id.nav)
+    NavBar navBar;
+    @Bind(R.id.et_input_number)
+    EditText etInputNumber;
+    @Bind(R.id.sure)
+    TextView sure;
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_charge_input_number;
+    }
+
+    @Override
+    protected void init(Bundle savedInstanceState) {
+        navBar.setColorRes(R.color.app_blue);
+        navBar.setNavTitle(this.getString(R.string.charge));
+
+        api = ApiFactory.getFactory().create(ScanApi.class);
+    }
+
+    @Override
+    protected BasePresenter createPresenter() {
+        return null;
+    }
+
+    @OnClick(R.id.sure)
+    public void onViewClicked() {
+        String str = etInputNumber.getText().toString();
+        long number = 0;
+        try {
+            number = Long.parseLong(str);
+        } catch (Exception e){
+            showToast("请输入正确的二维码!");
+            return;
+        }
+
+        getData(number);
+//        testt();
+    }
+
+    private void getData(long number){
+        showLoading();
+
+        if(UserHelper.getSavedUser()==null|| Tools.isNull(UserHelper.getSavedUser().token)){
+            startActivity(LoginActivity.getLauncher(this));
+            hideLoading();
+            return;
+        }
+
+        RequestScanBean bean = new RequestScanBean();
+        bean.setAppUserId(UserHelper.getSavedUser().appUserId + "");
+        bean.setQrCode(number + "");
+
+        //正确
+        api.getScanChargeInfo(UserHelper.getSavedUser().token,bean)
+                .compose(new ResponseTransformer<>(this.<BaseData<ScanChargeInfo>>bindUntilEvent(ActivityEvent.DESTROY)))
+                .subscribe(new ResponseSubscriber<BaseData<ScanChargeInfo>>() {
+                               @Override
+                               public void success(BaseData<ScanChargeInfo> baseData) {
+                                   hideLoading();
+                                   if(baseData.data != null) {
+                                       Gson gson = new Gson();
+                                       String data = gson.toJson(baseData.data);
+                                       Intent intent = new Intent(ChargeInputNumberActivity.this,ChargeOrderDetailsActivity.class);
+                                       intent.putExtra("data",data);
+                                       startActivity(intent);
+                                   } else {
+                                       showToast(getString(R.string.no_user_info));
+                                   }
+
+                                   finish();
+                               }
+
+                               @Override
+                               public boolean operationError(BaseData<ScanChargeInfo> scanChargeInfoBaseData, int status, String message) {
+                                   hideLoading();
+                                   if(scanChargeInfoBaseData.code == 403) {
+                                       goLogin();
+                                   }
+                                   showToast("未获取数据，请重新输入！");
+                                   return super.operationError(scanChargeInfoBaseData, status, message);
+                               }
+
+                               @Override
+                               public void onError(Throwable e) {
+                                   super.onError(e);
+                                   hideLoading();
+                                   showToast(getString(R.string.time_out));
+                               }
+                           }
+                );
+
+
+     /*   LoginApi api1 = ApiFactory.getFactory().create(LoginApi.class);
+        LoginRequestBean bean1 = new LoginRequestBean();
+        bean1.phone = "17366206080";
+//        bean.carrier = Tools.getPhoneType();
+        bean1.carrier = "iphone";
+        bean1.type = 0;
+        if (0 == 0) {//密码登录
+            bean1.passWord = "123";
+        }
+        api1.login(bean1)
+                .compose(new ResponseTransformer<>(this.<BaseData>bindUntilEvent(ActivityEvent.DESTROY)))
+                .subscribe(new ResponseSubscriber<BaseData>() {
+                    @Override
+                    public void success(BaseData baseData) {
+                        Log.e("zw",baseData.toString());
+
+                    }
+                });*/
+
+    }
+
+    private void testt(){
+
+        RequestMyOrderBean bean = new RequestMyOrderBean();
+        bean.setRp("10");
+        bean.setPage("1");
+        RequestMyOrderChildBean bean1 = new RequestMyOrderChildBean();
+        bean1.setAppUserId(UserHelper.getSavedUser().appUserId + "");
+        bean.setCondition(bean1);
+
+        api.getMyOrder(UserHelper.getSavedUser().token,bean)
+                .compose(new ResponseTransformer<>(this.<MyOrderData>bindUntilEvent(ActivityEvent.DESTROY)))
+                .subscribe(new ResponseSubscriber<MyOrderData>() {
+                    @Override
+                    public void success(MyOrderData baseData) {
+                        Log.e("zw"," success : " + baseData.toString());
+                    }
+
+                    @Override
+                    public boolean operationError(MyOrderData baseData, int status, String message) {
+                        Log.e("zw"," base : " + baseData.toString());
+
+                        return super.operationError(baseData, status, message);
+                    }
+                });
+    }
+
+    @Override
+    public void goLogin() {
+        ToastMgr.show(getString(R.string.login_fail));
+        UserHelper.clearUserInfo(UserBean.class);
+        startActivity(LoginActivity.getLauncher(ChargeInputNumberActivity.this));
+    }
+}

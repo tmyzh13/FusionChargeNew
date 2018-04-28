@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/text_white"
+    tools:context="com.huawei.fusionchargeapp.views.fragments.CommentsFragment">
+
+    <GridView
+        android:id="@+id/flow_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="3"
+        android:verticalSpacing="8dp"
+        android:horizontalSpacing="16dp"
+        android:layout_margin="@dimen/dp_10"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_2"
+        android:background="@color/publish_bg_color" />
+    <ListView
+        android:id="@+id/comments_lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:dividerHeight="@dimen/dp_5" />
+</LinearLayout>
