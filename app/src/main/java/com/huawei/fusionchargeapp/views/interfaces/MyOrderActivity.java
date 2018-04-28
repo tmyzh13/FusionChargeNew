@@ -82,6 +82,9 @@ public class MyOrderActivity extends BaseActivity {
 
         adapter = new OrderListAdapter(context,recordBeanList);
         lvOrder.setAdapter(adapter);
+
+        ptrLayout.disableLoading();
+        ptrLayout.setCanRefresh(false);
         getData();
 
     }
