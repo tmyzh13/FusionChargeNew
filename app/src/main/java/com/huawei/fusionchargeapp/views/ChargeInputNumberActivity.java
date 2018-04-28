@@ -77,11 +77,7 @@ public class ChargeInputNumberActivity extends BaseActivity {
     private void getData(long number){
         showLoading();
 
-        if(UserHelper.getSavedUser()==null|| Tools.isNull(UserHelper.getSavedUser().token)){
-            startActivity(LoginActivity.getLauncher(this));
-            hideLoading();
-            return;
-        }
+
 
         RequestScanBean bean = new RequestScanBean();
         bean.setAppUserId(UserHelper.getSavedUser().appUserId + "");
