@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.corelibs.api.ApiFactory;
 import com.corelibs.api.ResponseTransformer;
 import com.corelibs.base.BaseActivity;
 import com.corelibs.base.BasePresenter;
@@ -52,7 +53,6 @@ public class MyOrderActivity extends BaseActivity {
 
 
     private OrderListAdapter adapter;
-    private List<OrderBean> list;
 
     private List<RawRecordBean> recordBeanList;
 
@@ -75,13 +75,13 @@ public class MyOrderActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
-
+        api = ApiFactory.getFactory().create(ScanApi.class);
 
         navBar.setColorRes(R.color.app_blue);
         navBar.setNavTitle(context.getString(R.string.home_my_order));
 
-//        adapter = new OrderListAdapter(context,list);
-//        order_lv.setAdapter(adapter);
+        adapter = new OrderListAdapter(context,recordBeanList);
+        lvOrder.setAdapter(adapter);
         getData();
 
     }
@@ -109,18 +109,21 @@ public class MyOrderActivity extends BaseActivity {
                     public void success(MyOrderData baseData) {
                         recordBeanList = baseData.rawRecords;
                         if(null == recordBeanList || recordBeanList.isEmpty()) {
-
+                            showToast(getString(R.string.no_data));
+                        } else {
+                            adapter.setDatas(recordBeanList);
+                            adapter.notifyDataSetChanged();
                         }
-
+                        hideLoading();
                     }
 
                     @Override
                     public boolean operationError(MyOrderData baseData, int status, String message) {
+                        hideLoading();
                         if(baseData.code == 403) {
                             goLogin();
                         }
-//                        showToast(getString(R.string.));
-//                        return super.operationError(scanChargeInfoBaseData, status, message);
+                        showToast(getString(R.string.server_wrong));
                         return super.operationError(baseData, status, message);
                     }
 

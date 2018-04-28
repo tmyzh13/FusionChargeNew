@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.model.beans.OrderBean;
+import com.huawei.fusionchargeapp.model.beans.RawRecordBean;
 
 import java.util.List;
 
@@ -17,22 +18,26 @@ import java.util.List;
  */
 
 public class OrderListAdapter extends BaseAdapter {
-    private List<OrderBean> list;
+    private List<RawRecordBean> datas;
     private LayoutInflater inflater;
 
-    public OrderListAdapter(Context context, List<OrderBean> list) {
-        this.list = list;
+    public OrderListAdapter(Context context, List<RawRecordBean> list) {
+        this.datas = list;
         inflater = LayoutInflater.from(context);
+    }
+
+    public void setDatas(List<RawRecordBean> data){
+        this.datas = data;
     }
 
     @Override
     public int getCount() {
-        return list.size();
+        return datas == null ? 0 :datas.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return list.get(position);
+        return datas.get(position);
     }
 
     @Override
@@ -54,11 +59,24 @@ public class OrderListAdapter extends BaseAdapter {
             holder.oder_charge_fee_tv = convertView.findViewById(R.id.oder_charge_fee_tv);
             holder.oder_service_fee_tv = convertView.findViewById(R.id.oder_service_fee_tv);
             holder.oder_total_fee_tv = convertView.findViewById(R.id.oder_total_fee_tv);
+            holder.charge_gun_code = convertView.findViewById(R.id.charge_gun_code);
             convertView.setTag(holder);
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
         //设置数据
+        RawRecordBean bean = datas.get(position);
+        holder.oder_code_tv.setText(bean.getOrderNum());
+        holder.oder_time_tv.setText(bean.getChargingTime());
+        holder.charge_pile_code.setText(bean.getRunCode());
+        holder.charge_gun_code.setText(bean.getGunCode());
+        holder.charge_pile_address.setText(bean.getAddress());
+        if(bean.getPayStatus() == 1) {
+            holder.oder_status_tv.setText("");
+        }
+        holder.oder_charge_fee_tv.setText(bean.getEneryCharge() + "");
+        holder.oder_service_fee_tv.setText(bean.getServiceCharge() + "");
+        holder.oder_total_fee_tv.setText((bean.getServiceCharge() + bean.getEneryCharge()) + "");
 
         return convertView;
     }
@@ -72,5 +90,6 @@ public class OrderListAdapter extends BaseAdapter {
         TextView oder_charge_fee_tv;
         TextView oder_service_fee_tv;
         TextView oder_total_fee_tv;
+        TextView charge_gun_code;
     }
 }

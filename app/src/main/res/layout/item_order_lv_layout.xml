@@ -7,11 +7,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_48"
+        android:layout_height="58dp"
         android:background="@color/white"
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin">
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
 
         <TextView
             android:id="@+id/oder"
@@ -29,17 +31,20 @@
             android:layout_toRightOf="@id/oder" />
 
         <ImageView
+            android:id="@+id/iv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dp_5"
-            android:layout_toLeftOf="@id/oder_time_tv"
+            android:layout_alignParentBottom="true"
             android:src="@mipmap/time" />
 
         <TextView
+            android:layout_marginLeft="2dp"
             android:id="@+id/oder_time_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true" />
+            android:layout_toRightOf="@id/iv_time"
+            android:layout_alignParentBottom="true" />
     </RelativeLayout>
 
     <View
@@ -89,7 +94,34 @@
                     android:text="@string/guilding_charging_pile_no" />
 
                 <TextView
+                    android:maxLines="1"
                     android:id="@+id/charge_pile_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/oder_pile_code_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="@string/gun_code" />
+
+                <TextView
+                    android:maxLines="1"
+                    android:id="@+id/charge_gun_code"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_10" />
@@ -114,6 +146,7 @@
                     android:text="@string/charge_pile_address" />
 
                 <TextView
+                    android:maxLines="1"
                     android:id="@+id/charge_pile_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

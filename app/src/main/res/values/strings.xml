@@ -297,4 +297,6 @@
     <string name="account_pwd_fault">账号或密码错误，请重新输入</string>
     <string name="request_refuse">请求被拒绝！</string>
     <string name="get_location_permission_fail">获取位置权限失败，请手动开启</string>
+    <string name="gun_code">电枪编号</string>
+    <string name="charge_times">充电时长</string>
 </resources>

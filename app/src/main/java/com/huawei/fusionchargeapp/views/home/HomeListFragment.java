@@ -32,6 +32,7 @@ import butterknife.Bind;
 
 /**
  * Created by issuser on 2018/4/19.
+ *
  */
 
 public class HomeListFragment extends BaseFragment<HomeListView, HomeListPresenter> implements HomeListView, PtrLollipopLayout.RefreshCallback, PtrAutoLoadMoreLayout.RefreshLoadCallback {
