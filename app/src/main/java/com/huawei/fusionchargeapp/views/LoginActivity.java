@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.corelibs.base.BaseActivity;
 import com.corelibs.utils.PreferencesHelper;
+import com.corelibs.utils.ToastMgr;
 import com.corelibs.utils.rxbus.RxBus;
 import com.huawei.fusionchargeapp.MainActivity;
 import com.huawei.fusionchargeapp.R;
@@ -134,13 +135,18 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     /**
      * 用户注册
      */
-    private void registerUser() {
-        getUserInput();
-        code = codeEt.getText().toString().trim();
-        if (TextUtils.isEmpty(code)) {
-            showHintDialog(getString(R.string.hint),getString(R.string.hint_input_code));
-            return;
+    private boolean registerUser() {
+
+        if(getUserInput()){
+            code = codeEt.getText().toString().trim();
+            if (TextUtils.isEmpty(code)) {
+                showHintDialog(getString(R.string.hint),getString(R.string.hint_input_code));
+                return false;
+            }
+        }else{
+            return false;
         }
+        return true;
     }
 
     @Override
@@ -214,19 +220,20 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
         dialog.show();
     }
 
-    private void getUserInput() {
+    private boolean getUserInput() {
         phoneNumber = phoneNumberEt.getText().toString().trim();
         pwd = pwdEt.getText().toString().trim();
         if (TextUtils.isEmpty(phoneNumber) || !Tools.isChinaPhoneLegal(phoneNumber)) {
             showHintDialog(getString(R.string.hint),getString(R.string.input_correct_phone));
-            return;
+            return false;
         } else if (TextUtils.isEmpty(pwd)) {
             showHintDialog(getString(R.string.hint),getString(R.string.hint_input_password));
-            return;
+            return false;
         } else if (!Tools.isPwdRight(pwd)) {
             showHintDialog(getString(R.string.hint),getString(R.string.regist_password_hint));
-            return;
+            return false;
         }
+        return true;
     }
 
     @Override
@@ -243,6 +250,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
 
     @Override
     public void registerSuccess() {
+        ToastMgr.show(getString(R.string.register_success));
         handler.sendEmptyMessage(1);
     }
 
@@ -274,9 +282,21 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
             case R.id.login_tv:
                 if (!isRegister) {
                     if (type == 1) {
-                        getUserInput();
-                        //手机号密码登录
-                        presenter.loginAction(0, phoneNumber, pwd, code);
+//                        if(getUserInput()){
+                            //手机号密码登录
+                        Log.e("yzh","phone--"+phoneNumberEt.getText().toString().trim());
+                        if (TextUtils.isEmpty(phoneNumberEt.getText().toString().trim()) || !Tools.isChinaPhoneLegal(phoneNumberEt.getText().toString().trim())) {
+                            Log.e("yzh",Tools.isChinaPhoneLegal(phoneNumber)+"--phone--"+phoneNumber);
+                            showHintDialog(getString(R.string.hint),getString(R.string.input_correct_phone));
+
+                        } else if (TextUtils.isEmpty(pwdEt.getText().toString().trim())) {
+                            showHintDialog(getString(R.string.hint),getString(R.string.hint_input_password));
+
+                        }else{
+                            presenter.loginAction(0, phoneNumberEt.getText().toString().trim(), pwdEt.getText().toString().trim(), code);
+                        }
+
+//                        }
                     } else if (type == 3) {
                         code = codeEt.getText().toString().trim();
                         if (TextUtils.isEmpty(code)) {
@@ -288,8 +308,10 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
                     }
                 }else {
                     //调用注册接口
-                    registerUser();
-                    presenter.registerAction(phoneNumber, pwd, code);
+                    if(registerUser()){
+                        presenter.registerAction(phoneNumber, pwd, code);
+                    }
+
                 }
                 break;
             default:

@@ -7,6 +7,7 @@ import com.corelibs.api.ResponseTransformer;
 import com.corelibs.base.BasePresenter;
 import com.corelibs.subscriber.ResponseSubscriber;
 import com.corelibs.utils.PreferencesHelper;
+import com.corelibs.utils.ToastMgr;
 import com.huawei.fusionchargeapp.constants.Constant;
 import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.apis.LoginApi;
@@ -74,6 +75,13 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                             view.loginFailure();
                         }
                     }
+                    @Override
+                    public boolean operationError(BaseData<UserBean> userBeanBaseData, int status, String message) {
+                        if(status!=0){
+                            ToastMgr.show("后台返回code=="+status);
+                        }
+                        return super.operationError(userBeanBaseData, status, message);
+                    }
                 });
     }
 
@@ -91,12 +99,20 @@ public class LoginPresenter extends BasePresenter<LoginView> {
         bean.captcha = captcha;
         api.register(bean)
                 .compose(new ResponseTransformer<BaseData>())
-                .subscribe(new ResponseSubscriber<BaseData>() {
+                .subscribe(new ResponseSubscriber<BaseData>(view) {
                     @Override
                     public void success(BaseData baseData) {
                         if (baseData.code == 0) {
                             view.registerSuccess();
                         }
+                    }
+
+                    @Override
+                    public boolean operationError(BaseData baseData, int status, String message) {
+                        if(status!=0){
+                            ToastMgr.show("后台返回code=="+status);
+                        }
+                        return super.operationError(baseData, status, message);
                     }
                 });
     }
@@ -110,13 +126,22 @@ public class LoginPresenter extends BasePresenter<LoginView> {
         LoginRequestBean bean = new LoginRequestBean();
         bean.type = type;
         bean.phone = phone;
+        view.showLoading();
         api.getCode(bean)
                 .compose(new ResponseTransformer<BaseData>())
-                .subscribe(new ResponseSubscriber<BaseData>() {
+                .subscribe(new ResponseSubscriber<BaseData>(view) {
                     @Override
                     public void success(BaseData baseData) {
                         PreferencesHelper.saveData("phone", phone);
                         view.getCodeSuccess();
+                    }
+
+                    @Override
+                    public boolean operationError(BaseData baseData, int status, String message) {
+                        if(status!=0){
+                            ToastMgr.show("后台返回code=="+status);
+                        }
+                        return super.operationError(baseData, status, message);
                     }
                 });
     }
@@ -127,12 +152,21 @@ public class LoginPresenter extends BasePresenter<LoginView> {
      * @param bean
      */
     public void restPwdAction(RestPwdRequestBean bean) {
+        view.showLoading();
         api.restPwd(bean)
                 .compose(new ResponseTransformer<BaseData>())
-                .subscribe(new ResponseSubscriber<BaseData>() {
+                .subscribe(new ResponseSubscriber<BaseData>(view) {
                     @Override
                     public void success(BaseData baseData) {
                         view.loginSuccess();
+                    }
+
+                    @Override
+                    public boolean operationError(BaseData baseData, int status, String message) {
+                        if(status!=0){
+                            ToastMgr.show("后台返回code=="+status);
+                        }
+                        return super.operationError(baseData, status, message);
                     }
                 });
     }
