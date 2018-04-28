@@ -71,9 +71,10 @@ public class OrderListAdapter extends BaseAdapter {
         holder.charge_pile_code.setText(bean.getRunCode());
         holder.charge_gun_code.setText(bean.getGunCode());
         holder.charge_pile_address.setText(bean.getAddress());
-        if(bean.getPayStatus() == 1) {
+        /*if(bean.getPayStatus() == 1) {
             holder.oder_status_tv.setText("");
-        }
+        }*/
+        holder.oder_status_tv.setText("未知");
         holder.oder_charge_fee_tv.setText(bean.getEneryCharge() + "");
         holder.oder_service_fee_tv.setText(bean.getServiceCharge() + "");
         holder.oder_total_fee_tv.setText((bean.getServiceCharge() + bean.getEneryCharge()) + "");
