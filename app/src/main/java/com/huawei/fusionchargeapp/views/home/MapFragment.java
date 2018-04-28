@@ -322,6 +322,9 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
     private MapDataBean currentMapDataBean;
 
     private void location() {
+        //控制手势
+//        aMap.getUiSettings().setRotateGesturesEnabled(false);
+//        aMap.getUiSettings().setTiltGesturesEnabled(false);
         // 设置定位监听
         aMap.setLocationSource(this);
         // 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
@@ -556,7 +559,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
             markerOption.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory
                     .decodeResource(getResources(), R.mipmap.home_ic_position)));
             // 将Marker设置为贴地显示，可以双指下拉地图查看效果
-            markerOption.setFlat(true);//设置marker平贴地图效果
+            markerOption.setFlat(false);//设置marker平贴地图效果
             aMap.addMarker(markerOption);
         }
     }
