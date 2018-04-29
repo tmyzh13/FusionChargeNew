@@ -8,7 +8,15 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
     <style name="text_normal">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/text_color_main</item>
+        <item name="android:textSize">@dimen/text_normal</item>
+    </style>
+
+    <style name="textview" parent="text_normal">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/text_color_main</item>
@@ -83,5 +91,16 @@
         <item name="android:progressDrawable">@drawable/ratingbar_drawable</item>
         <item name="android:minHeight">26dp</item>
         <item name="android:maxHeight">26dp</item>
+    </style>
+
+
+    <style name="item_layout_simple">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:minHeight">80dp</item>
+        <item name="android:paddingLeft">@dimen/dp_15</item>
+        <item name="android:paddingRight">@dimen/dp_15</item>
+        <item name="android:background">@color/white</item>
     </style>
 </resources>

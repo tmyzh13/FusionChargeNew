@@ -111,33 +111,67 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:gravity="center"
+            android:paddingTop="60dp"
+            android:paddingBottom="30dp"
             android:background="@mipmap/leftbar_bg"
-            android:paddingTop="50dp"
-            android:paddingBottom="15dp"
             >
             <com.corelibs.views.roundedimageview.CircleImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="15dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="@dimen/dp_10"
+                android:src="@mipmap/ic_launcher"
                 android:id="@+id/iv_user_icon"
                 />
 
             <TextView
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginTop="@dimen/dp_8"
                 style="@style/text_normal"
                 android:textColor="@color/white"
                 android:text="李国强"
                 android:id="@+id/tv_user_name"
                 />
-            <TextView
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="3dp"
-                style="@style/text_normal"
-                android:textColor="@color/white"
-                android:text="13813827385"
-                android:id="@+id/tv_user_phone"
-                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/dp_8"
+                android:background="@mipmap/leftbar_ic_bg"
+                >
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="@dimen/dp_5"
+                    android:layout_gravity="center"
+                    android:gravity="right|center_vertical"
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/leftbar_ic_favourite"
+                        android:layout_marginRight="@dimen/dp_2"
+                        />
+                    <TextView
+                        style="@style/text_normal"
+                        android:textSize="@dimen/text_small_small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:text="积分"
+                        />
+                </LinearLayout>
+                <TextView
+                    style="@style/text_normal"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:textColor="@color/white"
+                    android:text="55"
+                    android:id="@+id/tv_favourite"
+                    />
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -179,6 +213,7 @@
                 android:layout_marginLeft="25dp"
                 />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/nav_height"
@@ -199,6 +234,27 @@
                 android:layout_marginLeft="25dp"
                 />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/nav_height"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:id="@+id/ll_home_setmeal"
+            android:gravity="center_vertical"
+            android:paddingLeft="15dp"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/icn_my_account"/>
+
+            <TextView
+                style="@style/text_normal"
+                android:text="@string/home_setmeal"
+                android:layout_marginLeft="25dp"
+                />
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/nav_height"

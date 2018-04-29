@@ -117,6 +117,8 @@
     <string name="home_appointment_hint">您有一个预约请尽快前往</string>
     <string name="home_my_order">我的订单</string>
     <string name="home_my_account">我的账户</string>
+    <string name="home_setmeal">购买套餐</string>
+
     <string name="home_my_appointment">我的预约</string>
     <string name="home_my_charge">我的充电</string>
     <string name="home_setting">设置</string>
@@ -300,4 +302,14 @@
     <string name="gun_code">电枪编号</string>
     <string name="charge_times">充电时长</string>
     <string name="register_success">注册成功</string>
+<!--    //个人资料-->
+
+    <string name="portrait">头像</string>
+    <string name="nick">姓名</string>
+    <string name="sex">性别</string>
+    <string name="email">邮箱</string>
+    <string name="birthday">出生日期</string>
+    <string name="address">地址</string>
+    <string name="car_vin">汽车VIN</string>
+
 </resources>

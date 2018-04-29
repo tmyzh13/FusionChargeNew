@@ -2,10 +2,10 @@ package com.huawei.fusionchargeapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -25,7 +25,6 @@ import com.corelibs.utils.IMEUtil;
 import com.corelibs.utils.rxbus.RxBus;
 import com.huawei.fusionchargeapp.constants.Constant;
 import com.huawei.fusionchargeapp.model.UserHelper;
-import com.huawei.fusionchargeapp.model.beans.UserBean;
 import com.huawei.fusionchargeapp.utils.ChoiceManager;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.LoginActivity;
@@ -67,8 +66,8 @@ public class MainActivity extends BaseActivity {
     EditText et_distance;
     @Bind(R.id.tv_user_name)
     TextView tv_user_name;
-    @Bind(R.id.tv_user_phone)
-    TextView tv_user_phone;
+    @Bind(R.id.tv_favourite)
+    TextView tv_favourite;
     @Bind(R.id.iv_search)
     ImageView search;
 
@@ -102,9 +101,6 @@ public class MainActivity extends BaseActivity {
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(R.id.content, mapFragment).commit();
-
-        Glide.with(context).load("http://imgsrc.baidu.com/baike/pic/item/bd7faf355e43afc1a71e1220.jpg")
-                .override(320, 320).into(iv_user_icon);
 
         drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
@@ -166,10 +162,10 @@ public class MainActivity extends BaseActivity {
         if (UserHelper.getSavedUser() == null) {
             startActivity(LoginActivity.getLauncher(context));
         } else {
-            Glide.with(context).load(UserHelper.getSavedUser().photoUrl)
+            Glide.with(context).load(UserHelper.getSavedUser().photoUrl).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher)
                     .override(320, 320).into(iv_user_icon);
             tv_user_name.setText(UserHelper.getSavedUser().nickName);
-            tv_user_phone.setText(UserHelper.getSavedUser().phone);
+            tv_favourite.setText("161");
             drawerLayout.openDrawer(main_left_drawer_layout);
         }
 

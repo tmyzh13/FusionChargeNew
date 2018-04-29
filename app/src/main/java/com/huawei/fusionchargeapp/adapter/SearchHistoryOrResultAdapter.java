@@ -38,6 +38,10 @@ public class SearchHistoryOrResultAdapter extends BaseAdapter {
         isHistoryData = true;
     }
 
+    public boolean isHistoryData() {
+        return isHistoryData;
+    }
+
     public Bundle getIntent(int position){
         Bundle bd = new Bundle();
         if (isHistoryData) {
