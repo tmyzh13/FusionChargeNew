@@ -176,9 +176,10 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.ll_user_icon)
     public void gotoUserinfo() {
-            startActivity(UserInfoActivity.startActivity(context));
-
-
+        if (drawerLayout.isDrawerOpen(main_left_drawer_layout)) {
+            drawerLayout.closeDrawer(main_left_drawer_layout);
+        }
+        startActivity(UserInfoActivity.startActivity(context));
     }
 
     @OnClick(R.id.iv_choice)
