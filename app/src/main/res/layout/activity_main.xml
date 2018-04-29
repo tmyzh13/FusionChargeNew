@@ -246,7 +246,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/icn_my_account"/>
+                android:src="@mipmap/leftbar_ic_05"/>
 
             <TextView
                 style="@style/text_normal"
