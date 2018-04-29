@@ -66,8 +66,6 @@ public class MainActivity extends BaseActivity {
     EditText et_distance;
     @Bind(R.id.tv_user_name)
     TextView tv_user_name;
-    @Bind(R.id.tv_user_phone)
-    TextView tv_user_phone;
     @Bind(R.id.tv_favourite)
     TextView tv_favourite;
     @Bind(R.id.iv_search)
