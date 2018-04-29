@@ -8,7 +8,15 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
     <style name="text_normal">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/text_color_main</item>
+        <item name="android:textSize">@dimen/text_normal</item>
+    </style>
+
+    <style name="textview" parent="text_normal">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/text_color_main</item>
