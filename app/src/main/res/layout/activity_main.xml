@@ -112,12 +112,15 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
+            android:paddingTop="60dp"
+            android:paddingBottom="30dp"
             android:background="@mipmap/leftbar_bg"
             >
             <com.corelibs.views.roundedimageview.CircleImageView
-                android:layout_width="85dp"
-                android:layout_height="85dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="@dimen/dp_10"
+                android:src="@mipmap/ic_launcher"
                 android:id="@+id/iv_user_icon"
                 />
 
