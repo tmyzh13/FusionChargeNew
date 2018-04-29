@@ -29,6 +29,7 @@ import com.huawei.fusionchargeapp.utils.ChoiceManager;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.LoginActivity;
 import com.huawei.fusionchargeapp.views.SearchStationTitleActivity;
+import com.huawei.fusionchargeapp.views.UserInfoActivity;
 import com.huawei.fusionchargeapp.views.home.HomeListFragment;
 import com.huawei.fusionchargeapp.views.home.MapFragment;
 import com.huawei.fusionchargeapp.views.interfaces.MyOrderActivity;
@@ -68,6 +69,8 @@ public class MainActivity extends BaseActivity {
     TextView tv_user_name;
     @Bind(R.id.tv_favourite)
     TextView tv_favourite;
+    @Bind(R.id.ll_user_icon)
+    LinearLayout ll_user_icon;
     @Bind(R.id.iv_search)
     ImageView search;
 
@@ -168,6 +171,13 @@ public class MainActivity extends BaseActivity {
             tv_favourite.setText("161");
             drawerLayout.openDrawer(main_left_drawer_layout);
         }
+
+    }
+
+    @OnClick(R.id.ll_user_icon)
+    public void gotoUserinfo() {
+            startActivity(UserInfoActivity.startActivity(context));
+
 
     }
 

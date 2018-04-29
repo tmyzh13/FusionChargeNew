@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/line"
+    android:orientation="vertical">
+    <com.huawei.fusionchargeapp.weights.NavBar
+        android:id="@+id/nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:id="@+id/layout_portrait"
+        style="@style/item_layout_simple"
+        android:layout_height="70dp"
+        android:background="@drawable/list_selector"
+        >
+
+        <TextView
+            style="@style/textview"
+            android:layout_weight="1"
+            android:text="@string/portrait" />
+
+        <com.corelibs.views.roundedimageview.CircleImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@mipmap/ic_launcher"
+            android:id="@+id/iv_user_icon"
+            />
+    </LinearLayout>
+
+
+    <ImageView style="@style/view_line"
+        android:layout_height="@dimen/dp_13"/>
+
+    <LinearLayout
+        android:id="@+id/layout_nick"
+        style="@style/item_layout_simple"
+        android:background="@drawable/list_selector">
+
+        <TextView
+            style="@style/textview"
+            android:layout_weight="1"
+            android:text="@string/nick" />
+
+        <EditText
+            android:id="@+id/et_nick"
+            style="@style/textview"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:gravity="right|center_vertical"
+            android:lines="1"
+            android:text="陈生"
+            android:textColor="@color/md_material_blue_600" />
+    </LinearLayout>
+
+    <ImageView style="@style/view_line"
+        />
+    <LinearLayout
+        android:id="@+id/layout_sex"
+        style="@style/item_layout_simple"
+        android:background="@drawable/list_selector">
+
+        <TextView
+            style="@style/textview"
+            android:text="@string/sex" />
+
+        <TextView
+            android:id="@+id/tv_sex"
+            style="@style/textview"
+            android:layout_weight="1"
+            android:gravity="right|center_vertical"
+            android:textColor="@color/md_material_blue_600"
+            android:text="男"/>
+    </LinearLayout>
+
+    <ImageView style="@style/view_line"
+        />
+    <LinearLayout
+        android:id="@+id/layout_birthday"
+        style="@style/item_layout_simple"
+        android:background="@drawable/list_selector">
+
+        <TextView
+            style="@style/textview"
+            android:text="@string/birthday" />
+
+        <TextView
+            android:id="@+id/tv_birthday"
+            style="@style/textview"
+            android:layout_weight="1"
+            android:gravity="right|center_vertical"
+            android:text="1989.10.29"
+            android:textColor="@color/md_material_blue_600" />
+    </LinearLayout>
+
+    <ImageView style="@style/view_line"
+        />
+    <LinearLayout
+        android:id="@+id/layout_weight"
+        style="@style/item_layout_simple"
+        android:background="@drawable/list_selector">
+
+        <TextView
+            style="@style/textview"
+            android:layout_weight="1"
+            android:text="@string/email" />
+
+        <TextView
+            android:id="@+id/tv_weight"
+            style="@style/textview"
+            android:textColor="@color/text_gray" />
+
+        <TextView
+            style="@style/textview"
+            android:gravity="right|center_vertical"
+            android:text="132XXXXX@163.com"
+            android:textColor="@color/md_material_blue_600" />
+    </LinearLayout>
+    <ImageView style="@style/view_line"
+        />
+    <LinearLayout
+        android:id="@+id/layout_address"
+        style="@style/item_layout_simple"
+        android:background="@drawable/list_selector">
+
+        <TextView
+            style="@style/textview"
+            android:text="@string/address" />
+
+        <TextView
+            android:id="@+id/tv_address"
+            style="@style/textview"
+            android:gravity="right|center_vertical"
+            android:text="江苏省南京市"
+            android:layout_weight="1"
+            android:textColor="@color/md_material_blue_600" />
+    </LinearLayout>
+    <ImageView style="@style/view_line"
+        />
+    <LinearLayout
+        android:id="@+id/layout_car_vin"
+        style="@style/item_layout_simple"
+        android:background="@drawable/list_selector">
+
+        <TextView
+            style="@style/textview"
+            android:layout_weight="1"
+            android:text="@string/car_vin" />
+
+        <TextView
+            android:id="@+id/tv_car_vin"
+            style="@style/textview"
+            android:gravity="right|center_vertical"
+            android:text="L00000001"
+            android:textColor="@color/md_material_blue_600" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/login_tv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/dp_30"
+        android:background="@drawable/blue_shape_bg"
+        android:gravity="center"
+        android:text="@string/action_submit"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/text_title" />
+</LinearLayout>

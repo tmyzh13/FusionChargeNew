@@ -82,7 +82,7 @@
     <string name="reset_password_input_password">输入密码</string>
 
     <!--个人信息-->
-    <string name="user_info_icon">头像</string>
+    <string name="user_info_title">个人信息</string>
     <string name="user_info_name">姓名</string>
     <string name="user_info_sex">性别</string>
     <string name="user_info_man">男</string>
@@ -306,6 +306,7 @@
 
     <string name="portrait">头像</string>
     <string name="nick">姓名</string>
+    <string name="userinfo">个人信息</string>
     <string name="sex">性别</string>
     <string name="email">邮箱</string>
     <string name="birthday">出生日期</string>

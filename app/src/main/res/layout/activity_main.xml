@@ -115,6 +115,8 @@
             android:paddingTop="60dp"
             android:paddingBottom="30dp"
             android:background="@mipmap/leftbar_bg"
+            android:id="@+id/ll_user_icon"
+
             >
             <com.corelibs.views.roundedimageview.CircleImageView
                 android:layout_width="70dp"
