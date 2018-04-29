@@ -2,6 +2,7 @@ package com.huawei.fusionchargeapp.model.apis;
 
 import com.huawei.fusionchargeapp.constants.Urls;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
+import com.huawei.fusionchargeapp.model.beans.CheckCodeBean;
 import com.huawei.fusionchargeapp.model.beans.LoginRequestBean;
 import com.huawei.fusionchargeapp.model.beans.ModifyPwdRequestBean;
 import com.huawei.fusionchargeapp.model.beans.ResponseMessageBean;
@@ -35,4 +36,7 @@ public interface LoginApi {
     //修改密码
     @POST(Urls.RESET_PWD)
     Observable<BaseData<ResponseMessageBean>> modifyPwd(@Header("AccessToken")String accessToken,@Body ModifyPwdRequestBean bean);
+
+    @POST(Urls.CHECK_CODE)
+    Observable<BaseData> checkCode(@Body CheckCodeBean bean);
 }

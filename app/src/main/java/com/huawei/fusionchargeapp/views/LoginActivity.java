@@ -249,6 +249,11 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     }
 
     @Override
+    public void checkCodeSuccess() {
+
+    }
+
+    @Override
     public void registerSuccess() {
         ToastMgr.show(getString(R.string.register_success));
         handler.sendEmptyMessage(1);
@@ -325,7 +330,10 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
      * @param v
      */
     private void showPopuWindow(View v) {
-        popupWindow = new PopupWindow(context);
+        if(popupWindow==null){
+            popupWindow = new PopupWindow(context);
+        }
+
         popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.title_popuwindow, null);
@@ -333,7 +341,11 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
         workerTypeTv = view.findViewById(R.id.worker_login_tv);
         codeTypeTv = view.findViewById(R.id.code_login_tv);
         popupWindow.setContentView(view);
-        popupWindow.showAsDropDown(v);
+        popupWindow.setOutsideTouchable(true);
+        if(!popupWindow.isShowing()){
+            popupWindow.showAsDropDown(v);
+        }
+
         getLoginType();
     }
 

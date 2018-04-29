@@ -44,7 +44,7 @@ public class AppointSuccessActivity extends BaseActivity {
 
     public static Intent getLauncher(Context context, int time) {
         Intent intent = new Intent(context, AppointSuccessActivity.class);
-        intent.putExtra("time", 0);
+        intent.putExtra("time", time);
         return intent;
     }
 

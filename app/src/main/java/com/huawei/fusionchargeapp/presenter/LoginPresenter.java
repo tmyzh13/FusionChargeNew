@@ -12,6 +12,7 @@ import com.huawei.fusionchargeapp.constants.Constant;
 import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.apis.LoginApi;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
+import com.huawei.fusionchargeapp.model.beans.CheckCodeBean;
 import com.huawei.fusionchargeapp.model.beans.LoginRequestBean;
 import com.huawei.fusionchargeapp.model.beans.RestPwdRequestBean;
 import com.huawei.fusionchargeapp.model.beans.UserBean;
@@ -52,6 +53,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
         } else if (type == 1) {//验证码登录
             bean.captcha = captcha;
         }
+        view.showLoading();
         api.login(bean)
                 .compose(new ResponseTransformer<>(this.<BaseData<UserBean>>bindUntilEvent(ActivityEvent.DESTROY)))
                 .subscribe(new ResponseSubscriber<BaseData<UserBean>>(view) {
@@ -77,9 +79,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                     }
                     @Override
                     public boolean operationError(BaseData<UserBean> userBeanBaseData, int status, String message) {
-                        if(status!=0){
-                            ToastMgr.show("后台返回code=="+status);
-                        }
+
                         return super.operationError(userBeanBaseData, status, message);
                     }
                 });
@@ -97,6 +97,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
         bean.phone = phone;
         bean.passWord = pwd;
         bean.captcha = captcha;
+        view.showLoading();
         api.register(bean)
                 .compose(new ResponseTransformer<BaseData>())
                 .subscribe(new ResponseSubscriber<BaseData>(view) {
@@ -109,9 +110,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
 
                     @Override
                     public boolean operationError(BaseData baseData, int status, String message) {
-                        if(status!=0){
-                            ToastMgr.show("后台返回code=="+status);
-                        }
+
                         return super.operationError(baseData, status, message);
                     }
                 });
@@ -138,9 +137,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
 
                     @Override
                     public boolean operationError(BaseData baseData, int status, String message) {
-                        if(status!=0){
-                            ToastMgr.show("后台返回code=="+status);
-                        }
+
                         return super.operationError(baseData, status, message);
                     }
                 });
@@ -163,11 +160,22 @@ public class LoginPresenter extends BasePresenter<LoginView> {
 
                     @Override
                     public boolean operationError(BaseData baseData, int status, String message) {
-                        if(status!=0){
-                            ToastMgr.show("后台返回code=="+status);
-                        }
+
                         return super.operationError(baseData, status, message);
                     }
                 });
     }
+
+    public void checkCode(CheckCodeBean bean){
+        view.showLoading();
+        api.checkCode(bean)
+                .compose(new ResponseTransformer<BaseData>())
+                .subscribe(new ResponseSubscriber<BaseData>(view) {
+                    @Override
+                    public void success(BaseData baseData) {
+
+                    }
+                });
+    }
+
 }

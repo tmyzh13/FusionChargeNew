@@ -25,6 +25,7 @@ import com.corelibs.utils.IMEUtil;
 import com.corelibs.utils.rxbus.RxBus;
 import com.huawei.fusionchargeapp.constants.Constant;
 import com.huawei.fusionchargeapp.model.UserHelper;
+import com.huawei.fusionchargeapp.model.beans.UserBean;
 import com.huawei.fusionchargeapp.utils.ChoiceManager;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.LoginActivity;
@@ -295,6 +296,7 @@ public class MainActivity extends BaseActivity {
      */
     @OnClick(R.id.my_order_tv)
     public void toMyOrder(){
+//        UserHelper.clearUserInfo(UserBean.class);
         startActivity(MyOrderActivity.getLauncher(MainActivity.this));
     }
 

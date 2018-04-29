@@ -262,15 +262,7 @@ public class GuildActivity  extends BaseActivity<GuaildView,GuaildPresenter> imp
                 return true;
             }
         });
-        RxBus.getDefault().toObservable(Object.class,Constant.REFRESH_APPOINTMENT_TIME)
-                .compose(this.bindToLifecycle())
-                .subscribe(new RxBusSubscriber<Object>() {
-                    @Override
-                    public void receive(Object data) {
-                        Log.e("yzh","guailds");
-                        tv_appointment_time.setText(Tools.formatMinute(Long.parseLong(PreferencesHelper.getData(Constant.TIME_APPOINTMENT))));
-                    }
-                });
+
         RxBus.getDefault().toObservable(Object.class,Constant.APPOINTMENT_TIME_OUT)
                 .compose(this.bindToLifecycle())
                 .subscribe(new RxBusSubscriber<Object>() {
@@ -338,7 +330,9 @@ public class GuildActivity  extends BaseActivity<GuaildView,GuaildPresenter> imp
     public void onDestroy() {
         super.onDestroy();
         map.onDestroy();
+
         if(timerAppointment!=null){
+            timerAppointment.cancel();
             timerAppointment=null;
         }
     }
@@ -413,10 +407,13 @@ public class GuildActivity  extends BaseActivity<GuaildView,GuaildPresenter> imp
     @Override
     public void cancelAppointmentSuccess() {
         //取消成功
-        TimeServiceManager.getInstance().getTimerService().cancelTimerAppointment();
+        timerAppointment.cancel();
+        timerAppointment=null;
+//        TimeServiceManager.getInstance().getTimerService().cancelTimerAppointment();
         HomeRefreshBean bean =new HomeRefreshBean();
         bean.type=1;
         RxBus.getDefault().send(bean,Constant.HOME_STATUE_REFRESH);
+
         finish();
     }
 
