@@ -29,6 +29,7 @@ import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
+import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.BitmapDescriptor;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
@@ -150,6 +151,10 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
     protected void init(Bundle savedInstanceState) {
         map.onCreate(savedInstanceState);
         aMap = map.getMap();
+
+        UiSettings uiSettings = aMap.getUiSettings();
+        // 去掉缩放按钮
+        uiSettings.setZoomControlsEnabled(false);
 
         aMap.setOnMapClickListener(new AMap.OnMapClickListener() {
             @Override
