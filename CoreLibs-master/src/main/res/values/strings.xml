@@ -22,7 +22,7 @@
     <string name="code_202">验证码错误</string>
     <string name="code_203">用户名或密码错误</string>
     <string name="code_204">原密码错误</string>
-    <string name="code_205">用户名或者验证码</string>
+    <string name="code_205">用户名或者验证码错误</string>
     <string name="code_207">一键登录未绑定手机号</string>
     <string name="code_210">手机号码未注册</string>
     <string name="code_214">余额不足</string>
@@ -36,4 +36,5 @@
     <string name="code_252">优惠卷或者折扣校验失败</string>
     <string name="code_297">存在正在进行中的充电订单</string>
     <string name="code_294">二维码没有匹配的充电车和枪</string>
+    <string name="code_206">获取验证码失败</string>
 </resources>

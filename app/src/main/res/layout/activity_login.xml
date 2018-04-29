@@ -55,9 +55,9 @@
         <ImageView
             android:id="@+id/phone_dropdown_iv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/dp_5"
+            android:paddingLeft="@dimen/dp_5"
             android:src="@mipmap/pop_ic_down"
             android:visibility="visible" />
 

@@ -252,7 +252,7 @@ public class Tools {
         if(str.length()<6){
             return false;
         }
-        if(str.length()>12){
+        if(str.length()>20){
             return false;
         }
         String reg = "^(?![0-9]+$)(?![^0-9]+$)(?![a-zA-Z]+$)(?![^a-zA-Z]+$)(?![a-zA-Z0-9]+$)[a-zA-Z0-9\\S]+$";

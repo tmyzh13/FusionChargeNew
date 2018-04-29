@@ -104,6 +104,11 @@ public class InputNewPwdActivity extends BaseActivity<LoginView, LoginPresenter>
     }
 
     @Override
+    public void checkCodeSuccess() {
+
+    }
+
+    @Override
     public void registerSuccess() {
 
     }

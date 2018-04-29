@@ -129,6 +129,12 @@ public class MapPresenter extends BasePresenter<MapHomeView> {
                             view.hasNoPayOrder(true,baseData.data);
                         }
                     }
+
+                    @Override
+                    public boolean operationError(BaseData<HomeOrderBean> homeOrderBeanBaseData, int status, String message) {
+                        view.hasNoPayOrder(false,null);
+                        return true;
+                    }
                 });
     }
 
@@ -146,6 +152,12 @@ public class MapPresenter extends BasePresenter<MapHomeView> {
                             view.renderHomeChargerOrder(false,null);
                         }
                     }
+
+                    @Override
+                    public boolean operationError(BaseData<HomeChargeOrderBean> homeChargeOrderBeanBaseData, int status, String message) {
+                        view.renderHomeChargerOrder(false,null);
+                        return true;
+                    }
                 });
     }
 
@@ -162,6 +174,12 @@ public class MapPresenter extends BasePresenter<MapHomeView> {
                         }else{
                             view.renderAppoinmentInfo(false,null);
                         }
+                    }
+
+                    @Override
+                    public boolean operationError(BaseData<HomeAppointmentBean> homeAppointmentBeanBaseData, int status, String message) {
+                        view.renderAppoinmentInfo(false,null);
+                        return true;
                     }
                 });
     }

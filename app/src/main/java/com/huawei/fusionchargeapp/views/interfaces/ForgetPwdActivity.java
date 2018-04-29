@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.corelibs.base.BaseActivity;
 import com.huawei.fusionchargeapp.R;
+import com.huawei.fusionchargeapp.model.beans.CheckCodeBean;
 import com.huawei.fusionchargeapp.presenter.LoginPresenter;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.InputNewPwdActivity;
@@ -82,12 +83,21 @@ public class ForgetPwdActivity extends BaseActivity<LoginView,LoginPresenter> im
             case R.id.next_tv:
                 phoneNum = phoneNumEt.getText().toString().trim();
                 code = inputMessageCodeEt.getText().toString().trim();
+                if (TextUtils.isEmpty(phoneNum) || !Tools.isChinaPhoneLegal(phoneNum)) {
+                    showHintDialog(getString(R.string.hint),getString(R.string.input_correct_phone));
+                    return;
+                }
                 if (TextUtils.isEmpty(code)) {
                     showHintDialog(getString(R.string.hint),getString(R.string.hint_input_code));
                     return;
-                } else {
-                    startActivity(InputNewPwdActivity.getLaunch(context,phoneNum, code));
                 }
+                CheckCodeBean bean=new CheckCodeBean();
+                bean.type="2";
+                bean.phone=phoneNum;
+                bean.captcha=code;
+                presenter.checkCode(bean);
+
+
                 break;
             default:
                 break;
@@ -111,6 +121,11 @@ public class ForgetPwdActivity extends BaseActivity<LoginView,LoginPresenter> im
     @Override
     public void loginFailure() {
 
+    }
+
+    @Override
+    public void checkCodeSuccess() {
+        startActivity(InputNewPwdActivity.getLaunch(context,phoneNum, code));
     }
 
     @Override
