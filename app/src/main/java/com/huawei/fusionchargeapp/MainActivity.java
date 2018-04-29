@@ -176,10 +176,15 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.ll_user_icon)
     public void gotoUserinfo() {
-        if (drawerLayout.isDrawerOpen(main_left_drawer_layout)) {
-            drawerLayout.closeDrawer(main_left_drawer_layout);
-        }
         startActivity(UserInfoActivity.startActivity(context));
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (drawerLayout.isDrawerOpen(main_left_drawer_layout)) {
+                    drawerLayout.closeDrawer(main_left_drawer_layout);
+                }
+            }
+        },500);
     }
 
     @OnClick(R.id.iv_choice)
