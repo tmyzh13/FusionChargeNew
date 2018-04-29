@@ -68,6 +68,8 @@ public class MainActivity extends BaseActivity {
     TextView tv_user_name;
     @Bind(R.id.tv_user_phone)
     TextView tv_user_phone;
+    @Bind(R.id.tv_favourite)
+    TextView tv_favourite;
     @Bind(R.id.iv_search)
     ImageView search;
 
@@ -169,6 +171,7 @@ public class MainActivity extends BaseActivity {
                     .override(320, 320).into(iv_user_icon);
             tv_user_name.setText(UserHelper.getSavedUser().nickName);
             tv_user_phone.setText(UserHelper.getSavedUser().phone);
+            tv_favourite.setText("161");
             drawerLayout.openDrawer(main_left_drawer_layout);
         }
 

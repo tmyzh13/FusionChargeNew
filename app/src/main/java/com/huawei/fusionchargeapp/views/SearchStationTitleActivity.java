@@ -30,6 +30,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import cn.finalteam.toolsfinal.StringUtils;
 
 /**
  * Created by issuser on 2018/4/27.
@@ -77,8 +78,10 @@ public class SearchStationTitleActivity extends BaseActivity<HomeListView,HomeLi
     @OnClick(R.id.tv_search)
     public void goSearch(){
         String key=tvSearchContent.getText().toString();
-        CachedSearchTitleUtils.addHistoryData(new CachedSearchTitleUtils.CachedData(key,key,key));
-        CachedSearchTitleUtils.saveHistoryData();
+        if (!StringUtils.isEmpty(key)) {
+            CachedSearchTitleUtils.addHistoryData(new CachedSearchTitleUtils.CachedData(key, key, key));
+            CachedSearchTitleUtils.saveHistoryData();
+        }
         presenter.getDatas(key);
     }
     @Override

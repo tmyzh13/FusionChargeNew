@@ -117,6 +117,8 @@
     <string name="home_appointment_hint">您有一个预约请尽快前往</string>
     <string name="home_my_order">我的订单</string>
     <string name="home_my_account">我的账户</string>
+    <string name="home_setmeal">购买套餐</string>
+
     <string name="home_my_appointment">我的预约</string>
     <string name="home_my_charge">我的充电</string>
     <string name="home_setting">设置</string>
