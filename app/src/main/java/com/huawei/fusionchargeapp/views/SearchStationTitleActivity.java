@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.corelibs.base.BaseActivity;
 import com.corelibs.utils.ToastMgr;
-import com.huawei.fusionchargeapp.MainActivity;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.adapter.SearchHistoryOrResultAdapter;
 import com.huawei.fusionchargeapp.model.UserHelper;
@@ -173,7 +172,6 @@ public class SearchStationTitleActivity extends BaseActivity<HomeListView,HomeLi
 
     @OnClick(R.id.tv_clear_history)
     public void clearHistory(){
-        isHistoryDataUpdate = true;
         CachedSearchTitleUtils.resetHistoryData();
         listSearch.setDivider(null);
         listSearch.setDividerHeight(0);
