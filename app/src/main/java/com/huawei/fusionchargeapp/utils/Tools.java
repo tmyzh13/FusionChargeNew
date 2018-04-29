@@ -170,7 +170,7 @@ public class Tools {
      */
     public static String getPhoneType() {
 
-        String SYS = "";
+        String SYS = "android";
         try {
             Properties prop = new Properties();
             prop.load(new FileInputStream(new File(Environment.getRootDirectory(), "build.prop")));
@@ -182,7 +182,6 @@ public class Tools {
                 SYS = "android";
             }
         } catch (IOException e) {
-            e.printStackTrace();
             return SYS;
         }
         return SYS;
