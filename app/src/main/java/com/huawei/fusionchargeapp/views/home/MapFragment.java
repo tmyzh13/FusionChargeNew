@@ -382,6 +382,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
             mlocationClient.onDestroy();
         }
         if (null != timerAppointment) {
+            timerAppointment.cancel();
             timerAppointment = null;
         }
     }

@@ -330,7 +330,9 @@ public class GuildActivity  extends BaseActivity<GuaildView,GuaildPresenter> imp
     public void onDestroy() {
         super.onDestroy();
         map.onDestroy();
+
         if(timerAppointment!=null){
+            timerAppointment.cancel();
             timerAppointment=null;
         }
     }
