@@ -97,7 +97,7 @@
     <ImageView style="@style/view_line"
         />
     <LinearLayout
-        android:id="@+id/layout_weight"
+        android:id="@+id/layout_email"
         style="@style/item_layout_simple"
         android:background="@drawable/list_selector">
 
@@ -114,6 +114,7 @@
         <EditText
             style="@style/textview"
             android:text="132XXXXX@163.com"
+            android:id="@+id/tv_email"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/transparent"
@@ -152,13 +153,16 @@
             style="@style/textview"
             android:layout_weight="1"
             android:text="@string/car_vin" />
-
-        <TextView
-            android:id="@+id/tv_car_vin"
+        <EditText
             style="@style/textview"
-            android:gravity="right|center_vertical"
             android:text="L00000001"
-            android:textColor="@color/md_material_blue_600" />
+            android:id="@+id/tv_car_vin"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:gravity="right|center_vertical"
+            android:lines="1"
+            android:textColor="@color/md_material_blue_600"/>
     </LinearLayout>
     <TextView
         android:id="@+id/login_tv"
