@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.corelibs.base.BaseActivity;
+import com.corelibs.utils.ToastMgr;
 import com.huawei.fusionchargeapp.MainActivity;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.adapter.SearchHistoryOrResultAdapter;
@@ -56,8 +57,7 @@ public class SearchStationTitleActivity extends BaseActivity<HomeListView,HomeLi
     public static final String KEY_TYPE = "type";
 
     private SearchHistoryOrResultAdapter adapter;
-    private boolean isHistoryDataInit = false;
-    private boolean isHistoryDataUpdate = false;
+
 
     @OnClick(R.id.iv_back)
     public void goBack(){
@@ -68,7 +68,6 @@ public class SearchStationTitleActivity extends BaseActivity<HomeListView,HomeLi
     public void doClear(){
         tvSearchContent.setText("");
         tvSearchContent.setHint(R.string.please_input_key_value);
-        ivSearch.setVisibility(View.VISIBLE);
         ivClear.setVisibility(View.GONE);
         clearHistory.setVisibility(View.VISIBLE);
         listSearch.setDivider(null);
@@ -77,11 +76,16 @@ public class SearchStationTitleActivity extends BaseActivity<HomeListView,HomeLi
 
     @OnClick(R.id.tv_search)
     public void goSearch(){
-        presenter.getDatas(tvSearchContent.getText().toString());
+        String key=tvSearchContent.getText().toString();
+        CachedSearchTitleUtils.addHistoryData(new CachedSearchTitleUtils.CachedData(key,key,key));
+        CachedSearchTitleUtils.saveHistoryData();
+        presenter.getDatas(key);
     }
     @Override
     public void rendData(List<MapDataBean> list) {
         if (null == list || list.size() == 0) {
+            ToastMgr.show(getString(R.string.no_data));
+            adapter.resetShowHistoryData();
             return;
         }
         adapter.setResultData(list);
@@ -105,31 +109,15 @@ public class SearchStationTitleActivity extends BaseActivity<HomeListView,HomeLi
         return R.layout.activity_search_station;
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (!isHistoryDataInit) {
-            CachedSearchTitleUtils.initHistoryData();
-            isHistoryDataInit = true;
-        }
-        isHistoryDataUpdate = false;
-        adapter.resetShowHistoryData();
-        tvSearchContent.setText("");
-        clearHistory.setVisibility(View.VISIBLE);
-        listSearch.setDivider(null);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (isHistoryDataUpdate) {
-            CachedSearchTitleUtils.saveHistoryData();
-        }
-    }
 
     @Override
     protected void init(Bundle savedInstanceState) {
+        CachedSearchTitleUtils.initHistoryData();
+        tvSearchContent.setText("");
+        clearHistory.setVisibility(View.VISIBLE);
+        listSearch.setDivider(null);
         adapter = new SearchHistoryOrResultAdapter(SearchStationTitleActivity.this);
+        adapter.resetShowHistoryData();
         listSearch.setAdapter(adapter);
         listSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -137,8 +125,14 @@ public class SearchStationTitleActivity extends BaseActivity<HomeListView,HomeLi
                 if (position ==0){
                     return;
                 }
-                Bundle data = adapter.getIntent(position);
-                goDetailActivity(data);
+                if (adapter.isHistoryData()){
+                    tvSearchContent.setText(adapter.getIntent(position).getString(SearchStationTitleActivity.KEY_TITLE));
+                    goSearch();
+                }else{
+                    Bundle data = adapter.getIntent(position);
+                    goDetailActivity(data);
+                }
+
             }
         });
         tvSearchContent.addTextChangedListener(new TextWatcher() {
@@ -148,14 +142,15 @@ public class SearchStationTitleActivity extends BaseActivity<HomeListView,HomeLi
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (ivClear.getVisibility() != View.VISIBLE) {
                     ivClear.setVisibility(View.VISIBLE);
-                    ivSearch.setVisibility(View.INVISIBLE);
                 }
             }
             @Override
             public void afterTextChanged(Editable s) {
                 if (null == s || s.toString().isEmpty()) {
                     ivClear.setVisibility(View.GONE);
-                    ivSearch.setVisibility(View.VISIBLE);
+                    listSearch.setDivider(null);
+                    listSearch.setDividerHeight(0);
+                    adapter.resetShowHistoryData();
                 }
             }
         });
@@ -168,9 +163,6 @@ public class SearchStationTitleActivity extends BaseActivity<HomeListView,HomeLi
             Intent intent =new Intent(SearchStationTitleActivity.this,ChargeDetailsActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
-            CachedSearchTitleUtils.addHistoryData(new CachedSearchTitleUtils.CachedData(bundle.getString(KEY_TITLE),bundle.getString(KEY_TYPE)
-                    ,bundle.getString(KEY_ID)));
-            isHistoryDataUpdate = true;
         }
 
 
@@ -179,6 +171,8 @@ public class SearchStationTitleActivity extends BaseActivity<HomeListView,HomeLi
     @OnClick(R.id.tv_clear_history)
     public void clearHistory(){
         CachedSearchTitleUtils.resetHistoryData();
+        listSearch.setDivider(null);
+        listSearch.setDividerHeight(0);
         adapter.resetShowHistoryData();
     }
 
