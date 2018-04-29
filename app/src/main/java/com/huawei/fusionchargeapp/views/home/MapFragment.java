@@ -191,6 +191,9 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
             @Override
             public void run() {
                 if (homeAppointmentBean != null) {
+                    if(!AppManager.getAppManager().currentActivity().getClass().equals(MainActivity.class)){
+                        return;
+                    }
                     if (Tools.isNull(PreferencesHelper.getData(Constant.TIME_APPOINTMENT))) {
                         appointmentTime = 0;
                     } else {
@@ -465,9 +468,9 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                 if (followMove) {
                     aMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude())));
                 }
-                if (list == null || list.size() == 0) {
-                    presenter.getData();
-                }
+//                if (list == null || list.size() == 0) {
+//                    presenter.getData();
+//                }
             } else {
                 String errText = "location_fail," + aMapLocation.getErrorCode() + ": " + aMapLocation.getErrorInfo();
                 Log.e("yzh", errText);

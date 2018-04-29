@@ -61,7 +61,7 @@ public class SearchStationTitleActivity extends BaseActivity<HomeListView,HomeLi
 
     @OnClick(R.id.iv_back)
     public void goBack(){
-        startActivity(MainActivity.getLauncher(SearchStationTitleActivity.this));
+       finish();
     }
 
     @OnClick(R.id.iv_clear)
@@ -178,6 +178,7 @@ public class SearchStationTitleActivity extends BaseActivity<HomeListView,HomeLi
 
     @OnClick(R.id.tv_clear_history)
     public void clearHistory(){
+        isHistoryDataUpdate = true;
         CachedSearchTitleUtils.resetHistoryData();
         adapter.resetShowHistoryData();
     }

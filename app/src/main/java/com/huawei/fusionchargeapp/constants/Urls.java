@@ -68,4 +68,6 @@ public class Urls {
 
     //我的订单
     public static final String MY_ORDER = "user/queryAllChargeOrder";
+    //校验验证码
+    public static final String CHECK_CODE="user/checkCaptcha";
 }
