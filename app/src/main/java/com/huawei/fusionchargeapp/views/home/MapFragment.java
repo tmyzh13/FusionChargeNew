@@ -153,7 +153,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
         aMap = map.getMap();
 
         UiSettings uiSettings = aMap.getUiSettings();
-        // 去掉缩放按钮
+        // 去掉缩放按钮==
         uiSettings.setZoomControlsEnabled(false);
 
         aMap.setOnMapClickListener(new AMap.OnMapClickListener() {
