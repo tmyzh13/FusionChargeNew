@@ -173,7 +173,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                 .subscribe(new ResponseSubscriber<BaseData>(view) {
                     @Override
                     public void success(BaseData baseData) {
-
+                        view.checkCodeSuccess();
                     }
                 });
     }
