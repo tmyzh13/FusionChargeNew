@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.ActivityCompat;
+import android.text.TextPaint;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -529,7 +530,13 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
             ll_fee_all.setVisibility(View.VISIBLE);
         }
         tv_map_info_name.setText(mapInfoBean.name);
+        // 加粗
+        TextPaint paintName = tv_map_info_name.getPaint();
+        paintName.setFakeBoldText(true);
         tv_map_info_address.setText(mapInfoBean.address);
+        // 加粗
+        TextPaint paintAddress = tv_map_info_address.getPaint();
+        paintAddress.setFakeBoldText(true);
         if (mapInfoBean.averageScore.equals("-1")) {
             tv_map_info_score.setText("");
         } else {

@@ -122,8 +122,8 @@
     <string name="home_setting">设置</string>
     <string name="home_distance">距离（KM）</string>
     <string name="home_charge_type">方式</string>
-    <string name="home_charge_direct">直流快充</string>
-    <string name="home_charge_alternating">交流慢充</string>
+    <string name="home_charge_direct">直流</string>
+    <string name="home_charge_alternating">交流</string>
     <string name="home_charge_direct_">直流：</string>
     <string name="home_charge_alternating_">交流：</string>
     <string name="home_charge_hint_">个空闲</string>
