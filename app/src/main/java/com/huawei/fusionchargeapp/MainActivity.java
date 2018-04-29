@@ -168,7 +168,6 @@ public class MainActivity extends BaseActivity {
             Glide.with(context).load(UserHelper.getSavedUser().photoUrl)
                     .override(320, 320).into(iv_user_icon);
             tv_user_name.setText(UserHelper.getSavedUser().nickName);
-            tv_user_phone.setText(UserHelper.getSavedUser().phone);
             tv_favourite.setText("161");
             drawerLayout.openDrawer(main_left_drawer_layout);
         }
