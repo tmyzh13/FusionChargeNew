@@ -95,11 +95,11 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        if (intent==null)
+        if (intent==null || intent.getExtras()==null)
             return;
-        if (intent.getExtras().get(ACTION).equals(EXIT)){
+        if (EXIT.equals(intent.getExtras().get(ACTION))){
             PreferencesHelper.clearData();
-        }else  if (intent.getExtras().get(ACTION).equals(LOGINT_OUT)){
+        }else  if (LOGINT_OUT.equals(intent.getExtras().get(ACTION))){
             PreferencesHelper.clearData();
         }
     }
