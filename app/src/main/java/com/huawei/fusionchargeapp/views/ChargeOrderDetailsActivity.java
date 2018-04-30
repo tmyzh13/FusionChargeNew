@@ -18,6 +18,7 @@ import com.corelibs.api.ApiFactory;
 import com.corelibs.api.ResponseTransformer;
 import com.corelibs.base.BaseActivity;
 import com.corelibs.base.BasePresenter;
+import com.corelibs.base.BaseView;
 import com.corelibs.subscriber.ResponseSubscriber;
 import com.corelibs.utils.ToastMgr;
 import com.google.gson.Gson;
@@ -40,7 +41,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class ChargeOrderDetailsActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
+public class ChargeOrderDetailsActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener,BaseView {
 
     private int chargePowerCount = 0;
 
@@ -241,8 +242,6 @@ public class ChargeOrderDetailsActivity extends BaseActivity implements RadioGro
                 .subscribe(new ResponseSubscriber<BaseData>() {
                     @Override
                     public void success(BaseData baseData) {
-                        Log.e("zw","info : success");
-                        Log.e("zw",baseData.data.toString());
                         int code = -1;
                         try {
                             code = Integer.parseInt(baseData.data.toString());

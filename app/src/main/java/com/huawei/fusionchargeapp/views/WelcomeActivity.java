@@ -31,6 +31,7 @@ public class WelcomeActivity extends BaseActivity {
             public void run() {
                 // TODO Auto-generated method stub
                 startActivity(MainActivity.getLauncher(WelcomeActivity.this));
+                finish();
             }
         }, 2000);
     }

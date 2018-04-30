@@ -29,6 +29,8 @@ import com.huawei.fusionchargeapp.model.beans.BaseData;
 import com.huawei.fusionchargeapp.model.beans.RequestScanBean;
 import com.huawei.fusionchargeapp.model.beans.ScanChargeInfo;
 import com.huawei.fusionchargeapp.model.beans.UserBean;
+import com.huawei.fusionchargeapp.presenter.ChargeCapturePresenter;
+import com.huawei.fusionchargeapp.views.interfaces.ChargeCaptureView;
 import com.huawei.fusionchargeapp.weights.CommonDialog;
 import com.huawei.fusionchargeapp.weights.NavBar;
 import com.journeyapps.barcodescanner.CaptureManager;
@@ -38,7 +40,7 @@ import com.trello.rxlifecycle.ActivityEvent;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class ChargeCaptureActivity extends BaseActivity {
+public class ChargeCaptureActivity extends BaseActivity<ChargeCaptureView,ChargeCapturePresenter> implements ChargeCaptureView {
 
     private ScanApi api;
 
@@ -84,8 +86,9 @@ public class ChargeCaptureActivity extends BaseActivity {
 
     private void showLoadingDialog(String contents){
         showLoading();
+        presenter.getData(contents);
 
-        RequestScanBean bean = new RequestScanBean();
+        /*RequestScanBean bean = new RequestScanBean();
         bean.setAppUserId(UserHelper.getSavedUser().appUserId + "");
         Log.e("zw","UserHelper.getSavedUser().userId : " + UserHelper.getSavedUser().appUserId);
 //        bean.setQrCode("1300000001");
@@ -150,12 +153,12 @@ public class ChargeCaptureActivity extends BaseActivity {
 
                                }
                            }
-                );
+                );*/
     }
 
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected ChargeCapturePresenter createPresenter() {
+        return new ChargeCapturePresenter();
     }
 
     @Override
@@ -236,5 +239,67 @@ public class ChargeCaptureActivity extends BaseActivity {
         ToastMgr.show(getString(R.string.login_fail));
         UserHelper.clearUserInfo(UserBean.class);
         startActivity(LoginActivity.getLauncher(ChargeCaptureActivity.this));
+    }
+
+    @Override
+    public void onSuccess(ScanChargeInfo info) {
+        hideLoading();
+        if(info != null) {
+            Gson gson = new Gson();
+            String data = gson.toJson(info);
+            Intent intent = new Intent(ChargeCaptureActivity.this,ChargeOrderDetailsActivity.class);
+            intent.putExtra("data",data);
+            startActivity(intent);
+        } else {
+            showToast(getString(R.string.no_user_info));
+        }
+        finish();
+    }
+
+    @Override
+    public void onOperationError(String msg) {
+        hideLoading();
+
+        /*if(status==403){
+            UserHelper.clearUserInfo(UserBean.class);
+            startActivity(LoginActivity.getLauncher(ChargeCaptureActivity.this));
+            finish();
+        }else{
+            String content = TextUtils.isEmpty(scanChargeInfoBaseData.msg) ? getString(R.string.server_wrong) : scanChargeInfoBaseData.msg;
+            dialog = new CommonDialog(ChargeCaptureActivity.this,getString(R.string.hint),content,1);
+            dialog.show();
+            dialog.setPositiveListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                    finish();
+                }
+            });
+        }*/
+        String content = TextUtils.isEmpty(msg) ? getString(R.string.server_wrong) : msg;
+        dialog = new CommonDialog(ChargeCaptureActivity.this,getString(R.string.hint),content,1);
+        dialog.show();
+        dialog.setPositiveListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                finish();
+            }
+        });
+
+    }
+
+    @Override
+    public void onError() {
+        hideLoading();
+        dialog = new CommonDialog(ChargeCaptureActivity.this,getString(R.string.hint),getString(R.string.scan_time_out),1);
+        dialog.show();
+        dialog.setPositiveListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                finish();
+            }
+        });
     }
 }

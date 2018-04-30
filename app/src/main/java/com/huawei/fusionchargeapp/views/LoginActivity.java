@@ -222,7 +222,11 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
 
     private boolean getUserInput() {
         phoneNumber = phoneNumberEt.getText().toString().trim();
-        pwd = pwdEt.getText().toString().trim();
+        pwd = pwdEt.getText().toString();
+        if(pwd != null && pwd.contains(" ")){
+            showHintDialog(getString(R.string.hint),getString(R.string.pwd_cannot_contain_space));
+            return false;
+        }
         if (TextUtils.isEmpty(phoneNumber) || !Tools.isChinaPhoneLegal(phoneNumber)) {
             showHintDialog(getString(R.string.hint),getString(R.string.input_correct_phone));
             return false;

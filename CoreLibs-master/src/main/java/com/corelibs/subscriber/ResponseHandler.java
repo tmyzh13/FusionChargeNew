@@ -1,10 +1,12 @@
 package com.corelibs.subscriber;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.corelibs.R;
 import com.corelibs.base.BasePaginationView;
 import com.corelibs.base.BaseView;
+import com.corelibs.common.AppManager;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
@@ -26,11 +28,13 @@ public class ResponseHandler<T> {
 
     public ResponseHandler(CustomHandler<T> handler) {
         this.handler = handler;
+        Log.e("zw"," 11111  ");
     }
 
     public ResponseHandler(CustomHandler<T> handler, BaseView view) {
         this.handler = handler;
         this.view = view;
+        Log.e("zw"," 222222  ");
     }
 
     public boolean checkDataNotNull(IBaseData data) {
@@ -63,7 +67,7 @@ public class ResponseHandler<T> {
                 handler.success(t);
             } else {
                 if (!handler.operationError(t, data.status(), data.msg())) {
-                    if(data.status()==403){
+                    /*if(data.status()==403){
                         handlerGoLogin();
                     }else if(data.status()==900){
                         handleOperationError(view.getViewContext().getString(R.string.code_900));
@@ -135,6 +139,83 @@ public class ResponseHandler<T> {
                         handleOperationError(view.getViewContext().getString(R.string.code_898));
                     }else if(data.status()==899){
                         handleOperationError(view.getViewContext().getString(R.string.code_899));
+                    }else{
+                        handleOperationError(data.msg());
+                    }*/
+                    Context context = AppManager.getAppManager().currentActivity();
+                    if(data.status()==403){
+                        handlerGoLogin();
+                    }else if(data.status()==900){
+
+                        handleOperationError(context.getString(R.string.code_900));
+                    }else if(data.status()==999){
+                        handleOperationError(context.getString(R.string.code_999));
+                    }else if(data.status()==403){
+                        handleOperationError(context.getString(R.string.code_403));
+                    }else if(data.status()==201){
+                        handleOperationError(context.getString(R.string.code_201));
+                    }else if(data.status()==202){
+                        handleOperationError(context.getString(R.string.code_202));
+                    } else if(data.status()==203){
+                        handleOperationError(context.getString(R.string.code_203));
+                    }else if(data.status()==204){
+                        handleOperationError(context.getString(R.string.code_204));
+                    }else if(data.status()==205){
+                        handleOperationError(context.getString(R.string.code_205));
+                    }else if(data.status()==206){
+                        handleOperationError(context.getString(R.string.code_206));
+                    }else if(data.status()==207){
+                        handleOperationError(context.getString(R.string.code_207));
+                    }else if(data.status()==208){
+                        handleOperationError(context.getString(R.string.code_208));
+                    }else if(data.status()==210){
+                        handleOperationError(context.getString(R.string.code_210));
+                    }else if(data.status()==214){
+                        handleOperationError(context.getString(R.string.code_214));
+                    }else if(data.status()==220){
+                        handleOperationError(context.getString(R.string.code_220));
+                    }else if(data.status()==221){
+                        handleOperationError(context.getString(R.string.code_221));
+                    }else if(data.status()==222){
+                        handleOperationError(context.getString(R.string.code_222));
+                    }else if(data.status()==223){
+                        handleOperationError(context.getString(R.string.code_223));
+                    }else if(data.status()==250){
+                        handleOperationError(context.getString(R.string.code_250));
+                    }else if(data.status()==251){
+                        handleOperationError(context.getString(R.string.code_251));
+                    }else if(data.status()==252){
+                        handleOperationError(context.getString(R.string.code_252));
+                    }else if(data.status()==296){
+                        handleOperationError(context.getString(R.string.code_296));
+                    }else if(data.status()==297){
+                        handleOperationError(context.getString(R.string.code_297));
+                    }else if(data.status()==294){
+                        handleOperationError(context.getString(R.string.code_294));
+                    }else if(data.status()==870){
+                        handleOperationError(context.getString(R.string.code_870));
+                    }else if(data.status()==871){
+                        handleOperationError(context.getString(R.string.code_871));
+                    }else if(data.status()==890){
+                        handleOperationError(context.getString(R.string.code_890));
+                    }else if(data.status()==891){
+                        handleOperationError(context.getString(R.string.code_891));
+                    }else if(data.status()==892){
+                        handleOperationError(context.getString(R.string.code_892));
+                    }else if(data.status()==893){
+                        handleOperationError(context.getString(R.string.code_893));
+                    }else if(data.status()==894){
+                        handleOperationError(context.getString(R.string.code_894));
+                    }else if(data.status()==895){
+                        handleOperationError(context.getString(R.string.code_895));
+                    }else if(data.status()==896){
+                        handleOperationError(context.getString(R.string.code_896));
+                    }else if(data.status()==897){
+                        handleOperationError(context.getString(R.string.code_897));
+                    }else if(data.status()==898){
+                        handleOperationError(context.getString(R.string.code_898));
+                    }else if(data.status()==899){
+                        handleOperationError(context.getString(R.string.code_899));
                     }else{
                         handleOperationError(data.msg());
                     }

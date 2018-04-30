@@ -280,7 +280,7 @@
     <string name="wrong_request">请求出现错误！</string>
     <string name="time_out">连接超时。</string>
     <string name="time_out_or_qrcode_wrong">连接超时或输入二维码不正确。</string>
-    <string name="scan_time_out">解析二维码错误</string>
+    <string name="scan_time_out">二维码扫描有误</string>
     <string name="no_data">未获取到数据！</string>
     <string name="no_search_station">没有搜索到相关站点信息！</string>
 
