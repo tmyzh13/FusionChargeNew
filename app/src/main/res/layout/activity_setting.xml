@@ -13,6 +13,7 @@
     <TextView
     style="@style/textview2"
     android:text="@string/setting_about_us"
+        android:layout_marginTop="@dimen/dp_8"
     android:id="@+id/tv_about_us"
     android:background="@drawable/list_selector"/>
     <TextView
