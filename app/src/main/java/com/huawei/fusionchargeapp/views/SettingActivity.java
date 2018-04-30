@@ -55,6 +55,7 @@ public class SettingActivity extends BaseActivity<SettingView, SettingPresenter>
         Intent intent=MainActivity.getLauncher(this);
         intent.putExtra(MainActivity.ACTION,MainActivity.LOGINT_OUT);
         startActivity(intent);
+        finish();
     }
 
     @OnClick(R.id.tv_exit)
@@ -62,6 +63,7 @@ public class SettingActivity extends BaseActivity<SettingView, SettingPresenter>
         Intent intent=MainActivity.getLauncher(this);
         intent.putExtra(MainActivity.ACTION,MainActivity.EXIT);
         startActivity(intent);
+        finish();
     }
 
 
