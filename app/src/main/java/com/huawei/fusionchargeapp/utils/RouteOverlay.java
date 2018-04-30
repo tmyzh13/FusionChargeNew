@@ -116,14 +116,15 @@ public class RouteOverlay {
 		return BitmapDescriptorFactory.fromResource(R.drawable.amap_car);
 	}
 
+	// 2018-04-30 问题16
 	protected void addStartAndEndMarker() {
 		startMarker = mAMap.addMarker((new MarkerOptions())
 				.position(startPoint).icon(getStartBitmapDescriptor())
-				.title("\u8D77\u70B9"));
+				.title("\u8D77\u70B9").anchor(0.55f ,0.55f));
 		// startMarker.showInfoWindow();
 
 		endMarker = mAMap.addMarker((new MarkerOptions()).position(endPoint)
-				.icon(getEndBitmapDescriptor()).title("\u7EC8\u70B9"));
+				.icon(getEndBitmapDescriptor()).title("\u7EC8\u70B9").anchor(0.6f, 0.9f));
 		// mAMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startPoint,
 		// getShowRouteZoom()));
 	}

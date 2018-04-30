@@ -60,6 +60,10 @@ public class PreferencesHelper {
         sharedPreferences.edit().putString(key, gson.toJson(data)).apply();
     }
 
+    public static void clearData() {
+        checkInit();
+        sharedPreferences.edit().clear().commit();
+    }
     /**
      * 保存List集合数据至SharedPreferences, 请确保List至少含有一个元素, 如
      * <pre>

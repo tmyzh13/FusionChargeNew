@@ -22,6 +22,7 @@ import com.corelibs.base.BaseActivity;
 import com.corelibs.base.BasePresenter;
 import com.corelibs.common.AppManager;
 import com.corelibs.utils.IMEUtil;
+import com.corelibs.utils.PreferencesHelper;
 import com.corelibs.utils.rxbus.RxBus;
 import com.huawei.fusionchargeapp.constants.Constant;
 import com.huawei.fusionchargeapp.model.UserHelper;
@@ -29,6 +30,7 @@ import com.huawei.fusionchargeapp.utils.ChoiceManager;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.LoginActivity;
 import com.huawei.fusionchargeapp.views.SearchStationTitleActivity;
+import com.huawei.fusionchargeapp.views.SettingActivity;
 import com.huawei.fusionchargeapp.views.UserInfoActivity;
 import com.huawei.fusionchargeapp.views.home.HomeListFragment;
 import com.huawei.fusionchargeapp.views.home.MapFragment;
@@ -73,15 +75,33 @@ public class MainActivity extends BaseActivity {
     LinearLayout ll_user_icon;
     @Bind(R.id.iv_search)
     ImageView search;
-
+    @Bind(R.id.ll_setting)
+    LinearLayout ll_setting;
     private Context context = MainActivity.this;
 
     private MapFragment mapFragment;
     private HomeListFragment homeListFragment;
 
+    public  static  final String ACTION="action";
+    public  static  final String LOGINT_OUT="loginout";
+    public  static  final String EXIT="exit";
+
     public static Intent getLauncher(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
         return intent;
+    }
+
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (intent==null || intent.getExtras()==null)
+            return;
+        if (EXIT.equals(intent.getExtras().get(ACTION))){
+            PreferencesHelper.clearData();
+        }else  if (LOGINT_OUT.equals(intent.getExtras().get(ACTION))){
+            PreferencesHelper.clearData();
+        }
     }
 
     @Override
@@ -177,6 +197,19 @@ public class MainActivity extends BaseActivity {
     @OnClick(R.id.ll_user_icon)
     public void gotoUserinfo() {
         startActivity(UserInfoActivity.startActivity(context));
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (drawerLayout.isDrawerOpen(main_left_drawer_layout)) {
+                    drawerLayout.closeDrawer(main_left_drawer_layout);
+                }
+            }
+        },500);
+    }
+
+    @OnClick(R.id.ll_setting)
+    public void gotoSetting() {
+        startActivity(SettingActivity.startActivity(context));
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

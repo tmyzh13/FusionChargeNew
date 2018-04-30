@@ -319,4 +319,15 @@
     <string name="no_order_data">无记录。</string>
 
 
+    <!--    //设置页面-->
+
+    <string name="setting_title">设置</string>
+    <string name="setting_about_us">关于我们</string>
+    <string name="setting_help">使用帮助</string>
+    <string name="setting_version">当前版本</string>
+    <string name="setting_new_version">检测到有新版本</string>
+    <string name="setting_advice">意见反馈</string>
+    <string name="setting_exit">退出</string>
+    <string name="setting_login_out">注销账户</string>
+    <string name="setting_clause">版权声明于免责条款</string>
 </resources>

@@ -23,6 +23,15 @@
         <item name="android:textSize">@dimen/text_normal</item>
     </style>
 
+
+    <style name="textview2" parent="text_normal">
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:paddingLeft">@dimen/dp_15</item>
+        <item name="android:paddingRight">@dimen/dp_15</item>
+        <item name="android:layout_height">@dimen/dp_48</item>
+    </style>
+
     <style name="edit_normal">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
