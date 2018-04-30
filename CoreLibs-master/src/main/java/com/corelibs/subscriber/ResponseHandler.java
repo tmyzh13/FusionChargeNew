@@ -81,8 +81,12 @@ public class ResponseHandler<T> {
                         handleOperationError(view.getViewContext().getString(R.string.code_204));
                     }else if(data.status()==205){
                         handleOperationError(view.getViewContext().getString(R.string.code_205));
+                    }else if(data.status()==206){
+                        handleOperationError(view.getViewContext().getString(R.string.code_206));
                     }else if(data.status()==207){
                         handleOperationError(view.getViewContext().getString(R.string.code_207));
+                    }else if(data.status()==208){
+                        handleOperationError(view.getViewContext().getString(R.string.code_208));
                     }else if(data.status()==210){
                         handleOperationError(view.getViewContext().getString(R.string.code_210));
                     }else if(data.status()==214){
@@ -101,10 +105,36 @@ public class ResponseHandler<T> {
                         handleOperationError(view.getViewContext().getString(R.string.code_251));
                     }else if(data.status()==252){
                         handleOperationError(view.getViewContext().getString(R.string.code_252));
+                    }else if(data.status()==296){
+                        handleOperationError(view.getViewContext().getString(R.string.code_296));
                     }else if(data.status()==297){
                         handleOperationError(view.getViewContext().getString(R.string.code_297));
                     }else if(data.status()==294){
                         handleOperationError(view.getViewContext().getString(R.string.code_294));
+                    }else if(data.status()==870){
+                        handleOperationError(view.getViewContext().getString(R.string.code_870));
+                    }else if(data.status()==871){
+                        handleOperationError(view.getViewContext().getString(R.string.code_871));
+                    }else if(data.status()==890){
+                        handleOperationError(view.getViewContext().getString(R.string.code_890));
+                    }else if(data.status()==891){
+                        handleOperationError(view.getViewContext().getString(R.string.code_891));
+                    }else if(data.status()==892){
+                        handleOperationError(view.getViewContext().getString(R.string.code_892));
+                    }else if(data.status()==893){
+                        handleOperationError(view.getViewContext().getString(R.string.code_893));
+                    }else if(data.status()==894){
+                        handleOperationError(view.getViewContext().getString(R.string.code_894));
+                    }else if(data.status()==895){
+                        handleOperationError(view.getViewContext().getString(R.string.code_895));
+                    }else if(data.status()==896){
+                        handleOperationError(view.getViewContext().getString(R.string.code_896));
+                    }else if(data.status()==897){
+                        handleOperationError(view.getViewContext().getString(R.string.code_897));
+                    }else if(data.status()==898){
+                        handleOperationError(view.getViewContext().getString(R.string.code_898));
+                    }else if(data.status()==899){
+                        handleOperationError(view.getViewContext().getString(R.string.code_899));
                     }else{
                         handleOperationError(data.msg());
                     }

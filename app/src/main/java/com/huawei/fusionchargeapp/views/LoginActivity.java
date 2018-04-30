@@ -308,10 +308,23 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
                             showHintDialog(getString(R.string.hint),getString(R.string.hint_input_code));
                             return;
                         }
+                        phoneNumber = phoneNumberEt.getText().toString().trim();
+                        if(TextUtils.isEmpty(phoneNumber)) {
+                            showHintDialog(getString(R.string.hint),getString(R.string.hint_input_phone));
+                            return;
+                        }
+                        if(!Tools.isChinaPhoneLegal(phoneNumber)) {
+                            showHintDialog(getString(R.string.hint),getString(R.string.input_correct_phone));
+                            return;
+                        }
                         //手机号验证码登录
                         presenter.loginAction(1, phoneNumber, pwd, code);
                     }
                 }else {
+                    if(pwd != null && pwd.contains(" ")){
+                        showToast(getString(R.string.pwd_cannot_contain_space));
+                        return;
+                    }
                     //调用注册接口
                     if(registerUser()){
                         presenter.registerAction(phoneNumber, pwd, code);

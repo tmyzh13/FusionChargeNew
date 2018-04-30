@@ -112,7 +112,7 @@ public class MyOrderActivity extends BaseActivity {
                     public void success(MyOrderData baseData) {
                         recordBeanList = baseData.rawRecords;
                         if(null == recordBeanList || recordBeanList.isEmpty()) {
-                            showToast(getString(R.string.no_data));
+                            showToast(getString(R.string.no_order_data));
                         } else {
                             adapter.setDatas(recordBeanList);
                             adapter.notifyDataSetChanged();

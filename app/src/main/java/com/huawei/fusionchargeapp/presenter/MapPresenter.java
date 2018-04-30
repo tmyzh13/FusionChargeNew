@@ -6,6 +6,8 @@ import com.corelibs.api.ApiFactory;
 import com.corelibs.api.ResponseTransformer;
 import com.corelibs.base.BasePresenter;
 import com.corelibs.subscriber.ResponseSubscriber;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.apis.MapApi;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
@@ -47,6 +49,7 @@ public class MapPresenter extends BasePresenter<MapHomeView> {
     }
 
     public void getData(){
+        Log.e("zw","map presenter :  getData"  );
         Condition condition=new Condition();
         condition.selectType=3;
         if(ChoiceManager.getInstance().getType()==0){
@@ -72,7 +75,21 @@ public class MapPresenter extends BasePresenter<MapHomeView> {
                 .subscribe(new ResponseSubscriber<BaseData<List<MapDataBean>>>(view) {
                     @Override
                     public void success(BaseData<List<MapDataBean>> baseData) {
+                        Log.e("zw","map presenter SUCCESS : " + baseData.toString() );
+
+                        MapDataBean bean = null;
+                        Gson gson = new Gson();
+                        bean = gson.fromJson("{address='?????????????????????????????????sad', id=30, latitude=0.965231, longitude=-6.99647, alterNum=0, directNum=0, title='????', type='station', distance=0.0}",
+                                new TypeToken<MapDataBean>(){}.getType());
+                        baseData.data.add(bean);
+                        Log.e("zw","map presenter SUCCESS data: " + baseData.data.toString() );
                         view.renderMapData(baseData.data);
+                    }
+
+                    @Override
+                    public boolean operationError(BaseData<List<MapDataBean>> listBaseData, int status, String message) {
+                        Log.e("zw","map presenter : ERROR " + listBaseData.toString() );
+                        return super.operationError(listBaseData, status, message);
                     }
                 });
     }

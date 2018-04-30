@@ -27,6 +27,7 @@ import com.huawei.fusionchargeapp.weights.MyViewPager;
 import com.huawei.fusionchargeapp.weights.NavBar;
 import com.trello.rxlifecycle.ActivityEvent;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,8 +62,8 @@ public class ChargeDetailsActivity extends BaseActivity {
     MyViewPager myViewPager;
     ChargePileTypeAdapter mAdapter;
     private ScanApi api;
-    private double latitude;
-    private double longitude;
+    private double userLatitude;
+    private double userLongitude;
     private String id;
     private String type;
 
@@ -88,11 +89,12 @@ public class ChargeDetailsActivity extends BaseActivity {
 //        latitude = getIntent().getDoubleExtra("latitude",0);
 //        longitude = getIntent().getDoubleExtra("longitude",0);
         MyLocationBean bean = PreferencesHelper.getData(MyLocationBean.class);
-        latitude=bean.latitude;
-        longitude=bean.longtitude;
+        if(bean != null) {
+            userLatitude = bean.latitude;
+            userLongitude = bean.longtitude;
+        }
         id = getIntent().getStringExtra("id");
         type=getIntent().getStringExtra("type");
-        Log.e("yzh","type--"+type);
         getData();
     }
 
@@ -181,10 +183,16 @@ public class ChargeDetailsActivity extends BaseActivity {
         chargePileAddressTv.setText(bean.getAddress());
         scoreTv.setText(bean.getAverageScore() + "");
 //        计算距离
-        LatLng positionLatlng = new LatLng(latitude,longitude);
+        LatLng positionLatlng = new LatLng(userLatitude,userLongitude);
         LatLng userLatlng = new LatLng(bean.getLatitude(),bean.getLongitude());
         float distance = AMapUtils.calculateLineDistance(positionLatlng,userLatlng);
-        Log.e("zw","distance : " + distance);
+        if(distance > 1000) {
+            DecimalFormat df = new DecimalFormat("#.0");
+            String km = df.format(distance/1000);
+            distanceTv.setText(km + "KM");
+        } else {
+            distanceTv.setText(distance + "M");
+        }
 
         mAdapter = new ChargePileTypeAdapter(getSupportFragmentManager(),bean);
         myViewPager.setAdapter(mAdapter);

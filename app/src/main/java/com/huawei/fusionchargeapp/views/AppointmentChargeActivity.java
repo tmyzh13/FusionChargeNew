@@ -211,7 +211,7 @@ public class AppointmentChargeActivity extends BaseActivity<AppointView, Appoint
             public void onClick(View v) {
                 if (item == 1) {
                     appointTime = 15;
-                    userChosedTimeTv.setText(R.string.appoint_15m);
+                    userChosedTimeTv.setText(R.string.time_15m);
                 } else if (item == 2) {
                     appointTime = 30;
                     userChosedTimeTv.setText(R.string.time_30m);

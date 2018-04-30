@@ -16,4 +16,19 @@ public class MapDataBean {
     //station pile
     public String type;
     public double distance;
+
+    @Override
+    public String toString() {
+        return "MapDataBean{" +
+                "address='" + address + '\'' +
+                ", id=" + id +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", alterNum=" + alterNum +
+                ", directNum=" + directNum +
+                ", title='" + title + '\'' +
+                ", type='" + type + '\'' +
+                ", distance=" + distance +
+                '}';
+    }
 }

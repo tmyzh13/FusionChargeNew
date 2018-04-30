@@ -77,9 +77,9 @@ public class ChargePileAdapter extends BaseAdapter {
             holder.pileStatusIv.setImageResource(R.mipmap.charge_on);
         }
         holder.pileNumTv.setText(chargePileBean.getRunCode());
-        holder.maxPowerTv.setText(chargePileBean.getMaxPower());
-        holder.maxElectronicTv.setText(chargePileBean.getMaxCurrent());
-        holder.maxVoltageTv.setText(chargePileBean.getMaxVoltage());
+        holder.maxPowerTv.setText(chargePileBean.getMaxPower() + "kw");
+        holder.maxElectronicTv.setText(chargePileBean.getMaxCurrent() + "A");
+        holder.maxVoltageTv.setText(chargePileBean.getMaxVoltage() + "V"); //电压
 
         gunList = chargePileBean.getGunList();
 

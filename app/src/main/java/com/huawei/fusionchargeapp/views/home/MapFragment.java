@@ -553,7 +553,9 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
         }
         //要单算距离
         MyLocationBean bean = PreferencesHelper.getData(MyLocationBean.class);
-        tv_map_info_distance.setText(Tools.GetDistance(currentMapDataBean.latitude, currentMapDataBean.longitude, bean.latitude, bean.longtitude) + "KM");
+        if(bean != null) {
+            tv_map_info_distance.setText(Tools.GetDistance(currentMapDataBean.latitude, currentMapDataBean.longitude, bean.latitude, bean.longtitude) + "KM");
+        }
         tv_map_info_pile_num.setText(mapInfoBean.pileNum + "");
         tv_map_info_gun_num.setText(mapInfoBean.gunNum + "");
         tv_map_info_free_num.setText(mapInfoBean.freeNum + "");

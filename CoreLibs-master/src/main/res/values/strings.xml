@@ -15,15 +15,17 @@
     <!-- general -->
 
     <!--app错误码-->
-    <string name="code_999">服务端内部错误</string>
-    <string name="code_900">接口参数错误（服务端安全校验，app业务逻辑无需处理）</string>
+    <string name="code_999">系统错误</string>
+    <string name="code_900">请求参数错误</string>
     <string name="code_403">用户鉴权失败</string>
-    <string name="code_201">手机已注册</string>
+    <string name="code_201">手机号码已经被注册</string>
     <string name="code_202">验证码错误</string>
     <string name="code_203">用户名或密码错误</string>
     <string name="code_204">原密码错误</string>
     <string name="code_205">用户名或者验证码错误</string>
-    <string name="code_207">一键登录未绑定手机号</string>
+    <string name="code_206">验证码错误</string>
+    <string name="code_207">第三方登录未绑定手机号</string>
+    <string name="code_208">手机号已经被第三方登录绑定</string>
     <string name="code_210">手机号码未注册</string>
     <string name="code_214">余额不足</string>
     <string name="code_220">有未支付异常订单</string>
@@ -33,8 +35,22 @@
     <string name="code_250">订单未支付</string>
     <string name="code_251">订单已支付</string>
     <string name="code_295">启动充电失败</string>
+    <string name="code_296">停止充电失败</string>
     <string name="code_252">优惠卷或者折扣校验失败</string>
     <string name="code_297">存在正在进行中的充电订单</string>
+    <string name="code_298">选择的订单已经有开过票的</string>
     <string name="code_294">二维码没有匹配的充电车和枪</string>
-    <string name="code_206">获取验证码失败</string>
+    <string name="code_870">预约违约次数过多，赞不支持预约</string>
+    <string name="code_871">指令下发成功，但桩返回被拒绝</string>
+    <string name="code_890">指令下发成功，但桩返回被拒绝</string>
+    <string name="code_891">没有预约记录</string>
+    <string name="code_892">用户有正在充电的订单，不能再次扫描</string>
+    <string name="code_893">用户有未支付订单，不能再次扫描</string>
+    <string name="code_894">扫描的桩不是预约的桩</string>
+    <string name="code_895">该桩被预约或者正在使用中</string>
+    <string name="code_896">主站到采集器HTTP错误</string>
+    <string name="code_897">不可重复下发指令</string>
+    <string name="code_898">主站到采集器</string>
+    <string name="code_899">已有预约，无法再次预约</string>
+
 </resources>

@@ -8,6 +8,7 @@ import com.corelibs.base.BasePresenter;
 import com.corelibs.subscriber.ResponseSubscriber;
 import com.corelibs.utils.PreferencesHelper;
 import com.corelibs.utils.ToastMgr;
+import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.constants.Constant;
 import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.apis.LoginApi;
@@ -93,6 +94,9 @@ public class LoginPresenter extends BasePresenter<LoginView> {
      * @param captcha
      */
     public void registerAction(String phone, String pwd, String captcha) {
+
+
+
         LoginRequestBean bean = new LoginRequestBean();
         bean.phone = phone;
         bean.passWord = pwd;

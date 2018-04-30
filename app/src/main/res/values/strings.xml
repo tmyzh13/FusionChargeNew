@@ -74,7 +74,7 @@
     <string name="login_error">登录失败</string>
     <!--注册-->
     <string name="regist">注册</string>
-    <string name="regist_password_hint">请输入6-20位密码，支持字符a-zA-Z0-9以及英文特殊字符</string>
+    <string name="regist_password_hint">6-20位，必须是字母+数字+特殊符号等</string>
     <!--重置密码-->
     <string name="reset_password">重置密码</string>
     <string name="reset_password_hint">验证码已经发送到您的手机</string>
@@ -242,6 +242,7 @@
     <string name="appoint_1h">请您在1小时内到达</string>
     <string name="appoint_2h">请您在2小时内到达</string>
     <string name="status_fault">故障</string>
+    <string name="time_15m">15分钟</string>
     <string name="time_30m">30分钟</string>
     <string name="time_1h">1小时</string>
     <string name="time_2h">2小时</string>
@@ -276,8 +277,10 @@
     <string name="please_take_qrcode">请对准二维码</string>
     <string name="wrong_request">请求出现错误！</string>
     <string name="time_out">连接超时。</string>
+    <string name="time_out_or_qrcode_wrong">连接超时或输入二维码不正确。</string>
     <string name="scan_time_out">解析二维码错误</string>
     <string name="no_data">未获取到数据！</string>
+    <string name="no_search_station">没有搜索到相关站点信息！</string>
 
     <string name="login_fail">登录失效</string>
     <string name="has_no_pay_order">有未支付订单</string>
@@ -312,5 +315,8 @@
     <string name="birthday">出生日期</string>
     <string name="address">地址</string>
     <string name="car_vin">汽车VIN</string>
+    <string name="pwd_cannot_contain_space">密码不能包含空格！</string>
+    <string name="no_order_data">无记录。</string>
+
 
 </resources>

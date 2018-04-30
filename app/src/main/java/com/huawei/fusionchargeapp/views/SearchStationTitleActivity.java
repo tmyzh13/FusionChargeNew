@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.corelibs.base.BaseActivity;
+import com.corelibs.utils.PreferencesHelper;
 import com.corelibs.utils.ToastMgr;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.adapter.SearchHistoryOrResultAdapter;
@@ -86,7 +87,7 @@ public class SearchStationTitleActivity extends BaseActivity<HomeListView,HomeLi
     @Override
     public void rendData(List<MapDataBean> list) {
         if (null == list || list.size() == 0) {
-            ToastMgr.show(getString(R.string.no_data));
+            ToastMgr.show(getString(R.string.no_search_station));
             adapter.resetShowHistoryData();
             return;
         }
@@ -172,6 +173,8 @@ public class SearchStationTitleActivity extends BaseActivity<HomeListView,HomeLi
 
     @OnClick(R.id.tv_clear_history)
     public void clearHistory(){
+        PreferencesHelper.remove(CachedSearchTitleUtils.HistoryDataBean.class);
+
         CachedSearchTitleUtils.resetHistoryData();
         listSearch.setDivider(null);
         listSearch.setDividerHeight(0);

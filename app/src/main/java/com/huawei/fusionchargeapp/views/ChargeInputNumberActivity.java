@@ -117,7 +117,7 @@ public class ChargeInputNumberActivity extends BaseActivity {
                                public void onError(Throwable e) {
                                    super.onError(e);
                                    hideLoading();
-                                   showToast(getString(R.string.time_out));
+                                   showToast(getString(R.string.time_out_or_qrcode_wrong));
                                }
                            }
                 );
