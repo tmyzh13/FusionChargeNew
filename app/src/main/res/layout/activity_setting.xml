@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/line"
+    android:orientation="vertical">
+
+    <com.huawei.fusionchargeapp.weights.NavBar
+        android:id="@+id/nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+    style="@style/textview2"
+    android:text="@string/setting_about_us"
+    android:id="@+id/tv_about_us"
+    android:background="@drawable/list_selector"/>
+    <TextView
+        style="@style/textview2"
+        android:text="@string/setting_help"
+        android:id="@+id/tv_help"
+        android:background="@drawable/list_selector"/>
+
+
+
+    <LinearLayout
+        android:id="@+id/layout_version"
+        style="@style/item_layout_simple"
+        android:layout_margin="0dp"
+        android:padding="0dp"
+        android:orientation="horizontal"
+        android:background="@drawable/list_selector"
+        >
+
+
+        <TextView
+            style="@style/textview2"
+            android:text="@string/setting_version"
+            android:layout_weight="1"
+            />
+
+
+        <TextView
+            style="@style/textview2"
+            android:layout_weight="1"
+            android:gravity="right|center_vertical"
+            android:textColor="@color/setting_blue"
+            android:text="@string/setting_new_version"
+            android:drawableRight="@mipmap/new_version"
+            android:drawablePadding="-5dp"
+            android:id="@+id/tv_version"
+            />
+
+    </LinearLayout>
+
+
+    <TextView
+        style="@style/textview2"
+        android:text="@string/setting_clause"
+        android:id="@+id/tv_clause"
+        android:background="@drawable/list_selector"/>
+    <TextView
+        style="@style/textview2"
+        android:text="@string/setting_advice"
+        android:id="@+id/tv_advice"
+        android:background="@drawable/list_selector"/>
+    <TextView
+        style="@style/textview2"
+        android:text="@string/setting_login_out"
+        android:id="@+id/tv_login_out"
+        android:background="@drawable/list_selector"/>
+
+
+    <TextView
+        android:id="@+id/tv_exit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/dp_30"
+        android:background="@drawable/blue_shape_bg"
+        android:gravity="center"
+        android:text="@string/setting_exit"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/text_title" />
+</LinearLayout>

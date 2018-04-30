@@ -51,7 +51,7 @@
             android:gravity="right|center_vertical"
             android:lines="1"
             android:text="陈生"
-            android:textColor="@color/md_material_blue_600" />
+            android:textColor="@color/setting_blue" />
     </LinearLayout>
 
     <ImageView style="@style/view_line"
@@ -70,7 +70,7 @@
             style="@style/textview"
             android:layout_weight="1"
             android:gravity="right|center_vertical"
-            android:textColor="@color/md_material_blue_600"
+            android:textColor="@color/setting_blue"
             android:text="男"/>
     </LinearLayout>
 
@@ -91,7 +91,7 @@
             android:layout_weight="1"
             android:gravity="right|center_vertical"
             android:text="1989.10.29"
-            android:textColor="@color/md_material_blue_600" />
+            android:textColor="@color/setting_blue" />
     </LinearLayout>
 
     <ImageView style="@style/view_line"
@@ -121,7 +121,7 @@
             android:gravity="right|center_vertical"
             android:lines="1"
             android:inputType="textWebEmailAddress"
-            android:textColor="@color/md_material_blue_600"/>
+            android:textColor="@color/setting_blue"/>
     </LinearLayout>
     <ImageView style="@style/view_line"
         />
@@ -140,7 +140,7 @@
             android:gravity="right|center_vertical"
             android:text="江苏省南京市"
             android:layout_weight="1"
-            android:textColor="@color/md_material_blue_600" />
+            android:textColor="@color/setting_blue" />
     </LinearLayout>
     <ImageView style="@style/view_line"
         />
@@ -162,7 +162,7 @@
             android:background="@color/transparent"
             android:gravity="right|center_vertical"
             android:lines="1"
-            android:textColor="@color/md_material_blue_600"/>
+            android:textColor="@color/setting_blue"/>
     </LinearLayout>
     <TextView
         android:id="@+id/login_tv"

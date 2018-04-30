@@ -24,4 +24,5 @@
     <color name="color_red">#ff0000</color>
     <color name="publish_bg_color">#44cdcdcd</color>
     <color name="list_pressed">#efefef</color>
+    <color name="setting_blue">#4772fb</color>
 </resources>

@@ -282,6 +282,7 @@
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:gravity="center_vertical"
+            android:id="@+id/ll_setting"
             android:paddingLeft="15dp"
             >
             <ImageView
