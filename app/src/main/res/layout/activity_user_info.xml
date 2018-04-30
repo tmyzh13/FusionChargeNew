@@ -50,7 +50,6 @@
             android:background="@color/transparent"
             android:gravity="right|center_vertical"
             android:lines="1"
-            android:text="陈生"
             android:textColor="@color/setting_blue" />
     </LinearLayout>
 
@@ -63,15 +62,19 @@
 
         <TextView
             style="@style/textview"
+            android:layout_weight="1"
             android:text="@string/sex" />
 
-        <TextView
+
+        <EditText
             android:id="@+id/tv_sex"
             style="@style/textview"
+            android:background="@color/transparent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:maxLength="1"
             android:gravity="right|center_vertical"
-            android:textColor="@color/setting_blue"
-            android:text="男"/>
+            android:textColor="@color/setting_blue" />
     </LinearLayout>
 
     <ImageView style="@style/view_line"
@@ -83,14 +86,16 @@
 
         <TextView
             style="@style/textview"
+            android:layout_weight="1"
             android:text="@string/birthday" />
 
-        <TextView
+        <EditText
             android:id="@+id/tv_birthday"
             style="@style/textview"
             android:layout_weight="1"
+            android:background="@color/transparent"
+            android:layout_height="match_parent"
             android:gravity="right|center_vertical"
-            android:text="1989.10.29"
             android:textColor="@color/setting_blue" />
     </LinearLayout>
 
@@ -106,22 +111,18 @@
             android:layout_weight="1"
             android:text="@string/email" />
 
-        <TextView
-            android:id="@+id/tv_weight"
-            style="@style/textview"
-            android:textColor="@color/text_gray" />
 
         <EditText
-            style="@style/textview"
-            android:text="132XXXXX@163.com"
             android:id="@+id/tv_email"
+            style="@style/textview"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/transparent"
             android:gravity="right|center_vertical"
-            android:lines="1"
             android:inputType="textWebEmailAddress"
-            android:textColor="@color/setting_blue"/>
+            android:lines="1"
+            android:hint="填写邮箱"
+            android:textColor="@color/setting_blue" />
     </LinearLayout>
     <ImageView style="@style/view_line"
         />
@@ -132,14 +133,17 @@
 
         <TextView
             style="@style/textview"
+            android:layout_weight="1"
             android:text="@string/address" />
 
-        <TextView
+        <EditText
             android:id="@+id/tv_address"
             style="@style/textview"
-            android:gravity="right|center_vertical"
-            android:text="江苏省南京市"
             android:layout_weight="1"
+            android:lines="1"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:gravity="right|center_vertical"
             android:textColor="@color/setting_blue" />
     </LinearLayout>
     <ImageView style="@style/view_line"
@@ -153,16 +157,17 @@
             style="@style/textview"
             android:layout_weight="1"
             android:text="@string/car_vin" />
+
         <EditText
-            style="@style/textview"
-            android:text="L00000001"
             android:id="@+id/tv_car_vin"
+            style="@style/textview"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/transparent"
             android:gravity="right|center_vertical"
             android:lines="1"
-            android:textColor="@color/setting_blue"/>
+            android:hint="填写VIN码"
+            android:textColor="@color/setting_blue" />
     </LinearLayout>
     <TextView
         android:id="@+id/login_tv"
@@ -174,6 +179,7 @@
         android:background="@drawable/blue_shape_bg"
         android:gravity="center"
         android:text="@string/action_submit"
+        android:visibility="gone"
         android:textColor="@color/text_white"
         android:textSize="@dimen/text_title" />
 </LinearLayout>
