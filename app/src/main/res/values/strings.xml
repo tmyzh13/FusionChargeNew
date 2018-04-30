@@ -139,6 +139,8 @@
     <string name="charging_pile_position">桩位</string>
     <string name="charging_pile_comments">评论</string>
     <string name="charging_pile_no">电桩编号：</string>
+    <string name="charging_pile_charging_fee">充电费：</string>
+    <string name="charging_pile_service_fee">服务费：</string>
     <string name="charging_pile_max_power">最大功率：</string>
     <string name="charging_pile_max_electronic">最大电流：</string>
     <string name="charging_pile_max_voltage">最大电压：</string>
