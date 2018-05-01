@@ -1,11 +1,8 @@
 package com.huawei.fusionchargeapp.views;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -38,7 +35,6 @@ import com.huawei.fusionchargeapp.model.beans.HomeRefreshBean;
 import com.huawei.fusionchargeapp.model.beans.MyLocationBean;
 import com.huawei.fusionchargeapp.presenter.GuaildPresenter;
 import com.huawei.fusionchargeapp.utils.DrivingRouteOverLay;
-import com.huawei.fusionchargeapp.utils.TimeServiceManager;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.interfaces.GuaildView;
 import com.huawei.fusionchargeapp.weights.AppointmentTimeOutDialog;
@@ -235,6 +231,9 @@ public class GuildActivity  extends BaseActivity<GuaildView,GuaildPresenter> imp
         MyLocationBean locationBean=PreferencesHelper.getData(MyLocationBean.class);
         if(locationBean!=null){
             mStartPoint=new LatLonPoint(locationBean.latitude,locationBean.longtitude);
+        }
+        if (mStartPoint==null){
+            mStartPoint=new  LatLonPoint(39.9088600000,116.3973900000);
         }
         mEndPoint=new LatLonPoint(endLatitude,endLongitude);
         searchRouteResult(ROUTE_TYPE_DRIVE, RouteSearch.DrivingDefault);

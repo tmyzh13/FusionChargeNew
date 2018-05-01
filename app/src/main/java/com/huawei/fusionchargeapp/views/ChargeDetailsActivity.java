@@ -205,7 +205,11 @@ public class ChargeDetailsActivity extends BaseActivity {
     private void initView(ChargeStationDetailBean bean){
         chargePileNameTv.setText(bean.getName());
         chargePileAddressTv.setText(bean.getAddress());
-        scoreTv.setText(bean.getAverageScore() + "");
+        if ("-1.0".equals(bean.getAverageScore())){
+            scoreTv.setText("--");
+        }else {
+            scoreTv.setText(bean.getAverageScore() + "");
+        }
 //        计算距离
         LatLng positionLatlng = new LatLng(userLatitude,userLongitude);
         LatLng userLatlng = new LatLng(bean.getLatitude(),bean.getLongitude());

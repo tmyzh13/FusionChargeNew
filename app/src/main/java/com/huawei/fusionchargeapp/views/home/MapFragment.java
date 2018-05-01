@@ -571,8 +571,8 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
         // 加粗
         TextPaint paintAddress = tv_map_info_address.getPaint();
         paintAddress.setFakeBoldText(true);
-        if (mapInfoBean.averageScore.equals("-1")) {
-            tv_map_info_score.setText("");
+        if (mapInfoBean.averageScore.equals("-1.0")) {
+            tv_map_info_score.setText("--");
         } else {
             tv_map_info_score.setText(mapInfoBean.averageScore + getString(R.string.score));
         }
