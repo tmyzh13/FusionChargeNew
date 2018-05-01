@@ -1,7 +1,6 @@
 package com.huawei.fusionchargeapp.views;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -12,7 +11,6 @@ import com.corelibs.common.AppManager;
 import com.huawei.fusionchargeapp.MainActivity;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.model.beans.HomeAppointmentBean;
-import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.weights.NavBar;
 
 import butterknife.Bind;
@@ -23,8 +21,6 @@ public class AppointSuccessActivity extends BaseActivity {
     private Context context = AppointSuccessActivity.this;
     @Bind(R.id.nav)
     NavBar navBar;
-    @Bind(R.id.appoint_date_tv)
-    TextView appiontDateTv;
     @Bind(R.id.arrive_on_time_tv)
     TextView arriveOnTimeTv;
     @Bind(R.id.action_go_tv)
@@ -42,11 +38,6 @@ public class AppointSuccessActivity extends BaseActivity {
     private String address;
     private String reserveId;
 
-    public static Intent getLauncher(Context context, int time) {
-        Intent intent = new Intent(context, AppointSuccessActivity.class);
-        intent.putExtra("time", time);
-        return intent;
-    }
 
     @Override
     protected int getLayoutId() {
@@ -67,7 +58,6 @@ public class AppointSuccessActivity extends BaseActivity {
         } else if (time == 4) {
             arriveOnTimeTv.setText(R.string.appoint_2h);
         }
-        appiontDateTv.setText(Tools.getYearMonthDate());
 
         gunCode = getIntent().getStringExtra("gunCode");
         chargingPileId = getIntent().getIntExtra("chargingPileId",0);

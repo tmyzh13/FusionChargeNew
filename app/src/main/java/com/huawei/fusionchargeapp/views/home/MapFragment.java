@@ -118,6 +118,8 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
     RelativeLayout rl_charger_order;
     @Bind(R.id.tv_appointment_address)
     TextView tv_appointment_address;
+    @Bind(R.id.ll_appointment_guaild)
+    LinearLayout ll_appointment_guaild;
     @Bind(R.id.tv_appointment_time)
     TextView tv_appointment_time;
     @Bind(R.id.iv_hint)
@@ -207,7 +209,9 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                         appointmentTime = Long.parseLong(PreferencesHelper.getData(Constant.TIME_APPOINTMENT));
                     }
                     appointmentTime -= 1000;
-                    PreferencesHelper.saveData(Constant.TIME_APPOINTMENT, appointmentTime + "");
+                    if (appointmentTime>=0) {
+                        PreferencesHelper.saveData(Constant.TIME_APPOINTMENT, appointmentTime + "");
+                    }
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -216,22 +220,23 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                     });
                     if (appointmentTime <= 0) {
                         //预约超时
-                       if (AppManager.getAppManager().currentActivity().getClass().equals(MainActivity.class)) {
-                           appointmentTimeOutDialog.show();
-                           appointmentTimeOutDialog.setIvDeleteListener(new View.OnClickListener() {
-                               @Override
-                               public void onClick(View v) {
-                                   appointmentTimeOutDialog.dismiss();
-                               }
-                           });
-                           appointmentTimeOutDialog.setReAppointment(new View.OnClickListener() {
-                               @Override
-                               public void onClick(View v) {
-                                   appointmentTimeOutDialog.dismiss();
-                               }
-                           });
-                       }
+                        if (AppManager.getAppManager().currentActivity().getClass().equals(MainActivity.class)) {
+                            appointmentTimeOutDialog.show();
+                            appointmentTimeOutDialog.setIvDeleteListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    appointmentTimeOutDialog.dismiss();
+                                }
+                            });
+                            appointmentTimeOutDialog.setReAppointment(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    appointmentTimeOutDialog.dismiss();
+                                }
+                            });
+                        }
                         homeAppointmentBean=null;
+                        timerAppointment.cancel();
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -669,7 +674,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
         }
     };
 
-    @OnClick(R.id.iv_appointment_guaild)
+    @OnClick(R.id.ll_appointment_guaild)
     public void goAppointmentGuaild() {
         startActivity(GuildActivity.getLauncher(getContext(), homeAppointmentBean.latitude, homeAppointmentBean.longitude, homeAppointmentBean, false));
     }
