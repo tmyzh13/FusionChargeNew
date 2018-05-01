@@ -5,11 +5,14 @@ import com.huawei.fusionchargeapp.model.beans.BaseData;
 import com.huawei.fusionchargeapp.model.beans.CheckCodeBean;
 import com.huawei.fusionchargeapp.model.beans.LoginRequestBean;
 import com.huawei.fusionchargeapp.model.beans.ModifyPwdRequestBean;
+import com.huawei.fusionchargeapp.model.beans.ModifyUserInfoRequestBean;
 import com.huawei.fusionchargeapp.model.beans.ResponseMessageBean;
 import com.huawei.fusionchargeapp.model.beans.RestPwdRequestBean;
 import com.huawei.fusionchargeapp.model.beans.UserBean;
+import com.huawei.fusionchargeapp.model.beans.UserInfoBean;
 
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import rx.Observable;
@@ -39,4 +42,14 @@ public interface LoginApi {
 
     @POST(Urls.CHECK_CODE)
     Observable<BaseData> checkCode(@Body CheckCodeBean bean);
+
+    //获取用户信息
+    @GET(Urls.GET_USER_INFO)
+    Observable<BaseData<UserInfoBean>> getUserInfo(@Header("AccessToken")String accessToken);
+
+    //修改用户信息
+    @POST(Urls.MODIFY_USER_INFO)
+    Observable<BaseData<ResponseMessageBean>> modifyUserInfo(@Header("AccessToken")String accessToken,@Body ModifyUserInfoRequestBean bean);
+
+
 }

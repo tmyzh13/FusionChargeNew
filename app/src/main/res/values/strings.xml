@@ -87,6 +87,7 @@
     <string name="user_info_sex">性别</string>
     <string name="user_info_man">男</string>
     <string name="user_info_female">女</string>
+    <string name="user_info_unknown">未知</string>
     <string name="user_info_nick_name">昵称</string>
     <string name="user_info_email">邮箱</string>
     <string name="user_info_birthday">出生日期</string>
@@ -319,6 +320,10 @@
     <string name="car_vin">汽车VIN</string>
     <string name="pwd_cannot_contain_space">密码不能包含空格！</string>
     <string name="no_order_data">无记录。</string>
+    <string name="user_info_modify_success">提交成功</string>
+    <string name="user_info_modify_fail">提交失败</string>
+    <string name="user_info_get_fail">获取用户信息失败</string>
+
 
 
     <!--    //设置页面-->

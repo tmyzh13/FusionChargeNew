@@ -8,14 +8,12 @@ package com.huawei.fusionchargeapp.constants;
 public class Urls {
 
 
-//        public static final String ROOT="http://10.40.143.17:8088/charger/api/v1/";//菊
+        public static final String ROOT="http://10.40.143.17:8088/charger/api/v1/";//菊
 ////    public static final String ROOT="http://10.40.143.67:8088/charger/api/v1/";//李凯
 ////    public static final String ROOT="http://10.40.143.130:8088/charger/api/v1/";//胡明明
 ////    public static final String ROOT="http://10.40.143.130:8088/charger/api/v1/";//菊1
 //    public static final String ROOT = "http://114.115.141.57:8080/charger/api/v1/";
-//        public static final String ROOT = "http://114.115.169.46:8088/charger/api/v1/"; //正式
-
-    public static final String ROOT = "http://10.40.143.10:8088/charger/api/v1/";   //大灰灰
+//        public static final String ROOT = "http://114.115.169.46:8088/charger/api/v1/";
 
 
     //登录
@@ -28,6 +26,10 @@ public class Urls {
     public static final String MODIFY_PWD = "user/modifypwd";
     //获取验证码
     public static final String GET_CODE = "user/captcha";
+
+    public static final String GET_USER_INFO = "user/getUserInfo";
+
+    public static final String MODIFY_USER_INFO = "user/modifyUserInfo";
     //预约
     public static final String APPOINT_CHARGE = "charging/reserve";
 
