@@ -211,6 +211,8 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                     appointmentTime -= 1000;
                     if (appointmentTime>=0) {
                         PreferencesHelper.saveData(Constant.TIME_APPOINTMENT, appointmentTime + "");
+                    }else {
+                        appointmentTime=0;
                     }
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
@@ -236,7 +238,6 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                             });
                         }
                         homeAppointmentBean=null;
-                        timerAppointment.cancel();
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
