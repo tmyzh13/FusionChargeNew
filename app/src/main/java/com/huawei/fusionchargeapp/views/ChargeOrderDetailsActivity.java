@@ -321,20 +321,19 @@ public class ChargeOrderDetailsActivity extends BaseActivity implements RadioGro
                     etChargeCount.setClickable(false);
                     etChargeCount.setHint(R.string.choose_charge_full);
                     chooseStyle = WITH_FULL;
-                    Log.e("zw",chooseStyle + "chooseInfo :WITH_FULL " );
                 }else {
                     etChargeCount.setEnabled(true);
                     etChargeCount.setClickable(true);
-                    etChargeCount.setHint(R.string.please_enter_charge_count);
+//                    etChargeCount.setHint(R.string.please_enter_charge_count);
                     if(i == rbWithPower.getId()){
                         chooseStyle = WITH_POWER;
-                        Log.e("zw",chooseStyle +"chooseInfo :WITH_POWER " );
+                        etChargeCount.setHint(R.string.please_enter_charge_count);
                     }else if(i == rbWithMoney.getId()){
                         chooseStyle = WITH_MONEY;
-                        Log.e("zw",chooseStyle +"chooseInfo :WITH_MONEY " );
+                        etChargeCount.setHint(R.string.please_input_charge_money);
                     } else if(i == rbWithTime.getId()){
                         chooseStyle = WITH_TIME; //2
-                        Log.e("zw",chooseStyle +"chooseInfo :WITH_TIME " );
+                        etChargeCount.setHint(R.string.please_input_charge_time);
                     }
                 }
                 break;

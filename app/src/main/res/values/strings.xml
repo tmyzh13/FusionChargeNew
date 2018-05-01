@@ -332,4 +332,6 @@
     <string name="setting_exit">退出</string>
     <string name="setting_login_out">注销账户</string>
     <string name="setting_clause">版权声明于免责条款</string>
+    <string name="please_input_charge_money">请输入充电金额</string>
+    <string name="please_input_charge_time">请输入充电时长</string>
 </resources>
