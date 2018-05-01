@@ -152,7 +152,7 @@
     <string name="appoint_charge_choice_time">选择时间</string>
     <string name="appoint_charge_choice_time_title">请选择合适的预约时间段</string>
     <string name="appoint_charge_choice_time_hint">温馨提示：请根据您的实际需要进行预约，恶意预约将受到使用限制</string>
-    <string name="appoint_success">预约成功</string>
+    <string name="appoint_success">预约成功!</string>
 
     <!--导航中-->
     <string name="guilding">导航中</string>
@@ -239,10 +239,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="appoint_charge">预约充电</string>
     <string name="appoint_time">15分钟</string>
-    <string name="appoint_15m">请您在15分钟内到达</string>
-    <string name="appoint_30m">请您在30分钟内到达</string>
-    <string name="appoint_1h">请您在1小时内到达</string>
-    <string name="appoint_2h">请您在2小时内到达</string>
+    <string name="appoint_15m">请您在15分钟内到达,若不能及时达到，请您\n取消预约，否则将会被记为恶意预约!</string>
+    <string name="appoint_30m">请您在30分钟内到达,若不能及时达到，请您\n取消预约，否则将会被记为恶意预约!</string>
+    <string name="appoint_1h">请您在1小时内到达,若不能及时达到，请您\n取消预约，否则将会被记为恶意预约!</string>
+    <string name="appoint_2h">请您在2小时内到达,若不能及时达到，请您\n取消预约，否则将会被记为恶意预约!</string>
     <string name="status_fault">故障</string>
     <string name="time_15m">15分钟</string>
     <string name="time_30m">30分钟</string>

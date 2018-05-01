@@ -235,7 +235,7 @@ public class AppointmentChargeActivity extends BaseActivity<AppointView, Appoint
         RxBus.getDefault().send(new Object(), Constant.REFRESH_HOME_STATUE);
 //        startActivity(AppointSuccessActivity.getLauncher(context,item));
         Intent intent = new Intent(this,AppointSuccessActivity.class);
-        intent.putExtra("item",item);
+        intent.putExtra("time",item);
         intent.putExtra("gunCode",gunCode);
         intent.putExtra("chargingPileId",chargingPileId);
         intent.putExtra("chargingPileName",chargingPileName);

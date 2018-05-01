@@ -1,7 +1,6 @@
 package com.huawei.fusionchargeapp.views;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -42,11 +41,6 @@ public class AppointSuccessActivity extends BaseActivity {
     private String address;
     private String reserveId;
 
-    public static Intent getLauncher(Context context, int time) {
-        Intent intent = new Intent(context, AppointSuccessActivity.class);
-        intent.putExtra("time", time);
-        return intent;
-    }
 
     @Override
     protected int getLayoutId() {
