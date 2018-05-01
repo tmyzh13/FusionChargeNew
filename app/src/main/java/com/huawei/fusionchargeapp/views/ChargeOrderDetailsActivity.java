@@ -271,7 +271,8 @@ public class ChargeOrderDetailsActivity extends BaseActivity implements RadioGro
                         if(baseData.code == 403) {
                             goLogin();
                         }
-                        showToast(getString(R.string.server_wrong));
+//                        showToast(getString(R.string.server_wrong));
+                        showToast(message);
                         return super.operationError(baseData, status, message);
                     }
 
