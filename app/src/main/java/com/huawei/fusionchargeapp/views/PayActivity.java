@@ -339,6 +339,14 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
         dialog.show();
     }
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //刷新首页的界面
+        RxBus.getDefault().send(new Object(),Constant.REFRESH_HOME_STATUE);
+    }
+
     @Override
     public void goLogin() {
         UserHelper.clearUserInfo(UserBean.class);

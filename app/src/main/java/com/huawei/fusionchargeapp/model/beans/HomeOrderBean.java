@@ -10,4 +10,14 @@ public class HomeOrderBean {
     public long chargeId;
     public long id;
     public String chargeGunNum;
+
+    @Override
+    public String toString() {
+        return "HomeOrderBean{" +
+                "orderRecordNum='" + orderRecordNum + '\'' +
+                ", chargeId=" + chargeId +
+                ", id=" + id +
+                ", chargeGunNum='" + chargeGunNum + '\'' +
+                '}';
+    }
 }

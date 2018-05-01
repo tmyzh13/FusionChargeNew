@@ -131,7 +131,7 @@ public class MapPresenter extends BasePresenter<MapHomeView> {
     }
 
     public void getUserOrderStatue(){
-
+        Log.e("zw","getUserOrderStatus");
 //        RequestOnlyUserId bean =new RequestOnlyUserId();
 //        bean.userId=1;
         api.getUserOrderStatue(UserHelper.getSavedUser().token)
@@ -139,6 +139,7 @@ public class MapPresenter extends BasePresenter<MapHomeView> {
                 .subscribe(new ResponseSubscriber<BaseData<HomeOrderBean>>(view) {
                     @Override
                     public void success(BaseData<HomeOrderBean> baseData) {
+                        Log.e("zw",baseData.toString());
                         if(baseData.data==null){
 //                            \ Response Json: {"code":0,"data":{"orderRecordNum":"1524387088804002","chargeId":0,"id":13,"userId":1}}
                             Log.e("yzh","no order");
