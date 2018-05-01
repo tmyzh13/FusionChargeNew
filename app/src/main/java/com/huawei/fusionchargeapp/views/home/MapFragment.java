@@ -215,21 +215,23 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                     });
                     if (appointmentTime <= 0) {
                         //预约超时
-//                        if (AppManager.getAppManager().currentActivity().getClass().equals(MainActivity.class)) {
-//                            appointmentTimeOutDialog.show();
-//                            appointmentTimeOutDialog.setIvDeleteListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    appointmentTimeOutDialog.dismiss();
-//                                }
-//                            });
-//                            appointmentTimeOutDialog.setReAppointment(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    appointmentTimeOutDialog.dismiss();
-//                                }
-//                            });
-//                        }
+                       if (AppManager.getAppManager().currentActivity().getClass().equals(MainActivity.class)) {
+                           appointmentTimeOutDialog.show();
+                           appointmentTimeOutDialog.setIvDeleteListener(new View.OnClickListener() {
+                               @Override
+                               public void onClick(View v) {
+                                   appointmentTimeOutDialog.dismiss();
+                               }
+                           });
+                           appointmentTimeOutDialog.setReAppointment(new View.OnClickListener() {
+                               @Override
+                               public void onClick(View v) {
+                                   appointmentTimeOutDialog.dismiss();
+                               }
+                           });
+                       }
+                        homeAppointmentBean=null;
+                        ll_appontment.setVisibility(View.GONE);
 //                        cancelTimerAppointment();
                     }
                 }
@@ -605,7 +607,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
             tv_appointment_address.setText(getString(R.string.home_appointment_hint));
 
             if (bean.reserveEndTime <= bean.nowTime) {
-                ll_appontment.setVisibility(View.VISIBLE);
+                ll_appontment.setVisibility(View.GONE);
             } else {
                 ll_appontment.setVisibility(View.VISIBLE);
                 long surplusTime = bean.reserveEndTime - bean.nowTime;
