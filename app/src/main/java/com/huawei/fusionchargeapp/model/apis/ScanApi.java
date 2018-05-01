@@ -2,11 +2,13 @@ package com.huawei.fusionchargeapp.model.apis;
 
 import com.huawei.fusionchargeapp.constants.Urls;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
+import com.huawei.fusionchargeapp.model.beans.ChargeDetailFeeBean;
 import com.huawei.fusionchargeapp.model.beans.ChargeStationDetailBean;
 import com.huawei.fusionchargeapp.model.beans.MyOrderData;
 import com.huawei.fusionchargeapp.model.beans.OrderRequestInfo;
 import com.huawei.fusionchargeapp.model.beans.PileList;
 import com.huawei.fusionchargeapp.model.beans.RequestChargePileDetailBean;
+import com.huawei.fusionchargeapp.model.beans.RequestChargeQueryFeeBean;
 import com.huawei.fusionchargeapp.model.beans.RequestMyOrderBean;
 import com.huawei.fusionchargeapp.model.beans.RequestScanBean;
 import com.huawei.fusionchargeapp.model.beans.ScanChargeInfo;
@@ -42,6 +44,10 @@ public interface ScanApi {
     //我的订单
     @POST(Urls.MY_ORDER)
     Observable<MyOrderData> getMyOrder(@Header("AccessToken") String token, @Body RequestMyOrderBean bean);
+
+    //根据充电桩ID查询阶梯电价和服务费
+    @POST(Urls.QUERY_FEE)
+    Observable<BaseData<ChargeDetailFeeBean>> getQueryFee(@Header("AccessToken") String token, @Body RequestChargeQueryFeeBean bean);
 
 
 }

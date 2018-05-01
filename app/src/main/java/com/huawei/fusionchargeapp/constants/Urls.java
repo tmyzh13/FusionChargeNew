@@ -72,4 +72,5 @@ public class Urls {
     public static final String MY_ORDER = "user/queryAllChargeOrder";
     //校验验证码
     public static final String CHECK_CODE="user/checkCaptcha";
+
 }

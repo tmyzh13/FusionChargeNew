@@ -11,4 +11,6 @@ public class ChargeFeeBean {
     public String unit;
     public double multiFee;
 
+
+
 }

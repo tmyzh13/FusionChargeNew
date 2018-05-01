@@ -2,9 +2,12 @@ package com.huawei.fusionchargeapp.views;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 
 import com.corelibs.base.BaseActivity;
 import com.corelibs.base.BasePresenter;
+import com.corelibs.common.AppManager;
+import com.huawei.fusionchargeapp.App;
 import com.huawei.fusionchargeapp.MainActivity;
 import com.huawei.fusionchargeapp.R;
 
@@ -16,6 +19,13 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     public void goLogin() {
 
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.e("zw","getApplicationContext : " + (getApplicationContext() == null));
+        AppManager.getAppManager().setContext(getApplicationContext());
     }
 
     @Override

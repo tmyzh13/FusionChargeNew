@@ -1,6 +1,9 @@
 package com.corelibs.common;
 
 import android.app.Activity;
+import android.app.Application;
+import android.content.Context;
+import android.util.Log;
 
 import java.util.Stack;
 
@@ -12,6 +15,8 @@ public final class AppManager {
     private static Stack<Activity> activityStack;
 
     private static AppManager instance;
+
+    private static Context mContext;
 
     private AppManager() {
     }
@@ -111,5 +116,20 @@ public final class AppManager {
     public void appExit() {
         finishAllActivity();
         System.exit(0);
+    }
+
+    /**
+     * 为了获取Context
+     */
+    public void setContext(Context context){
+        if(context instanceof Application) {
+            if(mContext == null) {
+                mContext = context;
+            }
+        }
+    }
+
+    public Context getAppContext(){
+        return mContext;
     }
 }

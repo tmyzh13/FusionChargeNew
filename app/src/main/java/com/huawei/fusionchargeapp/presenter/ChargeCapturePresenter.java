@@ -51,7 +51,7 @@ public class ChargeCapturePresenter extends BasePresenter<ChargeCaptureView>{
         bean.setQrCode(contents);
         api.getScanChargeInfo(UserHelper.getSavedUser().token,bean)
                 .compose(new ResponseTransformer<>(this.<BaseData<ScanChargeInfo>>bindUntilEvent(ActivityEvent.DESTROY)))
-                .subscribe(new ResponseSubscriber<BaseData<ScanChargeInfo>>() {
+                .subscribe(new ResponseSubscriber<BaseData<ScanChargeInfo>>(view) {
                                @Override
                                public void success(BaseData<ScanChargeInfo> baseData) {
                                    view.onSuccess(baseData.data);
@@ -59,7 +59,9 @@ public class ChargeCapturePresenter extends BasePresenter<ChargeCaptureView>{
 
                                @Override
                                public boolean operationError(BaseData<ScanChargeInfo> scanChargeInfoBaseData, int status, String message) {
-                                   view.onOperationError(message);
+                                   if(!TextUtils.isEmpty(message)) {
+                                       view.onOperationError(message);
+                                   }
                                    return super.operationError(scanChargeInfoBaseData, status, message);
                                }
 

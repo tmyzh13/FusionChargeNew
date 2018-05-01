@@ -28,13 +28,11 @@ public class ResponseHandler<T> {
 
     public ResponseHandler(CustomHandler<T> handler) {
         this.handler = handler;
-        Log.e("zw"," 11111  ");
     }
 
     public ResponseHandler(CustomHandler<T> handler, BaseView view) {
         this.handler = handler;
         this.view = view;
-        Log.e("zw"," 222222  ");
     }
 
     public boolean checkDataNotNull(IBaseData data) {
@@ -142,11 +140,10 @@ public class ResponseHandler<T> {
                     }else{
                         handleOperationError(data.msg());
                     }*/
-                    Context context = AppManager.getAppManager().currentActivity();
+                    Context context = AppManager.getAppManager().getAppContext();
                     if(data.status()==403){
                         handlerGoLogin();
                     }else if(data.status()==900){
-
                         handleOperationError(context.getString(R.string.code_900));
                     }else if(data.status()==999){
                         handleOperationError(context.getString(R.string.code_999));

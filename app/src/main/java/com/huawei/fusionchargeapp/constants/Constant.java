@@ -39,4 +39,6 @@ public class Constant {
     public static final String REFRESH_MAP_OR_LIST_DATA="refresh_map_or_list_data";
     //刷新首页的状态
     public static final String REFRESH_HOME_STATUE="refresh_home_statue";
+    //注销账号取消预约中的信息
+    public static final String LOGIN_OUT_SET_APPOINT_VIEW_GONE = "login_out_set_appoint_view_gone";
 }

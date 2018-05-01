@@ -8,8 +8,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.corelibs.base.BaseActivity;
+import com.corelibs.utils.rxbus.RxBus;
 import com.huawei.fusionchargeapp.MainActivity;
 import com.huawei.fusionchargeapp.R;
+import com.huawei.fusionchargeapp.constants.Constant;
 import com.huawei.fusionchargeapp.presenter.SettingPresenter;
 import com.huawei.fusionchargeapp.views.interfaces.SettingView;
 import com.huawei.fusionchargeapp.weights.NavBar;
@@ -60,6 +62,7 @@ public class SettingActivity extends BaseActivity<SettingView, SettingPresenter>
 
     @OnClick(R.id.tv_exit)
     public void gotoExit() {
+        RxBus.getDefault().send(null, Constant.LOGIN_OUT_SET_APPOINT_VIEW_GONE);
         Intent intent=MainActivity.getLauncher(this);
         intent.putExtra(MainActivity.ACTION,MainActivity.EXIT);
         startActivity(intent);

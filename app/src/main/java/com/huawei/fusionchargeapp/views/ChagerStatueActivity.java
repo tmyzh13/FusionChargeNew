@@ -276,7 +276,9 @@ public class ChagerStatueActivity extends BaseActivity<ChargerStatueView, Charge
             if (Tools.isNull(bean.soc)) {
                 progressView.setProgress(0);
             } else {
-                progressView.setProgress(Long.parseLong(bean.soc));
+                double d = Double.parseDouble(bean.soc);
+                long l = (long) Math.floor(d);
+                progressView.setProgress(l);
             }
             if (bean.isStop == 1) {
 //                timerService.cancelTimerHour();

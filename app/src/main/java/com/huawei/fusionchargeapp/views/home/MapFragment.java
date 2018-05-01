@@ -196,6 +196,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
         timerAppointment.schedule(new TimerTask() {
             @Override
             public void run() {
+
                 if (homeAppointmentBean != null) {
                     if(!AppManager.getAppManager().currentActivity().getClass().equals(MainActivity.class)){
                         return;
@@ -231,7 +232,12 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                            });
                        }
                         homeAppointmentBean=null;
-                        ll_appontment.setVisibility(View.GONE);
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                ll_appontment.setVisibility(View.GONE);
+                            }
+                        });
 //                        cancelTimerAppointment();
                     }
                 }
@@ -279,6 +285,18 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                         if (UserHelper.getSavedUser() != null && !Tools.isNull(UserHelper.getSavedUser().token)) {
                             getHomeStatue();
                         }
+                    }
+                });
+
+        //从设置返回，让预约中的订单隐藏
+        RxBus.getDefault().toObservable(Object.class,Constant.LOGIN_OUT_SET_APPOINT_VIEW_GONE)
+                .compose(this.bindToLifecycle())
+                .subscribe(new RxBusSubscriber<Object>() {
+                    @Override
+                    public void receive(Object data) {
+                        ll_appontment.setVisibility(View.GONE);
+                        rl_charger_order.setVisibility(View.GONE);
+                        rl_not_pay.setVisibility(View.GONE);
                     }
                 });
 

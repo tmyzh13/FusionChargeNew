@@ -1,5 +1,6 @@
 package com.huawei.fusionchargeapp;
 
+import android.app.Application;
 import android.os.StrictMode;
 import android.support.multidex.MultiDexApplication;
 

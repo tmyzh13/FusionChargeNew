@@ -77,15 +77,7 @@ public class ChargeStatuePresenter extends BasePresenter<ChargerStatueView> {
                 .subscribe(new ResponseSubscriber<BaseData<String>>() {
                     @Override
                     public void success(BaseData<String> baseData) {
-                        if(baseData!=null&&baseData.data!=null){
-                            if(baseData.data.equals("4")){
                                 view.endChargeSuccess();
-                            }else{
-                                view.endChargeFail();
-                            }
-                        }else{
-                            view.endChargeFail();
-                        }
                     }
 
                     @Override

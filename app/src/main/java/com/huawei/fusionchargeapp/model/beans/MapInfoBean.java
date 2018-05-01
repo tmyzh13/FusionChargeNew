@@ -17,4 +17,19 @@ public class MapInfoBean {
     public int pileNum;
     public int gunNum;
     public String averageScore;
+
+
+    @Override
+    public String toString() {
+        return "MapInfoBean{" +
+                "address='" + address + '\'' +
+                ", freeNum=" + freeNum +
+                ", name='" + name + '\'' +
+                ", objType='" + objType + '\'' +
+                ", openStatus='" + openStatus + '\'' +
+                ", pileNum=" + pileNum +
+                ", gunNum=" + gunNum +
+                ", averageScore='" + averageScore + '\'' +
+                '}';
+    }
 }

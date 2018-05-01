@@ -141,7 +141,7 @@ public class ChargeOrderDetailsActivity extends BaseActivity implements RadioGro
                 }
             }
             rgChooseGun.setOnCheckedChangeListener(this);
-
+            Log.e("zw","virtualId : " + scanChargeInfo.getVirtualId() + ", chargeGunNum: " + chooseGun.getGunCode());
         }
 
     }
@@ -242,7 +242,13 @@ public class ChargeOrderDetailsActivity extends BaseActivity implements RadioGro
                 .subscribe(new ResponseSubscriber<BaseData>() {
                     @Override
                     public void success(BaseData baseData) {
-                        int code = -1;
+
+                        HomeChargeOrderBean homeChargeOrderBean = new HomeChargeOrderBean();
+                        homeChargeOrderBean.virtualId = scanChargeInfo.getVirtualId();
+                        homeChargeOrderBean.chargeGunNum = chooseGun.getGunCode();
+                        startActivity(ChagerStatueActivity.getLauncher(ChargeOrderDetailsActivity.this,homeChargeOrderBean));
+                        finish();
+                        /*int code = -1;
                         try {
                             code = Integer.parseInt(baseData.data.toString());
                         } catch (Exception e) {
@@ -260,7 +266,7 @@ public class ChargeOrderDetailsActivity extends BaseActivity implements RadioGro
                             showToast(getString(R.string.request_refuse));
                         } else {
                             showToast(getString(R.string.server_wrong));
-                        }
+                        }*/
 
                         hideLoading();
                     }
@@ -271,8 +277,12 @@ public class ChargeOrderDetailsActivity extends BaseActivity implements RadioGro
                         if(baseData.code == 403) {
                             goLogin();
                         }
-//                        showToast(getString(R.string.server_wrong));
-                        showToast(message);
+                        if(TextUtils.isEmpty(message)){
+                            showToast(getString(R.string.server_wrong));
+                        } else {
+                            showToast(message);
+                        }
+
                         return super.operationError(baseData, status, message);
                     }
 

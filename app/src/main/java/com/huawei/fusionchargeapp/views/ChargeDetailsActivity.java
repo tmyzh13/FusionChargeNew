@@ -19,10 +19,12 @@ import com.huawei.fusionchargeapp.adapter.ChargePileTypeAdapter;
 import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.apis.ScanApi;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
+import com.huawei.fusionchargeapp.model.beans.ChargeDetailFeeBean;
 import com.huawei.fusionchargeapp.model.beans.ChargeStationDetailBean;
 import com.huawei.fusionchargeapp.model.beans.MyLocationBean;
 import com.huawei.fusionchargeapp.model.beans.PileList;
 import com.huawei.fusionchargeapp.model.beans.RequestChargePileDetailBean;
+import com.huawei.fusionchargeapp.model.beans.RequestChargeQueryFeeBean;
 import com.huawei.fusionchargeapp.weights.MyViewPager;
 import com.huawei.fusionchargeapp.weights.NavBar;
 import com.trello.rxlifecycle.ActivityEvent;
@@ -113,6 +115,8 @@ public class ChargeDetailsActivity extends BaseActivity {
                     public void success(BaseData<ChargeStationDetailBean> baseData) {
                         Log.e("zw",TAG + " success : " + baseData.toString());
                         Log.e("zw",TAG + " success1 : " + baseData.data.toString());
+                        String id = baseData.data.getPileList().get(0).getId() + "";
+                        getFeeData(id);
                         initView(baseData.data);
                         hideLoading();
                     }
@@ -175,6 +179,26 @@ public class ChargeDetailsActivity extends BaseActivity {
                     });
         }
 
+
+    }
+
+    private void getFeeData(String id){
+        RequestChargeQueryFeeBean bean = new RequestChargeQueryFeeBean();
+        bean.setChargePileId(id);
+        api.getQueryFee(UserHelper.getSavedUser().token,bean)
+                .compose(new ResponseTransformer<>(this.<BaseData<ChargeDetailFeeBean>>bindUntilEvent(ActivityEvent.DESTROY)))
+                .subscribe(new ResponseSubscriber<BaseData<ChargeDetailFeeBean>>() {
+                    @Override
+                    public void success(BaseData<ChargeDetailFeeBean> chargeDetailFeeBean) {
+                        Log.e("zw","success : ~~ " + chargeDetailFeeBean.toString());
+                    }
+
+                    @Override
+                    public boolean operationError(BaseData<ChargeDetailFeeBean> chargeDetailFeeBeanBaseData, int status, String message) {
+//                        Log.e("zw")
+                        return super.operationError(chargeDetailFeeBeanBaseData, status, message);
+                    }
+                });
 
     }
 
