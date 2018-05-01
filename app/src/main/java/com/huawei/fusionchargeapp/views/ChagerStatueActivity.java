@@ -377,6 +377,8 @@ public class ChagerStatueActivity extends BaseActivity<ChargerStatueView, Charge
         timer = null;
         handler.removeCallbacks(runnable);
         handler=null;
+        //刷新首页的界面
+        RxBus.getDefault().send(new Object(),Constant.REFRESH_HOME_STATUE);
     }
 
     @Override

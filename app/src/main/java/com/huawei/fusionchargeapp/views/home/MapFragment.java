@@ -304,6 +304,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
 
     //获取未支付 充电  预约情况
     private void getHomeStatue() {
+        Log.e("zw","getHomeStatue");
         presenter.getUserOrderStatue();
         presenter.getUserChargeStatue();
         presenter.getUserAppointment();
