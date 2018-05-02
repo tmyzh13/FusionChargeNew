@@ -52,11 +52,6 @@ public class HomeListFragment extends BaseFragment<HomeListView, HomeListPresent
     @Override
     protected void init(Bundle savedInstanceState) {
         adapter = new HomeListAdpter(getContext());
-//        List<ElectronicPileBean> list =new ArrayList<>();
-//        for(int i=0;i<10;i++){
-//            list.add(new ElectronicPileBean());
-//        }
-//        adapter.replaceAll(list);
         lv_piles.setAdapter(adapter);
         lv_piles.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -126,10 +121,6 @@ public class HomeListFragment extends BaseFragment<HomeListView, HomeListPresent
             list_datas = list;
             adapter.replaceAll(list);
         }
-
-
-//        Log.e("yzh",bean.latitude+"---"+bean.longtitude);
-//        Log.e("yzh","-0---"+ Tools.GetDistance(list.get(0).longitude,list.get(0).latitude,bean.latitude,bean.longtitude));
     }
 
     @Override
