@@ -202,6 +202,7 @@ public class GuildActivity  extends BaseActivity<GuaildView,GuaildPresenter> imp
                         });
                         if(appointmentTime<=0){
                             //预约超时
+                            //计时器里面操作 RunOnUiThread 注意is your activity running?
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -222,7 +223,8 @@ public class GuildActivity  extends BaseActivity<GuaildView,GuaildPresenter> imp
                                     });
                                 }
                             });
-
+                            timerAppointment.cancel();
+                            timerAppointment=null;
 //                        cancelTimerAppointment();
                         }
                     }

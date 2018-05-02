@@ -70,7 +70,7 @@ public class PayPresenter extends BasePresenter<PayView> {
                         }else{
                             view.payFail();
                         }
-                        return true;
+                        return operationError(baseData,status,message);
                     }
                 });
     }
