@@ -319,7 +319,7 @@
     <string name="address">地址</string>
     <string name="car_vin">汽车VIN</string>
     <string name="pwd_cannot_contain_space">密码不能包含空格！</string>
-    <string name="no_order_data">无记录。</string>
+    <string name="no_order_data">已无订单数据。</string>
     <string name="user_info_modify_success">提交成功</string>
     <string name="user_info_modify_fail">提交失败</string>
     <string name="user_info_get_fail">获取用户信息失败</string>
@@ -342,4 +342,6 @@
     
     <string name="charge_info_unit_kw">kw</string>
     <string name="charger_info_fee_unit">¥</string>
+    <string name="has_pay">已支付</string>
+    <string name="no_pay">未支付</string>
 </resources>

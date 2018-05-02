@@ -6,98 +6,154 @@ package com.huawei.fusionchargeapp.model.beans;
 
 public class RawRecordBean {
 
+
+
+    private String chargTime;
+    private String chargeEndTime;
+    private String chargeStartTime;
+    private double consumeTotalMoney;
+
     private String address;
     private int appUserId;
     private int chargePowerAmount;
     private String chargingTime;
-    private int eneryCharge;
+    private double eneryCharge;
     private String gunCode;
     private int id;
     private String orderNum;
     private int payStatus;
     private String runCode;
-    private int serviceCharge;
+    private double serviceCharge;
+
+
+    public String getChargTime() {
+        return chargTime;
+    }
+
+    public void setChargTime(String chargTime) {
+        this.chargTime = chargTime;
+    }
+
+    public String getChargeEndTime() {
+        return chargeEndTime;
+    }
+
+    public void setChargeEndTime(String chargeEndTime) {
+        this.chargeEndTime = chargeEndTime;
+    }
+
+    public String getChargeStartTime() {
+        return chargeStartTime;
+    }
+
+    public void setChargeStartTime(String chargeStartTime) {
+        this.chargeStartTime = chargeStartTime;
+    }
+
+    public double getConsumeTotalMoney() {
+        return consumeTotalMoney;
+    }
+
+    public void setConsumeTotalMoney(double consumeTotalMoney) {
+        this.consumeTotalMoney = consumeTotalMoney;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
     public void setAddress(String address) {
         this.address = address;
     }
-    public String getAddress() {
-        return address;
+
+    public int getAppUserId() {
+        return appUserId;
     }
 
     public void setAppUserId(int appUserId) {
         this.appUserId = appUserId;
     }
-    public int getAppUserId() {
-        return appUserId;
+
+    public int getChargePowerAmount() {
+        return chargePowerAmount;
     }
 
     public void setChargePowerAmount(int chargePowerAmount) {
         this.chargePowerAmount = chargePowerAmount;
     }
-    public int getChargePowerAmount() {
-        return chargePowerAmount;
+
+    public String getChargingTime() {
+        return chargingTime;
     }
 
     public void setChargingTime(String chargingTime) {
         this.chargingTime = chargingTime;
     }
-    public String getChargingTime() {
-        return chargingTime;
+
+    public double getEneryCharge() {
+        return eneryCharge;
     }
 
-    public void setEneryCharge(int eneryCharge) {
+    public void setEneryCharge(double eneryCharge) {
         this.eneryCharge = eneryCharge;
     }
-    public int getEneryCharge() {
-        return eneryCharge;
+
+    public String getGunCode() {
+        return gunCode;
     }
 
     public void setGunCode(String gunCode) {
         this.gunCode = gunCode;
     }
-    public String getGunCode() {
-        return gunCode;
+
+    public int getId() {
+        return id;
     }
 
     public void setId(int id) {
         this.id = id;
     }
-    public int getId() {
-        return id;
+
+    public String getOrderNum() {
+        return orderNum;
     }
 
     public void setOrderNum(String orderNum) {
         this.orderNum = orderNum;
     }
-    public String getOrderNum() {
-        return orderNum;
+
+    public int getPayStatus() {
+        return payStatus;
     }
 
     public void setPayStatus(int payStatus) {
         this.payStatus = payStatus;
     }
-    public int getPayStatus() {
-        return payStatus;
+
+    public String getRunCode() {
+        return runCode;
     }
 
     public void setRunCode(String runCode) {
         this.runCode = runCode;
     }
-    public String getRunCode() {
-        return runCode;
+
+    public double getServiceCharge() {
+        return serviceCharge;
     }
 
-    public void setServiceCharge(int serviceCharge) {
+    public void setServiceCharge(double serviceCharge) {
         this.serviceCharge = serviceCharge;
-    }
-    public int getServiceCharge() {
-        return serviceCharge;
     }
 
     @Override
     public String toString() {
         return "RawRecordBean{" +
-                "address='" + address + '\'' +
+                "chargTime='" + chargTime + '\'' +
+                ", chargeEndTime='" + chargeEndTime + '\'' +
+                ", chargeStartTime='" + chargeStartTime + '\'' +
+                ", consumeTotalMoney=" + consumeTotalMoney +
+                ", address='" + address + '\'' +
                 ", appUserId=" + appUserId +
                 ", chargePowerAmount=" + chargePowerAmount +
                 ", chargingTime='" + chargingTime + '\'' +

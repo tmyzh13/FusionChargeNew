@@ -3,6 +3,7 @@ package com.huawei.fusionchargeapp.views.interfaces;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.corelibs.api.ApiFactory;
@@ -11,6 +12,7 @@ import com.corelibs.base.BaseActivity;
 import com.corelibs.base.BasePresenter;
 import com.corelibs.subscriber.ResponseSubscriber;
 import com.corelibs.utils.ToastMgr;
+import com.corelibs.views.cube.ptr.PtrFrameLayout;
 import com.corelibs.views.ptr.layout.PtrAutoLoadMoreLayout;
 import com.corelibs.views.ptr.loadmore.widget.AutoLoadMoreListView;
 import com.huawei.fusionchargeapp.R;
@@ -23,6 +25,7 @@ import com.huawei.fusionchargeapp.model.beans.RawRecordBean;
 import com.huawei.fusionchargeapp.model.beans.RequestMyOrderBean;
 import com.huawei.fusionchargeapp.model.beans.RequestMyOrderChildBean;
 import com.huawei.fusionchargeapp.model.beans.UserBean;
+import com.huawei.fusionchargeapp.presenter.MyOrderPresenter;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.ChargeInputNumberActivity;
 import com.huawei.fusionchargeapp.views.LoginActivity;
@@ -34,13 +37,10 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MyOrderActivity extends BaseActivity {
-    private final String RP = "10";
+public class MyOrderActivity extends BaseActivity<MyOrderView,MyOrderPresenter> implements MyOrderView {
+
 
     private int page = 0;
-
-    private ScanApi api;
-
 
     @Bind(R.id.lv_order)
     AutoLoadMoreListView lvOrder;
@@ -55,6 +55,7 @@ public class MyOrderActivity extends BaseActivity {
     private OrderListAdapter adapter;
 
     private List<RawRecordBean> recordBeanList;
+    private boolean isRefresh = true;
 
     @Override
     public void goLogin() {
@@ -75,7 +76,7 @@ public class MyOrderActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        api = ApiFactory.getFactory().create(ScanApi.class);
+
 
         navBar.setColorRes(R.color.app_blue);
         navBar.setNavTitle(context.getString(R.string.home_my_order));
@@ -83,71 +84,103 @@ public class MyOrderActivity extends BaseActivity {
         adapter = new OrderListAdapter(context,recordBeanList);
         lvOrder.setAdapter(adapter);
 
-        ptrLayout.disableLoading();
-        ptrLayout.setCanRefresh(false);
-        getData();
+//        ptrLayout.disableLoading();
+//        ptrLayout.setCanRefresh(false);
+        ptrLayout.setRefreshLoadCallback(new PtrAutoLoadMoreLayout.RefreshLoadCallback() {
+            @Override
+            public void onLoading(PtrFrameLayout frame) {
+                page++;
+                isRefresh = false;
+                presenter.getData(isRefresh);
+            }
 
-    }
+            //下拉
+            @Override
+            public void onRefreshing(PtrFrameLayout frame) {
 
-    private void getData(){
+
+                page = 0;
+                isRefresh = true;
+                ptrLayout.enableLoading();
+                if (!frame.isAutoRefresh()) {
+                    presenter.getData(isRefresh);
+                }
+            }
+        });
+
+        showLoading();
 
         if(UserHelper.getSavedUser()==null|| Tools.isNull(UserHelper.getSavedUser().token)){
             startActivity(LoginActivity.getLauncher(this));
             return;
         }
 
-        showLoading();
+        presenter.getData(isRefresh);
 
-        RequestMyOrderBean bean = new RequestMyOrderBean();
-        bean.setRp(RP);
-        bean.setPage(page + "");
-        RequestMyOrderChildBean bean1 = new RequestMyOrderChildBean();
-        bean1.setAppUserId(UserHelper.getSavedUser().appUserId + "");
-        bean.setCondition(bean1);
+    }
 
-        api.getMyOrder(UserHelper.getSavedUser().token,bean)
-                .compose(new ResponseTransformer<>(this.<MyOrderData>bindUntilEvent(ActivityEvent.DESTROY)))
-                .subscribe(new ResponseSubscriber<MyOrderData>() {
-                    @Override
-                    public void success(MyOrderData baseData) {
-                        recordBeanList = baseData.rawRecords;
-                        if(null == recordBeanList || recordBeanList.isEmpty()) {
-                            showToast(getString(R.string.no_order_data));
-                        } else {
-                            adapter.setDatas(recordBeanList);
-                            adapter.notifyDataSetChanged();
-                        }
-                        hideLoading();
-                    }
 
-                    @Override
-                    public boolean operationError(MyOrderData baseData, int status, String message) {
-                        hideLoading();
-                        if(baseData.code == 403) {
-                            goLogin();
-                        }
-                        showToast(getString(R.string.server_wrong));
-                        return super.operationError(baseData, status, message);
-                    }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        super.onError(e);
-                        hideLoading();
-                        showToast(getString(R.string.time_out));
-                    }
-                });
+    @Override
+    protected MyOrderPresenter createPresenter() {
+        return new MyOrderPresenter();
+    }
+
+
+    @Override
+    public void onLoadingSuccess(List<RawRecordBean> newBeans) {
+        recordBeanList.addAll(newBeans);
+        adapter.setDatas(recordBeanList);
+        adapter.notifyDataSetChanged();
+        hideLoading();
     }
 
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    public void onLoadingFail(String msg) {
+        if(TextUtils.isEmpty(msg)){
+            showToast(getString(R.string.server_wrong));
+        } else {
+            showToast(msg);
+        }
+        hideLoading();
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    public void onRefreshSuccess(List<RawRecordBean> newBeans) {
+        recordBeanList = newBeans;
+        adapter.setDatas(newBeans);
+        adapter.notifyDataSetChanged();
+        hideLoading();
+    }
+
+    @Override
+    public void onRefreshFail(String msg) {
+
+    }
+
+    @Override
+    public void noData() {
+        showToast(getString(R.string.no_order_data));
+    }
+
+    @Override
+    public void showLoading() {
+//        super.showLoading();
+        ptrLayout.setRefreshing();
+    }
+
+    @Override
+    public void hideLoading() {
+        ptrLayout.complete();
+    }
+
+    @Override
+    public void onLoadingCompleted() {
+            hideLoading();
+    }
+
+    @Override
+    public void onAllPageLoaded() {
+        ptrLayout.disableLoading();
     }
 }

@@ -26,4 +26,45 @@
         android:textColor="@color/zxing_status_text"/>
 
 
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="180dp"
+        android:id="@+id/iv_light"
+        android:src="@mipmap/icon_scanning"/>
+
+    <LinearLayout
+        android:id="@+id/ll_change_erweima_style"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="250dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="30dp"
+        android:layout_gravity="center"
+        android:layout_marginRight="30dp"
+        android:background="#88666666"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/ic_keyboard"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/change_enter_erweima_charge"
+            android:textSize="@dimen/text_normal"
+            android:textColor="@color/white"
+            android:layout_marginLeft="10dp"/>
+
+    </LinearLayout>
+
+
 </FrameLayout>

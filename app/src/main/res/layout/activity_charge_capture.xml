@@ -28,7 +28,7 @@
             ></com.journeyapps.barcodescanner.DecoratedBarcodeView>
 
 
-        <ImageView
+        <!--<ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_centerHorizontal="true"
@@ -64,7 +64,7 @@
                 android:textColor="@color/white"
                 android:layout_marginLeft="10dp"/>
 
-        </LinearLayout>
+        </LinearLayout>-->
     </RelativeLayout>
 
 

@@ -32,7 +32,9 @@ import com.huawei.fusionchargeapp.model.beans.HomeChargeOrderBean;
 import com.huawei.fusionchargeapp.model.beans.OrderRequestInfo;
 import com.huawei.fusionchargeapp.model.beans.ScanChargeInfo;
 import com.huawei.fusionchargeapp.model.beans.UserBean;
+import com.huawei.fusionchargeapp.presenter.ChargeOrderDetailsPresenter;
 import com.huawei.fusionchargeapp.utils.Tools;
+import com.huawei.fusionchargeapp.views.interfaces.ChargeOrderDetailView;
 import com.huawei.fusionchargeapp.weights.NavBar;
 import com.trello.rxlifecycle.ActivityEvent;
 
@@ -41,7 +43,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class ChargeOrderDetailsActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener,BaseView {
+public class ChargeOrderDetailsActivity extends BaseActivity<ChargeOrderDetailView,ChargeOrderDetailsPresenter> implements RadioGroup.OnCheckedChangeListener,ChargeOrderDetailView {
 
     private int chargePowerCount = 0;
 
@@ -91,7 +93,7 @@ public class ChargeOrderDetailsActivity extends BaseActivity implements RadioGro
     private ChargingGunBeans chooseGun;
     private int chooseStyle = WITH_POWER;
 
-    private ScanApi api;
+
 
     @Override
     protected int getLayoutId() {
@@ -101,7 +103,7 @@ public class ChargeOrderDetailsActivity extends BaseActivity implements RadioGro
     @Override
     protected void init(Bundle savedInstanceState) {
 
-        api = ApiFactory.getFactory().create(ScanApi.class);
+
         navBar.setColorRes(R.color.app_blue);
         navBar.setNavTitle(this.getString(R.string.charge_detail));
 
@@ -141,7 +143,6 @@ public class ChargeOrderDetailsActivity extends BaseActivity implements RadioGro
                 }
             }
             rgChooseGun.setOnCheckedChangeListener(this);
-            Log.e("zw","virtualId : " + scanChargeInfo.getVirtualId() + ", chargeGunNum: " + chooseGun.getGunCode());
         }
 
     }
@@ -166,8 +167,8 @@ public class ChargeOrderDetailsActivity extends BaseActivity implements RadioGro
     }
 
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected ChargeOrderDetailsPresenter createPresenter() {
+        return new ChargeOrderDetailsPresenter();
     }
 
     @OnClick({R.id.iv_charge_cost_ask, R.id.btn_start_charge})
@@ -210,7 +211,6 @@ public class ChargeOrderDetailsActivity extends BaseActivity implements RadioGro
         showLoading();
 
         OrderRequestInfo info = new OrderRequestInfo();
-        Log.e("zw",scanChargeInfo.toString());
         info.setChargingPileName(scanChargeInfo.getChargingPileName());
         //TODO 后续替换
 //        info.setVirtualId("0004d2");
@@ -237,62 +237,7 @@ public class ChargeOrderDetailsActivity extends BaseActivity implements RadioGro
             info.setChargingMode(CHARGE_MODE_SLOW);
         }
 
-        api.getOrderDetail(UserHelper.getSavedUser().token,info)
-                .compose(new ResponseTransformer<>(this.<BaseData>bindUntilEvent(ActivityEvent.DESTROY)))
-                .subscribe(new ResponseSubscriber<BaseData>() {
-                    @Override
-                    public void success(BaseData baseData) {
-
-                        HomeChargeOrderBean homeChargeOrderBean = new HomeChargeOrderBean();
-                        homeChargeOrderBean.virtualId = scanChargeInfo.getVirtualId();
-                        homeChargeOrderBean.chargeGunNum = chooseGun.getGunCode();
-                        startActivity(ChagerStatueActivity.getLauncher(ChargeOrderDetailsActivity.this,homeChargeOrderBean));
-                        finish();
-                        /*int code = -1;
-                        try {
-                            code = Integer.parseInt(baseData.data.toString());
-                        } catch (Exception e) {
-                            hideLoading();
-                            showToast(getString(R.string.server_wrong));
-                            return;
-                        }
-
-                        if(code == 4) {
-                            HomeChargeOrderBean homeChargeOrderBean = new HomeChargeOrderBean();
-                            homeChargeOrderBean.virtualId = scanChargeInfo.getVirtualId();
-                            homeChargeOrderBean.chargeGunNum = chooseGun.getGunCode();
-                            startActivity(ChagerStatueActivity.getLauncher(ChargeOrderDetailsActivity.this,homeChargeOrderBean));
-                        } else if( code == 5) {
-                            showToast(getString(R.string.request_refuse));
-                        } else {
-                            showToast(getString(R.string.server_wrong));
-                        }*/
-
-                        hideLoading();
-                    }
-
-                    @Override
-                    public boolean operationError(BaseData baseData, int status, String message) {
-                        hideLoading();
-                        if(baseData.code == 403) {
-                            goLogin();
-                        }
-                        if(TextUtils.isEmpty(message)){
-                            showToast(getString(R.string.server_wrong));
-                        } else {
-                            showToast(message);
-                        }
-
-                        return super.operationError(baseData, status, message);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        super.onError(e);
-                        hideLoading();
-                        showToast(getString(R.string.time_out));
-                    }
-                });
+       presenter.startCharge(info);
 
     }
 
@@ -350,5 +295,20 @@ public class ChargeOrderDetailsActivity extends BaseActivity implements RadioGro
         ToastMgr.show(getString(R.string.login_fail));
         UserHelper.clearUserInfo(UserBean.class);
         startActivity(LoginActivity.getLauncher(ChargeOrderDetailsActivity.this));
+    }
+
+    @Override
+    public void onSuccess() {
+        hideLoading();
+        HomeChargeOrderBean homeChargeOrderBean = new HomeChargeOrderBean();
+        homeChargeOrderBean.virtualId = scanChargeInfo.getVirtualId();
+        homeChargeOrderBean.chargeGunNum = chooseGun.getGunCode();
+        startActivity(ChagerStatueActivity.getLauncher(ChargeOrderDetailsActivity.this,homeChargeOrderBean));
+        finish();
+    }
+
+    @Override
+    public void onFail() {
+
     }
 }

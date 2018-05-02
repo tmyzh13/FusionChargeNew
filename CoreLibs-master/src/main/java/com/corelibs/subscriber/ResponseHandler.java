@@ -241,13 +241,14 @@ public class ResponseHandler<T> {
     }
 
     public void handleException(Throwable e) {
+        Context context = AppManager.getAppManager().getAppContext();
         if (view != null) {
             if (e instanceof ConnectException) {
-                view.showToastMessage(view.getViewContext().getString(R.string.network_error));
+                view.showToastMessage(context.getString(R.string.network_error));
             } else if (e instanceof HttpException) {
-                view.showToastMessage(view.getViewContext().getString(R.string.network_server_error));
+                view.showToastMessage(context.getString(R.string.network_server_error));
             } else if (e instanceof SocketTimeoutException) {
-                view.showToastMessage("连接超时");
+                view.showToastMessage(context.getString(R.string.network_timeout));
             } else {
                 view.showToastMessage(view.getViewContext().getString(R.string.network_other));
             }

@@ -47,9 +47,9 @@ public class ChargeCaptureActivity extends BaseActivity<ChargeCaptureView,Charge
 
     @Bind(R.id.nav)
     NavBar navBar;
-    @Bind(R.id.iv_light)
+//    @Bind(R.id.iv_light)
     ImageView ivLight;
-    @Bind(R.id.ll_change_erweima_style)
+//    @Bind(R.id.ll_change_erweima_style)
     LinearLayout llChangeErweimaStyle;
     private CaptureManager capture;
 
@@ -71,6 +71,9 @@ public class ChargeCaptureActivity extends BaseActivity<ChargeCaptureView,Charge
             navBar.setColor(getResources().getColor(R.color.app_blue));
         }
         navBar.setNavTitle(this.getString(R.string.charge));
+
+        ivLight = dbv.findViewById(R.id.iv_light);
+        llChangeErweimaStyle = dbv.findViewById(R.id.ll_change_erweima_style);
 
         api = ApiFactory.getFactory().create(ScanApi.class);
 
