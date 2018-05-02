@@ -56,6 +56,7 @@ public class SettingActivity extends BaseActivity<SettingView, SettingPresenter>
 
     @OnClick(R.id.tv_login_out)
     public void gotoLoginout() {
+        
         RxBus.getDefault().send(new Object(), Constant.LOGIN_OUT_SET_APPOINT_VIEW_GONE);
         PreferencesHelper.clearData();
         Intent intent=MainActivity.getLauncher(this);
