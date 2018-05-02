@@ -295,6 +295,7 @@ public class ChagerStatueActivity extends BaseActivity<ChargerStatueView, Charge
                             AppManager.getAppManager().finishActivity();
                         }
                         startActivity(PayActivity.getLauncher(context, chargerStatueBean.orderRecordNum));
+                        finish();
                     }
                 });
 
@@ -349,6 +350,7 @@ public class ChagerStatueActivity extends BaseActivity<ChargerStatueView, Charge
 //                                presenter.endCharging();
             startActivity(PayActivity.getLauncher(context,chargerStatueBean.orderRecordNum));
             commonDialog.dismiss();
+            finish();
             }
         });
         commonDialog.setNagitiveListener(new View.OnClickListener() {

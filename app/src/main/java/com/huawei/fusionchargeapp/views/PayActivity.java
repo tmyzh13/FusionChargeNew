@@ -326,6 +326,7 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
         bean.type=0;
         RxBus.getDefault().send(bean, Constant.HOME_STATUE_REFRESH);
         startActivity(PayCompleteActivity.getLauncher(context,orderNum));
+        finish();
     }
 
     @Override
