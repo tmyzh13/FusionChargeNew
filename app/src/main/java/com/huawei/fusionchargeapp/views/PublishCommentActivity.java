@@ -235,7 +235,7 @@ public class PublishCommentActivity extends BaseActivity<CommentView,CommentPres
         locationDetail.setText(bean.address);
         startTime.setText(bean.chargeStartTime);
         endTime.setText(bean.chargeEndTime);
-        power.setText(Double.toString(bean.chargePowerAmount));
+        power.setText(Double.toString(bean.chargePowerAmount)+"kw");
         money.setText(Double.toString(bean.eneryCharge));
         tips.setText(Double.toString(bean.serviceCharge));
         total.setText(Double.toString(bean.consumeTotalMoney));
