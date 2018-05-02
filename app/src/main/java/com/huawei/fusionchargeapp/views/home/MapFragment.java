@@ -209,11 +209,10 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                         appointmentTime = Long.parseLong(PreferencesHelper.getData(Constant.TIME_APPOINTMENT));
                     }
                     appointmentTime -= 1000;
-                    if (appointmentTime>=0) {
-                        PreferencesHelper.saveData(Constant.TIME_APPOINTMENT, appointmentTime + "");
-                    }else {
+                    if (appointmentTime<=0) {
                         appointmentTime=0;
                     }
+                    PreferencesHelper.saveData(Constant.TIME_APPOINTMENT, appointmentTime + "");
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -576,7 +575,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
         if (mapInfoBean.averageScore.equals("-1.0")) {
             tv_map_info_score.setText("--");
         } else {
-            tv_map_info_score.setText(mapInfoBean.averageScore + getString(R.string.score));
+            tv_map_info_score.setText(mapInfoBean.averageScore);
         }
         //要单算距离
         MyLocationBean bean = PreferencesHelper.getData(MyLocationBean.class);

@@ -178,11 +178,10 @@ public class GuildActivity  extends BaseActivity<GuaildView,GuaildPresenter> imp
                             appointmentTime=Long.parseLong(PreferencesHelper.getData(Constant.TIME_APPOINTMENT));
                         }
                         appointmentTime-=1000;
-                        if (appointmentTime>=0) {
-                            PreferencesHelper.saveData(Constant.TIME_APPOINTMENT, appointmentTime + "");
-                        }else {
+                        if (appointmentTime<=0) {
                             appointmentTime=0;
                         }
+                        PreferencesHelper.saveData(Constant.TIME_APPOINTMENT, appointmentTime + "");
                         Log.e("yzh","sssss----"+appointmentTime);
                         PreferencesHelper.saveData(Constant.TIME_APPOINTMENT,appointmentTime+"");
                         runOnUiThread(new Runnable() {
