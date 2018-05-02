@@ -4,10 +4,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.huawei.fusionchargeapp.model.beans.ChargeDetailFeeBean;
 import com.huawei.fusionchargeapp.model.beans.ChargeStationDetailBean;
 import com.huawei.fusionchargeapp.views.fragments.CommentsFragment;
 import com.huawei.fusionchargeapp.views.fragments.PictureFragment;
 import com.huawei.fusionchargeapp.views.fragments.PositionFragment;
+
+import java.util.List;
 
 /**
  * Created by issuser on 2018/4/12.
@@ -21,9 +24,12 @@ public class ChargePileTypeAdapter extends FragmentPagerAdapter {
 
     private ChargeStationDetailBean data;
 
-    public ChargePileTypeAdapter(FragmentManager fm, ChargeStationDetailBean bean) {
+    private List<ChargeDetailFeeBean> feeList;
+
+    public ChargePileTypeAdapter(FragmentManager fm, ChargeStationDetailBean bean, List<ChargeDetailFeeBean> feeList) {
         super(fm);
         this.data = bean;
+        this.feeList = feeList;
     }
 
     @Override
@@ -39,6 +45,7 @@ public class ChargePileTypeAdapter extends FragmentPagerAdapter {
             if (positionFragment == null) {
                 positionFragment = new PositionFragment();
                 positionFragment.data = data;
+                positionFragment.feeList = feeList;
             }
             return positionFragment;
         } else if (position == 2) {

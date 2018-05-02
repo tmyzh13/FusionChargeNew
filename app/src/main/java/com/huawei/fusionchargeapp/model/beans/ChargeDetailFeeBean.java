@@ -9,14 +9,25 @@ import java.util.List;
 public class ChargeDetailFeeBean {
 
     private int chargePileId;
+    private String endTime;
     private List<ChargeDetailFeeListBean> feeList;
-    private int serviceFee;
+    private String multiFee;
+    private String multiName;
+    private double serviceFee;
     private String serviceName;
+    private String startTime;
     public void setChargePileId(int chargePileId) {
         this.chargePileId = chargePileId;
     }
     public int getChargePileId() {
         return chargePileId;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+    public String getEndTime() {
+        return endTime;
     }
 
     public void setFeeList(List<ChargeDetailFeeListBean> feeList) {
@@ -26,10 +37,24 @@ public class ChargeDetailFeeBean {
         return feeList;
     }
 
-    public void setServiceFee(int serviceFee) {
+    public void setMultiFee(String multiFee) {
+        this.multiFee = multiFee;
+    }
+    public String getMultiFee() {
+        return multiFee;
+    }
+
+    public void setMultiName(String multiName) {
+        this.multiName = multiName;
+    }
+    public String getMultiName() {
+        return multiName;
+    }
+
+    public void setServiceFee(double serviceFee) {
         this.serviceFee = serviceFee;
     }
-    public int getServiceFee() {
+    public double getServiceFee() {
         return serviceFee;
     }
 
@@ -40,13 +65,10 @@ public class ChargeDetailFeeBean {
         return serviceName;
     }
 
-    @Override
-    public String toString() {
-        return "ChargeDetailFeeBean{" +
-                "chargePileId=" + chargePileId +
-                ", feeList=" + feeList +
-                ", serviceFee=" + serviceFee +
-                ", serviceName='" + serviceName + '\'' +
-                '}';
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+    public String getStartTime() {
+        return startTime;
     }
 }

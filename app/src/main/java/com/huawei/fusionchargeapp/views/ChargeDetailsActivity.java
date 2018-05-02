@@ -21,6 +21,7 @@ import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.apis.ScanApi;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
 import com.huawei.fusionchargeapp.model.beans.ChargeDetailFeeBean;
+import com.huawei.fusionchargeapp.model.beans.ChargeDetailFeeListBean;
 import com.huawei.fusionchargeapp.model.beans.ChargeStationDetailBean;
 import com.huawei.fusionchargeapp.model.beans.MyLocationBean;
 import com.huawei.fusionchargeapp.model.beans.PileList;
@@ -71,6 +72,10 @@ public class ChargeDetailsActivity extends BaseActivity {
     private String id;
     private String type;
 
+    private ChargeStationDetailBean chargeStationDetailBean;
+    private int feeId = 0;
+    private List<ChargeDetailFeeBean> feeList = new ArrayList<>();
+
     public static Intent getLauncher(Context context,String id,String type) {
         Intent intent = new Intent(context, ChargeDetailsActivity.class);
         intent.putExtra("id",id);
@@ -104,7 +109,7 @@ public class ChargeDetailsActivity extends BaseActivity {
 
     private void getData(){
         showLoading();
-        RequestChargePileDetailBean bean = new RequestChargePileDetailBean();
+        final RequestChargePileDetailBean bean = new RequestChargePileDetailBean();
 
         bean.setId(id);
         bean.setType(type);
@@ -117,10 +122,8 @@ public class ChargeDetailsActivity extends BaseActivity {
                     public void success(BaseData<ChargeStationDetailBean> baseData) {
                         Log.e("zw",TAG + " success : " + baseData.toString());
                         Log.e("zw",TAG + " success1 : " + baseData.data.toString());
-                        String id = baseData.data.getPileList().get(0).getId() + "";
-                        getFeeData(id);
-                        initView(baseData.data);
-                        hideLoading();
+                        chargeStationDetailBean = baseData.data;
+                        getFeeData();
                     }
 
                     @Override
@@ -147,19 +150,17 @@ public class ChargeDetailsActivity extends BaseActivity {
                         @Override
                         public void success(BaseData<PileList> baseData) {
                             PileList pileList = baseData.data;
-                            ChargeStationDetailBean bean = new ChargeStationDetailBean();
-                            bean.setAddress(pileList.getAddress());
-                            bean.setName(pileList.getName());
-                            bean.setAverageScore(pileList.getAverageScore());
-                            bean.setLatitude(Double.parseDouble(pileList.getLatitude()));
-                            bean.setLongitude(Double.parseDouble(pileList.getLongitude()));
-                            bean.setPhotoUrl(pileList.getPhotoUrl());
+                            chargeStationDetailBean = new ChargeStationDetailBean();
+                            chargeStationDetailBean.setAddress(pileList.getAddress());
+                            chargeStationDetailBean.setName(pileList.getName());
+                            chargeStationDetailBean.setAverageScore(pileList.getAverageScore());
+                            chargeStationDetailBean.setLatitude(Double.parseDouble(pileList.getLatitude()));
+                            chargeStationDetailBean.setLongitude(Double.parseDouble(pileList.getLongitude()));
+                            chargeStationDetailBean.setPhotoUrl(pileList.getPhotoUrl());
                             List<PileList> list = new ArrayList<>();
                             list.add(pileList);
-                            bean.setPileList(list);
-                            initView(bean);
-                            Log.e("zw",TAG + " success1 : " + baseData.data.toString());
-                            hideLoading();
+                            chargeStationDetailBean.setPileList(list);
+                            getFeeData();
                         }
 
                         @Override
@@ -184,50 +185,85 @@ public class ChargeDetailsActivity extends BaseActivity {
 
     }
 
-    private void getFeeData(String id){
-        RequestChargeQueryFeeBean bean = new RequestChargeQueryFeeBean();
-        bean.setChargePileId(id);
-        api.getQueryFee(UserHelper.getSavedUser().token,bean)
-                .compose(new ResponseTransformer<>(this.<BaseData<ChargeDetailFeeBean>>bindUntilEvent(ActivityEvent.DESTROY)))
-                .subscribe(new ResponseSubscriber<BaseData<ChargeDetailFeeBean>>() {
-                    @Override
-                    public void success(BaseData<ChargeDetailFeeBean> chargeDetailFeeBean) {
-                        Log.e("zw","success : ~~ " + chargeDetailFeeBean.toString());
-                    }
+    private void getFeeData(){
+        if(feeId < chargeStationDetailBean.getPileList().size()) {
+            RequestChargeQueryFeeBean bean = new RequestChargeQueryFeeBean();
+            bean.setChargePileId(chargeStationDetailBean.getPileList().get(feeId).getId() + "");
+            api.getQueryFee(UserHelper.getSavedUser().token,bean)
+                    .compose(new ResponseTransformer<>(this.<BaseData<ChargeDetailFeeBean>>bindUntilEvent(ActivityEvent.DESTROY)))
+                    .subscribe(new ResponseSubscriber<BaseData<ChargeDetailFeeBean>>() {
+                        @Override
+                        public void success(BaseData<ChargeDetailFeeBean> chargeDetailFeeBean) {
+                            feeList.add(chargeDetailFeeBean.data);
+                            feeId++;
+                            if(feeId < chargeStationDetailBean.getPileList().size()) {
+                                getFeeData();
+                            } else {
+                                initView();
+                                hideLoading();
+                            }
+                        }
 
-                    @Override
-                    public boolean operationError(BaseData<ChargeDetailFeeBean> chargeDetailFeeBeanBaseData, int status, String message) {
-//                        Log.e("zw")
-                        return super.operationError(chargeDetailFeeBeanBaseData, status, message);
-                    }
-                });
+                        @Override
+                        public boolean operationError(BaseData<ChargeDetailFeeBean> chargeDetailFeeBeanBaseData, int status, String message) {
+                            feeList.add(new ChargeDetailFeeBean());
+                            feeId++;
+                            if(feeId < chargeStationDetailBean.getPileList().size()) {
+
+                                getFeeData();
+                            } else {
+                                initView();
+                                hideLoading();
+                            }
+                            return super.operationError(chargeDetailFeeBeanBaseData, status, message);
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            super.onError(e);
+                            feeList.add(new ChargeDetailFeeBean());
+                            feeId++;
+                            if(feeId < chargeStationDetailBean.getPileList().size()) {
+                                getFeeData();
+                            } else {
+                                initView();
+                                hideLoading();
+                            }
+                        }
+                    });
+        }
 
     }
 
-    private void initView(ChargeStationDetailBean bean){
-        chargePileNameTv.setText(bean.getName());
-        chargePileAddressTv.setText(bean.getAddress());
-        if ("-1.0".equals(bean.getAverageScore())){
-            scoreTv.setText("--");
-        }else {
-            scoreTv.setText(bean.getAverageScore() + "");
-        }
-//        计算距离
-        LatLng positionLatlng = new LatLng(userLatitude,userLongitude);
-        LatLng userLatlng = new LatLng(bean.getLatitude(),bean.getLongitude());
-        float distance = AMapUtils.calculateLineDistance(positionLatlng,userLatlng);
-        if(distance > 1000) {
-            DecimalFormat df = new DecimalFormat("#.0");
-            String km = df.format(distance/1000);
-            distanceTv.setText(km + "KM");
+    private void initView(){
+        if(chargeStationDetailBean == null ) {
+            showToast(getString(R.string.no_data));
+            finish();
         } else {
-            distanceTv.setText(distance + "M");
+            chargePileNameTv.setText(chargeStationDetailBean.getName());
+            chargePileAddressTv.setText(chargeStationDetailBean.getAddress());
+            if ("-1.0".equals(chargeStationDetailBean.getAverageScore())){
+                scoreTv.setText("--");
+            }else {
+                scoreTv.setText(chargeStationDetailBean.getAverageScore() + "");
+            }
+//        计算距离
+            LatLng positionLatlng = new LatLng(userLatitude,userLongitude);
+            LatLng userLatlng = new LatLng(chargeStationDetailBean.getLatitude(),chargeStationDetailBean.getLongitude());
+            float distance = AMapUtils.calculateLineDistance(positionLatlng,userLatlng);
+            if(distance > 1000) {
+                DecimalFormat df = new DecimalFormat("#.0");
+                String km = df.format(distance/1000);
+                distanceTv.setText(km + "KM");
+            } else {
+                distanceTv.setText(distance + "M");
+            }
+
+            mAdapter = new ChargePileTypeAdapter(getSupportFragmentManager(),chargeStationDetailBean,feeList);
+            myViewPager.setAdapter(mAdapter);
+
+            chosePicture();
         }
-
-        mAdapter = new ChargePileTypeAdapter(getSupportFragmentManager(),bean);
-        myViewPager.setAdapter(mAdapter);
-
-        chosePicture();
     }
 
     @Override

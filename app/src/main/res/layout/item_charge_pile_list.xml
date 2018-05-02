@@ -83,7 +83,7 @@
                     android:id="@+id/charging_fee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0.1000元/度～1.8000元/度"
+                    android:text="--"
                     android:layout_marginLeft="@dimen/dp_5" />
             </LinearLayout>
 
@@ -104,7 +104,7 @@
                     android:id="@+id/service_fee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1.5000元/度"
+                    android:text="--"
                     android:layout_marginLeft="@dimen/dp_5" />
             </LinearLayout>
 

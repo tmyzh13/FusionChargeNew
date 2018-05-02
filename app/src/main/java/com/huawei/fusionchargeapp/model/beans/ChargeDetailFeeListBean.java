@@ -7,10 +7,20 @@ package com.huawei.fusionchargeapp.model.beans;
 
 public class ChargeDetailFeeListBean {
 
+    private String chargePileId;
     private String endTime;
-    private int multiFee;
+    private String feeList;
+    private double multiFee;
     private String multiName;
+    private String serviceFee;
+    private String serviceName;
     private String startTime;
+    public void setChargePileId(String chargePileId) {
+        this.chargePileId = chargePileId;
+    }
+    public String getChargePileId() {
+        return chargePileId;
+    }
 
     public void setEndTime(String endTime) {
         this.endTime = endTime;
@@ -19,10 +29,17 @@ public class ChargeDetailFeeListBean {
         return endTime;
     }
 
-    public void setMultiFee(int multiFee) {
+    public void setFeeList(String feeList) {
+        this.feeList = feeList;
+    }
+    public String getFeeList() {
+        return feeList;
+    }
+
+    public void setMultiFee(double multiFee) {
         this.multiFee = multiFee;
     }
-    public int getMultiFee() {
+    public double getMultiFee() {
         return multiFee;
     }
 
@@ -33,6 +50,20 @@ public class ChargeDetailFeeListBean {
         return multiName;
     }
 
+    public void setServiceFee(String serviceFee) {
+        this.serviceFee = serviceFee;
+    }
+    public String getServiceFee() {
+        return serviceFee;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
+    public String getServiceName() {
+        return serviceName;
+    }
+
     public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
@@ -40,4 +71,17 @@ public class ChargeDetailFeeListBean {
         return startTime;
     }
 
+    @Override
+    public String toString() {
+        return "ChargeDetailFeeListBean{" +
+                "chargePileId='" + chargePileId + '\'' +
+                ", endTime='" + endTime + '\'' +
+                ", feeList='" + feeList + '\'' +
+                ", multiFee=" + multiFee +
+                ", multiName='" + multiName + '\'' +
+                ", serviceFee='" + serviceFee + '\'' +
+                ", serviceName='" + serviceName + '\'' +
+                ", startTime='" + startTime + '\'' +
+                '}';
+    }
 }
