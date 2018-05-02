@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.MapView;
@@ -111,6 +113,15 @@ public class GuildActivity  extends BaseActivity<GuaildView,GuaildPresenter> imp
 
     @Override
     protected void init(Bundle savedInstanceState) {
+
+//        AMapLocationClient mlocationClient = new AMapLocationClient(context);
+//        //初始化定位参数
+//        AMapLocationClientOption mLocationOption = new AMapLocationClientOption();
+//        //设置单次定位
+//        mLocationOption.setOnceLocation(false);
+//        mlocationClient.setLocationOption(mLocationOption);
+//        mlocationClient.startLocation();
+
         navBar.setNavTitle(getString(R.string.guilding));
         navBar.setImageBackground(R.drawable.nan_bg);
 
@@ -181,8 +192,7 @@ public class GuildActivity  extends BaseActivity<GuaildView,GuaildPresenter> imp
                         if (appointmentTime<=0) {
                             appointmentTime=0;
                         }
-                        PreferencesHelper.saveData(Constant.TIME_APPOINTMENT, appointmentTime + "");
-                        Log.e("yzh","sssss----"+appointmentTime);
+//                        PreferencesHelper.saveData(Constant.TIME_APPOINTMENT,appointmentTime + "");
                         PreferencesHelper.saveData(Constant.TIME_APPOINTMENT,appointmentTime+"");
                         runOnUiThread(new Runnable() {
                             @Override

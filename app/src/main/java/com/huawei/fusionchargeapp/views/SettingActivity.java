@@ -11,6 +11,7 @@ import com.corelibs.base.BaseActivity;
 import com.corelibs.common.AppManager;
 import com.corelibs.utils.PreferencesHelper;
 import com.corelibs.utils.rxbus.RxBus;
+import com.huawei.fusionchargeapp.App;
 import com.huawei.fusionchargeapp.MainActivity;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.constants.Constant;
@@ -74,8 +75,9 @@ public class SettingActivity extends BaseActivity<SettingView, SettingPresenter>
 //        Intent intent=MainActivity.getLauncher(this);
 //        intent.putExtra(MainActivity.ACTION,MainActivity.EXIT);
 //        startActivity(intent);
-//        finish();
+        finish();
         AppManager.getAppManager().appExit();
+
     }
 
 

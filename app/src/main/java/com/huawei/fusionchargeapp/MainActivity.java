@@ -25,6 +25,7 @@ import com.corelibs.utils.IMEUtil;
 import com.corelibs.utils.PreferencesHelper;
 import com.corelibs.utils.rxbus.RxBus;
 import com.huawei.fusionchargeapp.constants.Constant;
+import com.huawei.fusionchargeapp.constants.Urls;
 import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.utils.ChoiceManager;
 import com.huawei.fusionchargeapp.utils.Tools;
@@ -82,9 +83,9 @@ public class MainActivity extends BaseActivity {
     private MapFragment mapFragment;
     private HomeListFragment homeListFragment;
 
-    public  static  final String ACTION="action";
-    public  static  final String LOGINT_OUT="loginout";
-    public  static  final String EXIT="exit";
+    public static final String ACTION = "action";
+    public static final String LOGINT_OUT = "loginout";
+    public static final String EXIT = "exit";
 
     public static Intent getLauncher(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -95,11 +96,12 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        if (intent==null || intent.getExtras()==null)
+        if (intent == null || intent.getExtras() == null)
             return;
-        if (EXIT.equals(intent.getExtras().get(ACTION))){
+        if (EXIT.equals(intent.getExtras().get(ACTION))) {
             PreferencesHelper.clearData();
-        }else  if (LOGINT_OUT.equals(intent.getExtras().get(ACTION))){
+            AppManager.getAppManager().appExit();
+        } else if (LOGINT_OUT.equals(intent.getExtras().get(ACTION))) {
             PreferencesHelper.clearData();
         }
     }
@@ -185,8 +187,10 @@ public class MainActivity extends BaseActivity {
         if (UserHelper.getSavedUser() == null) {
             startActivity(LoginActivity.getLauncher(context));
         } else {
-            Glide.with(context).load(UserHelper.getSavedUser().photoUrl).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher)
-                    .override(320, 320).into(iv_user_icon);
+            if (!Tools.isNull(UserHelper.getSavedUser().photoUrl)) {
+                Glide.with(context).load(Urls.ROOT + UserHelper.getSavedUser().photoUrl.replace("\\", "/")).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher)
+                        .override(320, 320).into(iv_user_icon);
+            }
             tv_user_name.setText(UserHelper.getSavedUser().nickName);
             tv_favourite.setText("161");
             drawerLayout.openDrawer(main_left_drawer_layout);
@@ -204,7 +208,7 @@ public class MainActivity extends BaseActivity {
                     drawerLayout.closeDrawer(main_left_drawer_layout);
                 }
             }
-        },500);
+        }, 500);
     }
 
     @OnClick(R.id.ll_setting)
@@ -217,7 +221,7 @@ public class MainActivity extends BaseActivity {
                     drawerLayout.closeDrawer(main_left_drawer_layout);
                 }
             }
-        },500);
+        }, 500);
     }
 
     @OnClick(R.id.iv_choice)
@@ -340,13 +344,13 @@ public class MainActivity extends BaseActivity {
      * 进入我的订单
      */
     @OnClick(R.id.my_order_tv)
-    public void toMyOrder(){
+    public void toMyOrder() {
 //        UserHelper.clearUserInfo(UserBean.class);
         startActivity(MyOrderActivity.getLauncher(MainActivity.this));
     }
 
     @OnClick(R.id.iv_search)
-    public void goSearch(){
+    public void goSearch() {
         startActivity(SearchStationTitleActivity.getLauncher(MainActivity.this));
     }
 

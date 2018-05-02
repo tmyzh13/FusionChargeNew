@@ -144,6 +144,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
     private List<ChargeFeeBean> list_fee;
     //首页地图桩站信息
     private List<MapDataBean> list;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_main;
@@ -200,7 +201,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
             public void run() {
 
                 if (homeAppointmentBean != null) {
-                    if(!AppManager.getAppManager().currentActivity().getClass().equals(MainActivity.class)){
+                    if (!AppManager.getAppManager().currentActivity().getClass().equals(MainActivity.class)) {
                         return;
                     }
                     if (Tools.isNull(PreferencesHelper.getData(Constant.TIME_APPOINTMENT))) {
@@ -209,8 +210,8 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                         appointmentTime = Long.parseLong(PreferencesHelper.getData(Constant.TIME_APPOINTMENT));
                     }
                     appointmentTime -= 1000;
-                    if (appointmentTime<=0) {
-                        appointmentTime=0;
+                    if (appointmentTime <= 0) {
+                        appointmentTime = 0;
                     }
                     PreferencesHelper.saveData(Constant.TIME_APPOINTMENT, appointmentTime + "");
                     getActivity().runOnUiThread(new Runnable() {
@@ -242,7 +243,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                             });
 
                         }
-                        homeAppointmentBean=null;
+                        homeAppointmentBean = null;
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -299,14 +300,14 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                 });
 
         //从设置返回，让预约中的订单隐藏
-        RxBus.getDefault().toObservable(Object.class,Constant.LOGIN_OUT_SET_APPOINT_VIEW_GONE)
+        RxBus.getDefault().toObservable(Object.class, Constant.LOGIN_OUT_SET_APPOINT_VIEW_GONE)
                 .compose(this.bindToLifecycle())
                 .subscribe(new RxBusSubscriber<Object>() {
                     @Override
                     public void receive(Object data) {
-                        homeAppointmentBean=null;
-                        homeOrderBean=null;
-                        homeChargeOrderBean=null;
+                        homeAppointmentBean = null;
+                        homeOrderBean = null;
+                        homeChargeOrderBean = null;
                         ll_appontment.setVisibility(View.GONE);
                         rl_charger_order.setVisibility(View.GONE);
                         rl_not_pay.setVisibility(View.GONE);
@@ -317,7 +318,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
 
     //获取未支付 充电  预约情况
     private void getHomeStatue() {
-        Log.e("zw","getHomeStatue");
+        Log.e("zw", "getHomeStatue");
         presenter.getUserOrderStatue();
         presenter.getUserChargeStatue();
         presenter.getUserAppointment();
@@ -509,6 +510,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                 if (followMove) {
                     aMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude())));
                 }
+                Log.e("yzh", "locationChange");
 //                if (list == null || list.size() == 0) {
 //                    presenter.getData();
 //                }
@@ -587,7 +589,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
         }
         //要单算距离
         MyLocationBean bean = PreferencesHelper.getData(MyLocationBean.class);
-        if(bean != null) {
+        if (bean != null) {
             tv_map_info_distance.setText(Tools.GetDistance(currentMapDataBean.latitude, currentMapDataBean.longitude, bean.latitude, bean.longtitude) + "KM");
         }
         tv_map_info_pile_num.setText(mapInfoBean.pileNum + "");
@@ -616,6 +618,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
     }
 
     private HomeOrderBean homeOrderBean;
+
     @Override
     public void hasNoPayOrder(boolean has, HomeOrderBean bean) {
         ActionControl.getInstance(getContext()).setHasNoPayOrder(has, bean);
@@ -628,6 +631,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
     }
 
     private HomeAppointmentBean homeAppointmentBean;
+
     @Override
     public void renderAppoinmentInfo(boolean has, HomeAppointmentBean bean) {
         ActionControl.getInstance(getContext()).setHasAppointment(has, bean);
@@ -655,6 +659,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
     }
 
     private HomeChargeOrderBean homeChargeOrderBean;
+
     @Override
     public void renderHomeChargerOrder(boolean has, HomeChargeOrderBean bean) {
         ActionControl.getInstance(getContext()).setHasCharging(has, bean);
@@ -691,7 +696,9 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
     public void goGuaild() {
         if (currentMapDataBean != null) {
             boolean choiceNotAppointment = false;
+            Log.e("yzh",(homeAppointmentBean!=null)+"--");
             if (homeAppointmentBean != null) {
+                Log.e("yzh",homeAppointmentBean.latitude+"--"+currentMapDataBean.latitude);
                 if (homeAppointmentBean.latitude != currentMapDataBean.latitude || homeAppointmentBean.longitude != currentMapDataBean.longitude) {
                     choiceNotAppointment = true;
                 } else {

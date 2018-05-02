@@ -18,8 +18,8 @@
     <!-- 允许程序访问CellID或WiFi热点来获取粗略的位置 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name="com.huawei.fusionchargeapp.App"
@@ -36,14 +36,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.huawei.fusionchargeapp.MainActivity"
-            android:launchMode="singleInstance">
+        <activity
+            android:name="com.huawei.fusionchargeapp.MainActivity"
+            android:launchMode="singleTask">
 
         </activity>
         <activity
             android:name="com.huawei.fusionchargeapp.views.LoginActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.huawei.fusionchargeapp.views.ChagerStatueActivity"
             android:screenOrientation="portrait" />
@@ -124,20 +125,27 @@
         <activity
             android:name="com.huawei.fusionchargeapp.views.ChargeCaptureActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.huawei.fusionchargeapp.views.ChargeInputNumberActivity"
+        <activity
+            android:name="com.huawei.fusionchargeapp.views.ChargeInputNumberActivity"
             android:screenOrientation="portrait"></activity>
         <activity
             android:name="com.huawei.fusionchargeapp.views.PublishCommentActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible|adjustResize">
-        </activity>
+            android:windowSoftInputMode="stateVisible|adjustResize"></activity>
         <activity
             android:name="com.huawei.fusionchargeapp.views.SearchStationTitleActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible|adjustResize">
-        </activity>
-        <activity android:name="com.huawei.fusionchargeapp.views.interfaces.MyOrderActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".views.UserInfoActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".views.SettingActivity" android:screenOrientation="portrait"/>
+            android:windowSoftInputMode="stateVisible|adjustResize"></activity>
+        <activity
+            android:name="com.huawei.fusionchargeapp.views.interfaces.MyOrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.UserInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.SettingActivity"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
     </application>
 </manifest>
