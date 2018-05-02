@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.BindString;
 import butterknife.OnClick;
 
 /**
@@ -69,6 +70,10 @@ public class PublishCommentActivity extends BaseActivity<CommentView,CommentPres
     NavBar navBar;
     @Bind(R.id.iv_back)
     ImageView iv_back;
+    @BindString(R.string.charge_info_unit_KW)
+    String unit_kw;
+    @BindString(R.string.charger_info_fee_unit)
+    String unit_fee;
 
     private PublishCommentsBean bean = new PublishCommentsBean();
     private Context mContext = PublishCommentActivity.this;
@@ -85,7 +90,7 @@ public class PublishCommentActivity extends BaseActivity<CommentView,CommentPres
         publish.setVisibility(View.GONE);
         sort = 0;
         favor.setIsIndicator(true);
-        flowGrid.setSelector(R.color.text_white);
+        flowGrid.setOnItemClickListener(null);
         //favor.setClickable(false);
     }
 
@@ -155,10 +160,10 @@ public class PublishCommentActivity extends BaseActivity<CommentView,CommentPres
     public void makeContentSort(View view, int position){
         int num =(int) Math.pow(2,position);
         if ((sort & num) > 0) {
-            sort =sort - 1 - position;
+            sort =sort - num;
             setTextAndCornerStokeColor((TextView)view, false);
         } else {
-            sort =sort +1 + position;
+            sort =sort + num;
             setTextAndCornerStokeColor((TextView)view, true);
         }
 
@@ -178,7 +183,7 @@ public class PublishCommentActivity extends BaseActivity<CommentView,CommentPres
             i=i*2;
         }
         if ((sort & num) >0 ) {
-            result = result + num;
+            result = result + i;
         }
         return result;
     }
@@ -235,10 +240,10 @@ public class PublishCommentActivity extends BaseActivity<CommentView,CommentPres
         locationDetail.setText(bean.address);
         startTime.setText(bean.chargeStartTime);
         endTime.setText(bean.chargeEndTime);
-        power.setText(Double.toString(bean.chargePowerAmount));
-        money.setText(Double.toString(bean.eneryCharge));
-        tips.setText(Double.toString(bean.serviceCharge));
-        total.setText(Double.toString(bean.consumeTotalMoney));
+        power.setText(Double.toString(bean.chargePowerAmount)+unit_kw);
+        money.setText(Double.toString(bean.eneryCharge)+unit_fee);
+        tips.setText(Double.toString(bean.serviceCharge)+unit_fee);
+        total.setText(Double.toString(bean.consumeTotalMoney)+unit_fee);
         pileId = bean.chargeId;
     }
 }
