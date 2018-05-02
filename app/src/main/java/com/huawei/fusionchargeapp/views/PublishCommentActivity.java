@@ -72,7 +72,7 @@ public class PublishCommentActivity extends BaseActivity<CommentView,CommentPres
     ImageView iv_back;
     @BindString(R.string.charger_info_fee_unit)
     String fee_unit;
-    @BindString(R.string.charge_info_unit_KW)
+    @BindString(R.string.charge_info_unit_kw)
     String unit_kw;
 
     private PublishCommentsBean bean = new PublishCommentsBean();
@@ -243,9 +243,9 @@ public class PublishCommentActivity extends BaseActivity<CommentView,CommentPres
         startTime.setText(bean.chargeStartTime);
         endTime.setText(bean.chargeEndTime);
         power.setText(Double.toString(bean.chargePowerAmount)+unit_kw);
-        money.setText(Double.toString(bean.eneryCharge)+fee_unit);
-        tips.setText(Double.toString(bean.serviceCharge)+fee_unit);
-        total.setText(Double.toString(bean.consumeTotalMoney)+fee_unit);
+        money.setText(fee_unit+Double.toString(bean.eneryCharge));
+        tips.setText(fee_unit+Double.toString(bean.serviceCharge));
+        total.setText(fee_unit+Double.toString(bean.consumeTotalMoney));
         pileId = bean.chargeId;
     }
 }

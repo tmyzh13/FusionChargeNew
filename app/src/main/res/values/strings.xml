@@ -340,6 +340,6 @@
     <string name="please_input_charge_money">请输入充电金额</string>
     <string name="please_input_charge_time">请输入充电时长</string>
     
-    <string name="charge_info_unit_KW">KW</string>
-    <string name="charger_info_fee_unit">￥</string>
+    <string name="charge_info_unit_kw">kw</string>
+    <string name="charger_info_fee_unit">¥</string>
 </resources>
