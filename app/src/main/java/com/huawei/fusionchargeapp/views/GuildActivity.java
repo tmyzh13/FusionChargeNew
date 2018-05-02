@@ -191,23 +191,28 @@ public class GuildActivity  extends BaseActivity<GuaildView,GuaildPresenter> imp
                             }
                         });
                         if(appointmentTime<=0){
-                            Log.e("yzh","cancel");
                             //预约超时
-                            appointmentTimeOutDialog.show();
-                            appointmentTimeOutDialog.setIvDeleteListener(new View.OnClickListener() {
+                            runOnUiThread(new Runnable() {
                                 @Override
-                                public void onClick(View v) {
-                                    appointmentTimeOutDialog.dismiss();
-                                    finish();
+                                public void run() {
+                                    appointmentTimeOutDialog.show();
+                                    appointmentTimeOutDialog.setIvDeleteListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            appointmentTimeOutDialog.dismiss();
+                                            finish();
+                                        }
+                                    });
+                                    appointmentTimeOutDialog.setReAppointment(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            appointmentTimeOutDialog.dismiss();
+                                            finish();
+                                        }
+                                    });
                                 }
                             });
-                            appointmentTimeOutDialog.setReAppointment(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    appointmentTimeOutDialog.dismiss();
-                                    finish();
-                                }
-                            });
+
 //                        cancelTimerAppointment();
                         }
                     }

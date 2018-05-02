@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.amap.api.maps.AMapUtils;
@@ -25,6 +26,7 @@ import com.huawei.fusionchargeapp.model.beans.MyLocationBean;
 import com.huawei.fusionchargeapp.model.beans.PileList;
 import com.huawei.fusionchargeapp.model.beans.RequestChargePileDetailBean;
 import com.huawei.fusionchargeapp.model.beans.RequestChargeQueryFeeBean;
+import com.huawei.fusionchargeapp.model.beans.UserBean;
 import com.huawei.fusionchargeapp.weights.MyViewPager;
 import com.huawei.fusionchargeapp.weights.NavBar;
 import com.trello.rxlifecycle.ActivityEvent;
@@ -271,6 +273,7 @@ public class ChargeDetailsActivity extends BaseActivity {
 
     @Override
     public void goLogin() {
-
+        UserHelper.clearUserInfo(UserBean.class);
+        startActivity(LoginActivity.getLauncher(context));
     }
 }
