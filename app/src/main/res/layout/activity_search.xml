@@ -42,6 +42,7 @@
             android:singleLine="true"
             android:textColor="@color/text_color_main"
             android:textColorHint="@color/text_color_shallow"
+
             android:textSize="@dimen/text_normal" />
 
         <TextView

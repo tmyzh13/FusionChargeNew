@@ -51,6 +51,7 @@
                 android:layout_gravity="center_vertical"
                 android:background="@null"
                 android:hint="@string/please_input_key_value"
+                android:singleLine="true"
                 android:textSize="@dimen/dp_13"/>
 
             <ImageView

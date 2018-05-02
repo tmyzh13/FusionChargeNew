@@ -1,6 +1,7 @@
 package com.huawei.fusionchargeapp.views.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -109,6 +110,7 @@ public class HomeListFragment extends BaseFragment<HomeListView, HomeListPresent
         if (bean != null) {
             for (int i = 0; i < list.size(); i++) {
                 double distance = Tools.GetDistance(bean.latitude, bean.longtitude, list.get(i).latitude, list.get(i).longitude);
+                Log.e("yzh","---distance--"+distance);
                 list.get(i).distance = distance;
                 //如果大于distance范围过滤
                 if (distance <= ChoiceManager.getInstance().getDistance()) {

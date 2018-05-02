@@ -249,7 +249,6 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                                 ll_appontment.setVisibility(View.GONE);
                             }
                         });
-//                        cancelTimerAppointment();
                     }
                 }
             }
@@ -305,6 +304,9 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                 .subscribe(new RxBusSubscriber<Object>() {
                     @Override
                     public void receive(Object data) {
+                        homeAppointmentBean=null;
+                        homeOrderBean=null;
+                        homeChargeOrderBean=null;
                         ll_appontment.setVisibility(View.GONE);
                         rl_charger_order.setVisibility(View.GONE);
                         rl_not_pay.setVisibility(View.GONE);

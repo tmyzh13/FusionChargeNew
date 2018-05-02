@@ -1,5 +1,7 @@
 package com.huawei.fusionchargeapp.presenter;
 
+import android.util.Log;
+
 import com.corelibs.api.ApiFactory;
 import com.corelibs.api.ResponseTransformer;
 import com.corelibs.base.BasePresenter;
