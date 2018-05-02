@@ -222,7 +222,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|start"
-            android:text="点状评分" />
+            android:text="电桩评分" />
 
         <RatingBar
             android:id="@+id/favor_lever"

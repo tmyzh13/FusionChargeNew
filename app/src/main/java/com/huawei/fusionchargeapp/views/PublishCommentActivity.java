@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.BindString;
 import butterknife.OnClick;
 
 /**
@@ -69,6 +70,10 @@ public class PublishCommentActivity extends BaseActivity<CommentView,CommentPres
     NavBar navBar;
     @Bind(R.id.iv_back)
     ImageView iv_back;
+    @BindString(R.string.charger_info_fee_unit)
+    String fee_unit;
+    @BindString(R.string.charge_info_unit_KW)
+    String unit_kw;
 
     private PublishCommentsBean bean = new PublishCommentsBean();
     private Context mContext = PublishCommentActivity.this;
@@ -85,7 +90,7 @@ public class PublishCommentActivity extends BaseActivity<CommentView,CommentPres
         publish.setVisibility(View.GONE);
         sort = 0;
         favor.setIsIndicator(true);
-        flowGrid.setSelector(R.color.text_white);
+        flowGrid.setOnItemClickListener(null);
         //favor.setClickable(false);
     }
 
@@ -155,10 +160,10 @@ public class PublishCommentActivity extends BaseActivity<CommentView,CommentPres
     public void makeContentSort(View view, int position){
         int num =(int) Math.pow(2,position);
         if ((sort & num) > 0) {
-            sort =sort - 1 - position;
+            sort =sort - num;
             setTextAndCornerStokeColor((TextView)view, false);
         } else {
-            sort =sort +1 + position;
+            sort =sort +num;
             setTextAndCornerStokeColor((TextView)view, true);
         }
 
@@ -169,16 +174,18 @@ public class PublishCommentActivity extends BaseActivity<CommentView,CommentPres
             return "0";
         }
         String result = "";
-        int num = (int) Math.pow(2,list.size());
+        int num = (int) Math.pow(2,list.size()-1);
         int i=1;
-        while(i < num ) {
-            if ((sort & i) >0 ) {
+        int step =1;
+        while(step < num ) {
+            if ((sort & step) >0 ) {
                 result = result + i + ",";
             }
-            i=i*2;
+            i++;
+            step = step *2;
         }
         if ((sort & num) >0 ) {
-            result = result + num;
+            result = result + i;
         }
         return result;
     }
@@ -235,10 +242,10 @@ public class PublishCommentActivity extends BaseActivity<CommentView,CommentPres
         locationDetail.setText(bean.address);
         startTime.setText(bean.chargeStartTime);
         endTime.setText(bean.chargeEndTime);
-        power.setText(Double.toString(bean.chargePowerAmount)+"kw");
-        money.setText(Double.toString(bean.eneryCharge));
-        tips.setText(Double.toString(bean.serviceCharge));
-        total.setText(Double.toString(bean.consumeTotalMoney));
+        power.setText(Double.toString(bean.chargePowerAmount)+unit_kw);
+        money.setText(Double.toString(bean.eneryCharge)+fee_unit);
+        tips.setText(Double.toString(bean.serviceCharge)+fee_unit);
+        total.setText(Double.toString(bean.consumeTotalMoney)+fee_unit);
         pileId = bean.chargeId;
     }
 }
