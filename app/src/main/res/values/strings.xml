@@ -353,4 +353,5 @@
     <string name="gun_status_bad">故障</string>
     
     <string name="appoint_evil_info">由于您违约已超过%1$d次，您的预约功能将被锁定，解锁时间%2$s</string>
+    <string name="no_comment">暂无评论</string>
 </resources>

@@ -74,6 +74,7 @@ public class CommentPresenter extends BasePresenter<CommentView> {
                         Log.e("zw","queryCommentInfo---success : " + baseData.toString());
                         view.queryCommentInfo(baseData.data);
                     }
+
                 });
     }
     public void queryCommentSortType() {

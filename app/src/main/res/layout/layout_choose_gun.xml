@@ -18,8 +18,6 @@
         android:layout_marginLeft="10dp"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
-        android:paddingTop="1dp"
-        android:paddingBottom="1dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="空闲"

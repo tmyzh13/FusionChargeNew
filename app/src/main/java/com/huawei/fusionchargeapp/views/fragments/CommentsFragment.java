@@ -3,9 +3,12 @@ package com.huawei.fusionchargeapp.views.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.corelibs.base.BaseFragment;
 import com.huawei.fusionchargeapp.R;
@@ -22,10 +25,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 
-public class CommentsFragment extends BaseFragment<CommentView,CommentPresenter> implements CommentView {
+public class CommentsFragment extends BaseFragment<CommentView, CommentPresenter> implements CommentView {
     public static final String TAG = CommentsFragment.class.getSimpleName();
+
     private Context context = getActivity();
 
     public ChargeStationDetailBean data;
@@ -34,6 +39,8 @@ public class CommentsFragment extends BaseFragment<CommentView,CommentPresenter>
     GridView flowLayout;
     @Bind(R.id.comments_lv)
     ListView commentsLv;
+    @Bind(R.id.tv_no_comment)
+    TextView tvNoComment;
 
     //private String point[] = {"设施完整", "交通便利", "充电快速", "环境不错"};
 
@@ -49,7 +56,7 @@ public class CommentsFragment extends BaseFragment<CommentView,CommentPresenter>
 
     @Override
     public void getCommentSortAndTimes(List<CommentSortBean> times) {
-        if (times == null || times.size()==0) {
+        if (times == null || times.size() == 0) {
             flowLayout.setVisibility(View.GONE);
         } else {
             sort = times;
@@ -61,13 +68,15 @@ public class CommentsFragment extends BaseFragment<CommentView,CommentPresenter>
 
     @Override
     public void queryCommentInfo(List<CommentsBean> infos) {
-        if (infos == null ||infos.size()==0){
+        if (infos == null || infos.size() == 0) {
             commentsLv.setVisibility(View.GONE);
+            tvNoComment.setVisibility(View.VISIBLE);
         } else {
             list = infos;
             adapter.setData(list);
             adapter.notifyDataSetChanged();
             commentsLv.setVisibility(View.VISIBLE);
+            tvNoComment.setVisibility(View.GONE);
         }
     }
 
@@ -89,7 +98,7 @@ public class CommentsFragment extends BaseFragment<CommentView,CommentPresenter>
     private void setData() {
         presenter.getCommentSortAndTimes(stationId);
         presenter.queryCommentInfo(stationId);
-        sortAdapter= new CommentSortAdapter(getActivity(),sort,false);
+        sortAdapter = new CommentSortAdapter(getActivity(), sort, false);
         flowLayout.setAdapter(sortAdapter);
         adapter = new CommentsAdapter(getActivity(), list);
         commentsLv.setAdapter(adapter);
@@ -138,5 +147,11 @@ public class CommentsFragment extends BaseFragment<CommentView,CommentPresenter>
     @Override
     public void renderData(PayInfoBean bean) {
 
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 }
