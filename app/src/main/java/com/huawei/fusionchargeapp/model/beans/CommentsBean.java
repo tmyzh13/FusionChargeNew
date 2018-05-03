@@ -4,35 +4,46 @@ import java.io.Serializable;
 
 /**
  * Created by issuser on 2018/4/23.
+ *
+ * modify by  zhangwei  on 2018/5/3  更改数据结构
  */
 
 public class CommentsBean implements Serializable{
 
-    public String name;
-    public String time;
-    public String content;
+    public String userName;
+    public String createTime;
+    public String evaluateContent;
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getTime() {
-        return time;
+    public String getCreateTime() {
+        return createTime;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 
-    public String getContent() {
-        return content;
+    public String getEvaluateContent() {
+        return evaluateContent;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setEvaluateContent(String evaluateContent) {
+        this.evaluateContent = evaluateContent;
+    }
+
+    @Override
+    public String toString() {
+        return "CommentsBean{" +
+                "userName='" + userName + '\'' +
+                ", createTime='" + createTime + '\'' +
+                ", evaluateContent='" + evaluateContent + '\'' +
+                '}';
     }
 }

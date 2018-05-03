@@ -58,7 +58,7 @@ public class CommentPresenter extends BasePresenter<CommentView> {
                 .subscribe(new ResponseSubscriber<BaseData<List<CommentSortBean>>>(view) {
                     @Override
                     public void success(BaseData<List<CommentSortBean>> baseData) {
-                        Log.e("getCommentSortAndTimes","---success");
+                        Log.e("zw","getCommentSortAndTimes---success : " + baseData.toString());
                         view.getCommentSortAndTimes(baseData.data);
                     }
                 });
@@ -71,7 +71,7 @@ public class CommentPresenter extends BasePresenter<CommentView> {
                 .subscribe(new ResponseSubscriber<BaseData<List<CommentsBean>>>(view) {
                     @Override
                     public void success(BaseData<List<CommentsBean>> baseData) {
-                        Log.e("queryCommentInfo","---success");
+                        Log.e("zw","queryCommentInfo---success : " + baseData.toString());
                         view.queryCommentInfo(baseData.data);
                     }
                 });

@@ -22,7 +22,7 @@ import com.huawei.fusionchargeapp.model.beans.ChargeStationDetailBean;
 
 public class PictureFragment extends BaseFragment {
 
-
+    //TODO  后期需要替换URL
     private static final String IMG_URL = "http://10.40.143.10:8088/charger/";
 
     public ChargeStationDetailBean data;

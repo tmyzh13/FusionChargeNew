@@ -31,7 +31,7 @@ public class CommentsAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return datas.size();
+        return datas == null ? 0 : datas.size();
     }
 
     @Override
@@ -59,9 +59,9 @@ public class CommentsAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.name.setText(bean.getName());
-        holder.time.setText(bean.getTime());
-        holder.content.setText(bean.getContent());
+        holder.name.setText(bean.getUserName());
+        holder.time.setText(bean.getCreateTime());
+        holder.content.setText(bean.getEvaluateContent());
 
         return convertView;
     }

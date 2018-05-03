@@ -41,7 +41,7 @@ public class CommentsFragment extends BaseFragment<CommentView,CommentPresenter>
     private List<CommentSortBean> sort = new ArrayList<>();
     private CommentsAdapter adapter;
     private CommentSortAdapter sortAdapter;
-    private int stationId = 1;
+    private int stationId;
 
     @Override
     public void commentPublished() {
@@ -82,6 +82,7 @@ public class CommentsFragment extends BaseFragment<CommentView,CommentPresenter>
 
     @Override
     protected void init(Bundle savedInstanceState) {
+        stationId = data.getId();
         setData();
     }
 

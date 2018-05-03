@@ -32,7 +32,7 @@ public class CommentSortAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return data.size();
+        return data == null ? 0 : data.size();
     }
 
     @Override
