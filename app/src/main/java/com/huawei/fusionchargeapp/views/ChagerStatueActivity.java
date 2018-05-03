@@ -237,7 +237,7 @@ public class ChagerStatueActivity extends BaseActivity<ChargerStatueView, Charge
                     }
                 }
             });
-        } else if (bean.isStart == 1) {
+        } else if (bean.isStart == 1||bean.isStart==-1) {
             checkStatueLoadingView.dismiss();
             //检测中的定时结束
             handler.postDelayed(runnable,5000);
@@ -253,13 +253,15 @@ public class ChagerStatueActivity extends BaseActivity<ChargerStatueView, Charge
 
             //成功
             tv_address_name.setText(bean.chargingPileName);
-            tv_kw.setText(bean.kwh);
+            //功率
+            tv_kw.setText(bean.power);
             if(!Tools.isNull(bean.money)){
                 tv_charged_money.setText(bean.money + getString(R.string.yuan));
             }
 
             tv_current_charge.setText(bean.soc+"%");
-            tv_charged_enegy.setText(bean.power + getString(R.string.du));
+            //kwh 当前电量
+            tv_charged_enegy.setText(bean.kwh + getString(R.string.du));
             //05:04:25
             if(Tools.isNull(bean.alreadyTime)){
                 tv_charge_time.setText("00:00");

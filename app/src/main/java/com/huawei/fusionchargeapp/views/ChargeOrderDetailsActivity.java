@@ -172,18 +172,20 @@ public class ChargeOrderDetailsActivity extends BaseActivity<ChargeOrderDetailVi
                 tvGunName.setText(getString(R.string.charge_gun_ )+ chargingGunBeans.getGunNumber());
 
                 TextView tvGunStatus = ll.findViewById(R.id.tv_gun_status);
-                if(chargingGunBeans.getGunStatus() == 1 ){
+                if(chargingGunBeans.getGunStatus() == 1 ||chargingGunBeans.getGunStatus() == 2){
                     //空闲
                     tvGunStatus.setText(R.string.gun_status_free);
                     tvGunStatus.setTextColor(getResources().getColor(R.color.gun_status_free));
                     tvGunStatus.setBackgroundResource(R.drawable.shape_choose_gun_free);
                     ivSelectGun.setOnClickListener(chooseGunsClickListener);
-                } else if(chargingGunBeans.getGunStatus() == 2) {
-                    //使用中（插标未充电）
-                    tvGunStatus.setText(R.string.gun_status_using);
-                    tvGunStatus.setTextColor(getResources().getColor(R.color.gun_status_using));
-                    tvGunStatus.setBackgroundResource(R.drawable.shape_choose_gun_using);
-                } else if(chargingGunBeans.getGunStatus() == 3) {
+                }
+//                else if(chargingGunBeans.getGunStatus() == 2) {
+//                    //使用中（插标未充电）
+//                    tvGunStatus.setText(R.string.gun_status_using);
+//                    tvGunStatus.setTextColor(getResources().getColor(R.color.gun_status_using));
+//                    tvGunStatus.setBackgroundResource(R.drawable.shape_choose_gun_using);
+//                }
+                else if(chargingGunBeans.getGunStatus() == 3) {
                     //使用中（已充电）
                     tvGunStatus.setText(R.string.gun_status_using);
                     tvGunStatus.setTextColor(getResources().getColor(R.color.gun_status_using));

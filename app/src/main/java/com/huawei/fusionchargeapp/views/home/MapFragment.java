@@ -227,21 +227,24 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                                 @Override
                                 public void run() {
                                     //结束时间小于=当前时间
-                                    if(homeAppointmentBean.reserveEndTime<=homeAppointmentBean.nowTime){
-                                        appointmentTimeOutDialog.show();
-                                        appointmentTimeOutDialog.setIvDeleteListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                appointmentTimeOutDialog.dismiss();
-                                            }
-                                        });
-                                        appointmentTimeOutDialog.setReAppointment(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                appointmentTimeOutDialog.dismiss();
-                                            }
-                                        });
+                                    if(homeAppointmentBean!=null){
+                                        if(homeAppointmentBean.reserveEndTime<=homeAppointmentBean.nowTime){
+                                            appointmentTimeOutDialog.show();
+                                            appointmentTimeOutDialog.setIvDeleteListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    appointmentTimeOutDialog.dismiss();
+                                                }
+                                            });
+                                            appointmentTimeOutDialog.setReAppointment(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    appointmentTimeOutDialog.dismiss();
+                                                }
+                                            });
+                                        }
                                     }
+
                                 }
                             });
 
@@ -514,7 +517,6 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                 if (followMove) {
                     aMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude())));
                 }
-                Log.e("yzh", "locationChange");
 //                if (list == null || list.size() == 0) {
 //                    presenter.getData();
 //                }
