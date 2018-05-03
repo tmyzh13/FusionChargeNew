@@ -26,4 +26,11 @@
     <color name="list_pressed">#efefef</color>
     <color name="setting_blue">#4772fb</color>
     <color name="yuyue">#9360fc</color>
+
+    <!--充电枪状态-->
+    <color name="gun_status_free">#8ada8a</color>
+    <color name="gun_status_using">#f39800</color>
+    <color name="gun_status_appoint">#f39800</color>
+    <color name="gun_status_stop_service">#d4d4d4</color>
+    <color name="gun_status_bad">#f30f04</color>
 </resources>

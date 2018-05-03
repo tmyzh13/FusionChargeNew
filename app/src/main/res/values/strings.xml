@@ -272,7 +272,7 @@
     <string name="change_enter_erweima_charge">切换至输入二维码编号充电</string>
     <string name="sure">确定</string>
     <string name="please_input_erweima_number">请输入二维码编号</string>
-    <string name="no_charge_gun_cannot_charge">没有获取到充电枪，无法充电。</string>
+    <string name="no_charge_gun_cannot_charge">没有获取到可用充电枪，无法充电。</string>
     <string name="please_enter_1_999_int">请输入1到999之间的整数</string>
     <string name="please_input_charge_count">请先输入充电数</string>
     <string name="no_user_info">没有获取到信息。</string>
@@ -344,4 +344,13 @@
     <string name="charger_info_fee_unit">¥</string>
     <string name="has_pay">已支付</string>
     <string name="no_pay">未支付</string>
+
+    <string name="charge_gun_">充电枪：</string>
+    <string name="gun_status_free">空闲</string>
+    <string name="gun_status_using">使用</string>
+    <string name="gun_status_appoint">预约</string>
+    <string name="gun_status_stop_service">停止</string>
+    <string name="gun_status_bad">故障</string>
+    
+    <string name="appoint_evil_info">由于您违约已超过%1$d次，您的预约功能将被锁定，解锁时间%2$s</string>
 </resources>

@@ -17,6 +17,9 @@ public class AppointResponseBean {
     private int reserveId;
     private int state;
 
+    private String reserveUnLockedTime;
+    private int reserveLockedCount;
+
 
     public void setAppUserId(int appUserId) {
         this.appUserId = appUserId;
@@ -88,9 +91,25 @@ public class AppointResponseBean {
         return state;
     }
 
+    public String getReserveUnLockedTime() {
+        return reserveUnLockedTime;
+    }
+
+    public void setReserveUnLockedTime(String reserveUnLockedTime) {
+        this.reserveUnLockedTime = reserveUnLockedTime;
+    }
+
+    public int getReserveLockedCount() {
+        return reserveLockedCount;
+    }
+
+    public void setReserveLockedCount(int reserveLockedCount) {
+        this.reserveLockedCount = reserveLockedCount;
+    }
+
     @Override
     public String toString() {
-        return "AppointResponceBean{" +
+        return "AppointResponseBean{" +
                 "appUserId=" + appUserId +
                 ", chargingPileId=" + chargingPileId +
                 ", chargingPileName='" + chargingPileName + '\'' +
@@ -101,6 +120,8 @@ public class AppointResponseBean {
                 ", reserveEndTime=" + reserveEndTime +
                 ", reserveId=" + reserveId +
                 ", state=" + state +
+                ", reserveUnLockedTime='" + reserveUnLockedTime + '\'' +
+                ", reserveLockedCount=" + reserveLockedCount +
                 '}';
     }
 }

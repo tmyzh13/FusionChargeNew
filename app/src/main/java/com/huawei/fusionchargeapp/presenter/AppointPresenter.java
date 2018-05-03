@@ -32,7 +32,7 @@ public class AppointPresenter extends BasePresenter<AppointView> {
     }
 
     public void appointAocation(String gunCode,int chargingPileId, String chargingPileName,String nowTime,String endTime,int appointTime) {
-        AppointRequestBean bean = new AppointRequestBean();
+        final AppointRequestBean bean = new AppointRequestBean();
         bean.setAppUserId(UserHelper.getSavedUser().appUserId + "");
 //        bean.setAppUserId(71 + "");
         bean.setChargingPileId(chargingPileId + "");
@@ -47,8 +47,16 @@ public class AppointPresenter extends BasePresenter<AppointView> {
                 .subscribe(new ResponseSubscriber<BaseData<AppointResponseBean>>(view) {
                     @Override
                     public void success(BaseData<AppointResponseBean> baseData) {
-                        Log.e("zw",baseData.toString());
                         view.appointSuccess(baseData.data);
+                    }
+
+                    @Override
+                    public boolean operationError(BaseData<AppointResponseBean> appointResponseBeanBaseData, int status, String message) {
+                       //恶意预约过多
+                        if(appointResponseBeanBaseData.code == 870) {
+                            view.appointEvil(appointResponseBeanBaseData.data);
+                        }
+                        return super.operationError(appointResponseBeanBaseData, status, message);
                     }
                 });
     }

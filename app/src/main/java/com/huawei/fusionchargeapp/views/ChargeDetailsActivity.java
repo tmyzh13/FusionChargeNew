@@ -120,7 +120,6 @@ public class ChargeDetailsActivity extends BaseActivity {
                 .subscribe(new ResponseSubscriber<BaseData<ChargeStationDetailBean>>() {
                     @Override
                     public void success(BaseData<ChargeStationDetailBean> baseData) {
-                        Log.e("zw",TAG + " success : " + baseData.toString());
                         Log.e("zw",TAG + " success1 : " + baseData.data.toString());
                         chargeStationDetailBean = baseData.data;
                         getFeeData();

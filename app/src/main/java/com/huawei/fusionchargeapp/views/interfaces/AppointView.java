@@ -9,4 +9,6 @@ import com.huawei.fusionchargeapp.model.beans.AppointResponseBean;
 
 public interface AppointView extends BaseView{
     void appointSuccess(AppointResponseBean bean);
+
+    void appointEvil(AppointResponseBean bean);
 }
