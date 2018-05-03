@@ -43,6 +43,7 @@
             android:text="@string/nick" />
 
         <EditText
+            android:hint="@string/write_name"
             android:id="@+id/et_nick"
             style="@style/textview"
             android:layout_height="match_parent"
@@ -72,7 +73,7 @@
             android:background="@color/transparent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:maxLength="1"
+            android:maxLines="1"
             android:gravity="right|center_vertical"
             android:textColor="@color/setting_blue" />
     </LinearLayout>
@@ -97,7 +98,7 @@
             android:layout_weight="1"
             android:background="@color/transparent"
             android:gravity="right|center_vertical"
-            android:inputType="textWebEmailAddress"
+            android:inputType="textEmailAddress"
             android:lines="1"
             android:hint="填写邮箱"
             android:textColor="@color/setting_blue" />
@@ -113,6 +114,7 @@
             android:text="@string/birthday" />
 
         <EditText
+            android:hint="@string/write_birthday"
             android:id="@+id/tv_birthday"
             style="@style/textview"
             android:layout_weight="1"
@@ -134,6 +136,7 @@
             android:text="@string/address" />
 
         <EditText
+            android:hint="@string/write_address"
             android:id="@+id/tv_address"
             style="@style/textview"
             android:layout_weight="1"
@@ -164,6 +167,8 @@
             android:gravity="right|center_vertical"
             android:lines="1"
             android:hint="填写VIN码"
+            android:inputType="number"
+            android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:textColor="@color/setting_blue" />
     </LinearLayout>
     <TextView

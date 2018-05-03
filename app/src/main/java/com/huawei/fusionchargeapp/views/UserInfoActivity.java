@@ -4,7 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -20,6 +24,9 @@ import com.huawei.fusionchargeapp.model.beans.UserInfoBean;
 import com.huawei.fusionchargeapp.presenter.UserInfoPresenter;
 import com.huawei.fusionchargeapp.views.interfaces.UserInfoView;
 import com.huawei.fusionchargeapp.weights.NavBar;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -63,6 +70,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
 
     @Bind(R.id.nav)
     NavBar navBar;
+
     public static Intent startActivity(Context context) {
         Intent intent = new Intent(context, UserInfoActivity.class);
         return intent;
@@ -80,6 +88,23 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
             navBar.setBackground(getResources().getDrawable(R.drawable.nan_bg));
         else
             navBar.setColor(getResources().getColor(R.color.app_blue));
+
+
+        tvEmail.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                Pattern pattern = Pattern.compile(".+@.+\\.[a-z]+");
+                Matcher matcher = pattern.matcher(tvEmail.getText().toString());
+
+                if(matcher.matches()) {
+
+                }else {
+                    tvEmail.setText("");
+                    showToast(getString(R.string.wrong_email_address));
+                }
+                return false;
+            }
+        });
 
         presenter = getPresenter();
         presenter.doGetUserInfoRequest();
@@ -112,13 +137,14 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
         // 更新界面
 
         //头像
-        Glide.with(this).load(userInfoBean.photoUrl).into(ivUserIcon);
+        Glide.with(this).load(userInfoBean.photoUrl).error(R.mipmap.ic_launcher_round).into(ivUserIcon);
 
         // 姓名
         if (!TextUtils.isEmpty(userInfoBean.name)) {
             etNick.setText(userInfoBean.name);
         }
         //性别 1为男，2为女，0为未知
+        Log.e("zw","sex ； " + userInfoBean.sexName);
         tvSex.setText(userInfoBean.sexName);
 
         // 邮箱
@@ -157,12 +183,6 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
         presenter.doGetUserInfoRequest();
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 
     @OnClick({R.id.tv_sex, R.id.tv_birthday, R.id.commit_userinfo})
     public void onClick(View view) {
@@ -182,4 +202,6 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
                 break;
         }
     }
+
+
 }

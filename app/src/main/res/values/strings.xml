@@ -354,4 +354,8 @@
     
     <string name="appoint_evil_info">由于您违约已超过%1$d次，您的预约功能将被锁定，解锁时间%2$s</string>
     <string name="no_comment">暂无评论</string>
+    <string name="wrong_email_address">您输入的邮箱地址格式不正确！</string>
+    <string name="write_name">填写姓名</string>
+    <string name="write_birthday">填写生日</string>
+    <string name="write_address">填写地址</string>
 </resources>
