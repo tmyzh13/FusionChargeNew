@@ -1,32 +1,26 @@
 package com.huawei.fusionchargeapp.views;
 
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.corelibs.api.ApiFactory;
-import com.corelibs.api.ResponseTransformer;
 import com.corelibs.base.BaseActivity;
-import com.corelibs.base.BasePresenter;
-import com.corelibs.base.BaseView;
-import com.corelibs.subscriber.ResponseSubscriber;
 import com.corelibs.utils.ToastMgr;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.model.UserHelper;
-import com.huawei.fusionchargeapp.model.apis.ScanApi;
-import com.huawei.fusionchargeapp.model.beans.BaseData;
 import com.huawei.fusionchargeapp.model.beans.ChargingGunBeans;
 import com.huawei.fusionchargeapp.model.beans.HomeChargeOrderBean;
 import com.huawei.fusionchargeapp.model.beans.OrderRequestInfo;
@@ -36,15 +30,18 @@ import com.huawei.fusionchargeapp.presenter.ChargeOrderDetailsPresenter;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.interfaces.ChargeOrderDetailView;
 import com.huawei.fusionchargeapp.weights.NavBar;
-import com.trello.rxlifecycle.ActivityEvent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ChargeOrderDetailsActivity extends BaseActivity<ChargeOrderDetailView,ChargeOrderDetailsPresenter> implements RadioGroup.OnCheckedChangeListener,ChargeOrderDetailView {
+public class ChargeOrderDetailsActivity extends BaseActivity<ChargeOrderDetailView, ChargeOrderDetailsPresenter> implements RadioGroup.OnCheckedChangeListener, ChargeOrderDetailView {
 
+    @Bind(R.id.ll_choose_gun)
+    LinearLayout llChooseGun;
     private int chargePowerCount = 0;
 
     private final int BASE_ID = 8888;
@@ -73,8 +70,8 @@ public class ChargeOrderDetailsActivity extends BaseActivity<ChargeOrderDetailVi
     TextView chargeCost;
     @Bind(R.id.charge_service_cost)
     TextView chargeServiceCost;
-    @Bind(R.id.rg_choose_gun)
-    RadioGroup rgChooseGun;
+    //    @Bind(R.id.rg_choose_gun)
+//    RadioGroup rgChooseGun;
     @Bind(R.id.rb_with_power)
     RadioButton rbWithPower;
     @Bind(R.id.rb_with_money)
@@ -93,7 +90,24 @@ public class ChargeOrderDetailsActivity extends BaseActivity<ChargeOrderDetailVi
     private ChargingGunBeans chooseGun;
     private int chooseStyle = WITH_POWER;
 
+    private List<ImageView> selectGunImageViews = new ArrayList<>();
 
+    private View.OnClickListener chooseGunsClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            int id = view.getId();
+            int index = id - BASE_ID;
+            chooseGun = scanChargeInfo.getChargingGunBeans().get(index);
+            for (int i = 0; i < selectGunImageViews.size(); i++) {
+                ImageView iv = selectGunImageViews.get(i);
+                if(id == iv.getId()) {
+                    iv.setImageResource(R.drawable.list_btn_on);
+                } else {
+                    iv.setImageResource(R.drawable.list_btn);
+                }
+            }
+        }
+    };
 
     @Override
     protected int getLayoutId() {
@@ -103,8 +117,11 @@ public class ChargeOrderDetailsActivity extends BaseActivity<ChargeOrderDetailVi
     @Override
     protected void init(Bundle savedInstanceState) {
 
-
-        navBar.setColorRes(R.color.app_blue);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            navBar.setBackground(getResources().getDrawable(R.drawable.nan_bg));
+        } else {
+            navBar.setColor(getResources().getColor(R.color.app_blue));
+        }
         navBar.setNavTitle(this.getString(R.string.charge_detail));
 
         initData();
@@ -115,14 +132,14 @@ public class ChargeOrderDetailsActivity extends BaseActivity<ChargeOrderDetailVi
         setRadioButtonDrawableSize();
     }
 
-    private void initData(){
+    private void initData() {
         String data = getIntent().getStringExtra("data");
         Gson gson = new Gson();
         scanChargeInfo = gson.fromJson(data, new TypeToken<ScanChargeInfo>() {
         }.getType());
     }
 
-    private void initView(){
+    private void initView() {
         chargeStationName.setText(scanChargeInfo.getStationName());
         chargeZhuangNumber.setText(scanChargeInfo.getRunCode());
         String chargeCostStr = "<font color='#FF0000'>" + scanChargeInfo.getFee() + "</font>" + getString(R.string.yuan_du);
@@ -130,38 +147,84 @@ public class ChargeOrderDetailsActivity extends BaseActivity<ChargeOrderDetailVi
         chargeServiceCost.setText(scanChargeInfo.getServiceFee() + getString(R.string.yuan_du));
 
         List<ChargingGunBeans> gunBeans = scanChargeInfo.getChargingGunBeans();
-        if(gunBeans != null && !gunBeans.isEmpty()){
+        if (gunBeans != null && !gunBeans.isEmpty()) {
 
+//            for (int i = 0; i < scanChargeInfo.getChargingGunBeans().size(); i++) {
+//                LayoutInflater.from(this).inflate(R.layout.merge_charge_gun_radiobutton,rgChooseGun,true);
+//                RadioButton rb = (RadioButton) rgChooseGun.getChildAt(i);
+//                rb.setText("充电枪 ： " + scanChargeInfo.getChargingGunBeans().get(i).getGunNumber());
+//                rb.setId(BASE_ID + i);
+//                if(i == 0) {
+//                    rb.setChecked(true);
+//                    chooseGun = scanChargeInfo.getChargingGunBeans().get(i);
+//                }
+//            }
+//            rgChooseGun.setOnCheckedChangeListener(this);
             for (int i = 0; i < scanChargeInfo.getChargingGunBeans().size(); i++) {
-                LayoutInflater.from(this).inflate(R.layout.merge_charge_gun_radiobutton,rgChooseGun,true);
-                RadioButton rb = (RadioButton) rgChooseGun.getChildAt(i);
-                rb.setText("充电枪 ： " + scanChargeInfo.getChargingGunBeans().get(i).getGunNumber());
-                rb.setId(BASE_ID + i);
-                if(i == 0) {
-                    rb.setChecked(true);
-                    chooseGun = scanChargeInfo.getChargingGunBeans().get(i);
+                ChargingGunBeans chargingGunBeans = scanChargeInfo.getChargingGunBeans().get(i);
+                LinearLayout ll = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.layout_choose_gun, llChooseGun,false);
+
+                ImageView ivSelectGun = ll.findViewById(R.id.iv_select_gun);
+                ivSelectGun.setId(BASE_ID + i);
+                selectGunImageViews.add(ivSelectGun);
+
+                TextView tvGunName = ll.findViewById(R.id.tv_gun_name);
+                tvGunName.setText(getString(R.string.charge_gun_ )+ chargingGunBeans.getGunNumber());
+
+                TextView tvGunStatus = ll.findViewById(R.id.tv_gun_status);
+                if(chargingGunBeans.getGunStatus() == 1 ){
+                    //空闲
+                    tvGunStatus.setText(R.string.gun_status_free);
+                    tvGunStatus.setTextColor(getResources().getColor(R.color.gun_status_free));
+                    tvGunStatus.setBackgroundResource(R.drawable.shape_choose_gun_free);
+                    ivSelectGun.setOnClickListener(chooseGunsClickListener);
+                } else if(chargingGunBeans.getGunStatus() == 2) {
+                    //使用中（插标未充电）
+                    tvGunStatus.setText(R.string.gun_status_using);
+                    tvGunStatus.setTextColor(getResources().getColor(R.color.gun_status_using));
+                    tvGunStatus.setBackgroundResource(R.drawable.shape_choose_gun_using);
+                } else if(chargingGunBeans.getGunStatus() == 3) {
+                    //使用中（已充电）
+                    tvGunStatus.setText(R.string.gun_status_using);
+                    tvGunStatus.setTextColor(getResources().getColor(R.color.gun_status_using));
+                    tvGunStatus.setBackgroundResource(R.drawable.shape_choose_gun_using);
+                } else if(chargingGunBeans.getGunStatus() == 4) {
+                    //预约中
+                    tvGunStatus.setText(R.string.gun_status_appoint);
+                    tvGunStatus.setTextColor(getResources().getColor(R.color.gun_status_appoint));
+                    tvGunStatus.setBackgroundResource(R.drawable.shape_choose_gun_appoint);
+                } else if(chargingGunBeans.getGunStatus() == 5) {
+                    //停止服务
+                    tvGunStatus.setText(R.string.gun_status_stop_service);
+                    tvGunStatus.setTextColor(getResources().getColor(R.color.gun_status_stop_service));
+                    tvGunStatus.setBackgroundResource(R.drawable.shape_choose_gun_stop_service);
+                } else if(chargingGunBeans.getGunStatus() == 6) {
+                    //故障
+                    tvGunStatus.setText(R.string.gun_status_bad);
+                    tvGunStatus.setTextColor(getResources().getColor(R.color.gun_status_bad));
+                    tvGunStatus.setBackgroundResource(R.drawable.shape_choose_gun_stop_bad);
                 }
+                llChooseGun.addView(ll);
             }
-            rgChooseGun.setOnCheckedChangeListener(this);
         }
 
     }
 
     private void setRadioButtonDrawableSize() {
         Drawable[] drawables = null;
-        for (int i = 0; i < rgChooseGun.getChildCount(); i++) {
+       /* for (int i = 0; i < rgChooseGun.getChildCount(); i++) {
             RadioButton rb = (RadioButton) rgChooseGun.getChildAt(i);
             drawables = rb.getCompoundDrawables();
             drawables[2].setBounds(0,0,Tools.dip2px(getApplicationContext(),20),Tools.dip2px(getApplicationContext(),20));
             rb.setCompoundDrawables(null,null,drawables[2],null);
-        }
+        }*/
 
         for (int i = 0; i < rgChoosePowerStyle.getChildCount(); i++) {
             RadioButton rb = (RadioButton) rgChoosePowerStyle.getChildAt(i);
             drawables = rb.getCompoundDrawables();
-            drawables[0].setBounds(0,0, Tools.dip2px(getApplicationContext(),20),Tools.dip2px(getApplicationContext(),20));
-            drawables[2].setBounds(0,0,Tools.dip2px(getApplicationContext(),20),Tools.dip2px(getApplicationContext(),20));
-            rb.setCompoundDrawables(drawables[0],null,drawables[2],null);
+            drawables[0].setBounds(0, 0, Tools.dip2px(getApplicationContext(), 20), Tools.dip2px(getApplicationContext(), 20));
+            drawables[2].setBounds(0, 0, Tools.dip2px(getApplicationContext(), 20), Tools.dip2px(getApplicationContext(), 20));
+            rb.setCompoundDrawables(drawables[0], null, drawables[2], null);
         }
 
     }
@@ -177,22 +240,22 @@ public class ChargeOrderDetailsActivity extends BaseActivity<ChargeOrderDetailVi
             case R.id.iv_charge_cost_ask:
                 break;
             case R.id.btn_start_charge:
-                if(UserHelper.getSavedUser()==null||Tools.isNull(UserHelper.getSavedUser().token)){
+                if (UserHelper.getSavedUser() == null || Tools.isNull(UserHelper.getSavedUser().token)) {
                     startActivity(LoginActivity.getLauncher(this));
                     return;
                 }
-                if(chooseGun == null) {
+                if (chooseGun == null) {
                     ToastMgr.show(getString(R.string.no_charge_gun_cannot_charge));
                     return;
                 }
-                if(chooseStyle == WITH_FULL) {
+                if (chooseStyle == WITH_FULL) {
                     getData();
                     return;
                 }
                 String count = etChargeCount.getText().toString();
-                if(!TextUtils.isEmpty(count)){
+                if (!TextUtils.isEmpty(count)) {
                     chargePowerCount = Integer.parseInt(count);
-                    if(chargePowerCount > 999 || chargePowerCount <1){
+                    if (chargePowerCount > 999 || chargePowerCount < 1) {
                         ToastMgr.show(getString(R.string.please_enter_1_999_int));
                         return;
                     } else {
@@ -207,7 +270,7 @@ public class ChargeOrderDetailsActivity extends BaseActivity<ChargeOrderDetailVi
     }
 
     //开始充电
-    private void getData(){
+    private void getData() {
         showLoading();
 
         OrderRequestInfo info = new OrderRequestInfo();
@@ -224,20 +287,20 @@ public class ChargeOrderDetailsActivity extends BaseActivity<ChargeOrderDetailVi
         //TODO 后续替换
 //        info.setChargingPileId(14);
         info.setChargingPileId(scanChargeInfo.getChargingPileId());
-        if(chooseStyle != WITH_FULL){
+        if (chooseStyle != WITH_FULL) {
 //            info.setControlData(320 + "");
             info.setControlData(chargePowerCount + "");
-        }else{
+        } else {
             info.setControlData("0");
         }
         //设置充电模式，交流为慢，直流为快
-        if(chooseGun.getGunType() == CHARGE_GUN_FAST){
+        if (chooseGun.getGunType() == CHARGE_GUN_FAST) {
             info.setChargingMode(CHARGE_MODE_FAST);
         } else {
             info.setChargingMode(CHARGE_MODE_SLOW);
         }
 
-       presenter.startCharge(info);
+        presenter.startCharge(info);
 
     }
 
@@ -258,35 +321,35 @@ public class ChargeOrderDetailsActivity extends BaseActivity<ChargeOrderDetailVi
 
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int i) {
-        switch (radioGroup.getId()){
+        switch (radioGroup.getId()) {
             //充电方式选择
             case R.id.rg_choose_power_style:
-                if(i == rbWithFull.getId()){
+                if (i == rbWithFull.getId()) {
                     etChargeCount.setEnabled(false);
                     etChargeCount.setClickable(false);
                     etChargeCount.setHint(R.string.choose_charge_full);
                     chooseStyle = WITH_FULL;
-                }else {
+                } else {
                     etChargeCount.setEnabled(true);
                     etChargeCount.setClickable(true);
 //                    etChargeCount.setHint(R.string.please_enter_charge_count);
-                    if(i == rbWithPower.getId()){
+                    if (i == rbWithPower.getId()) {
                         chooseStyle = WITH_POWER;
                         etChargeCount.setHint(R.string.please_enter_charge_count);
-                    }else if(i == rbWithMoney.getId()){
+                    } else if (i == rbWithMoney.getId()) {
                         chooseStyle = WITH_MONEY;
                         etChargeCount.setHint(R.string.please_input_charge_money);
-                    } else if(i == rbWithTime.getId()){
+                    } else if (i == rbWithTime.getId()) {
                         chooseStyle = WITH_TIME; //2
                         etChargeCount.setHint(R.string.please_input_charge_time);
                     }
                 }
                 break;
-                //充电枪选择
+           /* //充电枪选择
             case R.id.rg_choose_gun:
                 int index = i - BASE_ID;
                 chooseGun = scanChargeInfo.getChargingGunBeans().get(index);
-                break;
+                break;*/
         }
     }
 
@@ -303,7 +366,7 @@ public class ChargeOrderDetailsActivity extends BaseActivity<ChargeOrderDetailVi
         HomeChargeOrderBean homeChargeOrderBean = new HomeChargeOrderBean();
         homeChargeOrderBean.virtualId = scanChargeInfo.getVirtualId();
         homeChargeOrderBean.chargeGunNum = chooseGun.getGunCode();
-        startActivity(ChagerStatueActivity.getLauncher(ChargeOrderDetailsActivity.this,homeChargeOrderBean));
+        startActivity(ChagerStatueActivity.getLauncher(ChargeOrderDetailsActivity.this, homeChargeOrderBean));
         finish();
     }
 
@@ -311,4 +374,6 @@ public class ChargeOrderDetailsActivity extends BaseActivity<ChargeOrderDetailVi
     public void onFail() {
 
     }
+
+
 }

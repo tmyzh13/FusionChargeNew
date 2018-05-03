@@ -36,4 +36,13 @@ public class CommentSortBean implements Serializable {
     public void setTypeId(int typeId) {
         this.typeId = typeId;
     }
+
+    @Override
+    public String toString() {
+        return "CommentSortBean{" +
+                "typeName='" + typeName + '\'' +
+                ", typeId=" + typeId +
+                ", evaluateCount=" + evaluateCount +
+                '}';
+    }
 }

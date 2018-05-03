@@ -21,6 +21,7 @@ import com.huawei.fusionchargeapp.presenter.AppointPresenter;
 import com.huawei.fusionchargeapp.utils.ActionControl;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.interfaces.AppointView;
+import com.huawei.fusionchargeapp.weights.CommonDialog;
 import com.huawei.fusionchargeapp.weights.NavBar;
 
 import java.text.SimpleDateFormat;
@@ -49,6 +50,8 @@ public class AppointmentChargeActivity extends BaseActivity<AppointView, Appoint
     private double longitude;
     private String runCode;
     private String address;
+
+    private CommonDialog commonDialog;
 
     public static Intent getLauncher(Context context) {
         Intent intent = new Intent(context, AppointmentChargeActivity.class);
@@ -246,6 +249,23 @@ public class AppointmentChargeActivity extends BaseActivity<AppointView, Appoint
         intent.putExtra("reserveId",bean.getReserveId() + "");
         startActivity(intent);
         this.finish();
+    }
+
+    @Override
+    public void appointEvil(AppointResponseBean bean) {
+        commonDialog = new CommonDialog(context,"",1);
+        commonDialog.show();
+        commonDialog.setDialogBackground();
+        String msg = getResources().getString(R.string.appoint_evil_info);
+        msg = String.format(msg,bean.getReserveLockedCount(),bean.getReserveUnLockedTime());
+        commonDialog.setMsg(msg);
+        commonDialog.setPositiveListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                commonDialog.dismiss();
+                finish();
+            }
+        });
     }
 
     @Override

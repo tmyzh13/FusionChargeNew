@@ -29,7 +29,8 @@
         android:roundIcon="@mipmap/icon"
         android:supportsRtl="true"
         android:theme="@style/AppBaseCompactTheme">
-        <activity android:name="com.huawei.fusionchargeapp.views.WelcomeActivity">
+        <activity android:name="com.huawei.fusionchargeapp.views.WelcomeActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,6 +39,7 @@
         </activity>
         <activity
             android:name="com.huawei.fusionchargeapp.MainActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTask">
 
         </activity>

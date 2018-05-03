@@ -120,7 +120,6 @@ public class ChargeDetailsActivity extends BaseActivity {
                 .subscribe(new ResponseSubscriber<BaseData<ChargeStationDetailBean>>() {
                     @Override
                     public void success(BaseData<ChargeStationDetailBean> baseData) {
-                        Log.e("zw",TAG + " success : " + baseData.toString());
                         Log.e("zw",TAG + " success1 : " + baseData.data.toString());
                         chargeStationDetailBean = baseData.data;
                         getFeeData();
@@ -149,6 +148,7 @@ public class ChargeDetailsActivity extends BaseActivity {
                     .subscribe(new ResponseSubscriber<BaseData<PileList>>() {
                         @Override
                         public void success(BaseData<PileList> baseData) {
+                            Log.e("zw",TAG + "PILE success1 : " + baseData.data.toString());
                             PileList pileList = baseData.data;
                             chargeStationDetailBean = new ChargeStationDetailBean();
                             chargeStationDetailBean.setAddress(pileList.getAddress());
@@ -157,6 +157,7 @@ public class ChargeDetailsActivity extends BaseActivity {
                             chargeStationDetailBean.setLatitude(Double.parseDouble(pileList.getLatitude()));
                             chargeStationDetailBean.setLongitude(Double.parseDouble(pileList.getLongitude()));
                             chargeStationDetailBean.setPhotoUrl(pileList.getPhotoUrl());
+                            chargeStationDetailBean.setId(pileList.getId());
                             List<PileList> list = new ArrayList<>();
                             list.add(pileList);
                             chargeStationDetailBean.setPileList(list);

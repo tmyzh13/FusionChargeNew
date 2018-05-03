@@ -1,6 +1,7 @@
 package com.huawei.fusionchargeapp.views;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
@@ -48,7 +49,11 @@ public class ChargeInputNumberActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        navBar.setColorRes(R.color.app_blue);
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.JELLY_BEAN) {
+            navBar.setBackground(getResources().getDrawable(R.drawable.nan_bg));
+        } else {
+            navBar.setColor(getResources().getColor(R.color.app_blue));
+        }
         navBar.setNavTitle(this.getString(R.string.charge));
 
         api = ApiFactory.getFactory().create(ScanApi.class);

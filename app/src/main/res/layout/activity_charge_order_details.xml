@@ -131,8 +131,20 @@
                     android:textColor="@color/blue"
                     android:background="@color/white"
                     />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/ll_choose_gun">
+                    <!--<include
+                        layout="@layout/layout_choose_gun"
+                        ></include>-->
 
-                <RadioGroup
+                </LinearLayout>
+
+
+
+                <!--<RadioGroup
                     android:id="@+id/rg_choose_gun"
                     android:paddingLeft="10dp"
                     android:background="@color/white"
@@ -140,10 +152,10 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <!--<RadioButton
+                    <RadioButton
                         style="@style/charge_order_detail_radio_button"
-                        android:text="充电枪：12345" />-->
-                </RadioGroup>
+                        android:text="充电枪：12345" />
+                </RadioGroup>-->
 
             </LinearLayout>
 
@@ -209,7 +221,7 @@
                 android:id="@+id/et_charge_count"
                 android:layout_width="match_parent"
                 android:background="@color/white"
-                android:gravity="center | start"
+                android:gravity="center|start"
                 android:paddingLeft="5dp"
                 android:inputType="number"
                 android:layout_marginTop="10dp"

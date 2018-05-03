@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/tv_gun_name"
+        android:paddingLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textSize="@dimen/text_normal"
+        android:textColor="@color/black"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/tv_gun_status"
+        android:layout_marginLeft="10dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="空闲"
+        android:textColor="@color/green"
+        android:textSize="@dimen/text_normal"
+        android:background="@drawable/shape_choose_gun_free"
+        android:gravity="center"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_select_gun"
+            android:padding="10dp"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/list_btn"/>
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>
