@@ -361,4 +361,7 @@
     <string name="camera">相机</string>
     <string name="photo">照片</string>
     <string name="cancel">取消</string>
+
+    <string name="pile_info">电枪编号        %1$s</string>
+    <string name="run_adress">电桩地址        %1$s</string>
 </resources>

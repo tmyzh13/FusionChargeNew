@@ -231,6 +231,7 @@
                 />
 
             <TextView
+                android:id="@+id/tv_reserve"
                 style="@style/text_normal"
                 android:text="@string/home_my_appointment"
                 android:layout_marginLeft="25dp"
