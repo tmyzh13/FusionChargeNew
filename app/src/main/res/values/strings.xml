@@ -361,4 +361,10 @@
     <string name="camera">相机</string>
     <string name="photo">照片</string>
     <string name="cancel">取消</string>
+    <string name="permission_denied">权限被禁止,无法使用</string>
+    <string name="name_cannot_null">姓名不能为空。</string>
+    <string name="sex_cannot_null">性别不能为空。</string>
+    <string name="man">男</string>
+    <string name="woman">女</string>
+    <string name="secret">保密</string>
 </resources>

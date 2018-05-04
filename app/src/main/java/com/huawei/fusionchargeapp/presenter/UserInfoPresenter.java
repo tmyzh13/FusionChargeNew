@@ -16,6 +16,8 @@ import com.huawei.fusionchargeapp.model.beans.UserInfoBean;
 import com.huawei.fusionchargeapp.views.interfaces.UserInfoView;
 import com.trello.rxlifecycle.ActivityEvent;
 
+import java.util.List;
+
 
 public class UserInfoPresenter extends BasePresenter<UserInfoView> {
 
@@ -83,4 +85,5 @@ public class UserInfoPresenter extends BasePresenter<UserInfoView> {
                     }
                 });
     }
+
 }

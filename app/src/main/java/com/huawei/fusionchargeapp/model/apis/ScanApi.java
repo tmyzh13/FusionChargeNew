@@ -1,5 +1,7 @@
 package com.huawei.fusionchargeapp.model.apis;
 
+import android.net.Uri;
+
 import com.huawei.fusionchargeapp.constants.Urls;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
 import com.huawei.fusionchargeapp.model.beans.ChargeDetailFeeBean;
@@ -14,6 +16,8 @@ import com.huawei.fusionchargeapp.model.beans.RequestScanBean;
 import com.huawei.fusionchargeapp.model.beans.ScanChargeInfo;
 
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import rx.Observable;
@@ -48,6 +52,7 @@ public interface ScanApi {
     //根据充电桩ID查询阶梯电价和服务费
     @POST(Urls.QUERY_FEE)
     Observable<BaseData<ChargeDetailFeeBean>> getQueryFee(@Header("AccessToken") String token, @Body RequestChargeQueryFeeBean bean);
+
 
 
 }

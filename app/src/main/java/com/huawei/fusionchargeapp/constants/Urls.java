@@ -80,4 +80,7 @@ public class Urls {
     //校验验证码
     public static final String CHECK_CODE="user/checkCaptcha";
 
+    //上传头像
+    public static final String MODIFY_IMG = "user/modifyimg";
+
 }

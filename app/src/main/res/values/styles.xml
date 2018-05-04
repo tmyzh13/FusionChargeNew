@@ -116,4 +116,9 @@
     <style name="ImagePickerTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:fitsSystemWindows">true</item>
     </style>
+
+    //图片选择
+    <style name="UserPhotoSelectStyle" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/selector_user_photo_checkbox</item>
+    </style>
 </resources>

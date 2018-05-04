@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/shape_white_small_corner">
+        <TextView
+            android:id="@+id/tv_man"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textSize="@dimen/text_normal"
+            android:textColor="@color/app_blue"
+            android:backgroundTint="?android:attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:text="@string/man"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/light_gray"
+            ></View>
+        <TextView
+            android:id="@+id/tv_woman"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textSize="@dimen/text_normal"
+            android:textColor="@color/app_blue"
+            android:backgroundTint="?android:attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:text="@string/woman"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/light_gray"
+            ></View>
+        <TextView
+            android:id="@+id/tv_secret"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textSize="@dimen/text_normal"
+            android:textColor="@color/app_blue"
+            android:backgroundTint="?android:attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:text="@string/secret"/>
+    </LinearLayout>
+
+    <android.support.v4.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/transparent"/>
+
+    <TextView
+        android:background="@drawable/shape_white_small_corner"
+        android:id="@+id/tv_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textSize="@dimen/text_normal"
+        android:textColor="@color/app_blue"
+        android:gravity="center"
+        android:text="@string/cancel"/>
+    
+    <android.support.v4.widget.Space
+        android:backgroundTint="?android:attr/selectableItemBackgroundBorderless"
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+</LinearLayout>

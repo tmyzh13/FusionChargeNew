@@ -41,6 +41,7 @@ public class ImageActivity extends ImageBaseActivity implements ImageDataSource.
 
     public static final int REQUEST_PERMISSION_STORAGE = 0x01;
     public static final int REQUEST_PERMISSION_CAMERA = 0x02;
+    public static final int REQUEST_PERMISSION_ALL = 0x03;
     public static final String EXTRAS_TAKE_PICKERS = "TAKE";
     public static final String EXTRAS_IMAGES = "IMAGES";
 
@@ -86,11 +87,11 @@ public class ImageActivity extends ImageBaseActivity implements ImageDataSource.
         if (data != null && data.getExtras() != null) {
             directPhoto = data.getBooleanExtra(EXTRAS_TAKE_PICKERS, false); // 默认不是直接打开相机
             if (directPhoto) {
-                if (!(checkPermission(Manifest.permission.CAMERA))) {
-                    Log.e("zw","00000000000000000000");
-                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, ImageActivity.REQUEST_PERMISSION_CAMERA);
+                if (!(checkPermission(Manifest.permission.CAMERA)) || !(checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE))) {
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE}, ImageActivity.REQUEST_PERMISSION_ALL);
                 } else {
                     imagePicker.takePicture(this, ImagePicker.REQUEST_CODE_TAKE);
+//                    new ImageDataSource(this, null, this);
                 }
             }
             ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(EXTRAS_IMAGES);
@@ -115,14 +116,13 @@ public class ImageActivity extends ImageBaseActivity implements ImageDataSource.
             mBtnOk.setVisibility(View.GONE);
             mBtnPre.setVisibility(View.GONE);
         }
-        Log.e("zw","111111111111111");
 //        mImageGridAdapter = new ImageGridAdapter(this, null);
         mImageFolderAdapter = new ImageFolderAdapter(this, null);
         mRecyclerAdapter = new ImageRecyclerAdapter(this, null);
 
         onImageSelected(0, null, false);
 
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
+       /* if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
             if (checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 new ImageDataSource(this, null, this);
             } else {
@@ -130,25 +130,45 @@ public class ImageActivity extends ImageBaseActivity implements ImageDataSource.
             }
         } else {
             new ImageDataSource(this, null, this);
-        }
+        }*/
+        new ImageDataSource(this, null, this);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_PERMISSION_STORAGE) {
+        if (requestCode == REQUEST_PERMISSION_ALL) {
+
+            if(grantResults.length <2 || grantResults[0] == PackageManager.PERMISSION_DENIED || grantResults[1] == PackageManager.PERMISSION_DENIED){
+                showToast(getString(R.string.permission_denied));
+                finish();
+                return;
+            }
+
+            imagePicker.takePicture(this, ImagePicker.REQUEST_CODE_TAKE);
+            new ImageDataSource(this, null, this);
+
+           /* //相机
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                imagePicker.takePicture(this, ImagePicker.REQUEST_CODE_TAKE);
+            } else {
+                showToast("权限被禁止，无法打开相机");
+//                finish();
+            }
+
+
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 new ImageDataSource(this, null, this);
             } else {
                 showToast("权限被禁止，无法选择本地图片");
                 finish();
-            }
+            }*/
         } else if (requestCode == REQUEST_PERMISSION_CAMERA) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 imagePicker.takePicture(this, ImagePicker.REQUEST_CODE_TAKE);
             } else {
                 showToast("权限被禁止，无法打开相机");
-                finish();
+//                finish();
             }
         }
     }

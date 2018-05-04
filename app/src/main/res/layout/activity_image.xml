@@ -7,7 +7,7 @@
 
     <include
         android:id="@+id/top_bar"
-        layout="@layout/include_top_bar"/>
+        layout="@layout/layout_choose_user_phote_toolbar"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
