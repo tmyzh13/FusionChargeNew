@@ -30,6 +30,7 @@ import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.utils.ChoiceManager;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.LoginActivity;
+import com.huawei.fusionchargeapp.views.MyAppointDetailActivity;
 import com.huawei.fusionchargeapp.views.SearchStationTitleActivity;
 import com.huawei.fusionchargeapp.views.SettingActivity;
 import com.huawei.fusionchargeapp.views.UserInfoActivity;
@@ -347,6 +348,11 @@ public class MainActivity extends BaseActivity {
     public void toMyOrder() {
 //        UserHelper.clearUserInfo(UserBean.class);
         startActivity(MyOrderActivity.getLauncher(MainActivity.this));
+    }
+
+    @OnClick(R.id.tv_reserve)
+    public void goAllAppointActivity(){
+        startActivity(MyAppointDetailActivity.getLauncher(MainActivity.this));
     }
 
     @OnClick(R.id.iv_search)

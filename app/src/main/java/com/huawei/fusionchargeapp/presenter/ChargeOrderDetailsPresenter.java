@@ -12,6 +12,8 @@ import com.huawei.fusionchargeapp.model.apis.ScanApi;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
 import com.huawei.fusionchargeapp.model.beans.HomeChargeOrderBean;
 import com.huawei.fusionchargeapp.model.beans.OrderRequestInfo;
+import com.huawei.fusionchargeapp.model.beans.PileFeeBean;
+import com.huawei.fusionchargeapp.model.beans.RequestFeeBean;
 import com.huawei.fusionchargeapp.views.ChagerStatueActivity;
 import com.huawei.fusionchargeapp.views.ChargeOrderDetailsActivity;
 import com.huawei.fusionchargeapp.views.interfaces.ChargeOrderDetailView;
@@ -65,6 +67,36 @@ public class ChargeOrderDetailsPresenter extends BasePresenter<ChargeOrderDetail
                             showToast(getString(R.string.server_wrong));
                         }*/
 
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        view.onFail();
+                        super.onError(e);
+                    }
+
+                    @Override
+                    public boolean operationError(BaseData baseData, int status, String message) {
+                        view.onFail();
+                        return super.operationError(baseData, status, message);
+                    }
+                });
+    }
+
+    /**
+     * 获取费率信息
+     */
+    public void getFeeInfo(long id){
+        RequestFeeBean bean =new RequestFeeBean();
+        bean.chargePileId=id;
+        view.showLoading();
+        api.getFeeData(bean)
+                .compose(new ResponseTransformer<>(this.<BaseData<PileFeeBean>>bindUntilEvent(ActivityEvent.DESTROY)))
+                .subscribe(new ResponseSubscriber<BaseData<PileFeeBean>>(view) {
+                    @Override
+                    public void success(BaseData<PileFeeBean> baseData) {
+//                        view.getMarkInfo(baseData.data);
+                        view.showPileFeeInfo(baseData.data);
                     }
                 });
     }

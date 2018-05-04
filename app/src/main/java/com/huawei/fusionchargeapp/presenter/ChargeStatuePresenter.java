@@ -81,6 +81,12 @@ public class ChargeStatuePresenter extends BasePresenter<ChargerStatueView> {
                     }
 
                     @Override
+                    public void onError(Throwable e) {
+                        view.endChargeFail();
+                        super.onError(e);
+                    }
+
+                    @Override
                     public boolean operationError(BaseData baseData, int status, String message) {
                         view.endChargeFail();
                         return super.operationError(baseData, status, message);

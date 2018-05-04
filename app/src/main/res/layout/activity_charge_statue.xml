@@ -38,7 +38,7 @@
             <TextView
                style="@style/text_normal"
                 android:textColor="@color/app_blue"
-                android:textSize="50dp"
+                android:textSize="40dp"
                 android:text="00:00"
                 android:textStyle="bold"
                 android:id="@+id/tv_charge_time"
@@ -208,12 +208,13 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:gravity="center"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="16sp"
         android:text="@string/action_end_and_pay"
-        android:background="@drawable/tv_corner_blue"
+        android:background="@drawable/tv_corner_gray"
         android:layout_marginTop="30dp"
         android:id="@+id/tv_pay"
+        android:enabled="false"
         />
 
 </LinearLayout>

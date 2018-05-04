@@ -290,7 +290,12 @@ public class Tools {
         if(minStr.length()<2){
             minStr="0"+minStr;
         }
-        return hour + ":" + minStr;
+
+        String secStr=min/1000+"";
+        if(secStr.length()<2){
+            secStr="0"+secStr;
+        }
+        return hour + ":" + minStr+":"+secStr;
     }
 
     public static long getHourValue(String time){

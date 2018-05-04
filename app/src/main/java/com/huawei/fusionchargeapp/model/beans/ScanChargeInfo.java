@@ -9,7 +9,7 @@ import java.util.List;
 public class ScanChargeInfo {
 
     private String appUserId;
-    private List<ChargingGunBeans> chargingGunBeans;
+    private List<ChargingGunBeans> chargingGunReservePojos;
     private int chargingPileId;
     private String chargingPileName;
     private String endTime;
@@ -30,11 +30,11 @@ public class ScanChargeInfo {
     }
 
     public List<ChargingGunBeans> getChargingGunBeans() {
-        return chargingGunBeans;
+        return chargingGunReservePojos;
     }
 
     public void setChargingGunBeans(List<ChargingGunBeans> chargingGunBeans) {
-        this.chargingGunBeans = chargingGunBeans;
+        this.chargingGunReservePojos = chargingGunBeans;
     }
 
     public int getChargingPileId() {
@@ -121,7 +121,7 @@ public class ScanChargeInfo {
     public String toString() {
         return "ScanChargeInfo{" +
                 "appUserId='" + appUserId + '\'' +
-                ", chargingGunBeans=" + chargingGunBeans +
+                ", chargingGunReservePojos=" + chargingGunReservePojos +
                 ", chargingPileId=" + chargingPileId +
                 ", chargingPileName='" + chargingPileName + '\'' +
                 ", endTime='" + endTime + '\'' +

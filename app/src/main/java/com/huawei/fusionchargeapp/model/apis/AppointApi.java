@@ -6,6 +6,7 @@ import com.huawei.fusionchargeapp.model.beans.AppointResponseBean;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
 
 import retrofit2.http.Body;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import rx.Observable;

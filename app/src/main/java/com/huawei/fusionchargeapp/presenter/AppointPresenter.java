@@ -43,7 +43,7 @@ public class AppointPresenter extends BasePresenter<AppointView> {
         bean.setGunCode(gunCode);
 
         api.appoint(UserHelper.getSavedUser().token,bean)
-                .compose(new ResponseTransformer<BaseData<AppointResponseBean>>(this.<BaseData<AppointResponseBean>>bindToLifeCycle()))
+                .compose(new ResponseTransformer<>(this.<BaseData<AppointResponseBean>>bindToLifeCycle()))
                 .subscribe(new ResponseSubscriber<BaseData<AppointResponseBean>>(view) {
                     @Override
                     public void success(BaseData<AppointResponseBean> baseData) {

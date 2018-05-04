@@ -228,7 +228,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                                 public void run() {
                                     //结束时间小于=当前时间
                                     if(homeAppointmentBean!=null){
-                                        if(homeAppointmentBean.reserveEndTime<=homeAppointmentBean.nowTime){
+//                                        if(homeAppointmentBean.reserveEndTime<=homeAppointmentBean.nowTime){
                                             appointmentTimeOutDialog.show();
                                             appointmentTimeOutDialog.setIvDeleteListener(new View.OnClickListener() {
                                                 @Override
@@ -242,14 +242,12 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                                                     appointmentTimeOutDialog.dismiss();
                                                 }
                                             });
+                                        homeAppointmentBean = null;
                                         }
-                                    }
-
+//                                    }
                                 }
                             });
-
                         }
-                        homeAppointmentBean = null;
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -416,7 +414,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
 
     @OnClick(R.id.tv_pay)
     public void goPay() {
-        startActivity(PayActivity.getLauncher(getContext(), homeOrderBean.orderRecordNum));
+        startActivity(PayActivity.getLauncher(getContext(), homeOrderBean.orderRecordNum,"0"));
     }
 
     @Override
@@ -650,6 +648,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
 
             if (bean.reserveEndTime <= bean.nowTime) {
                 ll_appontment.setVisibility(View.GONE);
+                ActionControl.getInstance(getContext()).setHasAppointment(false, null);
             } else {
                 ll_appontment.setVisibility(View.VISIBLE);
                 long surplusTime = bean.reserveEndTime - bean.nowTime;
@@ -657,7 +656,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                 PreferencesHelper.saveData(Constant.APPOINTMENT_DURING, bean.reserveDuration);
                 tv_appointment_time.setText(Tools.formatMinute(surplusTime));
             }
-            ll_appontment.setVisibility(View.VISIBLE);
+//            ll_appontment.setVisibility(View.VISIBLE);
         } else {
             ll_appontment.setVisibility(View.GONE);
         }
@@ -672,7 +671,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
         if (has) {
             rl_charger_order.setVisibility(View.VISIBLE);
             homeChargeOrderBean = bean;
-            TimeServiceManager.getInstance().getTimerService().timerHour();
+//            TimeServiceManager.getInstance().getTimerService().timerHour();
         } else {
             rl_charger_order.setVisibility(View.GONE);
         }
@@ -688,7 +687,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            TimeServiceManager.getInstance().getTimerService().cancelTimerHour();
+//            TimeServiceManager.getInstance().getTimerService().cancelTimerHour();
             TimeServiceManager.getInstance().setTimerService(null);
         }
     };
