@@ -1,10 +1,12 @@
 package com.huawei.fusionchargeapp.model.beans;
 
+import java.io.Serializable;
+
 /**
  * Created by issuser on 2018/4/25.
  */
 
-public class PayInfoBean {
+public class PayInfoBean implements Serializable {
     public String chargeStartTime;
     public double serviceCharge;//充电服务费
     public double consumeTotalMoney;//消费总金额

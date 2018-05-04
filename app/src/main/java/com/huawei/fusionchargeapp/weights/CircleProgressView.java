@@ -1,5 +1,6 @@
 package com.huawei.fusionchargeapp.weights;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -8,6 +9,7 @@ import android.graphics.RectF;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 
 import com.huawei.fusionchargeapp.R;
 
@@ -169,4 +171,30 @@ public class CircleProgressView extends View{
         cirAngle = (orginAngle + cirAngle) % 360;
         return calcArcEndPointXY(cirX, cirY, radius, cirAngle);
     }
+
+    ValueAnimator progressAnimator;
+    public void startAnimation(int start, int current, int duration) {
+        progressAnimator = ValueAnimator.ofInt(start, current);
+        progressAnimator.setDuration(duration);
+        progressAnimator.setTarget(progress);
+        progressAnimator.setRepeatCount(ValueAnimator.INFINITE);
+        progressAnimator.setRepeatMode(ValueAnimator.RESTART);
+        progressAnimator.setInterpolator(new LinearInterpolator());
+        progressAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+
+                progress = (int) animation.getAnimatedValue();
+                invalidate();
+            }
+        });
+        progressAnimator.start();
+    }
+
+    public void stopAnimator(){
+        if(progressAnimator!=null){
+            progressAnimator.cancel();
+        }
+    }
+
 }

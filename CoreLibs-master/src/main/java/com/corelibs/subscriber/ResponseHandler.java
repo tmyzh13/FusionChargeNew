@@ -189,10 +189,32 @@ public class ResponseHandler<T> {
                         handleOperationError(context.getString(R.string.code_297));
                     }else if(data.status()==294){
                         handleOperationError(context.getString(R.string.code_294));
+                    }else if(data.status()==860){
+                        handleOperationError(context.getString(R.string.code_860));
+                    }else if(data.status()==861){
+                        handleOperationError(context.getString(R.string.code_861));
+                    }else if(data.status()==862){
+                        handleOperationError(context.getString(R.string.code_862));
                     }else if(data.status()==870){
                         handleOperationError(context.getString(R.string.code_870));
                     }else if(data.status()==871){
                         handleOperationError(context.getString(R.string.code_871));
+                    }else if(data.status()==872){
+                        handleOperationError(context.getString(R.string.code_872));
+                    }else if(data.status()==873){
+                        handleOperationError(context.getString(R.string.code_873));
+                    }else if(data.status()==874){
+                        handleOperationError(context.getString(R.string.code_874));
+                    }else if(data.status()==875){
+                        handleOperationError(context.getString(R.string.code_875));
+                    }else if(data.status()==876){
+                        handleOperationError(context.getString(R.string.code_876));
+                    }else if(data.status()==877){
+                        handleOperationError(context.getString(R.string.code_877));
+                    }else if(data.status()==878){
+                        handleOperationError(context.getString(R.string.code_878));
+                    }else if(data.status()==879){
+                        handleOperationError(context.getString(R.string.code_879));
                     }else if(data.status()==890){
                         handleOperationError(context.getString(R.string.code_890));
                     }else if(data.status()==891){

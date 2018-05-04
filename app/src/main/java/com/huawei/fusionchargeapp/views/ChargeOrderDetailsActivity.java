@@ -21,14 +21,17 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.model.UserHelper;
+import com.huawei.fusionchargeapp.model.beans.ChargeFeeBean;
 import com.huawei.fusionchargeapp.model.beans.ChargingGunBeans;
 import com.huawei.fusionchargeapp.model.beans.HomeChargeOrderBean;
 import com.huawei.fusionchargeapp.model.beans.OrderRequestInfo;
+import com.huawei.fusionchargeapp.model.beans.PileFeeBean;
 import com.huawei.fusionchargeapp.model.beans.ScanChargeInfo;
 import com.huawei.fusionchargeapp.model.beans.UserBean;
 import com.huawei.fusionchargeapp.presenter.ChargeOrderDetailsPresenter;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.interfaces.ChargeOrderDetailView;
+import com.huawei.fusionchargeapp.weights.ChargeFeeDialog;
 import com.huawei.fusionchargeapp.weights.NavBar;
 
 import java.util.ArrayList;
@@ -91,6 +94,7 @@ public class ChargeOrderDetailsActivity extends BaseActivity<ChargeOrderDetailVi
     private int chooseStyle = WITH_POWER;
 
     private List<ImageView> selectGunImageViews = new ArrayList<>();
+    private boolean hasAppointment=false;
 
     private View.OnClickListener chooseGunsClickListener = new View.OnClickListener() {
         @Override
@@ -137,6 +141,7 @@ public class ChargeOrderDetailsActivity extends BaseActivity<ChargeOrderDetailVi
         Gson gson = new Gson();
         scanChargeInfo = gson.fromJson(data, new TypeToken<ScanChargeInfo>() {
         }.getType());
+        presenter.getFeeInfo(scanChargeInfo.getChargingPileId());
     }
 
     private void initView() {
@@ -162,29 +167,38 @@ public class ChargeOrderDetailsActivity extends BaseActivity<ChargeOrderDetailVi
 //            rgChooseGun.setOnCheckedChangeListener(this);
             for (int i = 0; i < scanChargeInfo.getChargingGunBeans().size(); i++) {
                 ChargingGunBeans chargingGunBeans = scanChargeInfo.getChargingGunBeans().get(i);
+
+
                 LinearLayout ll = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.layout_choose_gun, llChooseGun,false);
 
                 ImageView ivSelectGun = ll.findViewById(R.id.iv_select_gun);
                 ivSelectGun.setId(BASE_ID + i);
                 selectGunImageViews.add(ivSelectGun);
-
+                if(chargingGunBeans.getReserve()==1){
+                    hasAppointment=true;
+                    chooseGun = chargingGunBeans;
+                    ivSelectGun.setImageResource(R.drawable.list_btn_on);
+                }else{
+                    ivSelectGun.setImageResource(R.drawable.list_btn);
+                }
                 TextView tvGunName = ll.findViewById(R.id.tv_gun_name);
                 tvGunName.setText(getString(R.string.charge_gun_ )+ chargingGunBeans.getGunNumber());
 
                 TextView tvGunStatus = ll.findViewById(R.id.tv_gun_status);
-                if(chargingGunBeans.getGunStatus() == 1 ||chargingGunBeans.getGunStatus() == 2){
+                if(chargingGunBeans.getGunStatus() == 1 ){
                     //空闲
                     tvGunStatus.setText(R.string.gun_status_free);
                     tvGunStatus.setTextColor(getResources().getColor(R.color.gun_status_free));
                     tvGunStatus.setBackgroundResource(R.drawable.shape_choose_gun_free);
                     ivSelectGun.setOnClickListener(chooseGunsClickListener);
                 }
-//                else if(chargingGunBeans.getGunStatus() == 2) {
-//                    //使用中（插标未充电）
-//                    tvGunStatus.setText(R.string.gun_status_using);
-//                    tvGunStatus.setTextColor(getResources().getColor(R.color.gun_status_using));
-//                    tvGunStatus.setBackgroundResource(R.drawable.shape_choose_gun_using);
-//                }
+                else if(chargingGunBeans.getGunStatus() == 2) {
+                    //使用中（插标未充电）
+                    tvGunStatus.setText(R.string.gun_not_using);
+                    tvGunStatus.setTextColor(getResources().getColor(R.color.gun_status_free));
+                    tvGunStatus.setBackgroundResource(R.drawable.shape_choose_gun_free);
+                    ivSelectGun.setOnClickListener(chooseGunsClickListener);
+                }
                 else if(chargingGunBeans.getGunStatus() == 3) {
                     //使用中（已充电）
                     tvGunStatus.setText(R.string.gun_status_using);
@@ -240,6 +254,12 @@ public class ChargeOrderDetailsActivity extends BaseActivity<ChargeOrderDetailVi
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_charge_cost_ask:
+                ChargeFeeDialog dialog = new ChargeFeeDialog(this);
+
+                if (list_fee != null && list_fee.size() != 0) {
+                    dialog.show();
+                    dialog.setFeeDatas(list_fee);
+                }
                 break;
             case R.id.btn_start_charge:
                 if (UserHelper.getSavedUser() == null || Tools.isNull(UserHelper.getSavedUser().token)) {
@@ -273,6 +293,8 @@ public class ChargeOrderDetailsActivity extends BaseActivity<ChargeOrderDetailVi
 
     //开始充电
     private void getData() {
+        btnStartCharge.setEnabled(false);
+
         showLoading();
 
         OrderRequestInfo info = new OrderRequestInfo();
@@ -374,7 +396,14 @@ public class ChargeOrderDetailsActivity extends BaseActivity<ChargeOrderDetailVi
 
     @Override
     public void onFail() {
+        btnStartCharge.setEnabled(true);
+    }
 
+    //对应充电桩的费率信息
+    private List<ChargeFeeBean> list_fee;
+    @Override
+    public void showPileFeeInfo(PileFeeBean bean) {
+        list_fee = bean.feeList;
     }
 
 

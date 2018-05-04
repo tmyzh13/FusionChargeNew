@@ -1,5 +1,7 @@
 package com.huawei.fusionchargeapp.model.beans;
 
+import com.corelibs.utils.PreferencesHelper;
+
 /**
  * Created by zhangwei on 2018/4/26.
  */
@@ -7,9 +9,9 @@ package com.huawei.fusionchargeapp.model.beans;
 public class ChargingGunBeans {
 
     private int chargingPileId;
-    private int currentA;
-    private int currentB;
-    private int currentC;
+    private double currentA;
+    private double currentB;
+    private double currentC;
     private String gunCode;
     private int gunId;
     private String gunNumber;
@@ -19,9 +21,11 @@ public class ChargingGunBeans {
     private String lockBeginTime;
     private String lockUser;
     private String parkingSpacesNumber;
-    private int voltageA;
-    private int voltageB;
-    private int voltageC;
+    private double voltageA;
+    private double voltageB;
+    private double voltageC;
+//    isReserve  0否 1是
+    public int isReserve;
     public void setChargingPileId(int chargingPileId) {
         this.chargingPileId = chargingPileId;
     }
@@ -29,24 +33,32 @@ public class ChargingGunBeans {
         return chargingPileId;
     }
 
+    public void setReserve(int reserve){
+        this.isReserve=reserve;
+    }
+
+    public int getReserve(){
+        return isReserve;
+    }
+
     public void setCurrentA(int currentA) {
         this.currentA = currentA;
     }
-    public int getCurrentA() {
+    public double getCurrentA() {
         return currentA;
     }
 
     public void setCurrentB(int currentB) {
         this.currentB = currentB;
     }
-    public int getCurrentB() {
+    public double getCurrentB() {
         return currentB;
     }
 
     public void setCurrentC(int currentC) {
         this.currentC = currentC;
     }
-    public int getCurrentC() {
+    public double getCurrentC() {
         return currentC;
     }
 
@@ -116,21 +128,21 @@ public class ChargingGunBeans {
     public void setVoltageA(int voltageA) {
         this.voltageA = voltageA;
     }
-    public int getVoltageA() {
+    public double getVoltageA() {
         return voltageA;
     }
 
     public void setVoltageB(int voltageB) {
         this.voltageB = voltageB;
     }
-    public int getVoltageB() {
+    public double getVoltageB() {
         return voltageB;
     }
 
     public void setVoltageC(int voltageC) {
         this.voltageC = voltageC;
     }
-    public int getVoltageC() {
+    public double getVoltageC() {
         return voltageC;
     }
 

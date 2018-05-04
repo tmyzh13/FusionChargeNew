@@ -72,10 +72,23 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
     private CommonDialog commonDialog;
     private PayFailDialog dialog;
     private String orderNum;
+    //type 0 订单查询  type 1 页面带值
+    private String type;
 
-    public static Intent getLauncher(Context context,String orderNum){
+    public static Intent getLauncher(Context context,String orderNum,String type){
         Intent intent =new Intent(context,PayActivity.class);
         intent.putExtra("num",orderNum);
+        intent.putExtra("type",type);
+        return intent;
+    }
+
+    public static Intent getLauncherWithBean(Context context,String orderNum,String type,PayInfoBean bean){
+        Intent intent=new Intent(context,PayActivity.class);
+        intent.putExtra("num",orderNum);
+        intent.putExtra("type",type);
+        Bundle bundle=new Bundle();
+        bundle.putSerializable("data",bean);
+        intent.putExtra("bundle",bundle);
         return intent;
     }
 
@@ -90,6 +103,7 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
         nav.setImageBackground(R.drawable.nan_bg);
 
         orderNum=getIntent().getStringExtra("num");
+        type=getIntent().getStringExtra("type");
 
         adapter=new PayStyleAdpter(context);
         list =new ArrayList<>();
@@ -125,7 +139,17 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
         commonDialog =new CommonDialog(context,"",getString(R.string.pay_balance_not_enough),1);
         dialog=new PayFailDialog(context);
 
-        presenter.getPayDetailInfo(orderNum);
+        if(type.equals("0")){
+            presenter.getPayDetailInfo(orderNum);
+        }else {
+            Bundle bundle=getIntent().getBundleExtra("bundle");
+            payInfoBean=(PayInfoBean) bundle.getSerializable("data");
+            tv_charger_enegry.setText(payInfoBean.chargePowerAmount+getString(R.string.du));
+            tv_charger_fee.setText(payInfoBean.eneryCharge+getString(R.string.yuan));
+            tv_charge_service_fee.setText(payInfoBean.serviceCharge+getString(R.string.yuan));
+            tv_total_fee.setText("￥"+payInfoBean.consumeTotalMoney);
+        }
+
     }
 
     @Override

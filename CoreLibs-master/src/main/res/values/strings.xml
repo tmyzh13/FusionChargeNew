@@ -40,9 +40,19 @@
     <string name="code_297">存在正在进行中的充电订单</string>
     <string name="code_298">选择的订单已经有开过票的</string>
     <string name="code_294">二维码没有匹配的充电车和枪</string>
+    <string name="code_860">删除固件错误</string>
+    <string name="code_861">枪正在充电，请勿重复下发指令</string>
+    <string name="code_862">该桩未上线，暂不能使用</string>
     <string name="code_870">预约违约次数过多，赞不支持预约</string>
     <string name="code_871">指令下发成功，但桩返回被拒绝</string>
-    <string name="code_878">充电桩正在充电，请勿重复下发指令</string>
+    <string name="code_872">未查询到充电桩</string>
+    <string name="code_873">枪尚未检测到连接，可能枪未插好</string>
+    <string name="code_874">枪在使用中</string>
+    <string name="code_875">枪被预约</string>
+    <string name="code_876">枪停止服务</string>
+    <string name="code_877">枪故障</string>
+    <string name="code_878">添加固件错误</string>
+    <string name="code_879">修改固件错误</string>
     <string name="code_890">指令下发成功，但桩返回被拒绝</string>
     <string name="code_891">没有预约记录</string>
     <string name="code_892">用户有正在充电的订单，不能再次扫描</string>
@@ -53,5 +63,6 @@
     <string name="code_897">不可重复下发指令</string>
     <string name="code_898">主站到采集器</string>
     <string name="code_899">已有预约，无法再次预约</string>
+
 
 </resources>

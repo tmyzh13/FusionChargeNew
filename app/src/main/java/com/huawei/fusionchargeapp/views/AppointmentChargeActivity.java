@@ -104,6 +104,8 @@ public class AppointmentChargeActivity extends BaseActivity<AppointView, Appoint
                 }
                 if(ActionControl.getInstance(AppointmentChargeActivity.this).canAction()){
                     presenter.appointAocation(gunCode,chargingPileId,chargingPileName,getNowTime(),getEndTime(),appointTime);
+                }else{
+                    hideLoading();
                 }
 
                 break;
