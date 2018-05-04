@@ -45,6 +45,9 @@ public abstract class BaseActivity<V extends BaseView, T extends BasePresenter<V
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
+        if(AppManager.getAppManager().getAppContext() == null ) {
+            AppManager.getAppManager().setContext(getApplicationContext());
+        }
         AppManager.getAppManager().addActivity(this);
         presenter = createPresenter();
         if (presenter != null) presenter.attachView((V) this);

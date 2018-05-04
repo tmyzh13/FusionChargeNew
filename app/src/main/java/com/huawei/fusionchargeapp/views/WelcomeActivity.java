@@ -22,13 +22,6 @@ public class WelcomeActivity extends BaseActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.e("zw","getApplicationContext : " + (getApplicationContext() == null));
-        AppManager.getAppManager().setContext(getApplicationContext());
-    }
-
-    @Override
     protected int getLayoutId() {
         return R.layout.activity_welcome;
     }

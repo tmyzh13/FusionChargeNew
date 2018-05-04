@@ -112,4 +112,8 @@
         <item name="android:paddingRight">@dimen/dp_15</item>
         <item name="android:background">@color/white</item>
     </style>
+
+    <style name="ImagePickerTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
 </resources>

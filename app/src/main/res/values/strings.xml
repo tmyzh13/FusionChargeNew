@@ -308,7 +308,7 @@
     <string name="gun_code">电枪编号</string>
     <string name="charge_times">充电时长</string>
     <string name="register_success">注册成功</string>
-<!--    //个人资料-->
+    <!--    //个人资料-->
 
     <string name="portrait">头像</string>
     <string name="nick">姓名</string>
@@ -325,7 +325,6 @@
     <string name="user_info_get_fail">获取用户信息失败</string>
 
 
-
     <!--    //设置页面-->
 
     <string name="setting_title">设置</string>
@@ -339,7 +338,7 @@
     <string name="setting_clause">版权声明于免责条款</string>
     <string name="please_input_charge_money">请输入充电金额</string>
     <string name="please_input_charge_time">请输入充电时长</string>
-    
+
     <string name="charge_info_unit_kw">kw</string>
     <string name="charger_info_fee_unit">¥</string>
     <string name="has_pay">已支付</string>
@@ -351,11 +350,15 @@
     <string name="gun_status_appoint">预约</string>
     <string name="gun_status_stop_service">停止</string>
     <string name="gun_status_bad">故障</string>
-    
+
     <string name="appoint_evil_info">由于您违约已超过%1$d次，您的预约功能将被锁定，解锁时间%2$s</string>
     <string name="no_comment">暂无评论</string>
     <string name="wrong_email_address">您输入的邮箱地址格式不正确！</string>
     <string name="write_name">填写姓名</string>
     <string name="write_birthday">填写生日</string>
     <string name="write_address">填写地址</string>
+    <string name="upload_phote">上传图片</string>
+    <string name="camera">相机</string>
+    <string name="photo">照片</string>
+    <string name="cancel">取消</string>
 </resources>

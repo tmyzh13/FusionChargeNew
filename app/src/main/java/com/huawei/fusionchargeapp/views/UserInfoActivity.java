@@ -22,9 +22,17 @@ import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.model.beans.ModifyUserInfoRequestBean;
 import com.huawei.fusionchargeapp.model.beans.UserInfoBean;
 import com.huawei.fusionchargeapp.presenter.UserInfoPresenter;
+import com.huawei.fusionchargeapp.utils.GlideImageLoader;
 import com.huawei.fusionchargeapp.views.interfaces.UserInfoView;
 import com.huawei.fusionchargeapp.weights.NavBar;
+import com.huawei.fusionchargeapp.weights.UserHeadPhoteDialog;
+import com.lzy.imagepicker.ImagePicker;
+import com.lzy.imagepicker.bean.ImageItem;
+import com.lzy.imagepicker.ui.ImageGridActivity;
+import com.lzy.imagepicker.view.CropImageView;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -68,8 +76,11 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
 
     private UserInfoPresenter presenter;
 
+    private static final int REQUEST_CODE_SELECT_CAMERA = 0x0001;
+
     @Bind(R.id.nav)
     NavBar navBar;
+    private UserHeadPhoteDialog dialog;
 
     public static Intent startActivity(Context context) {
         Intent intent = new Intent(context, UserInfoActivity.class);
@@ -106,6 +117,8 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
             }
         });
 
+        initImagePicker();
+
         presenter = getPresenter();
         presenter.doGetUserInfoRequest();
     }
@@ -118,6 +131,20 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
     @Override
     public void goLogin() {
 
+    }
+
+    private void initImagePicker(){
+        ImagePicker imagePicker = ImagePicker.getInstance();
+        imagePicker.setImageLoader(new GlideImageLoader());//设置图片加载器
+        imagePicker.setShowCamera(true);                      //显示拍照按钮
+        imagePicker.setCrop(true);                           //允许裁剪（单选才有效）
+        imagePicker.setSaveRectangle(true);                   //是否按矩形区域保存
+        imagePicker.setSelectLimit(3);              //选中数量限制
+        imagePicker.setStyle(CropImageView.Style.CIRCLE);  //裁剪框的形状
+        imagePicker.setFocusWidth(800);                       //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setFocusHeight(800);                      //裁剪框的高度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setOutPutX(400);                         //保存文件的宽度。单位像素
+        imagePicker.setOutPutY(400);                        //保存文件的高度。单位像素
     }
 
 
@@ -184,9 +211,17 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
     }
 
 
-    @OnClick({R.id.tv_sex, R.id.tv_birthday, R.id.commit_userinfo})
+    @OnClick({R.id.tv_sex, R.id.tv_birthday, R.id.commit_userinfo,R.id.iv_user_icon})
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.iv_user_icon:
+                //头像选择
+                if(dialog == null ){
+                    dialog = new UserHeadPhoteDialog(UserInfoActivity.this);
+                }
+                dialog.show();
+                dialog.setCameraListener(this);
+                break;
             case R.id.tv_sex:
                 // 性别选择单选框
 
@@ -200,8 +235,29 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
                 ModifyUserInfoRequestBean userInfoRequest = getUserInfoRequest();
                 presenter.doModifyUserInfo(userInfoRequest);
                 break;
+            case R.id.tv_camera:
+                //相机拍照
+                Intent intent = new Intent(this, ImageActivity.class);
+                intent.putExtra(ImageGridActivity.EXTRAS_TAKE_PICKERS,true); // 是否是直接打开相机
+                startActivityForResult(intent, REQUEST_CODE_SELECT_CAMERA);
+                break;
         }
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
+            if (data != null && requestCode == REQUEST_CODE_SELECT_CAMERA) {
+                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                if(images != null && images.size() != 0) {
+                    File file = new File(images.get(0).path);
+                    Glide.with(this).load(file).placeholder(R.mipmap.ic_launcher_round)
+                            .into(ivUserIcon);
+                }
+            } else {
+                Toast.makeText(this, "没有数据", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }

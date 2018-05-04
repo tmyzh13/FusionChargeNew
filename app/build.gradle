@@ -51,4 +51,5 @@ dependencies {
     //    implementation 'com.journeyapps:zxing-android-embedded:3.5.0'
     implementation project(':zxing-android-embedded')
     compile 'com.android.support:multidex:1.0.1'
+    compile 'com.lzy.widget:imagepicker:0.6.1'
 }

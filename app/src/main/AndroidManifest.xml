@@ -5,6 +5,15 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- 在SDCard中创建与删除文件权限 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <!-- 往SDCard写入数据权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!-- 从SDCard读取数据权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <!-- 相机权限 -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+
     <!-- 允许程序打开网络套接字 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- 允许程序设置内置sd卡的写权限 -->
@@ -22,14 +31,15 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
-        android:name="com.huawei.fusionchargeapp.App"
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/icon"
         android:supportsRtl="true"
         android:theme="@style/AppBaseCompactTheme">
-        <activity android:name="com.huawei.fusionchargeapp.views.WelcomeActivity"
+        <activity
+            android:name=".views.WelcomeActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,50 +48,48 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.huawei.fusionchargeapp.MainActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTask">
-
-        </activity>
+            android:name=".MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"></activity>
         <activity
-            android:name="com.huawei.fusionchargeapp.views.LoginActivity"
+            android:name=".views.LoginActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.huawei.fusionchargeapp.views.ChagerStatueActivity"
+            android:name=".views.ChagerStatueActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.huawei.fusionchargeapp.views.PayActivity"
+            android:name=".views.PayActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.huawei.fusionchargeapp.views.PayCompleteActivity"
+            android:name=".views.PayCompleteActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.huawei.fusionchargeapp.views.interfaces.ForgetPwdActivity"
+            android:name=".views.interfaces.ForgetPwdActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.huawei.fusionchargeapp.views.InputNewPwdActivity"
+            android:name=".views.InputNewPwdActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.huawei.fusionchargeapp.views.AppointmentChargeActivity"
+            android:name=".views.AppointmentChargeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.huawei.fusionchargeapp.views.AppointSuccessActivity"
+            android:name=".views.AppointSuccessActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.huawei.fusionchargeapp.views.interfaces.SearchActivity"
+            android:name=".views.interfaces.SearchActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.huawei.fusionchargeapp.views.ChargeDetailsActivity"
+            android:name=".views.ChargeDetailsActivity"
             android:screenOrientation="portrait" />
 
-        <service android:name="com.huawei.fusionchargeapp.views.TimerService" />
+        <service android:name=".views.TimerService" />
 
         <activity
-            android:name="com.huawei.fusionchargeapp.views.GuildActivity"
+            android:name=".views.GuildActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.huawei.fusionchargeapp.views.ParkActivity"
+            android:name=".views.ParkActivity"
             android:screenOrientation="portrait" />
 
         <!-- 支付宝 com.alipay.sdk.app.H5PayActivity -->
@@ -99,7 +107,7 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <!-- 微信支付 -->
         <activity
-            android:name="com.huawei.fusionchargeapp.wxapi.WXPayEntryActivity"
+            android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop">
             <intent-filter>
@@ -119,27 +127,25 @@
         <service android:name="com.amap.api.location.APSService" />
 
         <activity
-            android:name="com.huawei.fusionchargeapp.views.ChargeOrderDetailsActivity"
+            android:name=".views.ChargeOrderDetailsActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan">
-
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
-            android:name="com.huawei.fusionchargeapp.views.ChargeCaptureActivity"
+            android:name=".views.ChargeCaptureActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.huawei.fusionchargeapp.views.ChargeInputNumberActivity"
-            android:screenOrientation="portrait"></activity>
+            android:name=".views.ChargeInputNumberActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name="com.huawei.fusionchargeapp.views.PublishCommentActivity"
+            android:name=".views.PublishCommentActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible|adjustResize"></activity>
+            android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
-            android:name="com.huawei.fusionchargeapp.views.SearchStationTitleActivity"
+            android:name=".views.SearchStationTitleActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible|adjustResize"></activity>
+            android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
-            android:name="com.huawei.fusionchargeapp.views.interfaces.MyOrderActivity"
+            android:name=".views.interfaces.MyOrderActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".views.UserInfoActivity"
@@ -149,5 +155,9 @@
             android:excludeFromRecents="true"
             android:noHistory="true"
             android:screenOrientation="portrait" />
+        <activity android:name=".views.ImageActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/ImagePickerTheme"></activity>
     </application>
+
 </manifest>
