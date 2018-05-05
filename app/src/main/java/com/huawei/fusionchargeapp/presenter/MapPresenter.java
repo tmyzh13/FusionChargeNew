@@ -58,9 +58,9 @@ public class MapPresenter extends BasePresenter<MapHomeView> {
             condition.pileType= ChoiceManager.getInstance().getType();
         }
         if(ChoiceManager.getInstance().getStatue()==0){
-            condition.chargingMethod=3;
+            condition.workStatus=3;
         }else{
-            condition.chargingMethod=ChoiceManager.getInstance().getStatue();
+            condition.workStatus=ChoiceManager.getInstance().getStatue();
         }
 
 //        condition.pileName="";

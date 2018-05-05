@@ -56,6 +56,7 @@ public class OrderListAdapter extends BaseAdapter {
             holder.charge_pile_code = convertView.findViewById(R.id.charge_pile_code);
             holder.charge_pile_address = convertView.findViewById(R.id.charge_pile_address);
             holder.oder_status_tv = convertView.findViewById(R.id.oder_status_tv);
+            holder.pay_status = convertView.findViewById(R.id.pay_status);
             holder.oder_charge_fee_tv = convertView.findViewById(R.id.oder_charge_fee_tv);
             holder.oder_service_fee_tv = convertView.findViewById(R.id.oder_service_fee_tv);
             holder.oder_total_fee_tv = convertView.findViewById(R.id.oder_total_fee_tv);
@@ -73,10 +74,11 @@ public class OrderListAdapter extends BaseAdapter {
         holder.charge_pile_address.setText(bean.getAddress());
         //0 未支付 1 已支付
         if(bean.getPayStatus() == 0) {
-            holder.oder_status_tv.setText(R.string.no_pay);
+            holder.pay_status.setText(R.string.no_pay);
         } else if(bean.getPayStatus() == 1) {
-            holder.oder_status_tv.setText(R.string.has_pay);
+            holder.pay_status.setText(R.string.has_pay);
         }
+        holder.oder_status_tv.setText(bean.getChargTime()+"");
         holder.oder_charge_fee_tv.setText(bean.getEneryCharge() + "");
         holder.oder_service_fee_tv.setText(bean.getServiceCharge() + "");
         holder.oder_total_fee_tv.setText((bean.getServiceCharge() + bean.getEneryCharge()) + "");
@@ -90,6 +92,7 @@ public class OrderListAdapter extends BaseAdapter {
         TextView charge_pile_code;
         TextView charge_pile_address;
         TextView oder_status_tv;
+        TextView pay_status;
         TextView oder_charge_fee_tv;
         TextView oder_service_fee_tv;
         TextView oder_total_fee_tv;

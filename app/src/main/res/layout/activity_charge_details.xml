@@ -77,20 +77,28 @@
             android:layout_height="wrap_content"
             android:text="南京市雨花台区花神大道17号" />
 
-        <ImageView
-            android:layout_marginRight="@dimen/dp_5"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/distance_tv"
-            android:src="@mipmap/icon_guide" />
-
-        <TextView
-            android:id="@+id/distance_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_alignParentRight="true"
-            android:text="14.6km"
-            android:textColor="@color/black_bg" />
+            android:id="@+id/ll_guild"
+            >
+            <ImageView
+                android:id="@+id/iv_guaild"
+                android:layout_marginRight="@dimen/dp_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/icon_guide" />
+
+            <TextView
+                android:id="@+id/distance_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="14.6km"
+                android:textColor="@color/black_bg" />
+        </LinearLayout>
+
     </RelativeLayout>
 
     <View

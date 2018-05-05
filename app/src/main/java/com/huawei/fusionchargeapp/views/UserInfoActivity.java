@@ -1,5 +1,6 @@
 package com.huawei.fusionchargeapp.views;
 
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -19,8 +20,6 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.DatePicker;
@@ -46,7 +45,6 @@ import com.huawei.fusionchargeapp.model.beans.ModifyUserInfoRequestBean;
 import com.huawei.fusionchargeapp.model.beans.UserInfoBean;
 import com.huawei.fusionchargeapp.presenter.UserInfoPresenter;
 import com.huawei.fusionchargeapp.utils.GlideImageLoader;
-import com.huawei.fusionchargeapp.utils.SharePrefsUtils;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.interfaces.UserInfoView;
 import com.huawei.fusionchargeapp.weights.NavBar;
@@ -59,7 +57,6 @@ import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.view.CropImageView;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -67,7 +64,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;

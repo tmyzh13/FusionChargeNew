@@ -194,6 +194,7 @@ public class CircleProgressView extends View{
     public void stopAnimator(){
         if(progressAnimator!=null){
             progressAnimator.cancel();
+            progressAnimator=null;
         }
     }
 

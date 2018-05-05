@@ -10,6 +10,7 @@ import com.huawei.fusionchargeapp.model.apis.MapApi;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
 import com.huawei.fusionchargeapp.model.beans.Condition;
 import com.huawei.fusionchargeapp.model.beans.MapDataBean;
+import com.huawei.fusionchargeapp.utils.ChoiceManager;
 import com.huawei.fusionchargeapp.views.interfaces.HomeListView;
 import com.trello.rxlifecycle.ActivityEvent;
 
@@ -55,6 +56,16 @@ public class HomeListPresenter extends BasePresenter<HomeListView> {
 
     private Condition newCondition(){
         Condition condition=new Condition();
+        if(ChoiceManager.getInstance().getType()==0){
+            condition.pileType=3;
+        }else{
+            condition.pileType= ChoiceManager.getInstance().getType();
+        }
+        if(ChoiceManager.getInstance().getStatue()==0){
+            condition.workStatus=3;
+        }else{
+            condition.workStatus=ChoiceManager.getInstance().getStatue();
+        }
         condition.x1=100;
         condition.x2=200;
         condition.y1=30;

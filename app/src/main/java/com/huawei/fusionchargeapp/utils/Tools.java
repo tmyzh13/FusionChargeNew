@@ -9,6 +9,7 @@ import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
 
 
 import com.amap.api.maps.model.LatLng;
@@ -252,7 +253,7 @@ public class Tools {
         if(str.length()<6){
             return false;
         }
-        if(str.length()>20){
+        if(str.length()>12){
             return false;
         }
         String reg = "^(?![0-9]+$)(?![^0-9]+$)(?![a-zA-Z]+$)(?![^a-zA-Z]+$)(?![a-zA-Z0-9]+$)[a-zA-Z0-9\\S]+$";
@@ -291,7 +292,7 @@ public class Tools {
             minStr="0"+minStr;
         }
 
-        String secStr=min/1000+"";
+        String secStr=(min%(1000*60))/1000+"";
         if(secStr.length()<2){
             secStr="0"+secStr;
         }
