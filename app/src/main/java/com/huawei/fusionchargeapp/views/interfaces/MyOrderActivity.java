@@ -40,7 +40,7 @@ import butterknife.ButterKnife;
 public class MyOrderActivity extends BaseActivity<MyOrderView,MyOrderPresenter> implements MyOrderView {
 
 
-    private int page = 0;
+   // private int page = 0;
 
     @Bind(R.id.lv_order)
     AutoLoadMoreListView lvOrder;
@@ -89,7 +89,7 @@ public class MyOrderActivity extends BaseActivity<MyOrderView,MyOrderPresenter> 
         ptrLayout.setRefreshLoadCallback(new PtrAutoLoadMoreLayout.RefreshLoadCallback() {
             @Override
             public void onLoading(PtrFrameLayout frame) {
-                page++;
+               // page++;
                 isRefresh = false;
                 presenter.getData(isRefresh);
             }
@@ -99,7 +99,7 @@ public class MyOrderActivity extends BaseActivity<MyOrderView,MyOrderPresenter> 
             public void onRefreshing(PtrFrameLayout frame) {
 
 
-                page = 0;
+                //page = 0;
                 isRefresh = true;
                 ptrLayout.enableLoading();
                 if (!frame.isAutoRefresh()) {

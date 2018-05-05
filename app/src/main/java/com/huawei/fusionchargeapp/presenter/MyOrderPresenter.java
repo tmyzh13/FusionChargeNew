@@ -44,7 +44,7 @@ public class MyOrderPresenter extends PagePresenter<MyOrderView> {
     }
 
     public void getData(final boolean isRefresh){
-        page = isRefresh ? 0 : page++;
+        page = isRefresh ? 0 : ++page;
 
         RequestMyOrderBean bean = new RequestMyOrderBean();
         bean.setRp(RP);
