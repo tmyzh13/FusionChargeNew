@@ -133,6 +133,7 @@ public class ChagerStatueActivity extends BaseActivity<ChargerStatueView, Charge
                     }
                 });
         if (homeChargeOrderBean != null) {
+            showLoading();
             presenter.getChargeStatue(homeChargeOrderBean.virtualId, homeChargeOrderBean.chargeGunNum);
         }
         timer = new Timer();

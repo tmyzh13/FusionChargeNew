@@ -174,7 +174,10 @@ public class CircleProgressView extends View{
 
     ValueAnimator progressAnimator;
     public void startAnimation(int start, int current, int duration) {
-        progressAnimator = ValueAnimator.ofInt(start, current);
+        if(progressAnimator==null){
+            progressAnimator = ValueAnimator.ofInt(start, current);
+        }
+
         progressAnimator.setDuration(duration);
         progressAnimator.setTarget(progress);
         progressAnimator.setRepeatCount(ValueAnimator.INFINITE);
@@ -188,7 +191,10 @@ public class CircleProgressView extends View{
                 invalidate();
             }
         });
-        progressAnimator.start();
+        if(!progressAnimator.isRunning()){
+            progressAnimator.start();
+        }
+
     }
 
     public void stopAnimator(){
