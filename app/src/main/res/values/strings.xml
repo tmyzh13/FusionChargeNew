@@ -346,9 +346,13 @@
 
     <string name="charge_gun_">充电枪：</string>
     <string name="gun_status_free">空闲</string>
-    <string name="gun_status_using">使用</string>
+  <!--  <string name="gun_status_using">使用</string>
     <string name="gun_status_appoint">预约</string>
-    <string name="gun_status_stop_service">停止</string>
+    <string name="gun_status_stop_service">停止</string>-->
+    <string name="gun_not_using">插抢未使用</string>
+    <string name="gun_status_using">使用中</string>
+    <string name="gun_status_appoint">预约中</string>
+    <string name="gun_status_stop_service">停止服务</string>
     <string name="gun_status_bad">故障</string>
 
     <string name="appoint_evil_info">由于您违约已超过%1$d次，您的预约功能将被锁定，解锁时间%2$s</string>
@@ -361,6 +365,12 @@
     <string name="camera">相机</string>
     <string name="photo">照片</string>
     <string name="cancel">取消</string>
+
+    <string name="pile_info">电枪编号        %1$s</string>
+    <string name="run_adress">电桩地址        %1$s</string>
+
+    <string name="dont_end">请勿结束充电</string>
+
     <string name="permission_denied">权限被禁止,无法使用</string>
     <string name="name_cannot_null">姓名不能为空。</string>
     <string name="sex_cannot_null">性别不能为空。</string>

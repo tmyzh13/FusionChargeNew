@@ -55,7 +55,6 @@ public interface ScanApi {
     @POST(Urls.QUERY_FEE)
     Observable<BaseData<ChargeDetailFeeBean>> getQueryFee(@Header("AccessToken") String token, @Body RequestChargeQueryFeeBean bean);
 
-
     @POST(Urls.QUERY_FEE)
     Observable<BaseData<PileFeeBean>> getFeeData(@Body RequestFeeBean bean);
 

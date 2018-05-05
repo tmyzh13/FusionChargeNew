@@ -27,10 +27,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.corelibs.api.ApiFactory;
 import com.corelibs.base.BaseActivity;
 import com.corelibs.utils.PreferencesHelper;
 import com.corelibs.views.roundedimageview.CircleImageView;
 import com.huawei.fusionchargeapp.R;
+import com.huawei.fusionchargeapp.model.apis.UploadImagesApi;
 import com.huawei.fusionchargeapp.model.beans.ModifyUserInfoRequestBean;
 import com.huawei.fusionchargeapp.model.beans.UserInfoBean;
 import com.huawei.fusionchargeapp.presenter.UserInfoPresenter;
@@ -56,6 +58,8 @@ import java.util.regex.Pattern;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 
 public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresenter> implements UserInfoView, View.OnClickListener {
@@ -383,6 +387,14 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
     }
 
     private void uploadImage(File file) {
+        UploadImagesApi api = ApiFactory.getFactory().create(UploadImagesApi.class);
+
+        //图片参数
+        RequestBody body = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        //其他参数
+        RequestBody type = RequestBody.create(MediaType.parse("multipart/form-data"), "password");
+        api.upload(type,body)
+                .subscribe();
 
     }
 
