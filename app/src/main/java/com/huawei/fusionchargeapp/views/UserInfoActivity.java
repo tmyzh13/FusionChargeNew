@@ -36,8 +36,11 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.corelibs.api.ApiFactory;
 import com.corelibs.base.BaseActivity;
 import com.corelibs.utils.PreferencesHelper;
+import com.corelibs.utils.rxbus.RxBus;
 import com.corelibs.views.roundedimageview.CircleImageView;
 import com.huawei.fusionchargeapp.R;
+import com.huawei.fusionchargeapp.constants.Constant;
+import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.apis.UploadImagesApi;
 import com.huawei.fusionchargeapp.model.beans.ModifyUserInfoRequestBean;
 import com.huawei.fusionchargeapp.model.beans.UserInfoBean;
@@ -258,6 +261,12 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
         Log.e("zw","1111 : " + userInfoBean.photoUrl);
         Glide.with(this).load(userInfoBean.photoUrl).into(target);
 
+        //通知主页去更新头像
+        RxBus.getDefault().send(new Object(), Constant.REFRESH_MAIN_HEAD_PHOTO);
+
+        //保存用户信息
+        UserHelper.saveUserInfo(userInfoBean);
+
         // 姓名
         if (!TextUtils.isEmpty(userInfoBean.name)) {
             etNick.setText(userInfoBean.name);
@@ -285,17 +294,20 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
 
     @Override
     public void onGetUsrInfoFail() {
+        hideLoading();
         Toast.makeText(this, getString(R.string.user_info_get_fail), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onModifyUserInfoFail() {
+        hideLoading();
         Toast.makeText(this, getString(R.string.user_info_modify_fail), Toast.LENGTH_SHORT).show();
     }
 
 
     @Override
     public void onModifySuccess() {
+        hideLoading();
         Toast.makeText(this, getString(R.string.user_info_modify_success), Toast.LENGTH_SHORT).show();
         // 提交成功再请求获取用户信息接口
         presenter.doGetUserInfoRequest();
@@ -353,6 +365,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
                 // 修改个人信息
                 ModifyUserInfoRequestBean userInfoRequest = getUserInfoRequest();
                 if(userInfoRequest != null) {
+                    showLoading();
                     presenter.doModifyUserInfo(userInfoRequest);
                 }
                 break;
