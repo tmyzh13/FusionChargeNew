@@ -9,7 +9,7 @@ public class RequestBodyCreator {
 
     public static final String TYPE_DEFAULT = "multipart/form-data";
     public static final String MULTIPART_HACK = "\"; filename=\"image.png";
-    public static final String MULTIPART_JEPG = "\"; filename=\"image.png";
+    public static final String MULTIPART_JEPG = "\"; filename=\"image.jpg";
 
     public static RequestBody create(File file) {
         return RequestBody.create(MediaType.parse(TYPE_DEFAULT), file);

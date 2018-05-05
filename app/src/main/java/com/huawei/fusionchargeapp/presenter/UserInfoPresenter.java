@@ -98,7 +98,6 @@ public class UserInfoPresenter extends BasePresenter<UserInfoView> {
 
         //图片参数  MediaType.parse("image/*"
         RequestBody body = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-
         Log.e("zw","token :" + UserHelper.getSavedUser().token);
         api.upload(UserHelper.getSavedUser().token,body)
                 .compose(new ResponseTransformer<>(this.<BaseData>bindUntilEvent(ActivityEvent.DESTROY)))

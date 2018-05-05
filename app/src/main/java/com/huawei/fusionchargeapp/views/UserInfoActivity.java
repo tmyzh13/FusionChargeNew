@@ -255,6 +255,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
                         .error(R.mipmap.ic_launcher_round).into(ivUserIcon);
             }
         };
+        Log.e("zw","1111 : " + userInfoBean.photoUrl);
         Glide.with(this).load(userInfoBean.photoUrl).into(target);
 
         // 姓名
@@ -433,7 +434,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
                     Glide.with(this).load(Uri.fromFile(file))
                             .into(ivUserIcon);
                     PreferencesHelper.saveData(USER_PHOTO_PATH,images.get(0).path);
-//                    uploadImage(file);
+                    presenter.uploadImage(file);
                 }
             } else {
                 Toast.makeText(this, "没有数据", Toast.LENGTH_SHORT).show();
@@ -465,18 +466,6 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
         dialog.show();
     }
 
-
-    private void uploadImage(File file) {
-        UploadImagesApi api = ApiFactory.getFactory().create(UploadImagesApi.class);
-
-        //图片参数
-        RequestBody body = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-        //其他参数
-        RequestBody type = RequestBody.create(MediaType.parse("multipart/form-data"), "password");
-        api.upload(type,body)
-                .subscribe();
-
-    }
 
     private void setEmail(boolean isRight) {
         if(!isRight) {
