@@ -214,13 +214,7 @@ public class ChagerStatueActivity extends BaseActivity<ChargerStatueView, Charge
                     ToastMgr.show(getString(R.string.dont_end));
                     return;
                 }
-                //进入支付界面
-//                startActivity(PayActivity.getLauncher(context));
-                //结束充电 成功之后在选择进入支付
-//                checkStatueLoadingView.setMessage(getString(R.string.charging_statue_ending));
-//                checkStatueLoadingView.show();
                 checkEndStatueLoadingView.show();
-
                 presenter.endCharging(chargerStatueBean.chargingPileId, chargerStatueBean.chargingPileName, homeChargeOrderBean.virtualId, homeChargeOrderBean.chargeGunNum, chargerStatueBean.orderRecordNum);
             }
         });
