@@ -45,6 +45,16 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/iv_time"
             android:layout_alignParentBottom="true" />
+
+        <TextView
+            android:id="@+id/pay_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:text="@string/no_pay"
+            android:textSize="15dp"/>
     </RelativeLayout>
 
     <View
@@ -174,7 +184,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/statue" />
+            android:text="充电时长" />
 
         <TextView
             android:layout_width="0dp"
