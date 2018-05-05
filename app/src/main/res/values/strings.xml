@@ -367,4 +367,9 @@
     <string name="man">男</string>
     <string name="woman">女</string>
     <string name="secret">保密</string>
+
+    <string name="pile_info">电枪编号        %1$s</string>
+    <string name="run_adress">电桩地址        %1$s</string>
+
+    <string name="dont_end">请勿结束充电</string>
 </resources>

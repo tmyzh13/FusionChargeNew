@@ -8,9 +8,11 @@ import com.huawei.fusionchargeapp.model.beans.ChargeDetailFeeBean;
 import com.huawei.fusionchargeapp.model.beans.ChargeStationDetailBean;
 import com.huawei.fusionchargeapp.model.beans.MyOrderData;
 import com.huawei.fusionchargeapp.model.beans.OrderRequestInfo;
+import com.huawei.fusionchargeapp.model.beans.PileFeeBean;
 import com.huawei.fusionchargeapp.model.beans.PileList;
 import com.huawei.fusionchargeapp.model.beans.RequestChargePileDetailBean;
 import com.huawei.fusionchargeapp.model.beans.RequestChargeQueryFeeBean;
+import com.huawei.fusionchargeapp.model.beans.RequestFeeBean;
 import com.huawei.fusionchargeapp.model.beans.RequestMyOrderBean;
 import com.huawei.fusionchargeapp.model.beans.RequestScanBean;
 import com.huawei.fusionchargeapp.model.beans.ScanChargeInfo;
@@ -54,5 +56,7 @@ public interface ScanApi {
     Observable<BaseData<ChargeDetailFeeBean>> getQueryFee(@Header("AccessToken") String token, @Body RequestChargeQueryFeeBean bean);
 
 
+    @POST(Urls.QUERY_FEE)
+    Observable<BaseData<PileFeeBean>> getFeeData(@Body RequestFeeBean bean);
 
 }

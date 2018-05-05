@@ -382,7 +382,6 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
         }
     }
 
-
     private void uploadImage(File file) {
 
     }
