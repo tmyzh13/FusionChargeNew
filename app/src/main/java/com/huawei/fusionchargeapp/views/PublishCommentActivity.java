@@ -137,7 +137,7 @@ public class PublishCommentActivity extends BaseActivity<CommentView,CommentPres
         bean.setEvaluateTypeId(getSortType());
         bean.setOrderRecordNum(orderRecordNum);
         bean.setPileId(pileId);
-        bean.setUserId(UserHelper.getUserId());
+        bean.setUserId(UserHelper.getSavedUser().appUserId);
 
         presenter.publish(bean);
     }
