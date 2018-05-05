@@ -61,7 +61,10 @@
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@android:color/transparent</item>
-
+    </style>
+    <style name="MyDialog2" parent="MyDialog1">
+        <item name="android:windowEnterAnimation">@anim/user_sex_choose_in</item>
+        <item name="android:windowExitAnimation">@anim/user_sex_choose_out</item>
     </style>
     <!--充电站详情 电桩item style-->
     <style name="charge_pile_item">

@@ -85,14 +85,13 @@ public class ImageActivity extends ImageBaseActivity implements ImageDataSource.
         Intent data = getIntent();
         // 新增可直接拍照
         if (data != null && data.getExtras() != null) {
+            if (!(checkPermission(Manifest.permission.CAMERA)) || !(checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE))) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE}, ImageActivity.REQUEST_PERMISSION_ALL);
+            }
             directPhoto = data.getBooleanExtra(EXTRAS_TAKE_PICKERS, false); // 默认不是直接打开相机
             if (directPhoto) {
-                if (!(checkPermission(Manifest.permission.CAMERA)) || !(checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE))) {
-                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE}, ImageActivity.REQUEST_PERMISSION_ALL);
-                } else {
-                    imagePicker.takePicture(this, ImagePicker.REQUEST_CODE_TAKE);
+                imagePicker.takePicture(this, ImagePicker.REQUEST_CODE_TAKE);
 //                    new ImageDataSource(this, null, this);
-                }
             }
             ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(EXTRAS_IMAGES);
             imagePicker.setSelectedImages(images);

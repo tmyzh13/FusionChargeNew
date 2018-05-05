@@ -22,7 +22,7 @@ public class UserSexDialog extends Dialog {
     private Context context;
 
     public UserSexDialog(@NonNull Context context) {
-        super(context, R.style.MyDialog1);
+        super(context, R.style.MyDialog2);
         this.context = context;
     }
 
@@ -33,6 +33,7 @@ public class UserSexDialog extends Dialog {
 
         Window dialogWindow = getWindow();
         dialogWindow.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL);
+
 //        dialogWindow.setWindowAnimations(R.style.dialogstyle); // 添加动画
         WindowManager.LayoutParams lp = dialogWindow.getAttributes(); // 获取对话框当前的参数值
 //        lp.x = 0; // 新位置X坐标
