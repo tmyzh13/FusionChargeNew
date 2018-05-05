@@ -16,7 +16,11 @@ import com.huawei.fusionchargeapp.model.beans.UserInfoBean;
 import com.huawei.fusionchargeapp.views.interfaces.UserInfoView;
 import com.trello.rxlifecycle.ActivityEvent;
 
+import java.io.File;
 import java.util.List;
+
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 
 public class UserInfoPresenter extends BasePresenter<UserInfoView> {
@@ -84,6 +88,27 @@ public class UserInfoPresenter extends BasePresenter<UserInfoView> {
                         return super.operationError(userBeanBaseData, status, message);
                     }
                 });
+    }
+
+    /**
+     * 上传用户头像
+     */
+
+    public void uploadImage(File file){
+
+        //图片参数  MediaType.parse("image/*"
+        RequestBody body = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+        Log.e("zw","token :" + UserHelper.getSavedUser().token);
+        api.upload(UserHelper.getSavedUser().token,body)
+                .compose(new ResponseTransformer<>(this.<BaseData>bindUntilEvent(ActivityEvent.DESTROY)))
+                .subscribe(new ResponseSubscriber<BaseData>() {
+                    @Override
+                    public void success(BaseData baseData) {
+
+                    }
+                });
+
     }
 
 }
