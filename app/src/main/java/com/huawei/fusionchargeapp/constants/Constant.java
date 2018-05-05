@@ -41,4 +41,7 @@ public class Constant {
     public static final String REFRESH_HOME_STATUE="refresh_home_statue";
     //注销账号取消预约中的信息
     public static final String LOGIN_OUT_SET_APPOINT_VIEW_GONE = "login_out_set_appoint_view_gone";
+
+    //更改头像后刷新头像信息
+    public static final String REFRESH_MAIN_HEAD_PHOTO = "refresh_main_head_photo";
 }

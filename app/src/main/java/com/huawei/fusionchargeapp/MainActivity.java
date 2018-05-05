@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.corelibs.base.BaseActivity;
 import com.corelibs.base.BasePresenter;
 import com.corelibs.common.AppManager;
+import com.corelibs.subscriber.RxBusSubscriber;
 import com.corelibs.utils.IMEUtil;
 import com.corelibs.utils.PreferencesHelper;
 import com.corelibs.utils.rxbus.RxBus;
@@ -174,6 +175,19 @@ public class MainActivity extends BaseActivity {
 
             }
         });
+
+        RxBus.getDefault().toObservable(Object.class,Constant.REFRESH_MAIN_HEAD_PHOTO)
+                .compose(this.bindToLifecycle())
+                .subscribe(new RxBusSubscriber<Object>() {
+
+                    @Override
+                    public void receive(Object data) {
+                        if(UserHelper.getSavedUser() != null){
+                            Glide.with(MainActivity.this).load(UserHelper.getSavedUser().photoUrl)
+                                    .error(R.mipmap.ic_launcher_round).into(iv_user_icon);
+                        }
+                    }
+                });
 
     }
 
