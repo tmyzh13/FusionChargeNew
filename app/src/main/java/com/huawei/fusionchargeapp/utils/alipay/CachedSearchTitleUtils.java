@@ -12,8 +12,8 @@ import java.util.List;
 
 public class CachedSearchTitleUtils {
     private static List<CachedData> historyData = new ArrayList<>();
-    private static int lastTimeHistory = 0;
-    private static final int MAX_NUM_HITORY = 8;
+    //private static int lastTimeHistory = 0;
+    private static final int MAX_NUM_HITORY = 5;
     //private static boolean isCachedChange = false;
 
     public static void saveHistoryData() {
@@ -40,19 +40,26 @@ public class CachedSearchTitleUtils {
                 return;
             }
         }
-        if (historyData.size() > MAX_NUM_HITORY) {
+        if (historyData.size() >= MAX_NUM_HITORY) {
+            /*
             historyData.set(lastTimeHistory,data);
             lastTimeHistory = lastTimeHistory + 1;
             if (lastTimeHistory >= MAX_NUM_HITORY) {
                 lastTimeHistory -= MAX_NUM_HITORY;
             }
+            */
+            for (int m = 0;m < MAX_NUM_HITORY-1;m++) {
+                historyData.set(m,historyData.get(m+1));
+            }
+            historyData.set(MAX_NUM_HITORY-1,data);
         } else {
             historyData.add(data);
         }
     }
+
     public static void resetHistoryData(){
         historyData = new ArrayList<>();
-        lastTimeHistory = 0;
+        //lastTimeHistory = 0;
     }
     public static List<String> getHistoryData(){
         List<String> list = new ArrayList<>();

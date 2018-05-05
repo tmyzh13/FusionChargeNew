@@ -78,10 +78,6 @@ public class SearchStationTitleActivity extends BaseActivity<HomeListView,HomeLi
     @OnClick(R.id.tv_search)
     public void goSearch(){
         String key=tvSearchContent.getText().toString();
-        if (!StringUtils.isEmpty(key)) {
-            CachedSearchTitleUtils.addHistoryData(new CachedSearchTitleUtils.CachedData(key, key, key));
-            CachedSearchTitleUtils.saveHistoryData();
-        }
         presenter.getDatas(key);
     }
     @Override
@@ -91,6 +87,13 @@ public class SearchStationTitleActivity extends BaseActivity<HomeListView,HomeLi
             adapter.resetShowHistoryData();
             return;
         }
+        //搜索成功，且信息不为空保存数据
+        String key=tvSearchContent.getText().toString();
+        if (!StringUtils.isEmpty(key)) {
+            CachedSearchTitleUtils.addHistoryData(new CachedSearchTitleUtils.CachedData(key, key, key));
+            CachedSearchTitleUtils.saveHistoryData();
+        }
+
         adapter.setResultData(list);
         adapter.notifyDataSetChanged();
         clearHistory.setVisibility(View.GONE);
