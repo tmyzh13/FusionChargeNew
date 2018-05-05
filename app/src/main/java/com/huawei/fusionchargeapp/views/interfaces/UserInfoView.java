@@ -1,6 +1,7 @@
 package com.huawei.fusionchargeapp.views.interfaces;
 
 import com.corelibs.base.BaseView;
+import com.huawei.fusionchargeapp.model.beans.UserBean;
 import com.huawei.fusionchargeapp.model.beans.UserInfoBean;
 
 public interface UserInfoView extends BaseView{
@@ -11,4 +12,8 @@ public interface UserInfoView extends BaseView{
     void onModifyUserInfoFail();
 
     void onModifySuccess();
+
+    void onUploadPhotoSuccess(String imgUrl);
+
+    void onUploadPhotoFail();
 }

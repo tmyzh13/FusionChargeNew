@@ -12,6 +12,7 @@ import com.huawei.fusionchargeapp.model.apis.LoginApi;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
 import com.huawei.fusionchargeapp.model.beans.ModifyUserInfoRequestBean;
 import com.huawei.fusionchargeapp.model.beans.ResponseMessageBean;
+import com.huawei.fusionchargeapp.model.beans.UploadImageBean;
 import com.huawei.fusionchargeapp.model.beans.UserInfoBean;
 import com.huawei.fusionchargeapp.views.interfaces.UserInfoView;
 import com.trello.rxlifecycle.ActivityEvent;
@@ -100,11 +101,23 @@ public class UserInfoPresenter extends BasePresenter<UserInfoView> {
         RequestBody body = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         Log.e("zw","token :" + UserHelper.getSavedUser().token);
         api.upload(UserHelper.getSavedUser().token,body)
-                .compose(new ResponseTransformer<>(this.<BaseData>bindUntilEvent(ActivityEvent.DESTROY)))
-                .subscribe(new ResponseSubscriber<BaseData>() {
+                .compose(new ResponseTransformer<>(this.<BaseData<UploadImageBean>>bindUntilEvent(ActivityEvent.DESTROY)))
+                .subscribe(new ResponseSubscriber<BaseData<UploadImageBean>>(view) {
                     @Override
-                    public void success(BaseData baseData) {
+                    public void success(BaseData<UploadImageBean> baseData) {
+                        view.onUploadPhotoSuccess(baseData.data.getImgurl());
+                    }
 
+                    @Override
+                    public boolean operationError(BaseData<UploadImageBean> baseData, int status, String message) {
+                        view.onUploadPhotoFail();
+                        return super.operationError(baseData, status, message);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        view.onUploadPhotoFail();
                     }
                 });
 

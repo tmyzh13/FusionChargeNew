@@ -42,6 +42,7 @@ import com.huawei.fusionchargeapp.constants.Constant;
 import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.apis.UploadImagesApi;
 import com.huawei.fusionchargeapp.model.beans.ModifyUserInfoRequestBean;
+import com.huawei.fusionchargeapp.model.beans.UserBean;
 import com.huawei.fusionchargeapp.model.beans.UserInfoBean;
 import com.huawei.fusionchargeapp.presenter.UserInfoPresenter;
 import com.huawei.fusionchargeapp.utils.GlideImageLoader;
@@ -141,12 +142,10 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
         tvEmail.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                Log.e("zw","before");
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                Log.e("zw","onTextChanged");
             }
 
             @Override
@@ -254,25 +253,32 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
                         .error(R.mipmap.ic_launcher_round).into(ivUserIcon);
             }
         };
-        Log.e("zw","1111 : " + userInfoBean.photoUrl);
         Glide.with(this).load(userInfoBean.photoUrl).into(target);
 
-        //通知主页去更新头像
-        RxBus.getDefault().send(new Object(), Constant.REFRESH_MAIN_HEAD_PHOTO);
-
         //保存用户信息
-        UserHelper.saveUserInfo(userInfoBean);
+        UserBean userBean = UserHelper.getSavedUser();
+
+        userBean.photoUrl = userInfoBean.photoUrl;
+        userBean.name = userInfoBean.name;
+        userBean.sex = userInfoBean.sex;
+        userBean.sexName = userInfoBean.sexName;
+        userBean.email = userInfoBean.email;
+        userBean.birthDay = userInfoBean.birth;
+        userBean.address = userInfoBean.address;
+        userBean.vinCode = userInfoBean.vinCode;
+
+        UserHelper.saveUser(userBean);
 
         // 姓名
-        if (!TextUtils.isEmpty(userInfoBean.name)) {
-            etNick.setText(userInfoBean.name);
+        if (!TextUtils.isEmpty(userBean.name)) {
+            etNick.setText(userBean.name);
         }
         //性别 1为男，2为女，0为未知
-        tvSex.setText(userInfoBean.sexName);
+        tvSex.setText(userBean.sexName);
 
         // 邮箱
-        if (!TextUtils.isEmpty(userInfoBean.email)) {
-            tvEmail.setText(userInfoBean.email);
+        if (!TextUtils.isEmpty(userBean.email)) {
+            tvEmail.setText(userBean.email);
         }
         // 出生日期
         if (!TextUtils.isEmpty(userInfoBean.birth)) {
@@ -307,6 +313,22 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
         Toast.makeText(this, getString(R.string.user_info_modify_success), Toast.LENGTH_SHORT).show();
         // 提交成功再请求获取用户信息接口
         presenter.doGetUserInfoRequest();
+    }
+
+    @Override
+    public void onUploadPhotoSuccess(String imgUrl) {
+        UserBean userBean = UserHelper.getSavedUser();
+        if(userBean != null) {
+            userBean.photoUrl = imgUrl;
+            UserHelper.saveUser(userBean);
+            //通知主页去更新头像
+            RxBus.getDefault().send(new Object(), Constant.REFRESH_MAIN_HEAD_PHOTO);
+        }
+    }
+
+    @Override
+    public void onUploadPhotoFail() {
+        showToast(getString(R.string.upload_photo_error));
     }
 
 

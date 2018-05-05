@@ -16,6 +16,7 @@ public class UserBean {
     public String email;
     public String token;
     public String type;
+
     /**
      * 用户名
      */
@@ -47,7 +48,19 @@ public class UserBean {
      */
     public String gender = "0";
 
+    /**
+     * 生日
+     */
+    public String birthDay;
 
+    /**
+     * 地址
+     */
+    public String address;
 
+    /**
+     * vinCode
+     */
+    public String vinCode;
 
 }
