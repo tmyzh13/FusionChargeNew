@@ -86,7 +86,11 @@ public class MyAppointDetailActivity extends BaseActivity<AllAppointmentView,All
     @Override
     public void getAppointmentInfo(List<AllAppointmentResultBean> bean) {
         if (!noData(bean)){
-            data = bean;
+            if (page == 0) {
+                data = bean;
+            } else {
+                data.addAll(bean);
+            }
             appointmentListAdapter.setData(data);
             appointmentListAdapter.notifyDataSetChanged();
         } else if (null != startTime && page == 0){
@@ -218,11 +222,13 @@ public class MyAppointDetailActivity extends BaseActivity<AllAppointmentView,All
 
     public boolean noData(List<AllAppointmentResultBean> bean) {
         if (null == bean || bean.isEmpty()){
-            if (null == startTime) {
-                showToast("没有预约信息");
+            String str;
+            if (page == 0) {
+                str = null == startTime ? "没有预约信息" : "没有满足条件的预约信息";
             } else {
-                showToast("没有满足条件的预约信息");
+                str = null==startTime ? "没有更多预约信息" : "没有更多满足条件的预约信息";
             }
+            showToast(str);
             return true;
         }
         return false;

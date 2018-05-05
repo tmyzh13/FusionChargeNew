@@ -3,6 +3,7 @@ package com.huawei.fusionchargeapp.views;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -22,6 +23,7 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -57,6 +59,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -88,7 +91,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
     @Bind(R.id.layout_email)
     LinearLayout layoutEmail;
     @Bind(R.id.tv_birthday)
-    EditText tvBirthday;
+    TextView tvBirthday;
     @Bind(R.id.layout_birthday)
     LinearLayout layoutBirthday;
     @Bind(R.id.tv_address)
@@ -343,7 +346,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
                 break;
             case R.id.tv_birthday:
                 // 生日日期选择 上传要求格式：1993.04.05
-
+                showTimePickerDialog();
                 break;
             case R.id.commit_userinfo:
                 // 修改个人信息
@@ -430,12 +433,49 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
                     Glide.with(this).load(Uri.fromFile(file))
                             .into(ivUserIcon);
                     PreferencesHelper.saveData(USER_PHOTO_PATH,images.get(0).path);
-                    presenter.uploadImage(file);
+//                    uploadImage(file);
                 }
             } else {
                 Toast.makeText(this, "没有数据", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void showTimePickerDialog(){
+        Calendar time = Calendar.getInstance();
+        DatePickerDialog dialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener(){
+            @Override
+            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                String str = i + ".";
+                if (i1 < 9){
+                    str = str + "0"+(i1+1)+".";
+                } else {
+                    str = str + (i1+1) +".";
+                }
+                if (i2 < 10) {
+                    str = str + "0" + i2;
+                } else {
+                    str = str + i2;
+                }
+                tvBirthday.setText(str);
+            }
+        },time.get(Calendar.YEAR),time.get(Calendar.MONTH),time.get(Calendar.DAY_OF_MONTH));
+        dialog.getDatePicker().setCalendarViewShown(false);
+        dialog.getDatePicker().setSpinnersShown(true);
+        dialog.show();
+    }
+
+
+    private void uploadImage(File file) {
+        UploadImagesApi api = ApiFactory.getFactory().create(UploadImagesApi.class);
+
+        //图片参数
+        RequestBody body = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        //其他参数
+        RequestBody type = RequestBody.create(MediaType.parse("multipart/form-data"), "password");
+        api.upload(type,body)
+                .subscribe();
+
     }
 
     private void setEmail(boolean isRight) {
