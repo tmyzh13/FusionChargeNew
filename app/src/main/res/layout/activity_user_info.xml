@@ -112,7 +112,7 @@
             android:layout_weight="1"
             android:text="@string/birthday" />
 
-        <EditText
+        <TextView
             android:hint="@string/write_birthday"
             android:id="@+id/tv_birthday"
             style="@style/textview"
