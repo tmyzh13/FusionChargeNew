@@ -224,9 +224,9 @@ public class MyAppointDetailActivity extends BaseActivity<AllAppointmentView,All
         if (null == bean || bean.isEmpty()){
             String str;
             if (page == 0) {
-                str = "没有预约信息";
+                str = null == startTime ? "没有预约信息" : "没有满足条件的预约信息";
             } else {
-                str = null==startTime ? "没有更多预约信息" : "没有满足条件的预约信息";
+                str = null==startTime ? "没有更多预约信息" : "没有更多满足条件的预约信息";
             }
             showToast(str);
             return true;
