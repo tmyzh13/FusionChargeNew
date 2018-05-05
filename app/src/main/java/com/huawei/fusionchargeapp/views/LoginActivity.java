@@ -325,10 +325,6 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
                         presenter.loginAction(1, phoneNumber, pwd, code);
                     }
                 }else {
-                    if(pwd != null && pwd.contains(" ")){
-                        showToast(getString(R.string.pwd_cannot_contain_space));
-                        return;
-                    }
                     //调用注册接口
                     if(registerUser()){
                         presenter.registerAction(phoneNumber, pwd, code);
