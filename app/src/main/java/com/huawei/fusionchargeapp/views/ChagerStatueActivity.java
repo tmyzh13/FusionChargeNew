@@ -169,7 +169,6 @@ public class ChagerStatueActivity extends BaseActivity<ChargerStatueView, Charge
                 if (hourTime <= 0) {
                     hourTime = 0;
                 }
-//                        PreferencesHelper.saveData(Constant.TIME_APPOINTMENT,appointmentTime + "");
                 PreferencesHelper.saveData(Constant.CHARGING_TIME, hourTime + "");
                 runOnUiThread(new Runnable() {
                     @Override
@@ -245,6 +244,7 @@ public class ChagerStatueActivity extends BaseActivity<ChargerStatueView, Charge
     };
 
     private ChargerStatueBean chargerStatueBean;
+    private boolean isFirst=true;
 
     //-1状态
     @Override
@@ -277,12 +277,8 @@ public class ChagerStatueActivity extends BaseActivity<ChargerStatueView, Charge
                 checkStatueLoadingView.dismiss();
             }
 
-            if (Tools.isNull(bean.alreadyTime)) {
-                PreferencesHelper.saveData(Constant.CHARGING_TIME, "0");
-            } else {
-                PreferencesHelper.saveData(Constant.CHARGING_TIME, Tools.getTimeValue(bean.alreadyTime) + "");
-            }
-            startTimer();
+
+
             //检测中的定时结束
             handler.postDelayed(runnable, 5000);
 //            timer.cancel();
@@ -299,7 +295,7 @@ public class ChagerStatueActivity extends BaseActivity<ChargerStatueView, Charge
             tv_address_name.setText(bean.chargingPileName);
             //功率
             tv_kw.setText(bean.power);
-            if (!Tools.isNull(bean.money)) {
+            if (!Tools.isNull(bean.money)&&Double.parseDouble(bean.money)!=0) {
                 tv_charged_money.setText(bean.money + getString(R.string.yuan));
                 enableEndButton();
             }
@@ -308,10 +304,19 @@ public class ChagerStatueActivity extends BaseActivity<ChargerStatueView, Charge
             //kwh 当前电量
             tv_charged_enegy.setText(bean.kwh + getString(R.string.du));
             //05:04:25
-            if (Tools.isNull(bean.alreadyTime)) {
-                tv_charge_time.setText("00:00:00");
-            } else {
-                tv_charge_time.setText(bean.alreadyTime);
+            if(isFirst){
+                if (Tools.isNull(bean.alreadyTime)) {
+                    tv_charge_time.setText("00:00:00");
+                } else {
+                    tv_charge_time.setText(bean.alreadyTime);
+                }
+                if (Tools.isNull(bean.alreadyTime)) {
+                    PreferencesHelper.saveData(Constant.CHARGING_TIME, "0");
+                } else {
+                    PreferencesHelper.saveData(Constant.CHARGING_TIME, Tools.getTimeValue(bean.alreadyTime) + "");
+                }
+                startTimer();
+                isFirst=false;
             }
 
 

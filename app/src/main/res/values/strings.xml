@@ -74,7 +74,7 @@
     <string name="login_error">登录失败</string>
     <!--注册-->
     <string name="regist">注册</string>
-    <string name="regist_password_hint">6-20位，必须是字母+数字+特殊符号等</string>
+    <string name="regist_password_hint">6-12位，必须是字母+数字+特殊符号等</string>
     <!--重置密码-->
     <string name="reset_password">重置密码</string>
     <string name="reset_password_hint">验证码已经发送到您的手机</string>

@@ -79,6 +79,7 @@
                     android:orientation="horizontal"
                     android:layout_alignParentRight="true"
                     android:gravity="center_vertical"
+                    android:id="@+id/ll_guild"
                     >
                     <ImageView
                         android:layout_width="wrap_content"

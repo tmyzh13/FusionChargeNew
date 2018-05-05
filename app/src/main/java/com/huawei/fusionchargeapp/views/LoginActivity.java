@@ -223,6 +223,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     private boolean getUserInput() {
         phoneNumber = phoneNumberEt.getText().toString().trim();
         pwd = pwdEt.getText().toString();
+        Log.e("yzh","11111111"+pwd);
         if(pwd != null && pwd.contains(" ")){
             showHintDialog(getString(R.string.hint),getString(R.string.pwd_cannot_contain_space));
             return false;

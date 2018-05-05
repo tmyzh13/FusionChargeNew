@@ -313,4 +313,9 @@ public class ChargeDetailsActivity extends BaseActivity {
         UserHelper.clearUserInfo(UserBean.class);
         startActivity(LoginActivity.getLauncher(context));
     }
+
+    @OnClick(R.id.ll_guild)
+    public void goGuild(){
+        startActivity(GuildActivity.getLauncher(context, chargeStationDetailBean.getLatitude(), chargeStationDetailBean.getLongitude(), null, false));
+    }
 }
