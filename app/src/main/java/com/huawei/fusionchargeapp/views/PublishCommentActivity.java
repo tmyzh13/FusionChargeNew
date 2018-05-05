@@ -170,24 +170,26 @@ public class PublishCommentActivity extends BaseActivity<CommentView,CommentPres
     }
 
     private String getSortType() {
-        if(list.size()==0){
+        if(list.size()==0 || sort == 0){
             return "0";
         }
-        String result = "";
+        StringBuilder result = new StringBuilder();
         int num = (int) Math.pow(2,list.size()-1);
         int i=1;
         int step =1;
         while(step < num ) {
             if ((sort & step) >0 ) {
-                result = result + i + ",";
+                result.append(i).append(",");
             }
             i++;
             step = step *2;
         }
         if ((sort & num) >0 ) {
-            result = result + i;
+            result.append(i);
+        } else {
+            result.deleteCharAt(result.length()-1);
         }
-        return result;
+        return result.toString();
     }
     private void setTextAndCornerStokeColor(TextView view,boolean singleClick) {
         if (singleClick) {
