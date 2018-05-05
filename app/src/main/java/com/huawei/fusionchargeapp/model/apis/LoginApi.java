@@ -59,6 +59,6 @@ public interface LoginApi {
     @POST(Urls.MODIFY_IMG)
     @Multipart
     //表示请求发送multipart数据，需要配合使用@Part
-    Observable<BaseData> upload(@Header("AccessToken")String accessToken,@Part("file"+ RequestBodyCreator.MULTIPART_JEPG) RequestBody file);
+    Observable<BaseData> upload(@Header("AccessToken")String accessToken,@Part("userImage"+ RequestBodyCreator.MULTIPART_JEPG) RequestBody file);
 
 }
