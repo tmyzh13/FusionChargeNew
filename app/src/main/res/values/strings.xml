@@ -55,6 +55,7 @@
     <string name="hint_input_phone">请输入手机号</string>
     <string name="input_correct_phone">请输入正确的手机号</string>
     <string name="hint_input_code">请输入验证码</string>
+    <string name="choice_appointment">请同意用户协议</string>
     <string name="code_incorrect">验证码格式不正确</string>
     <string name="hint_input_password">请输入密码</string>
     <string name="hint_input_message_code">请输入短信中的验证码</string>
@@ -75,6 +76,7 @@
     <!--注册-->
     <string name="regist">注册</string>
     <string name="regist_password_hint">6-12位，必须是字母+数字+特殊符号等</string>
+    <string name="regist_appointment">我已阅读，并同意《用户注册协议》</string>
     <!--重置密码-->
     <string name="reset_password">重置密码</string>
     <string name="reset_password_hint">验证码已经发送到您的手机</string>

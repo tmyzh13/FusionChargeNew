@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -33,6 +34,7 @@ import com.huawei.fusionchargeapp.views.interfaces.LoginView;
 import com.huawei.fusionchargeapp.weights.CommonDialog;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 /**
  * Created by issuser on 2018/4/18.
@@ -69,6 +71,11 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     TextView forgetPwdTv;
     @Bind(R.id.register_tv)
     TextView registerTv;
+    @Bind(R.id.cb_appointment)
+    CheckBox cb_appointment;
+    @Bind(R.id.rl_login)
+    RelativeLayout rl_login;
+
 
     private Context context = LoginActivity.this;
     private String phoneNumber;
@@ -100,6 +107,8 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
                     typeCodeLl.setVisibility(View.GONE);
                     forgetPwdandRegisterRl.setVisibility(View.VISIBLE);
                     loginTv.setText(getText(R.string.login));
+                    cb_appointment.setVisibility(View.GONE);
+                    rl_login.setVisibility(View.GONE);
                     isRegister = false;
                     break;
                 case 2://员工账号登录
@@ -126,6 +135,8 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
                     typeCodeLl.setVisibility(View.VISIBLE);
                     forgetPwdandRegisterRl.setVisibility(View.GONE);
                     loginTv.setText(getText(R.string.regist));
+                    cb_appointment.setVisibility(View.VISIBLE);
+                    rl_login.setVisibility(View.VISIBLE);
                     isRegister = true;
                     break;
             }
@@ -141,6 +152,10 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
             code = codeEt.getText().toString().trim();
             if (TextUtils.isEmpty(code)) {
                 showHintDialog(getString(R.string.hint),getString(R.string.hint_input_code));
+                return false;
+            }
+            if(!cb_appointment.isChecked()){
+                showHintDialog(getString(R.string.hint),getString(R.string.choice_appointment));
                 return false;
             }
         }else{
@@ -223,7 +238,6 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     private boolean getUserInput() {
         phoneNumber = phoneNumberEt.getText().toString().trim();
         pwd = pwdEt.getText().toString();
-        Log.e("yzh","11111111"+pwd);
         if(pwd != null && pwd.contains(" ")){
             showHintDialog(getString(R.string.hint),getString(R.string.pwd_cannot_contain_space));
             return false;
@@ -256,6 +270,11 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     @Override
     public void checkCodeSuccess() {
 
+    }
+
+    @OnClick(R.id.tv_back_login)
+    public void backLogin(){
+        handler.sendEmptyMessage(1);
     }
 
     @Override

@@ -190,7 +190,25 @@
         android:text="@string/login"
         android:textColor="@color/text_white"
         android:textSize="@dimen/text_title" />
+    <RelativeLayout
+        android:id="@+id/rl_login"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin">
 
+
+
+        <TextView
+            android:id="@+id/tv_back_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/dp_20"
+            android:text="@string/login"
+            android:textColor="@color/text_gray" />
+    </RelativeLayout>
     <RelativeLayout
         android:id="@+id/forget_pwd_register_rl"
         android:layout_width="match_parent"
@@ -215,4 +233,23 @@
             android:text="@string/login_regist_account"
             android:textColor="@color/text_gray" />
     </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal|bottom"
+        >
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_light"
+            android:text="@string/regist_appointment"
+            android:button="@drawable/cb_regist"
+            android:paddingLeft="3dp"
+            android:layout_marginBottom="10dp"
+            android:checked="true"
+            android:id="@+id/cb_appointment"
+            android:visibility="gone"
+            />
+    </LinearLayout>
 </LinearLayout>
