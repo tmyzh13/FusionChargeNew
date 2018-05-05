@@ -46,6 +46,7 @@ public class AppointSuccessActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
+        
         navBar.setColorRes(R.color.app_blue);
         navBar.setNavTitle(context.getString(R.string.appoint_success));
         time = getIntent().getIntExtra("time", 0);
