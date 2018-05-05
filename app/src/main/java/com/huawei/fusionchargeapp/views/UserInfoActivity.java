@@ -1,15 +1,19 @@
 package com.huawei.fusionchargeapp.views;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -43,6 +47,7 @@ import com.huawei.fusionchargeapp.views.interfaces.UserInfoView;
 import com.huawei.fusionchargeapp.weights.NavBar;
 import com.huawei.fusionchargeapp.weights.UserHeadPhoteDialog;
 import com.huawei.fusionchargeapp.weights.UserSexDialog;
+import com.lzy.imagepicker.ImageDataSource;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
@@ -60,6 +65,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
+
+import static com.huawei.fusionchargeapp.views.ImageActivity.REQUEST_PERMISSION_ALL;
 
 
 public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresenter> implements UserInfoView, View.OnClickListener {
@@ -108,6 +115,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
     private String uploadImageName = "";
     private long lastInputTime = 0;
     private MyHandler myHandler = new MyHandler(this);
+    private boolean isGoToCarema = true;
 
     public static Intent startActivity(Context context) {
         Intent intent = new Intent(context, UserInfoActivity.class);
@@ -345,18 +353,62 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
                 }
                 break;
             case R.id.tv_camera:
+                isGoToCarema = true;
+                userHeadPhoteDialog.dismiss();
+                boolean isGo = checkPermisson();
+                if(!isGo) return;
                 //相机拍照
                 Intent intent = new Intent(this, ImageActivity.class);
                 intent.putExtra(ImageGridActivity.EXTRAS_TAKE_PICKERS,true); // 是否是直接打开相机
                 startActivityForResult(intent, REQUEST_CODE_SELECT_CAMERA);
-                userHeadPhoteDialog.dismiss();
                 break;
             case R.id.tv_photo:
+                isGoToCarema = false;
+                userHeadPhoteDialog.dismiss();
+                boolean isGo1 = checkPermisson();
+                if(!isGo1) return;
                 //从相册选取
                 Intent intent1 = new Intent(this, ImageActivity.class);
                 startActivityForResult(intent1, REQUEST_CODE_SELECT_CAMERA);
-                userHeadPhoteDialog.dismiss();
+
                 break;
+        }
+    }
+
+    private boolean checkPermisson(){
+        if (!(checkPermission(Manifest.permission.CAMERA)) || !(checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE))) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSION_ALL);
+            return false;
+        }
+        return true;
+    }
+
+    public boolean checkPermission(@NonNull String permission) {
+        return ActivityCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_PERMISSION_ALL) {
+            if(grantResults.length <2 || grantResults[0] == PackageManager.PERMISSION_DENIED || grantResults[1] == PackageManager.PERMISSION_DENIED){
+                showToast(getString(R.string.permission_denied));
+                return;
+            } else {
+                if(isGoToCarema) {
+                    //相机拍照
+                    Intent intent = new Intent(this, ImageActivity.class);
+                    intent.putExtra(ImageGridActivity.EXTRAS_TAKE_PICKERS,true); // 是否是直接打开相机
+                    startActivityForResult(intent, REQUEST_CODE_SELECT_CAMERA);
+                    userHeadPhoteDialog.dismiss();
+                } else {
+                    //从相册选取
+                    Intent intent1 = new Intent(this, ImageActivity.class);
+                    startActivityForResult(intent1, REQUEST_CODE_SELECT_CAMERA);
+                    userHeadPhoteDialog.dismiss();
+                }
+            }
+
         }
     }
 
@@ -378,7 +430,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
                     Glide.with(this).load(Uri.fromFile(file))
                             .into(ivUserIcon);
                     PreferencesHelper.saveData(USER_PHOTO_PATH,images.get(0).path);
-                    uploadImage(file);
+//                    uploadImage(file);
                 }
             } else {
                 Toast.makeText(this, "没有数据", Toast.LENGTH_SHORT).show();
