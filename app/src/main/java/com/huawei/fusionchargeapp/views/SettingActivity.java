@@ -81,15 +81,23 @@ public class SettingActivity extends BaseActivity<SettingView, SettingPresenter>
 
     @OnClick(R.id.tv_exit)
     public void gotoExit() {
-
-        RxBus.getDefault().send(new Object(), Constant.LOGIN_OUT_SET_APPOINT_VIEW_GONE);
-        PreferencesHelper.clearData();
-//        Intent intent=MainActivity.getLauncher(this);
-//        intent.putExtra(MainActivity.ACTION,MainActivity.EXIT);
-//        startActivity(intent);
-        finish();
-        AppManager.getAppManager().appExit();
-
+        final CommonDialog dialog = new CommonDialog(this,"","您确定要清除账户信息且退出应用？",2);
+        dialog.show();
+        dialog.setPositiveListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RxBus.getDefault().send(new Object(), Constant.LOGIN_OUT_SET_APPOINT_VIEW_GONE);
+                PreferencesHelper.clearData();
+                finish();
+                AppManager.getAppManager().appExit();
+            }
+        });
+        dialog.setNagitiveListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
     }
 
 
