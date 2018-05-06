@@ -4,8 +4,10 @@ package com.huawei.fusionchargeapp.views;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -20,6 +22,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.DatePicker;
@@ -474,10 +477,26 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
     }
 
     private void showTimePickerDialog(){
-        Calendar time = Calendar.getInstance();
-        DatePickerDialog dialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener(){
+        View popupView = LayoutInflater.from(UserInfoActivity.this).inflate(R.layout.double_date_picker,null);
+        DatePicker start_time,end_time;
+        TextView tv_start,tv_end;
+        start_time = (DatePicker) popupView.findViewById(R.id.start_time);
+        end_time = (DatePicker) popupView.findViewById(R.id.end_time);
+        tv_start = (TextView) popupView.findViewById(R.id.tv_start_time);
+        tv_end = (TextView) popupView.findViewById(R.id.tv_end_time);
+
+        end_time.setVisibility(View.GONE);
+        tv_end.setVisibility(View.GONE);
+        tv_start.setVisibility(View.GONE);
+
+        Calendar calendar = Calendar.getInstance();
+        int year=calendar.get(Calendar.YEAR);
+        int monthOfYear=calendar.get(Calendar.MONTH);
+        int dayOfMonth=calendar.get(Calendar.DAY_OF_MONTH);
+
+        start_time.init(year, monthOfYear, dayOfMonth, new DatePicker.OnDateChangedListener() {
             @Override
-            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+            public void onDateChanged(DatePicker datePicker, int i, int i1, int i2) {
                 String str = i + ".";
                 if (i1 < 9){
                     str = str + "0"+(i1+1)+".";
@@ -491,9 +510,10 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
                 }
                 tvBirthday.setText(str);
             }
-        },time.get(Calendar.YEAR),time.get(Calendar.MONTH),time.get(Calendar.DAY_OF_MONTH));
-        dialog.getDatePicker().setCalendarViewShown(false);
-        dialog.getDatePicker().setSpinnersShown(true);
+        });
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(popupView)
+                .setPositiveButton("确定",null).create();
         dialog.show();
     }
 
