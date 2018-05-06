@@ -678,6 +678,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
 
             if (bean.reserveEndTime <= bean.nowTime) {
                 ll_appontment.setVisibility(View.GONE);
+                homeAppointmentBean=null;
                 ActionControl.getInstance(getContext()).setHasAppointment(false, null);
             } else {
                 ll_appontment.setVisibility(View.VISIBLE);
