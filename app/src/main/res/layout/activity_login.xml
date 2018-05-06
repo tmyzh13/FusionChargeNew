@@ -141,7 +141,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:paddingRight="@dimen/dp_15"
-            android:src="@mipmap/default_ic_lock"
+            android:src="@drawable/ic_eye_see"
             android:visibility="gone"/>
 
     </LinearLayout>
