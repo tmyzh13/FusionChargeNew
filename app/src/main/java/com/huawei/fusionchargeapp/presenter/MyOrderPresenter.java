@@ -28,7 +28,7 @@ import java.util.List;
 public class MyOrderPresenter extends PagePresenter<MyOrderView> {
 
     private final String RP = "10";
-    private int page = 0;
+    private int page = 1;
 
     private ScanApi api;
 
@@ -44,7 +44,7 @@ public class MyOrderPresenter extends PagePresenter<MyOrderView> {
     }
 
     public void getData(final boolean isRefresh){
-        page = isRefresh ? 0 : ++page;
+        page = isRefresh ? 1 : ++page;
 
         RequestMyOrderBean bean = new RequestMyOrderBean();
         bean.setRp(RP);
@@ -61,7 +61,7 @@ public class MyOrderPresenter extends PagePresenter<MyOrderView> {
                         List<RawRecordBean> newBeans = baseData.rawRecords;
                         if(null == newBeans || newBeans.isEmpty()) {
                             view.noData();
-                            page = isRefresh ? 0 : page--;
+                            page = isRefresh ? 1 : page--;
                         } else {
                             if(isRefresh){
                                 view.onRefreshSuccess(newBeans);
@@ -74,14 +74,14 @@ public class MyOrderPresenter extends PagePresenter<MyOrderView> {
 
                     @Override
                     public boolean operationError(MyOrderData myOrderData, int status, String message) {
-                        page = isRefresh ? 0 : page--;
+                        page = isRefresh ? 1 : page--;
                         return super.operationError(myOrderData, status, message);
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         super.onError(e);
-                        page = isRefresh ? 0 : page--;
+                        page = isRefresh ? 1 : page--;
                     }
                 });
     }

@@ -66,10 +66,11 @@ public class MyAppointDetailActivity extends BaseActivity<AllAppointmentView,All
     @Bind(R.id.nav)
     NavBar navBar;
 
+    private static final int PAGE_FIRST_NUM = 1;
 
     private AppointmentListAdapter appointmentListAdapter;
     private List<AllAppointmentResultBean> data = new ArrayList<>();
-    private int page = 0;
+    private int page = PAGE_FIRST_NUM;
     private static final int PAGE_LIMIT_NUM = 10;
     private String startTime,endTime;
 
@@ -86,14 +87,14 @@ public class MyAppointDetailActivity extends BaseActivity<AllAppointmentView,All
     @Override
     public void getAppointmentInfo(List<AllAppointmentResultBean> bean) {
         if (!noData(bean)){
-            if (page == 0) {
+            if (page == PAGE_FIRST_NUM) {
                 data = bean;
             } else {
                 data.addAll(bean);
             }
             appointmentListAdapter.setData(data);
             appointmentListAdapter.notifyDataSetChanged();
-        } else if (null != startTime && page == 0){
+        } else if (null != startTime && page == PAGE_FIRST_NUM){
             data = null;
             appointmentListAdapter.setData(data);
             appointmentListAdapter.notifyDataSetChanged();
@@ -137,7 +138,7 @@ public class MyAppointDetailActivity extends BaseActivity<AllAppointmentView,All
             //下拉
             @Override
             public void onRefreshing(PtrFrameLayout frame) {
-                page = 0;
+                page = PAGE_FIRST_NUM;
                 ptrLayout.enableLoading();
                 if (!frame.isAutoRefresh()) {
                     getInfo();
@@ -181,7 +182,7 @@ public class MyAppointDetailActivity extends BaseActivity<AllAppointmentView,All
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        page = 0;
+                        page = PAGE_FIRST_NUM;
                         presenter.getAppointmentInfoWithTimeCondition(page,PAGE_LIMIT_NUM,startTime,endTime);
                     }
                 }).create();
@@ -210,12 +211,12 @@ public class MyAppointDetailActivity extends BaseActivity<AllAppointmentView,All
 
     @Override
     public void getInfoFail(boolean state) {
-        if (null != startTime && page == 0) {
+        if (null != startTime && page == PAGE_FIRST_NUM) {
             data = null;
             appointmentListAdapter.setData(data);
             appointmentListAdapter.notifyDataSetChanged();
         }
-        if (page > 0) {
+        if (page > PAGE_FIRST_NUM) {
             page--;
         }
     }
@@ -223,7 +224,7 @@ public class MyAppointDetailActivity extends BaseActivity<AllAppointmentView,All
     public boolean noData(List<AllAppointmentResultBean> bean) {
         if (null == bean || bean.isEmpty()){
             String str;
-            if (page == 0) {
+            if (page == PAGE_FIRST_NUM) {
                 str = null == startTime ? "没有预约信息" : "没有满足条件的预约信息";
             } else {
                 str = null==startTime ? "没有更多预约信息" : "没有更多满足条件的预约信息";
