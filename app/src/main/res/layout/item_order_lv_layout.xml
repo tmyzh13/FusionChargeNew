@@ -54,6 +54,11 @@
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
             android:text="@string/no_pay"
+            android:paddingTop="@dimen/dp_5"
+            android:paddingBottom="@dimen/dp_5"
+            android:paddingLeft="@dimen/dp_13"
+            android:paddingRight="@dimen/dp_13"
+            android:background="@drawable/tv_corner_gray"
             android:textSize="15dp"/>
     </RelativeLayout>
 

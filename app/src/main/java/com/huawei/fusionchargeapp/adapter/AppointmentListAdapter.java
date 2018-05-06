@@ -1,6 +1,7 @@
 package com.huawei.fusionchargeapp.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,8 @@ public class AppointmentListAdapter extends BaseAdapter {
     private List<AllAppointmentResultBean> data = new ArrayList<>();
     private LayoutInflater inflater;
     private Context context;
-    private static final String[] STATE= {"进行中","已完成","已取消","已超时"};
+    private static final String[] STATE_TEXT= {"进行中","已完成","已取消","已超时"};
+    private static final int[] STATE_COLOR = {Color.YELLOW,Color.GREEN,Color.BLUE,Color.RED};
 
     public AppointmentListAdapter(Context context,List<AllAppointmentResultBean> bean) {
         this.context = context;
@@ -65,11 +67,21 @@ public class AppointmentListAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        holder.adress.setText(String.format(context.getString(R.string.run_adress),data.get(i).chargingAddress));
-        holder.piple.setText(String.format(context.getString(R.string.pile_info),data.get(i).gunCode));
-        holder.runCode.setText(context.getString(R.string.charging_pile_no)+data.get(i).runCode);
-        holder.time.setText(data.get(i).reserveBeginTime);
-        holder.state.setText(STATE[data.get(i).state-1]);
+        final AllAppointmentResultBean bean = data.get(i);
+        holder.adress.setText(String.format(context.getString(R.string.run_adress),bean.chargingAddress));
+        holder.piple.setText(String.format(context.getString(R.string.pile_info),bean.gunCode));
+        holder.runCode.setText(context.getString(R.string.charging_pile_no)+bean.runCode);
+        holder.time.setText(bean.reserveBeginTime);
+        holder.state.setText(STATE_TEXT[bean.state-1]);
+        holder.state.setTextColor(STATE_COLOR[bean.state-1]);
+        holder.state.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (bean.state == 4) {
+                    //超时条目处理
+                }
+            }
+        });
         return view;
     }
 

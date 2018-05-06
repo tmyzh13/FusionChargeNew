@@ -1,6 +1,7 @@
 package com.huawei.fusionchargeapp.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,7 +67,7 @@ public class OrderListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         //设置数据
-        RawRecordBean bean = datas.get(position);
+        final RawRecordBean bean = datas.get(position);
         holder.oder_code_tv.setText(bean.getOrderNum());
         holder.oder_time_tv.setText(bean.getChargeEndTime());
         holder.charge_pile_code.setText(bean.getRunCode());
@@ -75,9 +76,19 @@ public class OrderListAdapter extends BaseAdapter {
         //0 未支付 1 已支付
         if(bean.getPayStatus() == 0) {
             holder.pay_status.setText(R.string.no_pay);
+            holder.pay_status.setTextColor(Color.RED);
         } else if(bean.getPayStatus() == 1) {
             holder.pay_status.setText(R.string.has_pay);
+            holder.pay_status.setTextColor(Color.GREEN);
         }
+        holder.pay_status.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (bean.getPayStatus() == 0) {
+                    //未完成订单处理
+                }
+            }
+        });
         holder.oder_status_tv.setText(bean.getChargTime()+"");
         holder.oder_charge_fee_tv.setText(bean.getEneryCharge() + "");
         holder.oder_service_fee_tv.setText(bean.getServiceCharge() + "");

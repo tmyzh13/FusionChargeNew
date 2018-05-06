@@ -36,8 +36,13 @@
             android:id="@+id/state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="完成"
+            android:text="已完成"
             android:layout_gravity="end|center_vertical"
+            android:paddingTop="@dimen/dp_5"
+            android:paddingBottom="@dimen/dp_5"
+            android:paddingLeft="@dimen/dp_13"
+            android:paddingRight="@dimen/dp_13"
+            android:background="@drawable/tv_corner_gray"
             android:textSize="@dimen/dp_13"/>
     </FrameLayout>
     <View
