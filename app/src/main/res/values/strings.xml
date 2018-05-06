@@ -55,6 +55,7 @@
     <string name="hint_input_phone">请输入手机号</string>
     <string name="input_correct_phone">请输入正确的手机号</string>
     <string name="hint_input_code">请输入验证码</string>
+    <string name="hint_input_code_6">请输入6位验证码</string>
     <string name="choice_appointment">请同意用户协议</string>
     <string name="code_incorrect">验证码格式不正确</string>
     <string name="hint_input_password">请输入密码</string>

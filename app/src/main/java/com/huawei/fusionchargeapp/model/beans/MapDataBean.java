@@ -16,6 +16,7 @@ public class MapDataBean {
     //station pile
     public String type;
     public double distance;
+    public int pileNum;
 
     @Override
     public String toString() {

@@ -380,6 +380,10 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
                             showHintDialog(getString(R.string.hint),getString(R.string.hint_input_code));
                             return;
                         }
+                        if(code.length()<6){
+                            showHintDialog(getString(R.string.hint),getString(R.string.hint_input_code_6));
+                            return;
+                        }
                         phoneNumber = phoneNumberEt.getText().toString().trim();
                         if(TextUtils.isEmpty(phoneNumber)) {
                             showHintDialog(getString(R.string.hint),getString(R.string.hint_input_phone));

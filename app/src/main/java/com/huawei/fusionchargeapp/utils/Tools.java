@@ -3,6 +3,12 @@ package com.huawei.fusionchargeapp.utils;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
@@ -14,6 +20,7 @@ import android.util.Log;
 
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.services.core.LatLonPoint;
+import com.huawei.fusionchargeapp.R;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -368,4 +375,27 @@ public class Tools {
         }
         return value;
     }
+
+    public static Bitmap getNumberBitmap(Bitmap bitmap, String number) {
+        Bitmap bitmap1 = Bitmap.createBitmap(80, 120, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap1);
+        RectF rect = new RectF(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DEV_KERN_TEXT_FLAG);
+        // draw background
+        paint.setColor(Color.WHITE);
+//        canvas.drawOval(rect, p都aint);
+        paint.setColor(Color.RED);
+        canvas.drawBitmap(bitmap,0,0,paint);
+//        canvas.drawOval(new RectF(padding, padding, rect.width() - padding, rect.height() - padding), paint);
+        // draw text
+        paint.setColor(Color.BLUE);
+        paint.setStrokeWidth(3);
+        paint.setTextSize(30);
+        paint.setTextAlign(Paint.Align.CENTER);
+        Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
+        float baseline = (rect.bottom + rect.top - fontMetrics.bottom - fontMetrics.top) / 2;
+        canvas.drawText(number, rect.centerX() ,rect.centerY()-7, paint);
+        return bitmap1;
+    }
+
 }

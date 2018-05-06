@@ -84,6 +84,17 @@
             />
     </RelativeLayout>
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/home_ic_ps"
+        android:padding="5dp"
+        android:id="@+id/iv_my_location"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="20dp"
+        android:paddingBottom="20dp"
+        />
+
     <!--底部详情-->
     <RelativeLayout
         android:layout_width="match_parent"

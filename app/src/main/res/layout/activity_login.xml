@@ -178,6 +178,7 @@
                 android:layout_marginRight="@dimen/dp_5"
                 android:background="@null"
                 android:hint="@string/hint_input_code"
+                android:maxLength="6"
                 android:singleLine="true"
                 android:textColor="@color/text_white"
                 android:textColorHint="@color/text_gray" />
@@ -265,7 +266,6 @@
             android:button="@drawable/cb_regist"
             android:paddingLeft="3dp"
             android:layout_marginBottom="10dp"
-            android:checked="true"
             android:id="@+id/cb_appointment"
             android:visibility="gone"
             />

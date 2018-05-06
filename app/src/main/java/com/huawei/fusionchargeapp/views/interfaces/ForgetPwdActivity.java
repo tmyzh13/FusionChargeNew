@@ -91,6 +91,10 @@ public class ForgetPwdActivity extends BaseActivity<LoginView,LoginPresenter> im
                     showHintDialog(getString(R.string.hint),getString(R.string.hint_input_code));
                     return;
                 }
+                if(code.length()<6){
+                    showHintDialog(getString(R.string.hint),getString(R.string.hint_input_code_6));
+                    return;
+                }
                 CheckCodeBean bean=new CheckCodeBean();
                 bean.type="2";
                 bean.phone=phoneNum;

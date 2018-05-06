@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
@@ -161,7 +162,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
         UiSettings uiSettings = aMap.getUiSettings();
         // 去掉缩放按钮==
         uiSettings.setZoomControlsEnabled(false);
-
+//        uiSettings.setMyLocationButtonEnabled(true);
         aMap.setOnMapClickListener(new AMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
@@ -232,8 +233,10 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                                     //结束时间小于=当前时间
                                     if(homeAppointmentBean!=null){
 //                                        if(homeAppointmentBean.reserveEndTime<=homeAppointmentBean.nowTime){
+                                        if(!appointmentTimeOutDialog.isShowing()){
                                             appointmentTimeOutDialog.show();
-                                            appointmentTimeOutDialog.setIvDeleteListener(new View.OnClickListener() {
+                                        }
+                                        appointmentTimeOutDialog.setIvDeleteListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {
                                                     appointmentTimeOutDialog.dismiss();
@@ -574,8 +577,15 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
             //点标记的标题和内容；
             markerOption.title(i + "");
             markerOption.draggable(true);//设置Marker可拖动
-            markerOption.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory
+            if(list.get(i).type.equals("pile")){
+                markerOption.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory
                     .decodeResource(getResources(), R.mipmap.home_ic_position)));
+            }else{
+                markerOption.icon(BitmapDescriptorFactory.fromBitmap(Tools.getNumberBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.home_ic_position1).copy(Bitmap.Config.ARGB_8888, true),list.get(i).pileNum+"")));
+
+            }
+//            markerOption.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory
+//                    .decodeResource(getResources(), R.mipmap.home_ic_position)));
             // 将Marker设置为贴地显示，可以双指下拉地图查看效果
             markerOption.setFlat(false);//设置marker平贴地图效果
             aMap.addMarker(markerOption);
@@ -736,6 +746,14 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
         }
     }
 
+    @OnClick(R.id.iv_my_location)
+    public void backLcation(){
+        MyLocationBean  bean =PreferencesHelper.getData(MyLocationBean.class);
+        if(bean!=null){
+            aMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(bean.latitude,bean.longtitude), 14));
+        }
+    }
+
     @OnClick(R.id.enter_charge_station_iv)
     public void enterChargeStation() {
         //获取详情要token 所以判断
@@ -748,6 +766,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
 
     @OnClick(R.id.iv_scan)
     public void goScan() {
+
 
         if (UserHelper.getSavedUser() == null || Tools.isNull(UserHelper.getSavedUser().token)) {
             startActivity(LoginActivity.getLauncher(getContext()));
