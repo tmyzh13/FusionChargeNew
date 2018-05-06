@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.model.beans.OrderBean;
 import com.huawei.fusionchargeapp.model.beans.RawRecordBean;
+import com.huawei.fusionchargeapp.views.PayActivity;
 
 import java.util.List;
 
@@ -21,9 +22,11 @@ import java.util.List;
 public class OrderListAdapter extends BaseAdapter {
     private List<RawRecordBean> datas;
     private LayoutInflater inflater;
+    private Context context;
 
     public OrderListAdapter(Context context, List<RawRecordBean> list) {
         this.datas = list;
+        this.context=context;
         inflater = LayoutInflater.from(context);
     }
 
@@ -86,6 +89,7 @@ public class OrderListAdapter extends BaseAdapter {
             public void onClick(View view) {
                 if (bean.getPayStatus() == 0) {
                     //未完成订单处理
+                    context.startActivity(PayActivity.getLauncher(context,bean.getOrderNum(),"0"));
                 }
             }
         });

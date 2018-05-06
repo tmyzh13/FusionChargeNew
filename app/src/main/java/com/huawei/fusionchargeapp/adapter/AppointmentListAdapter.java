@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.model.beans.AllAppointmentResultBean;
 import com.huawei.fusionchargeapp.model.beans.HomeAppointmentBean;
+import com.huawei.fusionchargeapp.views.GuildActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,8 +78,9 @@ public class AppointmentListAdapter extends BaseAdapter {
         holder.state.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (bean.state == 4) {
-                    //超时条目处理
+                if (bean.state == 1) {
+                    //进行中
+//                    context.startActivity(GuildActivity.getLauncher(context,bean., homeAppointmentBean.longitude, homeAppointmentBean));
                 }
             }
         });
