@@ -176,7 +176,7 @@ public class MainActivity extends BaseActivity {
 
             }
         });
-
+        /*
         RxBus.getDefault().toObservable(Object.class,Constant.REFRESH_MAIN_HEAD_PHOTO)
                 .compose(this.bindToLifecycle())
                 .subscribe(new RxBusSubscriber<Object>() {
@@ -185,10 +185,10 @@ public class MainActivity extends BaseActivity {
                     public void receive(Object data) {
                         if(UserHelper.getSavedUser() != null){
                             Glide.with(MainActivity.this).load(UserHelper.getSavedUser().photoUrl)
-                                    .error(R.mipmap.ic_launcher_round).into(iv_user_icon);
+                                    .override(320,320).error(R.mipmap.ic_launcher_round).into(iv_user_icon);
                         }
                     }
-                });
+                });*/
         cb_free.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -221,7 +221,7 @@ public class MainActivity extends BaseActivity {
             startActivity(LoginActivity.getLauncher(context));
         } else {
             if (!Tools.isNull(UserHelper.getSavedUser().photoUrl)) {
-                Glide.with(context).load(Urls.ROOT + UserHelper.getSavedUser().photoUrl.replace("\\", "/")).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher)
+                Glide.with(context).load(UserHelper.getSavedUser().photoUrl).error(R.mipmap.ic_launcher)
                         .override(320, 320).into(iv_user_icon);
             }
             tv_user_name.setText(UserHelper.getSavedUser().nickName);

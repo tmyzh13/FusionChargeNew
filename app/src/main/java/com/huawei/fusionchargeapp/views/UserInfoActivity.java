@@ -40,6 +40,7 @@ import com.corelibs.base.BaseActivity;
 import com.corelibs.utils.PreferencesHelper;
 import com.corelibs.utils.rxbus.RxBus;
 import com.corelibs.views.roundedimageview.CircleImageView;
+import com.huawei.fusionchargeapp.MainActivity;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.constants.Constant;
 import com.huawei.fusionchargeapp.model.UserHelper;
@@ -314,18 +315,20 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
     public void onModifySuccess() {
         hideLoading();
         Toast.makeText(this, getString(R.string.user_info_modify_success), Toast.LENGTH_SHORT).show();
+        startActivity(MainActivity.getLauncher(UserInfoActivity.this));
         // 提交成功再请求获取用户信息接口
-        presenter.doGetUserInfoRequest();
+        //presenter.doGetUserInfoRequest();
     }
 
     @Override
     public void onUploadPhotoSuccess(String imgUrl) {
+        uploadImageName =imgUrl;
         UserBean userBean = UserHelper.getSavedUser();
         if(userBean != null) {
-            userBean.photoUrl = imgUrl;
+            userBean.photoUrl = uploadImageName;
             UserHelper.saveUser(userBean);
             //通知主页去更新头像
-            RxBus.getDefault().send(new Object(), Constant.REFRESH_MAIN_HEAD_PHOTO);
+            //RxBus.getDefault().send(new Object(), Constant.REFRESH_MAIN_HEAD_PHOTO);
         }
     }
 
