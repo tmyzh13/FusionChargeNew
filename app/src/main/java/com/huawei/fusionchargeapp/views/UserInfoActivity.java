@@ -141,7 +141,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
         else
             navBar.setColor(getResources().getColor(R.color.app_blue));
 
-
+/*
         tvEmail.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -172,7 +172,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
                 }
 
             }
-        });
+        }); */
 
         initImagePicker();
 
@@ -383,6 +383,10 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
                 showTimePickerDialog();
                 break;
             case R.id.commit_userinfo:
+                //验证邮箱
+                if (!isEmailVailid()) {
+                    return;
+                }
                 // 修改个人信息
                 ModifyUserInfoRequestBean userInfoRequest = getUserInfoRequest();
                 if(userInfoRequest != null) {
@@ -411,6 +415,18 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
 
                 break;
         }
+    }
+
+    private boolean isEmailVailid() {
+        if (null == tvEmail.getText() || tvEmail.getText().toString().isEmpty()) {
+            showToast("邮箱不能为空！");
+            return false;
+        }
+        Pattern pattern = Pattern.compile(".+@.+\\.[a-z]+");
+        Matcher matcher = pattern.matcher(tvEmail.getText().toString());
+        boolean result = matcher.matches();
+        setEmail(result);
+        return result;
     }
 
     private boolean checkPermisson(){
