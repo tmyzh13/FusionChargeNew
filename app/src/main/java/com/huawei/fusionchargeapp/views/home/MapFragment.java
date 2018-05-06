@@ -288,7 +288,12 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
 
                     @Override
                     public void receive(Object data) {
-                        presenter.getData();
+                        if(ChoiceManager.getInstance().getType()==0){
+                            presenter.getDataType0();
+                        }else{
+                            presenter.getData();
+                        }
+
                     }
                 });
         //刷新首页获取未支付订单，充电中订单， 预约中订单
@@ -331,7 +336,12 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
 
     //获取地图数据
     private void initMapData() {
-        presenter.getData();
+        if(ChoiceManager.getInstance().getType()==0){
+            presenter.getDataType0();
+        }else{
+            presenter.getData();
+        }
+
     }
 
 
@@ -401,7 +411,11 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
             case 10:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // 获取到权限，作相应处理（调用定位SDK应当确保相关权限均被授权，否则可能引起定位失败）
-                    presenter.getData();
+                    if(ChoiceManager.getInstance().getType()==0){
+                        presenter.getDataType0();
+                    }else{
+                        presenter.getData();
+                    }
                 } else {
                     // 没有获取到权限，做特殊处理
                     ToastMgr.show(getString(R.string.get_location_permission_fail));
@@ -543,6 +557,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
     public void renderMapData(List<MapDataBean> list) {
         this.list = list;
         MyLocationBean bean = PreferencesHelper.getData(MyLocationBean.class);
+        aMap.clear();
         for (int i = 0; i < list.size(); i++) {
             //距离筛选
             if (bean != null) {

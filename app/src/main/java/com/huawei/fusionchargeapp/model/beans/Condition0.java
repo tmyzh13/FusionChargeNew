@@ -1,15 +1,11 @@
 package com.huawei.fusionchargeapp.model.beans;
 
 /**
- * Created by issuser on 2018/4/23.
+ * Created by john on 2018/5/6.
  */
 
-public class Condition {
-
+public class Condition0 {
     public int selectType;
-    public int pileType;
-//    public int chargingMethod;
-//    public String pileName;
     public String stationName;
     public double x1;
     public double x2;

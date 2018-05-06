@@ -3,6 +3,7 @@ package com.huawei.fusionchargeapp.model.apis;
 import com.huawei.fusionchargeapp.constants.Urls;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
 import com.huawei.fusionchargeapp.model.beans.Condition;
+import com.huawei.fusionchargeapp.model.beans.Condition0;
 import com.huawei.fusionchargeapp.model.beans.HomeAppointmentBean;
 import com.huawei.fusionchargeapp.model.beans.HomeChargeOrderBean;
 import com.huawei.fusionchargeapp.model.beans.HomeOrderBean;
@@ -30,6 +31,9 @@ public interface MapApi {
 
     @POST(Urls.MAP_DATA)
     Observable<BaseData<List<MapDataBean>>> getMapDatas(@Body Condition bean);
+
+    @POST(Urls.MAP_DATA)
+    Observable<BaseData<List<MapDataBean>>> getMapDatas0(@Body Condition0 bean);
 
     @POST(Urls.HOME_MAP_INFO)
     Observable<BaseData<MapInfoBean>> getHomeMapInfo(@Body RequesHomeMapInfo info);

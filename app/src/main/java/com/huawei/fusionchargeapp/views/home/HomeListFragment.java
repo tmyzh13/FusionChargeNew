@@ -67,7 +67,12 @@ public class HomeListFragment extends BaseFragment<HomeListView, HomeListPresent
         });
         ptrLayout.disableLoading();
         presenter.setOtherLoading(false);
-        presenter.getDatas();
+        if(ChoiceManager.getInstance().getType()==0){
+            presenter.getDataType0();
+        }else{
+            presenter.getDatas();
+        }
+
         ptrLayout.setRefreshLoadCallback(this);
         RxBus.getDefault().toObservable(Object.class, Constant.REFRESH_MAP_OR_LIST_DATA)
                 .compose(this.<Object>bindToLifecycle())
@@ -75,7 +80,11 @@ public class HomeListFragment extends BaseFragment<HomeListView, HomeListPresent
 
                     @Override
                     public void receive(Object data) {
-                        presenter.getDatas();
+                        if(ChoiceManager.getInstance().getType()==0){
+                            presenter.getDataType0();
+                        }else{
+                            presenter.getDatas();
+                        }
                     }
                 });
     }
@@ -129,7 +138,11 @@ public class HomeListFragment extends BaseFragment<HomeListView, HomeListPresent
     public void onRefreshing(PtrFrameLayout frame) {
         if (!frame.isAutoRefresh()) {
             presenter.setOtherLoading(true);
-            presenter.getDatas();
+            if(ChoiceManager.getInstance().getType()==0){
+                presenter.getDataType0();
+            }else{
+                presenter.getDatas();
+            }
         }
 
     }

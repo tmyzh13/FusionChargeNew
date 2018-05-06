@@ -9,6 +9,7 @@ import com.corelibs.subscriber.ResponseSubscriber;
 import com.huawei.fusionchargeapp.model.apis.MapApi;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
 import com.huawei.fusionchargeapp.model.beans.Condition;
+import com.huawei.fusionchargeapp.model.beans.Condition0;
 import com.huawei.fusionchargeapp.model.beans.MapDataBean;
 import com.huawei.fusionchargeapp.utils.ChoiceManager;
 import com.huawei.fusionchargeapp.views.interfaces.HomeListView;
@@ -46,12 +47,48 @@ public class HomeListPresenter extends BasePresenter<HomeListView> {
             view.showLoading();
         }
         doGetDatas(newCondition());
+
+    }
+
+    public void getDataType0(){
+        if(otherLoading){
+        }else{
+            view.showLoading();
+        }
+        Condition0 condition=new Condition0();
+        condition.workStatus=ChoiceManager.getInstance().getStatue();
+        condition.x1=100;
+        condition.x2=200;
+        condition.y1=30;
+        condition.y2=40;
+        condition.selectType=3;
+        api.getMapDatas0(condition)
+                .compose(new ResponseTransformer<>(this.<BaseData<List<MapDataBean>>>bindUntilEvent(ActivityEvent.DESTROY)))
+                .subscribe(new ResponseSubscriber<BaseData<List<MapDataBean>>>(view) {
+                    @Override
+                    public void success(BaseData<List<MapDataBean>> baseData) {
+                        view.rendData(baseData.data);
+                    }
+                });
     }
 
     public void getDatas(String stationName){
-        Condition condition = newCondition();
+        Condition0 condition = new Condition0();
+        condition.workStatus=ChoiceManager.getInstance().getStatue();
+        condition.x1=100;
+        condition.x2=200;
+        condition.y1=30;
+        condition.y2=40;
+        condition.selectType=3;
         condition.stationName =stationName;
-        doGetDatas(condition);
+        api.getMapDatas0(condition)
+                .compose(new ResponseTransformer<>(this.<BaseData<List<MapDataBean>>>bindUntilEvent(ActivityEvent.DESTROY)))
+                .subscribe(new ResponseSubscriber<BaseData<List<MapDataBean>>>(view) {
+                    @Override
+                    public void success(BaseData<List<MapDataBean>> baseData) {
+                        view.rendData(baseData.data);
+                    }
+                });
     }
 
     private Condition newCondition(){
@@ -61,11 +98,8 @@ public class HomeListPresenter extends BasePresenter<HomeListView> {
         }else{
             condition.pileType= ChoiceManager.getInstance().getType();
         }
-        if(ChoiceManager.getInstance().getStatue()==0){
-            condition.workStatus=3;
-        }else{
+
             condition.workStatus=ChoiceManager.getInstance().getStatue();
-        }
         condition.x1=100;
         condition.x2=200;
         condition.y1=30;

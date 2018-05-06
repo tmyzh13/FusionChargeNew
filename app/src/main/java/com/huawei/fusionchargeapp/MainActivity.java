@@ -12,6 +12,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -188,7 +189,24 @@ public class MainActivity extends BaseActivity {
                         }
                     }
                 });
+        cb_free.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    Log.e("yzh","1111111111111111");
+                    cb_busy.setChecked(false);
+                }
+            }
+        });
 
+        cb_busy.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    cb_free.setChecked(false);
+                }
+            }
+        });
     }
 
     @OnClick(R.id.iv_user)
@@ -329,12 +347,7 @@ public class MainActivity extends BaseActivity {
         if (cb_busy.isChecked()) {
             statue = 2;
         }
-        if (cb_free.isChecked() && cb_busy.isChecked()) {
-            statue = 3;
-        }
-        if (!cb_free.isChecked() && !cb_busy.isChecked()) {
-            statue = 0;
-        }
+
         ChoiceManager.getInstance().setStatue(statue);
         ChoiceManager.getInstance().setType(type);
         //发送设置
@@ -344,7 +357,7 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.tv_reset)
     public void resetCondition() {
-        cb_busy.setChecked(false);
+        cb_busy.setChecked(true);
         cb_free.setChecked(false);
         cb_charge_direct.setChecked(false);
         cb_charge_alternating.setChecked(false);

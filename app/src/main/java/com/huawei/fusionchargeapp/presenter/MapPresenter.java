@@ -12,6 +12,7 @@ import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.apis.MapApi;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
 import com.huawei.fusionchargeapp.model.beans.Condition;
+import com.huawei.fusionchargeapp.model.beans.Condition0;
 import com.huawei.fusionchargeapp.model.beans.HomeAppointmentBean;
 import com.huawei.fusionchargeapp.model.beans.HomeChargeOrderBean;
 import com.huawei.fusionchargeapp.model.beans.HomeOrderBean;
@@ -48,6 +49,38 @@ public class MapPresenter extends BasePresenter<MapHomeView> {
 
     }
 
+    public void getDataType0(){
+        Condition0 condition=new Condition0();
+        condition.selectType=3;
+        condition.workStatus=ChoiceManager.getInstance().getStatue();
+        condition.x1=100;
+        condition.x2=200;
+        condition.y1=30;
+        condition.y2=40;
+        api.getMapDatas0(condition)
+                .compose(new ResponseTransformer<>(this.<BaseData<List<MapDataBean>>>bindUntilEvent(ActivityEvent.DESTROY)))
+                .subscribe(new ResponseSubscriber<BaseData<List<MapDataBean>>>(view) {
+                    @Override
+                    public void success(BaseData<List<MapDataBean>> baseData) {
+                        Log.e("zw","map presenter SUCCESS : " + baseData.toString() );
+
+                        MapDataBean bean = null;
+                        Gson gson = new Gson();
+                        bean = gson.fromJson("{address='?????????????????????????????????sad', id=30, latitude=0.965231, longitude=-6.99647, alterNum=0, directNum=0, title='????', type='station', distance=0.0}",
+                                new TypeToken<MapDataBean>(){}.getType());
+                        baseData.data.add(bean);
+                        Log.e("zw","map presenter SUCCESS data: " + baseData.data.toString() );
+                        view.renderMapData(baseData.data);
+                    }
+
+                    @Override
+                    public boolean operationError(BaseData<List<MapDataBean>> listBaseData, int status, String message) {
+                        Log.e("zw","map presenter : ERROR " + listBaseData.toString() );
+                        return super.operationError(listBaseData, status, message);
+                    }
+                });
+    }
+
     public void getData(){
         Log.e("zw","map presenter :  getData"  );
         Condition condition=new Condition();
@@ -57,11 +90,9 @@ public class MapPresenter extends BasePresenter<MapHomeView> {
         }else{
             condition.pileType= ChoiceManager.getInstance().getType();
         }
-        if(ChoiceManager.getInstance().getStatue()==0){
-            condition.workStatus=3;
-        }else{
+
             condition.workStatus=ChoiceManager.getInstance().getStatue();
-        }
+
 
 //        condition.pileName="";
 //        condition.stationName="";

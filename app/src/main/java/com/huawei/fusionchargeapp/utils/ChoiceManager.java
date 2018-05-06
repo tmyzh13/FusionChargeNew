@@ -12,8 +12,8 @@ public class ChoiceManager {
 
     // 方式空 1交流2直流3交直流一体
     private int type=0;
-    // 状态空 //“充电方式1快充2慢充3快慢充”  空闲 繁忙 空闲繁忙
-    private int statue=0;
+    // 状态空 //“充电方式1快充2慢充3快慢充”  1空闲2繁忙
+    private int statue=1;
     //距离 默认距离是100 这里测试改成500
     private double distance=Constant.DEFAULT_DISTANCE;
 
@@ -30,7 +30,7 @@ public class ChoiceManager {
 
     public void resetChoice(){
         type=0;
-        statue=0;
+        statue=1;
         distance= Constant.DEFAULT_DISTANCE;
     }
 
