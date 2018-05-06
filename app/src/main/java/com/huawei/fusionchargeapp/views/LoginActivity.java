@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,6 +78,10 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     CheckBox cb_appointment;
     @Bind(R.id.rl_login)
     RelativeLayout rl_login;
+    @Bind(R.id.pwd_ic_del)
+    ImageView pwd_ic_del;
+    @Bind(R.id.pwd_ic_see)
+    ImageView pwd_ic_see;
 
 
     private Context context = LoginActivity.this;
@@ -207,6 +214,47 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
                 }
             }
         });
+        pwdEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence == null || charSequence.toString().isEmpty()){
+                    if (pwd_ic_del.getVisibility() != View.GONE) {
+                        pwd_ic_del.setVisibility(View.GONE);
+                        pwd_ic_see.setVisibility(View.GONE);
+                    }
+                } else {
+                    if (pwd_ic_del.getVisibility() != View.VISIBLE) {
+                        pwd_ic_del.setVisibility(View.VISIBLE);
+                        pwd_ic_see.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+    }
+
+    @OnClick(R.id.pwd_ic_del)
+    void resetPwdEditContent(){
+        pwdEt.setText("");
+        pwd_ic_del.setVisibility(View.GONE);
+        pwd_ic_see.setVisibility(View.GONE);
+        pwdEt.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+    }
+
+    @OnClick(R.id.pwd_ic_see)
+    void showPwdEditContent(){
+        if (InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD == pwdEt.getInputType()) {
+            pwdEt.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        } else {
+            pwdEt.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+        }
     }
 
     @Override

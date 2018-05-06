@@ -116,16 +116,34 @@
 
         <EditText
             android:id="@+id/pwd_et"
-            android:layout_width="match_parent"
+            android:layout_width="170dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/dp_5"
             android:layout_marginRight="@dimen/dp_16"
             android:background="@null"
             android:hint="@string/hint_input_password"
-            android:singleLine="true"
             android:inputType="textPassword"
+            android:singleLine="true"
             android:textColor="@color/text_white"
             android:textColorHint="@color/text_gray" />
+
+        <ImageView
+            android:id="@+id/pwd_ic_del"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingRight="@dimen/dp_8"
+            android:src="@mipmap/pop_ic_del"
+            android:visibility="gone"/>
+        <ImageView
+            android:id="@+id/pwd_ic_see"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingRight="@dimen/dp_15"
+            android:src="@mipmap/default_ic_lock"
+            android:visibility="gone"/>
+
     </LinearLayout>
 
     <LinearLayout
