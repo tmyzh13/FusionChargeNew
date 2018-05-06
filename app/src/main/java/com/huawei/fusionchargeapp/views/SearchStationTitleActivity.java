@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
@@ -78,7 +79,7 @@ public class SearchStationTitleActivity extends BaseActivity<HomeListView,HomeLi
     @OnClick(R.id.tv_search)
     public void goSearch(){
         String key=tvSearchContent.getText().toString();
-        if (key.isEmpty()){
+        if (TextUtils.isEmpty(key) || TextUtils.isEmpty(key.trim())) {
             showToast("输入不能为空");
         } else {
             presenter.getDatas(key);
