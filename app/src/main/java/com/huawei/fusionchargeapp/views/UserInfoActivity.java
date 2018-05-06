@@ -512,28 +512,35 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
         int year=calendar.get(Calendar.YEAR);
         int monthOfYear=calendar.get(Calendar.MONTH);
         int dayOfMonth=calendar.get(Calendar.DAY_OF_MONTH);
+        if (TextUtils.isEmpty(tvBirthday.getText())) {
+            tvBirthday.setText(getDateFromYMD(year,monthOfYear,dayOfMonth));
+        }
 
         start_time.init(year, monthOfYear, dayOfMonth, new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker datePicker, int i, int i1, int i2) {
-                String str = i + ".";
-                if (i1 < 9){
-                    str = str + "0"+(i1+1)+".";
-                } else {
-                    str = str + (i1+1) +".";
-                }
-                if (i2 < 10) {
-                    str = str + "0" + i2;
-                } else {
-                    str = str + i2;
-                }
-                tvBirthday.setText(str);
+                tvBirthday.setText(getDateFromYMD(i,i1,i2));
             }
         });
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setView(popupView)
                 .setPositiveButton("确定",null).create();
         dialog.show();
+    }
+
+    private String getDateFromYMD(int i,int i1,int i2){
+        String str = i + ".";
+        if (i1 < 9){
+            str = str + "0"+(i1+1)+".";
+        } else {
+            str = str + (i1+1) +".";
+        }
+        if (i2 < 10) {
+            str = str + "0" + i2;
+        } else {
+            str = str + i2;
+        }
+    ;    return str;
     }
 
 
