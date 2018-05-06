@@ -36,6 +36,7 @@ import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
+import com.amap.api.maps.model.Text;
 import com.corelibs.base.BaseFragment;
 import com.corelibs.common.AppManager;
 import com.corelibs.subscriber.RxBusSubscriber;
@@ -98,6 +99,8 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
     TextView tv_map_info_name;
     @Bind(R.id.tv_map_info_score)
     TextView tv_map_info_score;
+    @Bind(R.id.score_unit)
+    TextView scoreUnit;
     @Bind(R.id.tv_map_info_address)
     TextView tv_map_info_address;
     @Bind(R.id.tv_map_info_distance)
@@ -602,9 +605,11 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
         TextPaint paintAddress = tv_map_info_address.getPaint();
         paintAddress.setFakeBoldText(true);
         if (mapInfoBean.averageScore.equals("-1.0")) {
-            tv_map_info_score.setText("--");
+            tv_map_info_score.setText("");
+            scoreUnit.setText("暂无评分");
         } else {
             tv_map_info_score.setText(mapInfoBean.averageScore);
+            scoreUnit.setText(R.string.score);
         }
         //要单算距离
         MyLocationBean bean = PreferencesHelper.getData(MyLocationBean.class);

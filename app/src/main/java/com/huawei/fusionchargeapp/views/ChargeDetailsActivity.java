@@ -53,6 +53,8 @@ public class ChargeDetailsActivity extends BaseActivity {
     TextView chargePileNameTv;
     @Bind(R.id.score_tv)
     TextView scoreTv;
+    @Bind(R.id.score_unit)
+    TextView scoreUnit;
     @Bind(R.id.charge_pile_address_tv)
     TextView chargePileAddressTv;
     @Bind(R.id.distance_tv)
@@ -244,9 +246,11 @@ public class ChargeDetailsActivity extends BaseActivity {
             chargePileNameTv.setText(chargeStationDetailBean.getName());
             chargePileAddressTv.setText(chargeStationDetailBean.getAddress());
             if ("-1.0".equals(chargeStationDetailBean.getAverageScore())){
-                scoreTv.setText("--");
+                scoreTv.setText("");
+                scoreUnit.setText("暂无评分");
             }else {
                 scoreTv.setText(chargeStationDetailBean.getAverageScore() + "");
+                scoreUnit.setText(R.string.score);
             }
 //        计算距离
             LatLng positionLatlng = new LatLng(userLatitude,userLongitude);

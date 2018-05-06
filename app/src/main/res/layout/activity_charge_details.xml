@@ -58,6 +58,7 @@
                 android:textSize="@dimen/text_title" />
 
             <TextView
+                android:id="@+id/score_unit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/score" />
