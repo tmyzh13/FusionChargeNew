@@ -78,7 +78,11 @@ public class SearchStationTitleActivity extends BaseActivity<HomeListView,HomeLi
     @OnClick(R.id.tv_search)
     public void goSearch(){
         String key=tvSearchContent.getText().toString();
-        presenter.getDatas(key);
+        if (key.isEmpty()){
+            showToast("输入不能为空");
+        } else {
+            presenter.getDatas(key);
+        }
     }
     @Override
     public void rendData(List<MapDataBean> list) {
