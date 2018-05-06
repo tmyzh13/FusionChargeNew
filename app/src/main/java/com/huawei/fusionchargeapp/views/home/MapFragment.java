@@ -647,6 +647,8 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                 }
             }
             tv_map_info_current_fee.setText(min + getString(R.string.yuan_du) + "~" + max + getString(R.string.yuan_du));
+        }else{
+            tv_map_info_current_fee.setText("0.0" + getString(R.string.yuan_du) + "~" + "0.0" + getString(R.string.yuan_du));
         }
 
     }
