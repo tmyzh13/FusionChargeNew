@@ -252,12 +252,16 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
             public void onLoadFailed(Exception e, Drawable errorDrawable) {
                 super.onLoadFailed(e, errorDrawable);
                 String path = PreferencesHelper.getData(USER_PHOTO_PATH);
-                File file = new File(path);
-                Glide.with(UserInfoActivity.this).load(Uri.fromFile(file))
-                        .error(R.mipmap.ic_launcher_round).into(ivUserIcon);
+                if (!TextUtils.isEmpty(path)) {
+                    File file = new File(path);
+                    Glide.with(UserInfoActivity.this).load(Uri.fromFile(file))
+                            .error(R.mipmap.ic_launcher_round).into(ivUserIcon);
+                }
             }
         };
-        Glide.with(this).load(userInfoBean.photoUrl).into(target);
+        if (!TextUtils.isEmpty(userInfoBean.photoUrl)) {
+            Glide.with(this).load(userInfoBean.photoUrl).into(target);
+        }
 
         //保存用户信息
         UserBean userBean = UserHelper.getSavedUser();
