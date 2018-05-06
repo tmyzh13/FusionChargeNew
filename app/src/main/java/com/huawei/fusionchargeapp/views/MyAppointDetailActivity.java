@@ -131,6 +131,7 @@ public class MyAppointDetailActivity extends BaseActivity<AllAppointmentView,All
             //上拉
             @Override
             public void onLoading(PtrFrameLayout frame) {
+                ptrLayout.enableLoading();
                 page ++;
                 getInfo();
             }
@@ -230,6 +231,7 @@ public class MyAppointDetailActivity extends BaseActivity<AllAppointmentView,All
                 str = null==startTime ? "没有更多预约信息" : "没有更多满足条件的预约信息";
             }
             showToast(str);
+            ptrLayout.disableLoading();
             return true;
         }
         return false;

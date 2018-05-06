@@ -17,6 +17,7 @@ import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.constants.Constant;
 import com.huawei.fusionchargeapp.presenter.SettingPresenter;
 import com.huawei.fusionchargeapp.views.interfaces.SettingView;
+import com.huawei.fusionchargeapp.weights.CommonDialog;
 import com.huawei.fusionchargeapp.weights.NavBar;
 
 import butterknife.Bind;
@@ -57,14 +58,25 @@ public class SettingActivity extends BaseActivity<SettingView, SettingPresenter>
 
     @OnClick(R.id.tv_login_out)
     public void gotoLoginout() {
-        
-        RxBus.getDefault().send(new Object(), Constant.LOGIN_OUT_SET_APPOINT_VIEW_GONE);
-        PreferencesHelper.clearData();
-        Intent intent=MainActivity.getLauncher(this);
-        intent.putExtra(MainActivity.ACTION,MainActivity.LOGINT_OUT);
-        startActivity(intent);
-        finish();
-
+        final CommonDialog dialog = new CommonDialog(this,"","您确定要注销账户？",2);
+        dialog.show();
+        dialog.setPositiveListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RxBus.getDefault().send(new Object(), Constant.LOGIN_OUT_SET_APPOINT_VIEW_GONE);
+                PreferencesHelper.clearData();
+                Intent intent=MainActivity.getLauncher(SettingActivity.this);
+                intent.putExtra(MainActivity.ACTION,MainActivity.LOGINT_OUT);
+                startActivity(intent);
+                SettingActivity.this.finish();
+            }
+        });
+        dialog.setNagitiveListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
     }
 
     @OnClick(R.id.tv_exit)
