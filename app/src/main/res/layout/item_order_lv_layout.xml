@@ -20,27 +20,36 @@
             style="@style/charge_pile_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/oder" />
+            android:layout_marginTop="@dimen/dp_2"
+            android:text="@string/oder"
+            android:textSize="14dp"/>
 
         <TextView
             style="@style/charge_pile_item"
             android:layout_marginLeft="@dimen/dp_5"
             android:id="@+id/oder_code_tv"
+            android:layout_marginTop="@dimen/dp_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/oder" />
+            android:layout_toRightOf="@id/oder"
+            android:text="2019000"
+            android:textSize="14dp"/>
 
         <ImageView
             android:id="@+id/iv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_2"
             android:layout_alignParentBottom="true"
             android:src="@mipmap/time" />
 
         <TextView
             android:layout_marginLeft="2dp"
             android:id="@+id/oder_time_tv"
+            android:text="2012-02-2"
+            android:textSize="12dp"
+            android:layout_marginBottom="@dimen/dp_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/iv_time"
@@ -59,7 +68,7 @@
             android:paddingLeft="@dimen/dp_13"
             android:paddingRight="@dimen/dp_13"
             android:background="@drawable/tv_corner_gray"
-            android:textSize="15dp"/>
+            android:textSize="13dp"/>
     </RelativeLayout>
 
     <View
@@ -87,7 +96,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginLeft="25dp"
             android:layout_toRightOf="@id/charge_icon"
             android:orientation="vertical">
 
@@ -106,14 +115,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_10"
-                    android:text="@string/guilding_charging_pile_no" />
+                    android:text="@string/guilding_charging_pile_no"
+                    android:textSize="12dp"/>
 
                 <TextView
                     android:maxLines="1"
                     android:id="@+id/charge_pile_code"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10" />
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:textSize="12dp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -132,14 +143,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_10"
-                    android:text="@string/gun_code" />
+                    android:text="@string/gun_code"
+                    android:textSize="12dp"/>
 
                 <TextView
                     android:maxLines="1"
                     android:id="@+id/charge_gun_code"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10" />
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:textSize="12dp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -158,14 +171,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_10"
-                    android:text="@string/charge_pile_address" />
+                    android:text="@string/charge_pile_address"
+                    android:textSize="12dp"/>
 
                 <TextView
                     android:maxLines="1"
                     android:id="@+id/charge_pile_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10" />
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:textSize="12dp"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -189,28 +204,32 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="充电时长" />
+            android:text="充电时长"
+            android:textSize="12dp"/>
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/charging_statue_fee" />
+            android:text="@string/charging_statue_fee"
+            android:textSize="12dp"/>
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/pay_service_fee" />
+            android:text="@string/pay_service_fee"
+            android:textSize="12dp"/>
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/total_fee" />
+            android:text="@string/total_fee"
+            android:textSize="12dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -226,7 +245,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:textColor="@color/black_bg" />
+            android:textColor="@color/black_bg"
+            android:text="1:12"
+            android:textSize="12dp"/>
 
         <TextView
             android:id="@+id/oder_charge_fee_tv"
@@ -234,7 +255,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:textColor="@color/black_bg" />
+            android:textColor="@color/black_bg"
+            android:text="10"
+            android:textSize="12dp"/>
 
         <TextView
             android:id="@+id/oder_service_fee_tv"
@@ -242,6 +265,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
+            android:text="10"
             android:textColor="@color/black_bg" />
 
         <TextView
@@ -250,6 +274,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:textColor="@color/black_bg" />
+            android:textColor="@color/black_bg"
+            android:text="20"
+            android:textSize="12dp"/>
     </LinearLayout>
 </LinearLayout>

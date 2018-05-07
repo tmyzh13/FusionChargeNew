@@ -177,6 +177,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/my_order_tv"
             android:layout_width="match_parent"
             android:layout_height="@dimen/nav_height"
             android:layout_marginTop="10dp"
@@ -190,7 +191,6 @@
                 android:src="@mipmap/icn_my_order"/>
 
             <TextView
-                android:id="@+id/my_order_tv"
                 style="@style/text_normal"
                 android:text="@string/home_my_order"
                 android:layout_marginLeft="25dp"
@@ -217,6 +217,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/tv_reserve"
             android:layout_width="match_parent"
             android:layout_height="@dimen/nav_height"
             android:layout_marginTop="10dp"
@@ -231,7 +232,6 @@
                 />
 
             <TextView
-                android:id="@+id/tv_reserve"
                 style="@style/text_normal"
                 android:text="@string/home_my_appointment"
                 android:layout_marginLeft="25dp"
