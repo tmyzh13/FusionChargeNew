@@ -35,26 +35,33 @@ public class CachedSearchTitleUtils {
         //isCachedChange = false;
     }
     public static void addHistoryData(CachedData data) {
+        if (historyData.size() == 0){
+            historyData.add(data);
+            return;
+        }
+        int pos = -1;
         for (int i=0;i<historyData.size();i++) {
             if (historyData.get(i).equals(data)) {
-                return;
+                pos = i;
             }
+        }
+        if (pos != -1){
+            addDataToFirst(data,pos);
+            return;
         }
         if (historyData.size() >= MAX_NUM_HITORY) {
-            /*
-            historyData.set(lastTimeHistory,data);
-            lastTimeHistory = lastTimeHistory + 1;
-            if (lastTimeHistory >= MAX_NUM_HITORY) {
-                lastTimeHistory -= MAX_NUM_HITORY;
-            }
-            */
-            for (int m = 0;m < MAX_NUM_HITORY-1;m++) {
-                historyData.set(m,historyData.get(m+1));
-            }
-            historyData.set(MAX_NUM_HITORY-1,data);
+           addDataToFirst(data,MAX_NUM_HITORY-1);
         } else {
             historyData.add(data);
+            addDataToFirst(data,historyData.size()-1);
         }
+    }
+
+    private static void addDataToFirst(CachedData data,int pos){
+        for (int i= pos;i>0;i--) {
+            historyData.set(i,historyData.get(i-1));
+        }
+        historyData.set(0,data);
     }
 
     public static void resetHistoryData(){
