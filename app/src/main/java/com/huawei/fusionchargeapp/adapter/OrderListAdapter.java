@@ -72,7 +72,11 @@ public class OrderListAdapter extends BaseAdapter {
         //设置数据
         final RawRecordBean bean = datas.get(position);
         holder.oder_code_tv.setText(bean.getOrderNum());
-        holder.oder_time_tv.setText(bean.getChargeEndTime());
+        if (bean.getChargeEndTime().length() >2){
+            holder.oder_time_tv.setText(bean.getChargeEndTime().substring(0,bean.getChargeEndTime().length()-2));
+        } else {
+            holder.oder_time_tv.setText(bean.getChargeEndTime());
+        }
         holder.charge_pile_code.setText(bean.getRunCode());
         holder.charge_gun_code.setText(bean.getGunCode());
         holder.charge_pile_address.setText(bean.getAddress());

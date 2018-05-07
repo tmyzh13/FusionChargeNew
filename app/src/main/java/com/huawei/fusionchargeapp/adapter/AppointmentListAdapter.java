@@ -72,7 +72,11 @@ public class AppointmentListAdapter extends BaseAdapter {
         holder.adress.setText(String.format(context.getString(R.string.run_adress),bean.chargingAddress));
         holder.piple.setText(String.format(context.getString(R.string.pile_info),bean.gunCode));
         holder.runCode.setText(context.getString(R.string.charging_pile_no)+bean.runCode);
-        holder.time.setText(bean.reserveBeginTime);
+        if (bean.reserveBeginTime.length() >2){
+            holder.time.setText(bean.reserveBeginTime.substring(0,bean.reserveBeginTime.length()-2));
+        } else {
+            holder.time.setText(bean.reserveBeginTime);
+        }
         holder.state.setText(STATE_TEXT[bean.state-1]);
         holder.state.setTextColor(STATE_COLOR[bean.state-1]);
         holder.state.setOnClickListener(new View.OnClickListener() {
