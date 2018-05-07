@@ -96,7 +96,7 @@ public class ChargeDetailsActivity extends BaseActivity {
         api = ApiFactory.getFactory().create(ScanApi.class);
 
         navBar.setColorRes(R.color.app_blue);
-        navBar.setNavTitle(context.getString(R.string.charging_pile_detail));
+
 
 //        latitude = getIntent().getDoubleExtra("latitude",0);
 //        longitude = getIntent().getDoubleExtra("longitude",0);
@@ -118,6 +118,7 @@ public class ChargeDetailsActivity extends BaseActivity {
         bean.setType(type);
 
         if(bean.getType() .equals( STATION)){
+            navBar.setNavTitle(context.getString(R.string.charging_pile_detail));
              api.getChargeStationDetail(UserHelper.getSavedUser().token,bean)
                 .compose(new ResponseTransformer<>(this.<BaseData<ChargeStationDetailBean>>bindUntilEvent(ActivityEvent.DESTROY)))
                 .subscribe(new ResponseSubscriber<BaseData<ChargeStationDetailBean>>() {
@@ -146,6 +147,7 @@ public class ChargeDetailsActivity extends BaseActivity {
                     }
                 });
         } else if(bean.getType() .equals( PILE)) {
+            navBar.setNavTitle(context.getString(R.string.charging_pile_detail_));
             api.getChargePileDetail(UserHelper.getSavedUser().token,bean)
                     .compose(new ResponseTransformer<>(this.<BaseData<PileList>>bindUntilEvent(ActivityEvent.DESTROY)))
                     .subscribe(new ResponseSubscriber<BaseData<PileList>>() {

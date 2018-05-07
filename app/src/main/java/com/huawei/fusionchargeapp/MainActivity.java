@@ -402,7 +402,6 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Log.e("yzh", "11111111111");
             doublePressBackToast();
             return true;
         } else {

@@ -63,11 +63,13 @@ public class SettingActivity extends BaseActivity<SettingView, SettingPresenter>
         dialog.setPositiveListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog.dismiss();
                 RxBus.getDefault().send(new Object(), Constant.LOGIN_OUT_SET_APPOINT_VIEW_GONE);
                 PreferencesHelper.clearData();
                 Intent intent=MainActivity.getLauncher(SettingActivity.this);
                 intent.putExtra(MainActivity.ACTION,MainActivity.LOGINT_OUT);
                 startActivity(intent);
+
                 SettingActivity.this.finish();
             }
         });
@@ -86,6 +88,7 @@ public class SettingActivity extends BaseActivity<SettingView, SettingPresenter>
         dialog.setPositiveListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog.dismiss();
                 RxBus.getDefault().send(new Object(), Constant.LOGIN_OUT_SET_APPOINT_VIEW_GONE);
                 PreferencesHelper.clearData();
                 finish();

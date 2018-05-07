@@ -140,7 +140,7 @@ public class ElectricGunAdapter extends BaseAdapter {
             holder.gunAppointmentTv.setBackgroundResource(R.drawable.appoint_gray_bg_shape);
             holder.gunAppointmentTv.setClickable(false);
         }
-        holder.gunNum.setText(gunBean.getGunCode() + "");
+        holder.gunNum.setText(gunBean.getGunNumber());
 
         return convertView;
     }

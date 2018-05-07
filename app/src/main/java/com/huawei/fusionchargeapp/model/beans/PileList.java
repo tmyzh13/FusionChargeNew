@@ -40,7 +40,8 @@ public class PileList {
     private String pileList;
     private String pileNum;
     private String runCode;
-    private int runStatus;
+    //runStatus==>status  1在线 2离线
+    private int status;
     private String type;
     private String virtualId;
     private String workStatus;
@@ -192,10 +193,10 @@ public class PileList {
     }
 
     public void setRunStatus(int runStatus) {
-        this.runStatus = runStatus;
+        this.status = runStatus;
     }
     public int getRunStatus() {
-        return runStatus;
+        return status;
     }
 
     public void setType(String type) {
@@ -243,7 +244,7 @@ public class PileList {
                 ", pileList='" + pileList + '\'' +
                 ", pileNum='" + pileNum + '\'' +
                 ", runCode='" + runCode + '\'' +
-                ", runStatus=" + runStatus +
+                ", runStatus=" + status +
                 ", type='" + type + '\'' +
                 ", virtualId='" + virtualId + '\'' +
                 ", workStatus='" + workStatus + '\'' +

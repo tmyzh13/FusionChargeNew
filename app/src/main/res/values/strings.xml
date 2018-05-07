@@ -139,6 +139,7 @@
 
     <!--充电桩详情-->
     <string name="charging_pile_detail">充电站详情</string>
+    <string name="charging_pile_detail_">充电桩详情</string>
     <string name="charging_pile_pics">图片</string>
     <string name="charging_pile_position">桩位</string>
     <string name="charging_pile_comments">评论</string>
@@ -199,7 +200,7 @@
     <string name="charging_statue_a">电流(A)</string>
     <string name="charging_statue_v">电压(V)</string>
     <string name="charging_statue_kw">功率</string>
-    <string name="charging_statue_current">当期电量</string>
+    <string name="charging_statue_current">当前电量</string>
     <string name="charging_statue_soc">SOC</string>
     <string name="charging_statue_fail">开始充电失败</string>
     <string name="charging_statue_please_check">请检查桩与车的连接状态....</string>
@@ -391,5 +392,7 @@
     <string name="my_acount_invoice">发票与报销</string>
     <string name="send_electronic_invoice">开电子发票</string>
     <string name="invoice_histroy">开票历史</string>
-
+    <string name="invoice_detail">纸质发票详情</string>
+    <string name="invoice_detail_statue">纸质发票已开票</string>
+    <string name="invoice_receive_messege">接受信息</string>
 </resources>

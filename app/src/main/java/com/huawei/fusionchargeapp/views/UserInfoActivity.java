@@ -267,7 +267,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
         UserBean userBean = UserHelper.getSavedUser();
 
         userBean.photoUrl = userInfoBean.photoUrl;
-        userBean.name = userInfoBean.name;
+        userBean.nickName = userInfoBean.name;
         userBean.sex = userInfoBean.sex;
         userBean.sexName = userInfoBean.sexName;
         userBean.email = userInfoBean.email;
@@ -278,8 +278,8 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
         UserHelper.saveUser(userBean);
 
         // 姓名
-        if (!TextUtils.isEmpty(userBean.name)) {
-            etNick.setText(userBean.name);
+        if (!TextUtils.isEmpty(userBean.nickName)) {
+            etNick.setText(userBean.nickName);
         }
         //性别 1为男，2为女，0为未知
         tvSex.setText(userBean.sexName);

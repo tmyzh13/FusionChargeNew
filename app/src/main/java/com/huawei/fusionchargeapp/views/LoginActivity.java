@@ -126,7 +126,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
                     phoneDropDownIv.setVisibility(View.GONE);
                     phoneCutLine.setVisibility(View.INVISIBLE);
                     inputPwdLl.setVisibility(View.GONE);
-                    forgetPwdandRegisterRl.setVisibility(View.GONE);
+//                    forgetPwdandRegisterRl.setVisibility(View.GONE);
                     typeCodeLl.setVisibility(View.VISIBLE);
                     loginTv.setText(getText(R.string.login));
                     isRegister = false;
@@ -159,6 +159,10 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
             code = codeEt.getText().toString().trim();
             if (TextUtils.isEmpty(code)) {
                 showHintDialog(getString(R.string.hint),getString(R.string.hint_input_code));
+                return false;
+            }
+            if(code.length()<6){
+                showHintDialog(getString(R.string.hint),getString(R.string.hint_input_code_6));
                 return false;
             }
             if(!cb_appointment.isChecked()){

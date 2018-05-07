@@ -169,6 +169,12 @@
             />
         <activity android:name=".views.RechargeAndConsumeDetailActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".views.mycount.ApplyInvoiceActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".views.mycount.InvoiceDetailActivity"
+            android:screenOrientation="portrait"
+            />
     </application>
 
 </manifest>

@@ -78,9 +78,9 @@ public class ChargePileAdapter extends BaseAdapter {
         }
 
         if (chargePileBean.getRunStatus() == 1) {
-            holder.pileStatusIv.setImageResource(R.mipmap.charge_off);
-        } else {
             holder.pileStatusIv.setImageResource(R.mipmap.charge_on);
+        } else {
+            holder.pileStatusIv.setImageResource(R.mipmap.charge_off);
         }
 
         //获取充电价格和服务费价格
