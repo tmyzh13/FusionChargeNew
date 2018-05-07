@@ -239,12 +239,23 @@ public class MyAppointDetailActivity extends BaseActivity<AllAppointmentView,All
 
     @Override
     public void showLoading() {
+//        super.showLoading();
         ptrLayout.setRefreshing();
     }
 
     @Override
     public void hideLoading() {
         ptrLayout.complete();
+    }
+
+    @Override
+    public void onLoadingCompleted() {
+        hideLoading();
+    }
+
+    @Override
+    public void onAllPageLoaded() {
+        ptrLayout.disableLoading();
     }
 
 }

@@ -23,7 +23,7 @@ import com.corelibs.views.ptr.loadmore.adapter.LoadMoreAdapter;
  */
 public class AutoLoadMoreHandler<H extends ViewGroup, T extends LoadMoreAdapter<H>> {
 
-    public static final int DEFAULT_WHEN_TO_LOADING = 3;
+    public static final int DEFAULT_WHEN_TO_LOADING = 1;
 
     private Context context;
     private T adapter;

@@ -5,6 +5,7 @@ import android.util.Log;
 import com.corelibs.api.ApiFactory;
 import com.corelibs.api.ResponseTransformer;
 import com.corelibs.base.BasePresenter;
+import com.corelibs.pagination.presenter.PagePresenter;
 import com.corelibs.subscriber.ResponseSubscriber;
 import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.apis.AllAppointmentApi;
@@ -24,7 +25,7 @@ import rx.Subscription;
  * Created by admin on 2018/5/4.
  */
 
-public class AllAppointmentPresenter extends BasePresenter<AllAppointmentView> {
+public class AllAppointmentPresenter extends PagePresenter<AllAppointmentView> {
 
     AllAppointmentApi api;
 
