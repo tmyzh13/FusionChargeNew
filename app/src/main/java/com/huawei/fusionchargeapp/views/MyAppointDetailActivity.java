@@ -36,14 +36,10 @@ import com.huawei.fusionchargeapp.model.beans.PileFeeBean;
 import com.huawei.fusionchargeapp.model.beans.RawRecordBean;
 import com.huawei.fusionchargeapp.model.beans.UserBean;
 import com.huawei.fusionchargeapp.presenter.AllAppointmentPresenter;
-import com.huawei.fusionchargeapp.presenter.MapPresenter;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.interfaces.AllAppointmentView;
-import com.huawei.fusionchargeapp.views.interfaces.MapHomeView;
-import com.huawei.fusionchargeapp.views.interfaces.MyOrderActivity;
 import com.huawei.fusionchargeapp.weights.NavBar;
 
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Calendar;

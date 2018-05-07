@@ -140,6 +140,9 @@ public class ResponseHandler<T> {
                     }else{
                         handleOperationError(data.msg());
                     }*/
+                    if(view==null){
+                        return;
+                    }
                     Context context = view.getViewContext() == null ? AppManager.getAppManager().getAppContext() : view.getViewContext();
                     if(data.status()==403){
                         handlerGoLogin();

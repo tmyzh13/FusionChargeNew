@@ -111,7 +111,7 @@ public class ElectricGunAdapter extends BaseAdapter {
             holder.gunAppointmentTv.setBackgroundResource(R.drawable.blue_stroke_90angle_bg);
         } else if (gunBean.getGunStatus() == 2) {
             holder.gunStatusIv.setImageResource(R.drawable.dots_fault_red);
-            holder.gunStatusTv.setText(R.string.useing_no_charge);
+            holder.gunStatusTv.setText(R.string.gun_not_using);
             holder.gunAppointmentTv.setTextColor(context.getResources().getColor(R.color.text_gray));
             holder.gunAppointmentTv.setBackgroundResource(R.drawable.appoint_gray_bg_shape);
             holder.gunAppointmentTv.setClickable(false);
@@ -140,7 +140,7 @@ public class ElectricGunAdapter extends BaseAdapter {
             holder.gunAppointmentTv.setBackgroundResource(R.drawable.appoint_gray_bg_shape);
             holder.gunAppointmentTv.setClickable(false);
         }
-        holder.gunNum.setText(gunBean.getGunId() + "");
+        holder.gunNum.setText(gunBean.getGunCode() + "");
 
         return convertView;
     }

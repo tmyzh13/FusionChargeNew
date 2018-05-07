@@ -23,6 +23,7 @@ import com.huawei.fusionchargeapp.model.beans.BaseData;
 import com.huawei.fusionchargeapp.model.beans.ChargeDetailFeeBean;
 import com.huawei.fusionchargeapp.model.beans.ChargeDetailFeeListBean;
 import com.huawei.fusionchargeapp.model.beans.ChargeStationDetailBean;
+import com.huawei.fusionchargeapp.model.beans.GunList;
 import com.huawei.fusionchargeapp.model.beans.MyLocationBean;
 import com.huawei.fusionchargeapp.model.beans.PileList;
 import com.huawei.fusionchargeapp.model.beans.RequestChargePileDetailBean;
@@ -160,6 +161,12 @@ public class ChargeDetailsActivity extends BaseActivity {
                             chargeStationDetailBean.setLongitude(Double.parseDouble(pileList.getLongitude()));
                             chargeStationDetailBean.setPhotoUrl(pileList.getPhotoUrl());
                             chargeStationDetailBean.setId(pileList.getId());
+                            List<GunList> gunLists=pileList.getGunList();
+                            if(gunLists!=null){
+                                for(int i=0;i<gunLists.size();i++){
+                                    gunLists.get(i).setChargingPileId(pileList.getId());
+                                }
+                            }
                             List<PileList> list = new ArrayList<>();
                             list.add(pileList);
                             chargeStationDetailBean.setPileList(list);

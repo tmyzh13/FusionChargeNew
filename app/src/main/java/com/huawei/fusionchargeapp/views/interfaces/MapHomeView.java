@@ -27,4 +27,6 @@ public interface MapHomeView extends BaseView{
     void renderAppoinmentInfo(boolean has,HomeAppointmentBean bean);
 
     void renderHomeChargerOrder(boolean has,HomeChargeOrderBean bean);
+
+    void reportUserLocationSuccess();
 }

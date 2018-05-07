@@ -106,7 +106,7 @@ public class ChargePileAdapter extends BaseAdapter {
         holder.maxElectronicTv.setText(chargePileBean.getMaxCurrent() + "A");
         holder.maxVoltageTv.setText(chargePileBean.getMaxVoltage() + "V"); //电压
         holder.pileStatusTv.setText(chargePileBean.getRunStatus() == 1 ?
-                context.getString(R.string.statue_online) : context.getString(R.string.statue_offline));
+                context.getString(R.string.statue_offline) : context.getString(R.string.statue_online));
 
         gunList = chargePileBean.getGunList();
 

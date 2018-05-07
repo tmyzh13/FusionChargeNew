@@ -10,6 +10,7 @@ import com.huawei.fusionchargeapp.model.beans.HomeOrderBean;
 import com.huawei.fusionchargeapp.model.beans.MapDataBean;
 import com.huawei.fusionchargeapp.model.beans.MapInfoBean;
 import com.huawei.fusionchargeapp.model.beans.PileFeeBean;
+import com.huawei.fusionchargeapp.model.beans.ReportUserLocation;
 import com.huawei.fusionchargeapp.model.beans.RequesHomeMapInfo;
 import com.huawei.fusionchargeapp.model.beans.RequestChargeStateBean;
 import com.huawei.fusionchargeapp.model.beans.RequestFeeBean;
@@ -53,4 +54,8 @@ public interface MapApi {
 
     @POST(Urls.GET_USER_APPOINTMENT)
     Observable<BaseData<HomeAppointmentBean>> getUserAppointmentRecord(@Header("AccessToken") String token,@Body RequestHomeAppointment bean);
+
+    @POST(Urls.REPORT_LOCATION)
+    Observable<BaseData> reportUserLocation(@Body ReportUserLocation bean);
+
 }

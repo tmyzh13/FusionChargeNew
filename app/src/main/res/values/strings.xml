@@ -380,7 +380,16 @@
     <string name="man">男</string>
     <string name="woman">女</string>
     <string name="secret">保密</string>
-    <string name="upload_photo_error">上传头像失败。</string>
+    <string name="upload_photo_error">上传头像失败</string>
 
+    <!--my_acount-->
+    <string name="my_acount">我的账户</string>
+    <string name="my_acount_balance">余额（元）</string>
+    <string name="my_acount_recharge">充值</string>
+    <string name="my_acount_detail">明细</string>
+    <string name="my_acount_put_forward">提现</string>
+    <string name="my_acount_invoice">发票与报销</string>
+    <string name="send_electronic_invoice">开电子发票</string>
+    <string name="invoice_histroy">开票历史</string>
 
 </resources>

@@ -19,6 +19,7 @@ import com.huawei.fusionchargeapp.model.beans.HomeOrderBean;
 import com.huawei.fusionchargeapp.model.beans.MapDataBean;
 import com.huawei.fusionchargeapp.model.beans.MapInfoBean;
 import com.huawei.fusionchargeapp.model.beans.PileFeeBean;
+import com.huawei.fusionchargeapp.model.beans.ReportUserLocation;
 import com.huawei.fusionchargeapp.model.beans.RequesHomeMapInfo;
 import com.huawei.fusionchargeapp.model.beans.RequestChargeStateBean;
 import com.huawei.fusionchargeapp.model.beans.RequestFeeBean;
@@ -246,6 +247,20 @@ public class MapPresenter extends BasePresenter<MapHomeView> {
                     @Override
                     public void success(BaseData baseData) {
 
+                    }
+                });
+    }
+
+    public void reportUserLocation(double latitude,double longitude){
+        ReportUserLocation reportUserLocation=new ReportUserLocation();
+        reportUserLocation.latitude=latitude;
+        reportUserLocation.longitude=longitude;
+        api.reportUserLocation(reportUserLocation)
+                .compose(new ResponseTransformer<>(this.<BaseData>bindToLifeCycle()))
+                .subscribe(new ResponseSubscriber<BaseData>() {
+                    @Override
+                    public void success(BaseData baseData) {
+                        view.reportUserLocationSuccess();
                     }
                 });
     }

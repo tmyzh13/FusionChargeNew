@@ -15,7 +15,7 @@ public class Urls {
 //    public static final String ROOT = "http://114.115.141.57:8080/charger/api/v1/";
 //        public static final String ROOT = "http://114.115.169.46:8088/charger/api/v1/";  //开发环境
     public static final String ROOT = "http://114.115.141.57:8080/charger/api/v1/";      //测试环境
-
+//    public static final String ROOT="http://139.159.134.139:8080/charger/api/v1/";//5-7出包
 //    public static final String ROOT = "http://10.40.143.10:8088/charger/api/v1/";   //大灰灰
 //    public static final String ROOT = "http://10.40.143.17:8088/charger/api/v1/";
 //    public static final String ROOT = "http://10.40.143.72:8088/charger/api/v1/";
@@ -88,5 +88,7 @@ public class Urls {
     public static final String MODIFY_IMG = "user/modifyimg";
 
 
+    //上传用户信息
+    public static final String REPORT_LOCATION="user/selectUserInfoByRegion";
 
 }

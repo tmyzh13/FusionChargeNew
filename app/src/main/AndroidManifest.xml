@@ -161,6 +161,12 @@
         <activity
             android:name="com.huawei.fusionchargeapp.views.MyAppointDetailActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".views.mycount.MyAcountActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".views.mycount.MyInvoiceActivity"
+            android:screenOrientation="portrait"
+            />
     </application>
 
 </manifest>

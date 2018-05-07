@@ -227,12 +227,12 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                     if (appointmentTime <= 0) {
                         //预约超时
                         if (AppManager.getAppManager().currentActivity().getClass().equals(MainActivity.class)) {
+                            Log.e("yzh",(homeAppointmentBean==null)+"--");
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     //结束时间小于=当前时间
                                     if(homeAppointmentBean!=null){
-//                                        if(homeAppointmentBean.reserveEndTime<=homeAppointmentBean.nowTime){
                                         if(!appointmentTimeOutDialog.isShowing()){
                                             appointmentTimeOutDialog.show();
                                         }
@@ -280,9 +280,18 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                             ActionControl.getInstance(getViewContext()).setHasNoPayOrder(false, null);
                         } else if (data.type == 1) {
                             //预约结束 屏蔽预约提示
-                            ll_appontment.setVisibility(View.GONE);
                             homeAppointmentBean=null;
                             ActionControl.getInstance(getViewContext()).setHasAppointment(false, null);
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    ll_appontment.setVisibility(View.GONE);
+                                    if(appointmentTimeOutDialog.isShowing()){
+                                        appointmentTimeOutDialog.dismiss();
+                                    }
+                                }
+                            });
+
                         }
 
                     }
@@ -520,7 +529,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
     }
 
     private boolean followMove = true;
-
+    private boolean isReportUserLocation=false;
     @Override
     public void onLocationChanged(AMapLocation aMapLocation) {
         if (mListener != null && aMapLocation != null) {
@@ -535,9 +544,16 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                 if (followMove) {
                     aMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude())));
                 }
-//                if (list == null || list.size() == 0) {
-//                    presenter.getData();
-//                }
+
+                //在登陆的情况下上报一次用户坐标信息
+                if(UserHelper.getSavedUser()!=null){
+                    //登陆过了
+                    if(!isReportUserLocation){
+                        //还没上报
+                        presenter.reportUserLocation(aMapLocation.getLatitude(),aMapLocation.getLongitude());
+                    }
+                }
+
             } else {
                 String errText = "location_fail," + aMapLocation.getErrorCode() + ": " + aMapLocation.getErrorInfo();
                 Log.e("yzh", errText);
@@ -671,6 +687,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
     @Override
     public void renderAppoinmentInfo(boolean has, HomeAppointmentBean bean) {
         ActionControl.getInstance(getContext()).setHasAppointment(has, bean);
+        Log.e("yzh","renderAppointmentInfp");
         homeAppointmentBean = bean;
         if (has) {
             tv_pile_num.setText(bean.runCode);
@@ -711,6 +728,11 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
 
     }
 
+    @Override
+    public void reportUserLocationSuccess() {
+        isReportUserLocation=true;
+    }
+
     private ServiceConnection mConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -734,7 +756,6 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
     public void goGuaild() {
         if (currentMapDataBean != null) {
             boolean choiceNotAppointment = false;
-            Log.e("yzh",(homeAppointmentBean!=null)+"--");
             if (homeAppointmentBean != null) {
                 Log.e("yzh",homeAppointmentBean.latitude+"--"+currentMapDataBean.latitude);
                 if (homeAppointmentBean.latitude != currentMapDataBean.latitude || homeAppointmentBean.longitude != currentMapDataBean.longitude) {

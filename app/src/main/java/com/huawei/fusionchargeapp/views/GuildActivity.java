@@ -225,6 +225,9 @@ public class GuildActivity  extends BaseActivity<GuaildView,GuaildPresenter> imp
                             });
                             timerAppointment.cancel();
                             timerAppointment=null;
+                            HomeRefreshBean bean =new HomeRefreshBean();
+                            bean.type=1;
+                            RxBus.getDefault().send(bean,Constant.HOME_STATUE_REFRESH);
 //                        cancelTimerAppointment();
                         }
                     }
