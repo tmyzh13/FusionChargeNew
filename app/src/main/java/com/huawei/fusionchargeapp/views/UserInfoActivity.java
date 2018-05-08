@@ -123,6 +123,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
     private long lastInputTime = 0;
     private MyHandler myHandler = new MyHandler(this);
     private boolean isGoToCarema = true;
+    private String datePickerContent = "";
 
     public static Intent startActivity(Context context) {
         Intent intent = new Intent(context, UserInfoActivity.class);
@@ -523,23 +524,37 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
         tv_end.setVisibility(View.GONE);
         tv_start.setVisibility(View.GONE);
 
-        Calendar calendar = Calendar.getInstance();
-        int year=calendar.get(Calendar.YEAR);
-        int monthOfYear=calendar.get(Calendar.MONTH);
-        int dayOfMonth=calendar.get(Calendar.DAY_OF_MONTH);
+        int year,monthOfYear,dayOfMonth;
         if (TextUtils.isEmpty(tvBirthday.getText())) {
+            Calendar calendar = Calendar.getInstance();
+            year=calendar.get(Calendar.YEAR);
+            monthOfYear=calendar.get(Calendar.MONTH);
+            dayOfMonth=calendar.get(Calendar.DAY_OF_MONTH);
             tvBirthday.setText(getDateFromYMD(year,monthOfYear,dayOfMonth));
+        } else {
+            String[] date = tvBirthday.getText().toString().split("-|\\.");
+            year = Integer.parseInt(date[0]);
+            monthOfYear = Integer.parseInt(date[1]) - 1;
+            dayOfMonth = Integer.parseInt(date[2]);
         }
 
         start_time.init(year, monthOfYear, dayOfMonth, new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker datePicker, int i, int i1, int i2) {
-                tvBirthday.setText(getDateFromYMD(i,i1,i2));
+                datePickerContent = getDateFromYMD(i,i1,i2);
             }
         });
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setView(popupView)
-                .setPositiveButton("确定",null).create();
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (!Tools.isNull(datePickerContent)) {
+                            tvBirthday.setText(datePickerContent);
+                            datePickerContent = "";
+                        }
+                    }
+                }).create();
         dialog.show();
     }
 
