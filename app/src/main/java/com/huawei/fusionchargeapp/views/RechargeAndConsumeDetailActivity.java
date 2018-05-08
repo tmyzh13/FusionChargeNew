@@ -161,8 +161,7 @@ public class RechargeAndConsumeDetailActivity extends BaseActivity<RechargeAndCo
                 }
             }
         }
-        adpter = new RechargeAndConsumeDetailAdapter(this,groupList,itemList);
-        lvOrder.setAdapter(adpter);
+        adpter.setDatas(groupList,itemList);
         setExpandableListViewShowProperty();
     }
 
