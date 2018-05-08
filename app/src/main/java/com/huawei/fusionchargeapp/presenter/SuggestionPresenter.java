@@ -7,6 +7,7 @@ import com.corelibs.subscriber.ResponseSubscriber;
 import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.apis.SuggestionApi;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
+import com.huawei.fusionchargeapp.model.beans.ResultOnlyWithCodeBean;
 import com.huawei.fusionchargeapp.model.beans.SuggestionBean;
 import com.huawei.fusionchargeapp.views.interfaces.SuggestionView;
 import com.trello.rxlifecycle.ActivityEvent;
@@ -30,10 +31,10 @@ public class SuggestionPresenter extends BasePresenter<SuggestionView> {
 
     public void commit(SuggestionBean bean){
         api.commit(UserHelper.getSavedUser().token, bean)
-        .compose(new ResponseTransformer<>(this.<BaseData<Void>>bindUntilEvent(ActivityEvent.DESTROY)))
-                .subscribe(new ResponseSubscriber<BaseData<Void>>(view) {
+        .compose(new ResponseTransformer<>(this.<ResultOnlyWithCodeBean>bindUntilEvent(ActivityEvent.DESTROY)))
+                .subscribe(new ResponseSubscriber<ResultOnlyWithCodeBean>(view) {
                     @Override
-                    public void success(BaseData<Void> baseData) {
+                    public void success(ResultOnlyWithCodeBean baseData) {
                         view.CommitSucess();
                     }
                 });

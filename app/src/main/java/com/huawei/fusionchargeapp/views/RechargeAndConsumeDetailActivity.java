@@ -1,14 +1,24 @@
 package com.huawei.fusionchargeapp.views;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListView;
 
 import com.corelibs.base.BaseActivity;
 import com.corelibs.base.BasePresenter;
+import com.corelibs.views.cube.ptr.PtrFrameLayout;
+import com.corelibs.views.ptr.layout.PtrAutoLoadMoreLayout;
+import com.corelibs.views.ptr.loadmore.widget.AutoLoadMoreExpandableListView;
+import com.corelibs.views.ptr.loadmore.widget.AutoLoadMoreListView;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.adapter.RechargeAndConsumeDetailAdapter;
+import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.beans.RechargeAndConsumeBean;
+import com.huawei.fusionchargeapp.model.beans.RechargeAndConsumeRequestBean;
+import com.huawei.fusionchargeapp.presenter.RechargeAndConsumePresenter;
+import com.huawei.fusionchargeapp.utils.Tools;
+import com.huawei.fusionchargeapp.views.interfaces.RechargeAndConsumeView;
 import com.huawei.fusionchargeapp.weights.NavBar;
 
 import java.util.ArrayList;
@@ -20,17 +30,23 @@ import butterknife.Bind;
  * Created by admin on 2018/5/7.
  */
 
-public class RechargeAndConsumeDetailActivity extends BaseActivity{
+public class RechargeAndConsumeDetailActivity extends BaseActivity<RechargeAndConsumeView,RechargeAndConsumePresenter> implements RechargeAndConsumeView{
 
     @Bind(R.id.nav_bar)
     NavBar bar;
     @Bind(R.id.list_view)
-    ExpandableListView listView;
+    AutoLoadMoreExpandableListView lvOrder;
+    @Bind(R.id.ptrLayout)
+    PtrAutoLoadMoreLayout ptrLayout;
 
     private List<String> groupList = new ArrayList<>();
     private List<List<RechargeAndConsumeBean>> itemList = new ArrayList<>();
     private RechargeAndConsumeDetailAdapter adpter;
+    private RechargeAndConsumeRequestBean requestBean = new RechargeAndConsumeRequestBean();
 
+    private static final int PAGE_FIRST_NUM = 1;
+    private int page = PAGE_FIRST_NUM;
+    private static final int PAGE_LIMIT_NUM = 10;
     @Override
     public void goLogin() {
 
@@ -45,24 +61,49 @@ public class RechargeAndConsumeDetailActivity extends BaseActivity{
     protected void init(Bundle savedInstanceState) {
         bar.setNavTitle("明细");
         bar.setColorRes(R.color.blue);
-
-        //fake data
-        initFakeData();
+        requestBean.rp = PAGE_LIMIT_NUM;
+        requestBean.page = PAGE_FIRST_NUM;
 
         adpter = new RechargeAndConsumeDetailAdapter(this,groupList,itemList);
-        listView.setAdapter(adpter);
+        lvOrder.setAdapter(adpter);
         //reset listView show
         setExpandableListViewShowProperty();
+        ptrLayout.setRefreshLoadCallback(new PtrAutoLoadMoreLayout.RefreshLoadCallback() {
+            @Override
+            public void onLoading(PtrFrameLayout frame) {
+                ptrLayout.enableLoading();
+                page ++;
+                requestBean.page = page;
+                presenter.getBalanceDetail(requestBean);
+            }
 
+            @Override
+            public void onRefreshing(PtrFrameLayout frame) {
+                page = PAGE_FIRST_NUM;
+                requestBean.page = page;
+
+                ptrLayout.enableLoading();
+                if (!frame.isAutoRefresh()) {
+                    presenter.getBalanceDetail(requestBean);
+                }
+            }
+        });
+
+        if(UserHelper.getSavedUser()==null|| Tools.isNull(UserHelper.getSavedUser().token)){
+            startActivity(LoginActivity.getLauncher(this));
+            return;
+        }
+        showLoading();
+        presenter.getBalanceDetail(requestBean);
 
     }
 
     private void setExpandableListViewShowProperty(){
-        listView.setGroupIndicator(null);
+        lvOrder.setGroupIndicator(null);
         for (int i= 0; i<groupList.size();i++){
-            listView.expandGroup(i);
+            lvOrder.expandGroup(i);
         }
-        listView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+        lvOrder.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
             public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
                 return true;
@@ -70,44 +111,85 @@ public class RechargeAndConsumeDetailActivity extends BaseActivity{
         });
     }
 
-    private void initFakeData(){
-        groupList.add("本月");
-        groupList.add("4月");
-
-        RechargeAndConsumeBean bean = new RechargeAndConsumeBean();
-        bean.rechargeType = 0;
-        bean.money= "+33";
-        bean.moneySubscription="充值33";
-        bean.time="15:00";
-        bean.weekDay="周二";
-        List<RechargeAndConsumeBean> list = new ArrayList<>();
-        list.add(bean);
-
-        RechargeAndConsumeBean bean1 = new RechargeAndConsumeBean();
-        bean1.rechargeType = 1;
-        bean1.money= "+33";
-        bean1.moneySubscription="充值33";
-        bean1.time="15:00";
-        bean1.weekDay="周二";
-        list.add(bean1);
-
-        RechargeAndConsumeBean bean2 = new RechargeAndConsumeBean();
-        bean2.rechargeType = 2;
-        bean2.money= "+33";
-        bean2.moneySubscription="充值33";
-        bean2.time="15:00";
-        bean2.weekDay="周二";
-        list.add(bean2);
-
-        itemList.add(list);
-
-        List<RechargeAndConsumeBean> list1 = new ArrayList<>();
-        list1.add(bean);
-        itemList.add(list1);
+    @Override
+    public void onLoadingCompleted() {
+        hideLoading();
     }
 
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    public void onAllPageLoaded() {
+        ptrLayout.disableLoading();
+    }
+
+    @Override
+    public void getBalanceDetailFail() {
+        if (page > PAGE_FIRST_NUM) {
+            page--;
+        }
+    }
+
+    @Override
+    public void getBalanceDetail(List<RechargeAndConsumeBean> list) {
+        //如果list存在数据才继续处理
+        if (!noData(list)) {
+            setAdapterData(list);
+        }
+    }
+
+    //如何处理新增加的数据
+    private void setAdapterData(List<RechargeAndConsumeBean> list){
+        /*数据处理逻辑，数据分组以时间来分，即时间的年和月来分
+        如果有不同的年和月，就加入组，相应子数据开始增加；
+         */
+        int size = groupList.size();
+        for (int i =0; i < list.size(); i++) {
+            RechargeAndConsumeBean tempBean = list.get(i);
+            if (size == 0) {
+                groupList.add(getGroupStringFromeTime(tempBean.createTime));
+                itemList.add(new ArrayList<RechargeAndConsumeBean>());
+                size++;
+                itemList.get(size-1).add(tempBean);
+            }
+            if (size != 0) {
+                if (groupList.contains(getGroupStringFromeTime(tempBean.createTime))) {
+                    itemList.get(size-1).add(tempBean);
+                } else {
+                    groupList.add(getGroupStringFromeTime(tempBean.createTime));
+                    itemList.add(new ArrayList<RechargeAndConsumeBean>());
+                    size++;
+                    itemList.get(size-1).add(tempBean);
+                }
+            }
+        }
+        adpter.setDatas(groupList,itemList);
+    }
+
+    private String getGroupStringFromeTime(String date) {
+        return (date.substring(0,4) + "年" +date.substring(5,7) + "月");
+    }
+
+    @Override
+    protected RechargeAndConsumePresenter createPresenter() {
+        return new RechargeAndConsumePresenter();
+    }
+
+    public boolean noData(List<RechargeAndConsumeBean> bean) {
+        if (null == bean || bean.isEmpty()){
+            showToast(page == PAGE_FIRST_NUM ? "没有账单记录": "没有更多账单记录");
+            ptrLayout.disableLoading();
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void showLoading() {
+//        super.showLoading();
+        ptrLayout.setRefreshing();
+    }
+
+    @Override
+    public void hideLoading() {
+        ptrLayout.complete();
     }
 }

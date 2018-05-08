@@ -2,6 +2,7 @@ package com.huawei.fusionchargeapp.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,8 @@ public class RechargeAndConsumeDetailAdapter extends BaseExpandableListAdapter {
 
     private static final int[] sort_img = {R.drawable.list_ic_zhifubao,R.drawable.list_ic_weixin};
     private static final String[] sort_text =  {"支付宝","微信"};
+    private static final String[] DEL_OR_ADD = {"-","+"};
+    private static final String[] BALANCE = {"消费","充值"};
 
     public RechargeAndConsumeDetailAdapter(Context context, List<String> groupList, List<List<RechargeAndConsumeBean>> itemLst) {
         this.context = context;
@@ -117,21 +120,20 @@ public class RechargeAndConsumeDetailAdapter extends BaseExpandableListAdapter {
             holder = (ItemViewHolder) view.getTag();
         }
         RechargeAndConsumeBean bean = itemLst.get(i).get(i1);
-        if (bean.rechargeType < 2){
+        if (bean.type < 2){
             holder.recharge_sort.setVisibility(View.VISIBLE);
             holder.img_sort.setVisibility(View.VISIBLE);
-            holder.recharge_sort.setText(sort_text[bean.rechargeType]);
-            holder.img_sort.setImageResource(sort_img[bean.rechargeType]);
+            holder.recharge_sort.setText(sort_text[bean.type]);
+            holder.img_sort.setImageResource(sort_img[bean.type]);
         } else {
             holder.recharge_sort.setVisibility(View.GONE);
             holder.img_sort.setVisibility(View.GONE);
         }
 
         holder.tv_week.setText(bean.weekDay);
-        holder.tv_time.setText(bean.time);
-        holder.tv_money.setText(bean.money);
-        holder.tv_money_subscription.setText(bean.moneySubscription);
-
+        holder.tv_time.setText(bean.createTime.substring(bean.createTime.length()-8,bean.createTime.length()-3));
+        holder.tv_money.setText(DEL_OR_ADD[bean.isAdd]+bean.occurCost);
+        holder.tv_money_subscription.setText(BALANCE[bean.isAdd]+bean.occurCost);
 
         return view;
     }

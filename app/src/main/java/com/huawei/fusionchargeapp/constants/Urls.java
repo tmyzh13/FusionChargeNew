@@ -94,4 +94,7 @@ public class Urls {
     //用户提意见
     public static final String PUBLISH_SUGGESTION = "appUserRecord/addFeedbackRecord";
 
+    //充值消费记录
+    public static final String BALANCE_RECORD = "appUserRecord/getUserBalanceOrderRecord";
+
 }

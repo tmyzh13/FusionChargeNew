@@ -2,6 +2,7 @@ package com.huawei.fusionchargeapp.model.apis;
 
 import com.huawei.fusionchargeapp.constants.Urls;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
+import com.huawei.fusionchargeapp.model.beans.ResultOnlyWithCodeBean;
 import com.huawei.fusionchargeapp.model.beans.SuggestionBean;
 
 import retrofit2.http.Body;
@@ -15,5 +16,5 @@ import rx.Observable;
 
 public interface SuggestionApi {
     @POST(Urls.PUBLISH_SUGGESTION)
-    Observable<BaseData<Void>> commit(@Header("AccessToken") String token, @Body SuggestionBean bean);
+    Observable<ResultOnlyWithCodeBean> commit(@Header("AccessToken") String token, @Body SuggestionBean bean);
 }
