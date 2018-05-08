@@ -80,6 +80,8 @@ public class RechargeAndConsumeDetailActivity extends BaseActivity<RechargeAndCo
             @Override
             public void onRefreshing(PtrFrameLayout frame) {
                 page = PAGE_FIRST_NUM;
+                groupList.clear();
+                itemList.clear();
                 requestBean.page = page;
 
                 ptrLayout.enableLoading();
@@ -141,27 +143,27 @@ public class RechargeAndConsumeDetailActivity extends BaseActivity<RechargeAndCo
         /*数据处理逻辑，数据分组以时间来分，即时间的年和月来分
         如果有不同的年和月，就加入组，相应子数据开始增加；
          */
-        int size = groupList.size();
+        Log.e("liutao",list.size()+"");
         for (int i =0; i < list.size(); i++) {
             RechargeAndConsumeBean tempBean = list.get(i);
-            if (size == 0) {
-                groupList.add(getGroupStringFromeTime(tempBean.createTime));
+            if (groupList.size() == 0) {
+                groupList.add(getGroupStringFromeTime(tempBean.dealTime));
                 itemList.add(new ArrayList<RechargeAndConsumeBean>());
-                size++;
-                itemList.get(size-1).add(tempBean);
+                itemList.get(itemList.size()-1).add(tempBean);
             }
-            if (size != 0) {
-                if (groupList.contains(getGroupStringFromeTime(tempBean.createTime))) {
-                    itemList.get(size-1).add(tempBean);
+            if (groupList.size() != 0) {
+                if (groupList.contains(getGroupStringFromeTime(tempBean.dealTime))) {
+                    itemList.get(itemList.size()-1).add(tempBean);
                 } else {
-                    groupList.add(getGroupStringFromeTime(tempBean.createTime));
+                    groupList.add(getGroupStringFromeTime(tempBean.dealTime));
                     itemList.add(new ArrayList<RechargeAndConsumeBean>());
-                    size++;
-                    itemList.get(size-1).add(tempBean);
+                    itemList.get(itemList.size()-1).add(tempBean);
                 }
             }
         }
-        adpter.setDatas(groupList,itemList);
+        adpter = new RechargeAndConsumeDetailAdapter(this,groupList,itemList);
+        lvOrder.setAdapter(adpter);
+        setExpandableListViewShowProperty();
     }
 
     private String getGroupStringFromeTime(String date) {

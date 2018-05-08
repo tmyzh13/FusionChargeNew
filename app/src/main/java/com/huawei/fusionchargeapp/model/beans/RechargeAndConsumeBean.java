@@ -5,9 +5,8 @@ package com.huawei.fusionchargeapp.model.beans;
  */
 
 public class RechargeAndConsumeBean {
-    public long appUserId,balanceId;
     public String weekDay;
-    public String createTime;
+    public String dealTime;
     public String occurCost;
     public int isAdd;
     public int type;

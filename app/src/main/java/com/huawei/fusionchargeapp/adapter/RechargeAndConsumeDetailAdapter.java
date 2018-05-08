@@ -44,6 +44,7 @@ public class RechargeAndConsumeDetailAdapter extends BaseExpandableListAdapter {
     public void setDatas(List<String> groupList, List<List<RechargeAndConsumeBean>> itemLst){
         this.groupList = groupList;
         this.itemLst = itemLst;
+        Log.e("liutao",itemLst.size()+"");
         notifyDataSetChanged();
     }
 
@@ -131,7 +132,7 @@ public class RechargeAndConsumeDetailAdapter extends BaseExpandableListAdapter {
         }
 
         holder.tv_week.setText(bean.weekDay);
-        holder.tv_time.setText(bean.createTime.substring(bean.createTime.length()-8,bean.createTime.length()-3));
+        holder.tv_time.setText(bean.dealTime.substring(11,16));
         holder.tv_money.setText(DEL_OR_ADD[bean.isAdd]+bean.occurCost);
         holder.tv_money_subscription.setText(BALANCE[bean.isAdd]+bean.occurCost);
 
