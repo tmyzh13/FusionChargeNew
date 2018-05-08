@@ -250,14 +250,17 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
         pwd_ic_del.setVisibility(View.GONE);
         pwd_ic_see.setVisibility(View.GONE);
         pwdEt.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        pwd_ic_see.setImageResource(R.drawable.icon_eye_in);
     }
 
     @OnClick(R.id.pwd_ic_see)
     void showPwdEditContent(){
         if (InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD == pwdEt.getInputType()) {
             pwdEt.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            pwd_ic_see.setImageResource(R.drawable.icon_eye_in);
         } else {
             pwdEt.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            pwd_ic_see.setImageResource(R.drawable.icon_eye_on);
         }
     }
 
