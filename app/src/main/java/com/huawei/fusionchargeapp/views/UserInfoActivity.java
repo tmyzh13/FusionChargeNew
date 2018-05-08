@@ -112,7 +112,6 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
     private UserInfoPresenter presenter;
 
     private final int REQUEST_CODE_SELECT_CAMERA = 0x0001;
-    private final String USER_PHOTO_PATH = "";
 
     @Bind(R.id.nav)
     NavBar navBar;
@@ -263,7 +262,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
             @Override
             public void onLoadFailed(Exception e, Drawable errorDrawable) {
                 super.onLoadFailed(e, errorDrawable);
-                String path = PreferencesHelper.getData(USER_PHOTO_PATH);
+                String path = PreferencesHelper.getData(Tools.USER_PHOTO_PATH);
                 if (!TextUtils.isEmpty(path)) {
                     File file = new File(path);
                     Glide.with(UserInfoActivity.this).load(Uri.fromFile(file))
@@ -502,7 +501,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
 
                     Glide.with(this).load(Uri.fromFile(file))
                             .into(ivUserIcon);
-                    PreferencesHelper.saveData(USER_PHOTO_PATH,images.get(0).path);
+                    PreferencesHelper.saveData(Tools.USER_PHOTO_PATH,images.get(0).path);
                     presenter.uploadImage(file);
                 }
             } else {
