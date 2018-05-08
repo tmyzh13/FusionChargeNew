@@ -120,11 +120,11 @@ public class RechargeAndConsumeDetailAdapter extends BaseExpandableListAdapter {
             holder = (ItemViewHolder) view.getTag();
         }
         RechargeAndConsumeBean bean = itemLst.get(i).get(i1);
-        if (bean.type < 2){
+        if (bean.type == 1 || bean.type == 2){
             holder.recharge_sort.setVisibility(View.VISIBLE);
             holder.img_sort.setVisibility(View.VISIBLE);
-            holder.recharge_sort.setText(sort_text[bean.type]);
-            holder.img_sort.setImageResource(sort_img[bean.type]);
+            holder.recharge_sort.setText(sort_text[bean.type-1]);
+            holder.img_sort.setImageResource(sort_img[bean.type-1]);
         } else {
             holder.recharge_sort.setVisibility(View.GONE);
             holder.img_sort.setVisibility(View.GONE);
