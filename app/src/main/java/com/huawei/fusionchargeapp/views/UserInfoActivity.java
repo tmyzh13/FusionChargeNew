@@ -220,9 +220,20 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
             showToast(getString(R.string.sex_cannot_null));
             return null;
         }
+        //生日不能为空
+        if(Tools.isNull(tvBirthday.getText().toString())) {
+            showToast("请选择出生日期");
+            return null;
+        }
        /* if(Tools.isNull(tvEmail.getText().toString())) {
             showToast("邮箱不能为空！");
         }*/
+       //vin码校验，长度为17位
+        if (!Tools.isNull(tvCarVin.getText().toString()) && tvCarVin.getText().toString().length() != 17) {
+            showToast("车辆识别号码必须是17位字母和数字组合");
+            return null;
+        }
+
         ModifyUserInfoRequestBean bean = new ModifyUserInfoRequestBean();
         if(!Tools.isNull(uploadImageName)) {
             bean.photoUrl = uploadImageName;
