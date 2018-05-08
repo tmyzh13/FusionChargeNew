@@ -187,10 +187,11 @@
         android:layout_height="60dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_gravity="start|top"
+        android:gravity="top"
         android:hint="请对此次充电做出评价"
         android:background="@null"
         android:textColorHint="@color/text_gray"
+        android:inputType="textMultiLine"
         android:textSize="15dp" />
     <TextView
         android:id="@+id/comment_detail_show"

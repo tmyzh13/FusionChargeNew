@@ -178,6 +178,9 @@
         <activity android:name=".views.AboutUsActivity"
             android:screenOrientation="portrait"
             />
+        <activity android:name=".views.SuggestionActivity"
+            android:screenOrientation="portrait"
+            />
     </application>
 
 </manifest>

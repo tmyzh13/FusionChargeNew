@@ -1,5 +1,6 @@
 package com.huawei.fusionchargeapp.views;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -102,6 +103,11 @@ public class SettingActivity extends BaseActivity<SettingView, SettingPresenter>
                 dialog.dismiss();
             }
         });
+    }
+
+    @OnClick(R.id.tv_advice)
+    void goSuggestion(){
+        startActivity(new Intent(SettingActivity.this,SuggestionActivity.class));
     }
 
     @OnClick(R.id.tv_about_us)

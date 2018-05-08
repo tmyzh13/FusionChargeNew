@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/publish_bg_color">
+    <com.huawei.fusionchargeapp.weights.NavBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nav_bar"></com.huawei.fusionchargeapp.weights.NavBar>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginBottom="@dimen/dp_16"
+        android:background="@color/text_white">
+        <EditText
+            android:id="@+id/edit_suggestion"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:gravity="top"
+            android:background="@null"
+            android:padding="@dimen/dp_8"
+            android:inputType="textMultiLine"
+            android:textSize="15sp"
+            android:hint="请提出您的宝贵意见" />
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/publish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/blue_shape_bg"
+        android:gravity="center"
+        android:text="提交"
+        android:textSize="15sp"
+        android:textColor="@color/text_white" />
+
+
+</LinearLayout>
