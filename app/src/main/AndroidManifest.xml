@@ -38,6 +38,23 @@
         android:roundIcon="@mipmap/icon"
         android:supportsRtl="true"
         android:theme="@style/AppBaseCompactTheme">
+
+        <!--MBusAccessProviderService这个Service必须声明，供Internal Bundle对外提供服务-->
+        <service android:name="com.huawei.hae.mcloud.rt.mbus.access.MBusAccessProviderService" />
+
+        <!--Bundle别名必须与接口中保持一致-->
+        <meta-data
+            android:name="com.huawei.hae.mcloud.SERVICE_PROVIDER"
+            android:value="FusionChargeBundle" />
+        <meta-data
+            android:name="com.huawei.hae.mcloud.APP_NAME"
+            android:value="FusionChargeBundle" />
+        <!--Bundle类型，此Bundle类型为1，也可以写成internal-->
+        <meta-data
+            android:name="com.huawei.hae.mcloud.BUNDLE_TYPE"
+            android:value="1" />
+
+
         <activity
             android:name=".views.WelcomeActivity"
             android:screenOrientation="portrait">

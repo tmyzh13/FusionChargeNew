@@ -10,6 +10,10 @@ import com.corelibs.utils.GalleryFinalConfigurator;
 import com.corelibs.utils.PreferencesHelper;
 import com.corelibs.utils.ToastMgr;
 import com.huawei.fusionchargeapp.constants.Urls;
+import com.huawei.fusionchargeapp.iadmin.IAdminJump;
+import com.huawei.fusionchargeapp.iadmin.IAdminJumpImpl;
+import com.huawei.hae.mcloud.rt.mbus.access.MBusAccess;
+import com.huawei.hae.mcloud.rt.mbus.access.MBusAccessProviderService;
 
 /**
  * Created by issuser on 2018/4/18.
@@ -24,6 +28,10 @@ public class App extends MultiDexApplication {
     }
 
     private void init(){
+        MBusAccess.getInstance().init(this);
+        MBusAccessProviderService.setServiceProvider(IAdminJump.SERVICES_ALISA,new IAdminJumpImpl(this));
+
+
         ToastMgr.init(getApplicationContext());
         Configuration.enableLoggingNetworkParams();
         ApiFactory.getFactory().add(Urls.ROOT); //初始化Retrofit接口工厂
