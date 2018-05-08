@@ -32,6 +32,7 @@ public class SettingActivity extends BaseActivity<SettingView, SettingPresenter>
     TextView tv_login_out;
     @Bind(R.id.tv_exit)
     TextView tv_exit;
+
     public static Intent startActivity(Context context) {
         Intent intent = new Intent(context, SettingActivity.class);
         return intent;
@@ -101,6 +102,11 @@ public class SettingActivity extends BaseActivity<SettingView, SettingPresenter>
                 dialog.dismiss();
             }
         });
+    }
+
+    @OnClick(R.id.tv_about_us)
+    void goAboutUs(){
+        startActivity(new Intent(SettingActivity.this,AboutUsActivity.class));
     }
 
 
