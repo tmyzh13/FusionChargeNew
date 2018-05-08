@@ -249,8 +249,13 @@ public class MainActivity extends BaseActivity {
                 Glide.with(context).load(UserHelper.getSavedUser().photoUrl).error(R.mipmap.ic_launcher)
                         .override(320, 320).into(target);
             }
-            tv_user_name.setText(UserHelper.getSavedUser().nickName);
-            tv_favourite.setText("161");
+            if(Tools.isNull(UserHelper.getSavedUser().name)){
+                tv_user_name.setText(UserHelper.getSavedUser().phone);
+            }else{
+                tv_user_name.setText(UserHelper.getSavedUser().name);
+            }
+
+            tv_favourite.setText(UserHelper.getSavedUser().score+"");
             drawerLayout.openDrawer(main_left_drawer_layout);
         }
 

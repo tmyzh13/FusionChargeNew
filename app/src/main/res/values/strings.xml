@@ -395,4 +395,17 @@
     <string name="invoice_detail">纸质发票详情</string>
     <string name="invoice_detail_statue">纸质发票已开票</string>
     <string name="invoice_receive_messege">接受信息</string>
+
+    <!--我的套餐-->
+    <string name="tao_can">购买套餐</string>
+    <string name="tao_can_electronic">包电量</string>
+    <string name="tao_can_month">包月</string>
+    <string name="tao_can_year">包年</string>
+    <string name="tao_can_electronic_hint">充电电量</string>
+    <string name="tao_can_month_hint">使用月份</string>
+    <string name="tao_can_year_hint">使用年份</string>
+    <string name="buy_right_now">立即购买</string>
+    <string name="tao_can_hint">注：使用到XX度电量时，功率将会下降到xxkw</string>
+    <string name="tao_can_total">总计</string>
+
 </resources>

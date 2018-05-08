@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/app_bg">
+
+    <com.huawei.fusionchargeapp.weights.NavBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nav"
+        />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:listSelector="@color/transparent"
+        android:cacheColorHint="@color/transparent"
+        android:id="@+id/list_tc"
+        android:dividerHeight="10dp"
+        android:divider="@color/transparent"
+        ></ListView>
+
+    <TextView
+        style="@style/text_normal"
+        android:text="@string/tao_can_hint"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        />
+
+</LinearLayout>

@@ -16,6 +16,7 @@ public class UserBean {
     public String email;
     public String token;
     public String type;
+    public int score;
 
     /**
      * 用户名
