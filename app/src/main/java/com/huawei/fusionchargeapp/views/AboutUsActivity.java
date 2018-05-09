@@ -26,6 +26,7 @@ public class AboutUsActivity extends BaseActivity{
 
     @Override
     public void goLogin() {
+        
     }
 
     @Override
