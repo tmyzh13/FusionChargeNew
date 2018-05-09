@@ -21,6 +21,7 @@ public class MyAcountActivity extends BaseActivity {
     @Bind(R.id.nav)
     NavBar nav;
 
+    private Context context =MyAcountActivity.this;
 
     public static Intent getLuancher(Context context){
         Intent intent =new Intent(context,MyAcountActivity.class);
@@ -65,6 +66,6 @@ public class MyAcountActivity extends BaseActivity {
 
     @OnClick(R.id.rl_invoice)
     public void goInvoice(){
-
+        startActivity(MyInvoiceActivity.getLauncher(context));
     }
 }

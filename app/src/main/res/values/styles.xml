@@ -41,6 +41,16 @@
         <item name="android:background">@null</item>
         <item name="android:singleLine">true</item>
     </style>
+    <style name="edit_apply_invoice">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">@dimen/text_normal</item>
+        <item name="android:textColor">@color/text_color_main</item>
+        <item name="android:textColorHint">@color/text_light</item>
+        <item name="android:background">@null</item>
+        <item name="android:singleLine">true</item>
+    </style>
 
     <style name="view_line">
         <item name="android:layout_width">match_parent</item>
@@ -123,5 +133,14 @@
     //图片选择
     <style name="UserPhotoSelectStyle" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/selector_user_photo_checkbox</item>
+    </style>
+
+    <style name="ll_apply_invoice_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/ll_40</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
 </resources>

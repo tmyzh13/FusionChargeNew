@@ -197,13 +197,13 @@
                 />
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/my_invoice"
             android:layout_width="match_parent"
             android:layout_height="@dimen/nav_height"
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:paddingLeft="15dp"
+            android:id="@+id/ll_my_acount"
             >
             <ImageView
                 android:layout_width="wrap_content"

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg"
+    android:orientation="vertical">
+
+    <com.huawei.fusionchargeapp.weights.NavBar
+        android:id="@+id/nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/text_normal"
+                android:layout_margin="15dp"
+                android:text="@string/apply_invoice_detail" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp">
+
+                    <TextView
+                        style="@style/text_normal"
+                        android:layout_width="80dp"
+                        android:text="@string/apply_invoice_style" />
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_company"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="30dp"
+                            android:button="@drawable/cb_pay_select"
+                            android:checked="true"
+                            android:paddingLeft="5dp"
+                            android:text="@string/apply_invoice_company"
+                            android:textColor="@color/text_color_main" />
+
+                        <RadioButton
+                            android:id="@+id/rb_people"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:button="@drawable/cb_pay_select"
+                            android:paddingLeft="5dp"
+                            android:text="@string/apply_invoce_people"
+                            android:textColor="@color/text_color_main" />
+                    </RadioGroup>
+                </LinearLayout>
+
+                <View style="@style/view_line" />
+
+                <LinearLayout style="@style/ll_apply_invoice_style">
+
+                    <TextView
+                        style="@style/text_normal"
+                        android:layout_width="80dp"
+                        android:text="@string/apply_invoice_title" />
+
+                    <EditText
+                        style="@style/edit_apply_invoice"
+                        android:hint="@string/apply_invoice_title_hint" />
+                </LinearLayout>
+
+                <View style="@style/view_line" />
+
+                <LinearLayout style="@style/ll_apply_invoice_style">
+
+                    <TextView
+                        style="@style/text_normal"
+                        android:layout_width="80dp"
+                        android:text="@string/apply_invoice_tax" />
+
+                    <EditText
+                        style="@style/edit_apply_invoice"
+                        android:hint="@string/apply_invoice_tax_hint" />
+                </LinearLayout>
+
+                <View style="@style/view_line" />
+
+                <LinearLayout style="@style/ll_apply_invoice_style">
+
+                    <TextView
+                        style="@style/text_normal"
+                        android:layout_width="80dp"
+                        android:text="@string/apply_invoice_content" />
+
+                    <TextView
+                        style="@style/text_normal"
+                        android:text="@string/apply_invoice_content_"
+                        android:textColor="@color/text_color_shallow" />
+                </LinearLayout>
+
+                <View style="@style/view_line" />
+
+                <LinearLayout style="@style/ll_apply_invoice_style">
+
+                    <TextView
+                        style="@style/text_normal"
+                        android:layout_width="80dp"
+                        android:text="@string/apply_invoice_money" />
+
+                    <TextView
+                        style="@style/text_normal"
+                        android:text="9.40"
+                        android:textColor="@color/app_blue" />
+
+                    <TextView
+                        style="@style/text_normal"
+                        android:layout_marginLeft="2dp"
+                        android:text="@string/yuan"
+                        android:textColor="@color/text_color_shallow" />
+                </LinearLayout>
+
+                <View style="@style/view_line" />
+
+                <LinearLayout style="@style/ll_apply_invoice_style">
+
+                    <TextView
+                        style="@style/text_normal"
+                        android:layout_width="80dp"
+                        android:text="@string/apply_invoice_money" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|right"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/text_normal"
+                            android:singleLine="true"
+                            android:text="@string/apply_invoice_more_info_hint"
+                            android:textColor="@color/text_color_shallow" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/list_ic_back" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                style="@style/text_normal"
+                android:layout_margin="15dp"
+                android:text="@string/apply_invoice_receive_method" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+                <LinearLayout
+                    style="@style/ll_apply_invoice_style">
+                    <TextView
+                        style="@style/text_normal"
+                        android:layout_width="80dp"
+                        android:text="@string/apply_invoice_receive"
+                        />
+                    <EditText
+                       style="@style/edit_apply_invoice"
+                        android:hint="@string/apply_invoice_receive_hint"
+                        />
+                </LinearLayout>
+                <View
+                    style="@style/view_line"/>
+                <LinearLayout
+                    style="@style/ll_apply_invoice_style">
+                    <TextView
+                        style="@style/text_normal"
+                        android:layout_width="80dp"
+                        android:text="@string/apply_invoice_connect"
+                        />
+                    <EditText
+                        style="@style/edit_apply_invoice"
+                        android:hint="@string/apply_invoice_connect_hint"
+                        />
+                </LinearLayout>
+                <View
+                    style="@style/view_line"/>
+                <LinearLayout
+                    style="@style/ll_apply_invoice_style">
+                    <TextView
+                        style="@style/text_normal"
+                        android:layout_width="80dp"
+                        android:text="@string/apply_invoice_detail_address"
+                        />
+                    <EditText
+                        style="@style/edit_apply_invoice"
+                        android:hint="@string/apply_invoice_detail_address_hint"
+                        />
+                </LinearLayout>
+                <View
+                    style="@style/view_line"/>
+                <LinearLayout
+                    style="@style/ll_apply_invoice_style">
+                    <TextView
+                        style="@style/text_normal"
+                        android:layout_width="80dp"
+                        android:text="@string/apply_invoice_email"
+                        />
+                    <EditText
+                        style="@style/edit_apply_invoice"
+                        android:hint="@string/apply_invoice_email_hint"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--邮费布局-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ll_post"
+                android:orientation="vertical"
+                >
+                <TextView
+                    style="@style/text_normal"
+                    android:text="@string/apply_invoice_postage_hint"
+                    android:layout_margin="15dp"
+                    />
+                <com.corelibs.views.NoScrollingListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none"
+                    android:dividerHeight="1dp"
+                    android:divider="@color/line"
+                    android:listSelector="@color/transparent"
+                    android:cacheColorHint="@color/transparent"
+                    android:id="@+id/list"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

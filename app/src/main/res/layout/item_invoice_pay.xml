@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="@dimen/ll_40"
+    android:background="@color/white"
+    android:paddingLeft="@dimen/dp_15"
+    android:paddingRight="@dimen/dp_15">
+
+    <LinearLayout
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/img"
+            />
+        <TextView
+            style="@style/text_normal"
+            android:textColor="@color/text_color_shallow"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:id="@+id/tv_pay"
+            />
+        <TextView
+            style="@style/text_normal"
+            android:textColor="@color/app_blue"
+            android:id="@+id/tv_pay_hint"
+            />
+    </LinearLayout>
+    <CheckBox
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@drawable/cb_pay_select"
+        android:clickable="false"
+        android:enabled="false"
+        android:id="@+id/cb_select"
+        />
+</RelativeLayout>

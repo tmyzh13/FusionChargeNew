@@ -390,6 +390,7 @@
     <string name="my_acount_detail">明细</string>
     <string name="my_acount_put_forward">提现</string>
     <string name="my_acount_invoice">发票与报销</string>
+    <string name="my_acount_taocan">我的套餐</string>
     <string name="send_electronic_invoice">开电子发票</string>
     <string name="invoice_histroy">开票历史</string>
     <string name="invoice_detail">纸质发票详情</string>
@@ -408,4 +409,34 @@
     <string name="tao_can_hint">注：使用到XX度电量时，功率将会下降到xxkw</string>
     <string name="tao_can_total">总计</string>
 
+    <!--申请发票-->
+    <string name="apply_invoice">申请发票</string>
+    <string name="apply_invoice_detail">发票详情</string>
+    <string name="apply_invoice_style">抬头类型</string>
+    <string name="apply_invoice_company">企业单位</string>
+    <string name="apply_invoce_people">个人/企业单位</string>
+    <string name="apply_invoice_title">发票抬头</string>
+    <string name="apply_invoice_title_hint">填写发票抬头</string>
+    <string name="apply_invoice_tax">税号</string>
+    <string name="apply_invoice_tax_hint">请填写税号</string>
+    <string name="apply_invoice_content">发票内容</string>
+    <string name="apply_invoice_content_">*运输服务*客运服务费</string>
+    <string name="apply_invoice_money">发票金额</string>
+    <string name="apply_invoice_more_info">更多信息</string>
+    <string name="apply_invoice_more_info_hint">填写备注、地址等（非必填）</string>
+    <string name="apply_invoice_receive_method">接受方式</string>
+    <string name="apply_invoice_receive">收件人</string>
+    <string name="apply_invoice_receive_hint">填写收件人</string>
+    <string name="apply_invoice_connect">联系电话</string>
+    <string name="apply_invoice_connect_hint">填写联系电话</string>
+    <string name="apply_invoice_detail_address">详细地址</string>
+    <string name="apply_invoice_detail_address_hint">填写详细地址</string>
+    <string name="apply_invoice_email">电子邮箱</string>
+    <string name="apply_invoice_email_hint">填写电子邮箱</string>
+    <string name="apply_invoice_postage_hint">开票金额不足200元，需支付邮费</string>
+    <string name="apply_invoice_wechat_postage">（全国8元，邮费发票会一周邮寄）</string>
+    <string name="apply_invoice_ali_postage">（全国8元，邮费发票会一同邮寄）</string>
+    <string name="apply_invoice_to_pay_postage">（全国10元）</string>
+    <string name="apply_invoice_to_pay">货到付款</string>
+    
 </resources>

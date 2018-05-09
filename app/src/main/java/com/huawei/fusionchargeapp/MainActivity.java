@@ -38,13 +38,14 @@ import com.huawei.fusionchargeapp.utils.ChoiceManager;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.LoginActivity;
 import com.huawei.fusionchargeapp.views.MyAppointDetailActivity;
+import com.huawei.fusionchargeapp.views.MyTcActivity;
 import com.huawei.fusionchargeapp.views.SearchStationTitleActivity;
 import com.huawei.fusionchargeapp.views.SettingActivity;
 import com.huawei.fusionchargeapp.views.UserInfoActivity;
 import com.huawei.fusionchargeapp.views.home.HomeListFragment;
 import com.huawei.fusionchargeapp.views.home.MapFragment;
 import com.huawei.fusionchargeapp.views.interfaces.MyOrderActivity;
-import com.huawei.fusionchargeapp.views.mycount.MyInvoiceActivity;
+import com.huawei.fusionchargeapp.views.mycount.MyAcountActivity;
 
 import java.io.File;
 
@@ -418,9 +419,14 @@ public class MainActivity extends BaseActivity {
         startActivity(SearchStationTitleActivity.getLauncher(MainActivity.this));
     }
 
-    @OnClick(R.id.my_invoice)
-    void goInvoice(){
-        startActivity(new Intent(this, MyInvoiceActivity.class));
+    @OnClick(R.id.ll_home_setmeal)
+    public void goSetMeal(){
+        startActivity(MyTcActivity.getLauncher(context));
+    }
+
+    @OnClick(R.id.ll_my_acount)
+    public void goMyAcount(){
+        startActivity(MyAcountActivity.getLuancher(context));
     }
 
     @Override
@@ -468,6 +474,5 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void goLogin() {
-        Log.e("yzh", "sssssss111");
     }
 }

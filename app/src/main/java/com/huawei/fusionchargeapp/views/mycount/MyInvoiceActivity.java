@@ -21,6 +21,8 @@ public class MyInvoiceActivity extends BaseActivity {
     @Bind(R.id.nav)
     NavBar nav;
 
+    private Context context=MyInvoiceActivity.this;
+
     public static Intent getLauncher(Context context){
         Intent intent=new Intent(context,MyInvoiceActivity.class);
         return intent;
@@ -29,6 +31,7 @@ public class MyInvoiceActivity extends BaseActivity {
     @OnClick(R.id.invoice_ele)
     void goElectroniceInvoice(){
         //进入申请电子发票界面
+        startActivity(ApplyInvoiceActivity.getLauncher(context));
     }
 
     @OnClick(R.id.invoce_history)
