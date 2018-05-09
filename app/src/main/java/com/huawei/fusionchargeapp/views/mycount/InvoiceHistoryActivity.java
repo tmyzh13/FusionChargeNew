@@ -31,7 +31,6 @@ public class InvoiceHistoryActivity extends BaseActivity {
     AutoLoadMoreListView listView;
     @Bind(R.id.ptrLayout)
     PtrAutoLoadMoreLayout ptyLayout;
-
     private InvoiceHistoryAdapter adapter;
     private List<InvoiceHistoryBean> data = new ArrayList<>();
 
@@ -46,7 +45,7 @@ public class InvoiceHistoryActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        bar.setNavTitle("开票历史");
+        bar.setNavTitle(getString(R.string.invoice_histroy));
         bar.setColorRes(R.color.blue);
 
         //假数据

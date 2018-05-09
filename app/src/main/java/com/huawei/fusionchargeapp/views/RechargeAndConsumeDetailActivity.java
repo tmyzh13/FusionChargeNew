@@ -76,7 +76,6 @@ public class RechargeAndConsumeDetailActivity extends BaseActivity<RechargeAndCo
                 requestBean.page = page;
                 presenter.getBalanceDetail(requestBean);
             }
-
             @Override
             public void onRefreshing(PtrFrameLayout frame) {
                 page = PAGE_FIRST_NUM;

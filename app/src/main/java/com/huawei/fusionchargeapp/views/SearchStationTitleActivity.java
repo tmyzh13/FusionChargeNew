@@ -175,8 +175,6 @@ public class SearchStationTitleActivity extends BaseActivity<HomeListView,HomeLi
             intent.putExtras(bundle);
             startActivity(intent);
         }
-
-
     }
 
     @OnClick(R.id.tv_clear_history)

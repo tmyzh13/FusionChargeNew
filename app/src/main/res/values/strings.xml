@@ -451,4 +451,10 @@
     <string name="cancel_publish_toast">您确定要取消评论？</string>
     <string name="input_can_not_be_null">输入不能为空</string>
     <string name="advice_is_null">意见为空，请重新输入！</string>
+    <string name="receive_info">接收信息</string>
+    <string name="invoice_info">发票信息</string>
+    <string name="apply_invoice_time">申请时间</string>
+    <string name="see_the_detail">查看</string>
+    <string name="commit_toast">请对此次充电做出评价</string>
+    <string name="suggestion_yours">请提出您的宝贵意见</string>
 </resources>

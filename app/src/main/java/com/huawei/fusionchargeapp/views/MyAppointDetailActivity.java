@@ -242,7 +242,6 @@ public class MyAppointDetailActivity extends BaseActivity<AllAppointmentView,All
 
     @Override
     public void showLoading() {
-//        super.showLoading();
         ptrLayout.setRefreshing();
     }
 

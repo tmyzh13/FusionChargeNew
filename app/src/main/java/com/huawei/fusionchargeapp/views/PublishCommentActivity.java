@@ -74,7 +74,6 @@ public class PublishCommentActivity extends BaseActivity<CommentView,CommentPres
     String fee_unit;
     @BindString(R.string.charge_info_unit_kw)
     String unit_kw;
-
     private PublishCommentsBean bean = new PublishCommentsBean();
     private Context mContext = PublishCommentActivity.this;
     private int sort = 0;
@@ -91,7 +90,6 @@ public class PublishCommentActivity extends BaseActivity<CommentView,CommentPres
         sort = 0;
         favor.setIsIndicator(true);
         flowGrid.setOnItemClickListener(null);
-        //favor.setClickable(false);
     }
 
     @Override

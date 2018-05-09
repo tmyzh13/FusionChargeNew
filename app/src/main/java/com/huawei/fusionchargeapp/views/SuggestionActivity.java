@@ -26,6 +26,7 @@ public class SuggestionActivity extends BaseActivity<SuggestionView,SuggestionPr
     @Bind(R.id.edit_suggestion)
     EditText edit_suggestion;
 
+
     @Override
     public void CommitSucess() {
         startActivity(MainActivity.getLauncher(this));

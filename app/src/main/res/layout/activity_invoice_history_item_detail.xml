@@ -40,7 +40,7 @@
         android:paddingLeft="@dimen/dp_16"
         android:paddingBottom="@dimen/dp_8"
         android:paddingTop="@dimen/dp_8"
-        android:text="接收信息"
+        android:text="@string/receive_info"
         android:textStyle="bold"
         android:textSize="@dimen/text_normal"/>
     <LinearLayout
@@ -55,7 +55,7 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_title"
-            android:text="详细地址"/>
+            android:text="@string/apply_invoice_detail_address"/>
         <TextView
             android:id="@+id/receive_adress"
             android:layout_width="wrap_content"
@@ -71,7 +71,7 @@
         android:paddingLeft="@dimen/dp_16"
         android:paddingBottom="@dimen/dp_8"
         android:paddingTop="@dimen/dp_8"
-        android:text="发票信息"
+        android:text="@string/invoice_info"
         android:textStyle="bold"
         android:textSize="@dimen/text_normal"/>
     <LinearLayout
@@ -86,7 +86,7 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_title"
-            android:text="发票抬头"/>
+            android:text="@string/apply_invoice_title"/>
         <TextView
             android:id="@+id/invoice_head"
             android:layout_width="wrap_content"
@@ -109,7 +109,7 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_title"
-            android:text="税号"/>
+            android:text="@string/apply_invoice_tax"/>
         <TextView
             android:id="@+id/tax_num"
             android:layout_width="wrap_content"
@@ -132,7 +132,7 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_title"
-            android:text="发票内容"/>
+            android:text="@string/apply_invoice_content"/>
         <TextView
             android:id="@+id/invoice_content"
             android:layout_width="wrap_content"
@@ -155,7 +155,7 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_title"
-            android:text="发生金额"/>
+            android:text="@string/apply_invoice_money"/>
         <TextView
             android:id="@+id/money"
             android:layout_width="wrap_content"
@@ -178,7 +178,7 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_title"
-            android:text="申请时间"/>
+            android:text="@string/apply_invoice_time"/>
         <TextView
             android:id="@+id/invoice_time"
             android:layout_width="wrap_content"
@@ -224,7 +224,7 @@
             android:layout_gravity="end|center_vertical"
             android:drawablePadding="@dimen/dp_8"
             android:drawableRight="@mipmap/list_ic_back"
-            android:text="查看"
+            android:text="@string/see_the_detail"
             android:textSize="@dimen/text_small"/>
     </FrameLayout>
 

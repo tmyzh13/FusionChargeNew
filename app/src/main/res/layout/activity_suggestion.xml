@@ -22,7 +22,7 @@
             android:padding="@dimen/dp_8"
             android:inputType="textMultiLine"
             android:textSize="15sp"
-            android:hint="请提出您的宝贵意见" />
+            android:hint="@string/suggestion_yours" />
     </FrameLayout>
 
     <Button
@@ -32,7 +32,7 @@
         android:layout_margin="16dp"
         android:background="@drawable/blue_shape_bg"
         android:gravity="center"
-        android:text="提交"
+        android:text="@string/action_submit"
         android:textSize="15sp"
         android:textColor="@color/text_white" />
 

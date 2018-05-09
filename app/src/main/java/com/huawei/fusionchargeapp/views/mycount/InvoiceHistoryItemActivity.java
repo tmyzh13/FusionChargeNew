@@ -56,7 +56,7 @@ public class InvoiceHistoryItemActivity extends BaseActivity {
     @Override
     protected void init(Bundle savedInstanceState) {
         bar.setColorRes(R.color.blue);
-        bar.setNavTitle("纸质发票详情");
+        bar.setNavTitle(getString(R.string.invoice_detail));
 
         initAllTextView();
     }

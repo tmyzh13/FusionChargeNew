@@ -85,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|start"
-            android:text="充电量"/>
+            android:text="@string/pay_electronic"/>
         <TextView
             android:id="@+id/charge_info_kw"
             android:layout_width="wrap_content"
@@ -104,7 +104,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|start"
-            android:text="电费"/>
+            android:text="@string/send_comment_electronic_fee"/>
         <TextView
             android:id="@+id/charge_info_money"
             android:layout_width="wrap_content"
@@ -123,7 +123,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|start"
-            android:text="服务费"/>
+            android:text="@string/pay_service_fee"/>
         <TextView
             android:id="@+id/charge_info_tips"
             android:layout_width="wrap_content"
@@ -142,7 +142,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|start"
-            android:text="小计"/>
+            android:text="@string/send_comment_total"/>
         <TextView
             android:id="@+id/charge_info_total"
             android:layout_width="wrap_content"
@@ -188,7 +188,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:gravity="top"
-        android:hint="请对此次充电做出评价"
+        android:hint="@string/commit_toast"
         android:background="@null"
         android:textColorHint="@color/text_gray"
         android:inputType="textMultiLine"
@@ -199,7 +199,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:hint="请对此次充电做出评价"
         android:textColorHint="@color/text_gray"
         android:textSize="15dp"
         android:visibility="gone"/>
@@ -224,7 +223,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|start"
-            android:text="电桩评分" />
+            android:text="@string/pay_complete_score" />
 
         <RatingBar
             android:id="@+id/favor_lever"
@@ -248,7 +247,7 @@
             android:layout_margin="16dp"
             android:background="@drawable/blue_shape_bg"
             android:gravity="center"
-            android:text="发布评论"
+            android:text="@string/send_comment"
             android:textColor="@color/text_white" />
     </FrameLayout>
 </LinearLayout>

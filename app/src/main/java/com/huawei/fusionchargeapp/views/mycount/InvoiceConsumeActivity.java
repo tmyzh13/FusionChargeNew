@@ -39,10 +39,8 @@ public class InvoiceConsumeActivity extends BaseActivity{
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        bar.setNavTitle("纸质发票详情");
+        bar.setNavTitle(getString(R.string.invoice_detail));
         bar.setColorRes(R.color.blue);
-
-        //假数据
         initFakeData();
 
         adapter  = new InvoiceConsumeAdapter(this,data);
