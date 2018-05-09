@@ -20,6 +20,7 @@ import android.util.Log;
 
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.services.core.LatLonPoint;
+import com.corelibs.utils.ToastMgr;
 import com.huawei.fusionchargeapp.R;
 
 import java.io.File;
@@ -398,5 +399,13 @@ public class Tools {
         canvas.drawText(number, rect.centerX() ,rect.centerY()-7, paint);
         return bitmap1;
     }
-
+    public static boolean isEmailVailid(String content) {
+       if(!Tools.isNull(content)){
+          return false;
+       }
+        Pattern pattern = Pattern.compile(".+@.+\\.[a-z]+");
+        Matcher matcher = pattern.matcher(content);
+        boolean result = matcher.matches();
+        return result;
+    }
 }

@@ -209,6 +209,12 @@
             />
         <activity android:name=".views.TaoCanPayActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".views.mycount.InputContentActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".views.mycount.ApplyOrderListActivity"
+            android:screenOrientation="portrait"
+            />
     </application>
 
 </manifest>

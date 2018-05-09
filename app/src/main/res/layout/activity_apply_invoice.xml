@@ -81,7 +81,9 @@
                         android:text="@string/apply_invoice_title" />
 
                     <EditText
+                        android:id="@+id/et_invoice_title"
                         style="@style/edit_apply_invoice"
+
                         android:hint="@string/apply_invoice_title_hint" />
                 </LinearLayout>
 
@@ -95,6 +97,7 @@
                         android:text="@string/apply_invoice_tax" />
 
                     <EditText
+                        android:id="@+id/et_invoice_tax"
                         style="@style/edit_apply_invoice"
                         android:hint="@string/apply_invoice_tax_hint" />
                 </LinearLayout>
@@ -124,6 +127,7 @@
                         android:text="@string/apply_invoice_money" />
 
                     <TextView
+                        android:id="@+id/tv_invoice_money"
                         style="@style/text_normal"
                         android:text="9.40"
                         android:textColor="@color/app_blue" />
@@ -148,13 +152,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical|right"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:id="@+id/ll_go_input">
 
                         <TextView
                             style="@style/text_normal"
                             android:singleLine="true"
                             android:text="@string/apply_invoice_more_info_hint"
-                            android:textColor="@color/text_color_shallow" />
+                            android:textColor="@color/text_color_shallow"
+                            android:ellipsize="end"
+                            android:id="@+id/tv_more_info"/>
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -183,6 +190,7 @@
                         android:text="@string/apply_invoice_receive"
                         />
                     <EditText
+                        android:id="@+id/et_invoice_receive"
                        style="@style/edit_apply_invoice"
                         android:hint="@string/apply_invoice_receive_hint"
                         />
@@ -197,8 +205,10 @@
                         android:text="@string/apply_invoice_connect"
                         />
                     <EditText
+                        android:id="@+id/et_invoice_connect"
                         style="@style/edit_apply_invoice"
                         android:hint="@string/apply_invoice_connect_hint"
+                        android:inputType="number"
                         />
                 </LinearLayout>
                 <View
@@ -211,6 +221,7 @@
                         android:text="@string/apply_invoice_detail_address"
                         />
                     <EditText
+                        android:id="@+id/et_invoice_address"
                         style="@style/edit_apply_invoice"
                         android:hint="@string/apply_invoice_detail_address_hint"
                         />
@@ -227,6 +238,8 @@
                     <EditText
                         style="@style/edit_apply_invoice"
                         android:hint="@string/apply_invoice_email_hint"
+                        android:id="@+id/et_invoice_email"
+                        android:inputType="textEmailAddress"
                         />
                 </LinearLayout>
             </LinearLayout>
@@ -254,6 +267,22 @@
                     android:id="@+id/list"
                     />
             </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:text="@string/action_submit"
+                android:background="@drawable/tv_corner_gray"
+                android:layout_marginTop="30dp"
+                android:id="@+id/tv_submit"
+                android:clickable="false"
+                />
         </LinearLayout>
     </ScrollView>
 

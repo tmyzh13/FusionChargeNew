@@ -65,6 +65,8 @@
     <string name="hint_input_search_key">输入关键词查询</string>
     <string name="hint_input_device_num">请输入设备号</string>
     <string name="code_error_hint">错误提示：</string>
+    <string name="hint_input_content">请输入内容</string>
+    <string name="hint_input_right_email">请输入正确的邮箱</string>
 
     <!--登录界面-->
     <string name="login">登录</string>

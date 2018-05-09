@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg">
+
+    <com.huawei.fusionchargeapp.weights.NavBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nav"
+        />
+    <com.corelibs.views.ptr.layout.PtrAutoLoadMoreLayout
+        android:id="@+id/ptrLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.corelibs.views.ptr.loadmore.widget.AutoLoadMoreListView
+            android:id="@+id/lv_order"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:listSelector="#00000000"
+            android:scrollbars="none"
+            android:divider="@color/transparent"
+            android:dividerHeight="@dimen/dp_1"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"/>
+
+    </com.corelibs.views.ptr.layout.PtrAutoLoadMoreLayout>
+</LinearLayout>

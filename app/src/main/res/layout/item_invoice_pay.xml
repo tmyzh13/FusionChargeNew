@@ -27,6 +27,7 @@
             style="@style/text_normal"
             android:textColor="@color/app_blue"
             android:id="@+id/tv_pay_hint"
+            android:textSize="12sp"
             />
     </LinearLayout>
     <CheckBox

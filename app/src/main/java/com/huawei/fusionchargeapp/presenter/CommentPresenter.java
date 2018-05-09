@@ -72,7 +72,9 @@ public class CommentPresenter extends BasePresenter<CommentView> {
                     @Override
                     public void success(BaseData<List<CommentsBean>> baseData) {
                         Log.e("zw","queryCommentInfo---success : " + baseData.toString());
-                        view.queryCommentInfo(baseData.data);
+                        if(baseData.data!=null){
+                            view.queryCommentInfo(baseData.data);
+                        }
                     }
 
                 });
