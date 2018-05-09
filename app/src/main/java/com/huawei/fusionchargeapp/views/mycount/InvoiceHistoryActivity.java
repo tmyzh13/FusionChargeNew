@@ -1,5 +1,6 @@
 package com.huawei.fusionchargeapp.views.mycount;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -57,6 +58,8 @@ public class InvoiceHistoryActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //进入详细界面
+                Intent intent = new Intent(InvoiceHistoryActivity.this,InvoiceHistoryItemActivity.class);
+                startActivity(intent);
             }
         });
         ptyLayout.setRefreshLoadCallback(new PtrAutoLoadMoreLayout.RefreshLoadCallback() {

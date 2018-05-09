@@ -390,7 +390,6 @@
     <string name="my_acount_detail">明细</string>
     <string name="my_acount_put_forward">提现</string>
     <string name="my_acount_invoice">发票与报销</string>
-    <string name="my_acount_taocan">我的套餐</string>
     <string name="send_electronic_invoice">开电子发票</string>
     <string name="invoice_histroy">开票历史</string>
     <string name="invoice_detail">纸质发票详情</string>
@@ -438,5 +437,6 @@
     <string name="apply_invoice_ali_postage">（全国8元，邮费发票会一同邮寄）</string>
     <string name="apply_invoice_to_pay_postage">（全国10元）</string>
     <string name="apply_invoice_to_pay">货到付款</string>
-    
+
+    <string name="invoice_and_consume_num">%1$d张发票，%2$d个充电消费</string>
 </resources>

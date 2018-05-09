@@ -192,6 +192,9 @@
         <activity android:name=".views.mycount.InvoiceHistoryActivity"
             android:screenOrientation="portrait"
             />
+        <activity android:name=".views.mycount.InvoiceHistoryItemActivity"
+            android:screenOrientation="portrait"
+            />
         <activity android:name=".views.AboutUsActivity"
             android:screenOrientation="portrait"
             />
