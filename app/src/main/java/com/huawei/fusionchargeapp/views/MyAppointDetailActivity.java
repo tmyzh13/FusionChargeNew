@@ -120,8 +120,8 @@ public class MyAppointDetailActivity extends BaseActivity<AllAppointmentView,All
     @Override
     protected void init(Bundle savedInstanceState) {
         navBar.setColorRes(R.color.app_blue);
-        navBar.setNavTitle("我的预约");
-        tv_appointment.setText("筛选");
+        navBar.setNavTitle(getString(R.string.activity_appoint));
+        tv_appointment.setText(R.string.activity_appoint_selecet);
         presenter.getAppointmentInfo(page,PAGE_LIMIT_NUM);
 
         appointmentListAdapter = new AppointmentListAdapter(this,data);
@@ -180,7 +180,7 @@ public class MyAppointDetailActivity extends BaseActivity<AllAppointmentView,All
         end_time.init(year,monthOfYear,dayOfMonth,this);
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setView(popupView)
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getString(R.string.action_confirm), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         page = PAGE_FIRST_NUM;
@@ -226,14 +226,14 @@ public class MyAppointDetailActivity extends BaseActivity<AllAppointmentView,All
         if (null == bean || bean.isEmpty()){
             String str;
             if (page == PAGE_FIRST_NUM) {
-                str = null == startTime ? "没有预约信息" : "没有满足条件的预约信息";
+                //str = null == startTime ? "没有预约信息" : "没有满足条件的预约信息";
                 ptrLayout.setVisibility(View.GONE);
                 empty_view.setVisibility(View.VISIBLE);
                 tv_appointment.setVisibility(View.GONE);
             } else {
-                str = null==startTime ? "没有更多预约信息" : "没有更多满足条件的预约信息";
+                //str = null==startTime ? "没有更多预约信息" : "没有更多满足条件的预约信息";
             }
-            showToast(str);
+            //showToast(str);
             ptrLayout.disableLoading();
             return true;
         }

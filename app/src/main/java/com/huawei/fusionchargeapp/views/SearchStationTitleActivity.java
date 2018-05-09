@@ -80,7 +80,7 @@ public class SearchStationTitleActivity extends BaseActivity<HomeListView,HomeLi
     public void goSearch(){
         String key=tvSearchContent.getText().toString();
         if (TextUtils.isEmpty(key) || TextUtils.isEmpty(key.trim())) {
-            showToast("输入不能为空");
+            showToast(getString(R.string.input_can_not_be_null));
         } else {
             presenter.getDatas(key);
         }

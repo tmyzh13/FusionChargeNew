@@ -59,7 +59,7 @@ public class RechargeAndConsumeDetailActivity extends BaseActivity<RechargeAndCo
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        bar.setNavTitle("明细");
+        bar.setNavTitle(getString(R.string.my_acount_detail));
         bar.setColorRes(R.color.blue);
         requestBean.rp = PAGE_LIMIT_NUM;
         requestBean.page = PAGE_FIRST_NUM;

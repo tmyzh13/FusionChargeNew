@@ -101,7 +101,7 @@ public class PublishCommentActivity extends BaseActivity<CommentView,CommentPres
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        navBar.setNavTitle("发布评论");
+        navBar.setNavTitle(getString(R.string.activity_publish));
         navBar.setImageBackground(R.drawable.nan_bg);
         sort = 0;
         presenter.queryCommentSortType();
@@ -210,13 +210,13 @@ public class PublishCommentActivity extends BaseActivity<CommentView,CommentPres
             return;
         }
         AlertDialog dialog = new AlertDialog.Builder(PublishCommentActivity.this)
-                .setMessage("您确定要取消评论？")
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                .setMessage(getString(R.string.cancel_publish_toast))
+                .setNegativeButton(getString(R.string.action_cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
-        }).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        }).setPositiveButton(getString(R.string.action_confirm), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
             mContext.startActivity(MainActivity.getLauncher(mContext));

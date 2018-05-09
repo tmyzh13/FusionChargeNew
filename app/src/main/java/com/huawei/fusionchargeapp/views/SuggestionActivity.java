@@ -44,13 +44,13 @@ public class SuggestionActivity extends BaseActivity<SuggestionView,SuggestionPr
     @Override
     protected void init(Bundle savedInstanceState) {
         bar.setColorRes(R.color.blue);
-        bar.setNavTitle("意见反馈");
+        bar.setNavTitle(getString(R.string.setting_advice));
     }
 
     @OnClick(R.id.publish)
     void commitSuggestion(){
         if (Tools.isNull(edit_suggestion.getText().toString())) {
-            showToast("意见为空，请重新输入！");
+            showToast(getString(R.string.advice_is_null));
             return;
         }
         SuggestionBean bean = new SuggestionBean();
