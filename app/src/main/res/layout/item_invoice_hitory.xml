@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:orientation="vertical">
+    
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginBottom="@dimen/dp_8">
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:text="2016-12-23 19:00:34"
+            android:drawablePadding="@dimen/dp_8"
+            android:drawableLeft="@drawable/icon_time"
+            android:textSize="@dimen/text_normal"
+            android:paddingLeft="@dimen/dp_16"
+            android:textStyle="bold"/>
+        
+        <TextView
+            android:id="@+id/invoice_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:text="已开票"
+            android:textSize="@dimen/text_normal"
+            android:drawableRight="@mipmap/list_ic_back"
+            android:drawablePadding="@dimen/dp_8"
+            android:paddingRight="@dimen/dp_16"
+            />
+
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginBottom="@dimen/dp_16">
+
+        <TextView
+            android:id="@+id/invoice_sort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:text="纸质发票 充电发票"
+            android:textSize="@dimen/text_title"
+            android:paddingLeft="@dimen/dp_16" />
+
+        <TextView
+            android:id="@+id/invoice_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:text="48.5元"
+            android:textSize="@dimen/text_normal"
+            android:paddingRight="@dimen/dp_16"
+            />
+
+    </FrameLayout>
+
+</LinearLayout>

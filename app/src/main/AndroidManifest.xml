@@ -189,7 +189,7 @@
         <activity android:name=".views.mycount.ApplyInvoiceActivity"
             android:screenOrientation="portrait"
             />
-        <activity android:name=".views.mycount.InvoiceDetailActivity"
+        <activity android:name=".views.mycount.InvoiceHistoryActivity"
             android:screenOrientation="portrait"
             />
         <activity android:name=".views.AboutUsActivity"

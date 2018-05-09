@@ -44,6 +44,7 @@ import com.huawei.fusionchargeapp.views.UserInfoActivity;
 import com.huawei.fusionchargeapp.views.home.HomeListFragment;
 import com.huawei.fusionchargeapp.views.home.MapFragment;
 import com.huawei.fusionchargeapp.views.interfaces.MyOrderActivity;
+import com.huawei.fusionchargeapp.views.mycount.MyInvoiceActivity;
 
 import java.io.File;
 
@@ -415,6 +416,11 @@ public class MainActivity extends BaseActivity {
     @OnClick(R.id.iv_search)
     public void goSearch() {
         startActivity(SearchStationTitleActivity.getLauncher(MainActivity.this));
+    }
+
+    @OnClick(R.id.my_invoice)
+    void goInvoice(){
+        startActivity(new Intent(this, MyInvoiceActivity.class));
     }
 
     @Override
