@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 
 import com.corelibs.api.ApiFactory;
 import com.corelibs.api.ResponseTransformer;
@@ -40,7 +41,7 @@ import butterknife.ButterKnife;
 public class MyOrderActivity extends BaseActivity<MyOrderView,MyOrderPresenter> implements MyOrderView {
 
 
-   // private int page = 0;
+    private int page = 1;
 
     @Bind(R.id.lv_order)
     AutoLoadMoreListView lvOrder;
@@ -50,7 +51,8 @@ public class MyOrderActivity extends BaseActivity<MyOrderView,MyOrderPresenter> 
 
     @Bind(R.id.nav)
     NavBar navBar;
-
+    @Bind(R.id.empty_view)
+    View empty_view;
 
     private OrderListAdapter adapter;
 
@@ -89,7 +91,7 @@ public class MyOrderActivity extends BaseActivity<MyOrderView,MyOrderPresenter> 
         ptrLayout.setRefreshLoadCallback(new PtrAutoLoadMoreLayout.RefreshLoadCallback() {
             @Override
             public void onLoading(PtrFrameLayout frame) {
-               // page++;
+               page++;
                 isRefresh = false;
                 presenter.getData(isRefresh);
             }
@@ -98,8 +100,7 @@ public class MyOrderActivity extends BaseActivity<MyOrderView,MyOrderPresenter> 
             @Override
             public void onRefreshing(PtrFrameLayout frame) {
 
-
-                //page = 0;
+                page = 1;
                 isRefresh = true;
                 ptrLayout.enableLoading();
                 if (!frame.isAutoRefresh()) {
@@ -147,6 +148,10 @@ public class MyOrderActivity extends BaseActivity<MyOrderView,MyOrderPresenter> 
 
     @Override
     public void onRefreshSuccess(List<RawRecordBean> newBeans) {
+        if (page == 1) {
+            empty_view.setVisibility(View.GONE);
+            ptrLayout.setVisibility(View.VISIBLE);
+        }
         recordBeanList = newBeans;
         adapter.setDatas(newBeans);
         adapter.notifyDataSetChanged();
@@ -160,6 +165,10 @@ public class MyOrderActivity extends BaseActivity<MyOrderView,MyOrderPresenter> 
 
     @Override
     public void noData() {
+        if (page == 1) {
+            empty_view.setVisibility(View.VISIBLE);
+            ptrLayout.setVisibility(View.GONE);
+        }
         showToast(getString(R.string.no_order_data));
     }
 
