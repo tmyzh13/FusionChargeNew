@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginBottom="@dimen/dp_8">
+        <TextView
+            android:id="@+id/consume_sort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:text="充电消费"
+            android:textSize="@dimen/text_small"
+            android:paddingLeft="@dimen/dp_16"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/consume_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:text="2012-11-34 00:34:32"
+            android:textSize="@dimen/text_small"
+            android:paddingRight="@dimen/dp_16"
+            />
+
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginBottom="@dimen/dp_16">
+
+        <TextView
+            android:id="@+id/consume_adress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:text="武汉江夏区高新大道户口社区户口18栋"
+            android:textSize="@dimen/text_normal"
+            android:paddingLeft="@dimen/dp_16" />
+
+        <TextView
+            android:id="@+id/consume_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:text="48.5元"
+            android:textSize="@dimen/text_small"
+            android:paddingRight="@dimen/dp_16"
+            />
+
+    </FrameLayout>
+
+</LinearLayout>

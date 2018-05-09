@@ -390,6 +390,7 @@
     <string name="my_acount_detail">明细</string>
     <string name="my_acount_put_forward">提现</string>
     <string name="my_acount_invoice">发票与报销</string>
+    <string name="my_acount_taocan">我的套餐</string>
     <string name="send_electronic_invoice">开电子发票</string>
     <string name="invoice_histroy">开票历史</string>
     <string name="invoice_detail">纸质发票详情</string>

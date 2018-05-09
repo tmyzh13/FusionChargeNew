@@ -57,15 +57,18 @@ public class InvoiceHistoryItemActivity extends BaseActivity {
     protected void init(Bundle savedInstanceState) {
         bar.setColorRes(R.color.blue);
         bar.setNavTitle("纸质发票详情");
+
+        initAllTextView();
     }
 
-    private void initAllTextView(Intent intent){
-
+    private void initAllTextView(){
+        consume_detail.setText(getString(R.string.invoice_and_consume_num,1,4));
     }
 
     @OnClick(R.id.go_consume)
     void goConsumeDetail(){
         //进入消费详情
+        startActivity(new Intent(this,InvoiceConsumeActivity.class));
     }
 
     @Override
