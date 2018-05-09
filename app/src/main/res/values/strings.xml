@@ -440,4 +440,6 @@
     <string name="apply_invoice_to_pay">货到付款</string>
 
     <string name="invoice_and_consume_num">%1$d张发票，%2$d个充电消费</string>
+
+    <string name="list_no_data">很抱歉！暂时没有数据</string>
 </resources>

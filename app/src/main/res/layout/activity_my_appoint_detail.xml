@@ -8,13 +8,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></com.huawei.fusionchargeapp.weights.NavBar>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_16"
-        android:background="@color/publish_bg_color"/>
-
     <com.corelibs.views.ptr.layout.PtrAutoLoadMoreLayout
         android:id="@+id/ptrLayout"
+        android:layout_marginTop="@dimen/dp_16"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -28,7 +24,10 @@
             android:dividerHeight="@dimen/dp_5"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"/>
-
     </com.corelibs.views.ptr.layout.PtrAutoLoadMoreLayout>
-
+    <include
+        android:id="@+id/empty_view"
+        layout="@layout/empty_list_view"
+        android:visibility="gone"
+        />
 </LinearLayout>

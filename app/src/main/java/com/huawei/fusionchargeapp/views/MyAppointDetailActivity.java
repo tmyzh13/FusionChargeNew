@@ -61,6 +61,8 @@ public class MyAppointDetailActivity extends BaseActivity<AllAppointmentView,All
     TextView tv_appointment;
     @Bind(R.id.nav)
     NavBar navBar;
+    @Bind(R.id.empty_view)
+    View empty_view;
 
     private static final int PAGE_FIRST_NUM = 1;
 
@@ -85,6 +87,9 @@ public class MyAppointDetailActivity extends BaseActivity<AllAppointmentView,All
         if (!noData(bean)){
             if (page == PAGE_FIRST_NUM) {
                 data = bean;
+                ptrLayout.setVisibility(View.VISIBLE);
+                empty_view.setVisibility(View.GONE);
+                tv_appointment.setVisibility(View.VISIBLE);
             } else {
                 data.addAll(bean);
             }
@@ -116,9 +121,8 @@ public class MyAppointDetailActivity extends BaseActivity<AllAppointmentView,All
     protected void init(Bundle savedInstanceState) {
         navBar.setColorRes(R.color.app_blue);
         navBar.setNavTitle("我的预约");
-        presenter.getAppointmentInfo(page,PAGE_LIMIT_NUM);
-        tv_appointment.setVisibility(View.VISIBLE);
         tv_appointment.setText("筛选");
+        presenter.getAppointmentInfo(page,PAGE_LIMIT_NUM);
 
         appointmentListAdapter = new AppointmentListAdapter(this,data);
         lvOrder.setAdapter(appointmentListAdapter);
@@ -223,6 +227,9 @@ public class MyAppointDetailActivity extends BaseActivity<AllAppointmentView,All
             String str;
             if (page == PAGE_FIRST_NUM) {
                 str = null == startTime ? "没有预约信息" : "没有满足条件的预约信息";
+                ptrLayout.setVisibility(View.GONE);
+                empty_view.setVisibility(View.VISIBLE);
+                tv_appointment.setVisibility(View.GONE);
             } else {
                 str = null==startTime ? "没有更多预约信息" : "没有更多满足条件的预约信息";
             }
