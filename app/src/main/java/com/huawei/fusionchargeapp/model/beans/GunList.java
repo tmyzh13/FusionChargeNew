@@ -24,6 +24,7 @@ public class GunList {
     private int gunId;
     private String gunNumber;
     private int gunStatus;
+    //1 交流 2直流
     private int gunType;
     private int isBespeak;
     private String lockBeginTime;

@@ -14,6 +14,12 @@
         android:gravity="center"/>
 
     <TextView
+       style="@style/text_normal"
+        android:id="@+id/tv_gun_type"
+        android:layout_marginLeft="10dp"
+        />
+
+    <TextView
         android:id="@+id/tv_gun_status"
         android:layout_marginLeft="10dp"
         android:paddingLeft="5dp"

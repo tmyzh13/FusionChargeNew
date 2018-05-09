@@ -185,6 +185,12 @@ public class ChargeOrderDetailsActivity extends BaseActivity<ChargeOrderDetailVi
                 tvGunName.setText(getString(R.string.charge_gun_ )+ chargingGunBeans.getGunNumber());
 
                 TextView tvGunStatus = ll.findViewById(R.id.tv_gun_status);
+                TextView tv_gun_type=ll.findViewById(R.id.tv_gun_type);
+                if(chargingGunBeans.getGunType()==1){
+                    tv_gun_type.setText(getString(R.string.home_charge_alternating));
+                }else{
+                    tv_gun_type.setText(getString(R.string.home_charge_direct));
+                }
                 if(chargingGunBeans.getGunStatus() == 1 ){
                     //空闲
                     tvGunStatus.setText(R.string.gun_status_free);

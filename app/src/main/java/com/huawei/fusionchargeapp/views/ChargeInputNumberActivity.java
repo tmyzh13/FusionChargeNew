@@ -71,7 +71,7 @@ public class ChargeInputNumberActivity extends BaseActivity {
         try {
             number = Long.parseLong(str);
         } catch (Exception e){
-            showToast("请输入正确的二维码!");
+            showToast(getString(R.string.hint_right_code));
             return;
         }
 
@@ -114,7 +114,7 @@ public class ChargeInputNumberActivity extends BaseActivity {
                                    if(scanChargeInfoBaseData.code == 403) {
                                        goLogin();
                                    }
-                                   showToast("未获取数据，请重新输入！");
+//                                   showToast("未获取数据，请重新输入！");
                                    return super.operationError(scanChargeInfoBaseData, status, message);
                                }
 
