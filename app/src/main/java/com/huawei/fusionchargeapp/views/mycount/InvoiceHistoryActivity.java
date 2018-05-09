@@ -70,6 +70,7 @@ public class InvoiceHistoryActivity extends BaseActivity {
 
             }
         });
+        ptyLayout.setCanRefresh(false);
     }
 
     private void initFakeData(){
