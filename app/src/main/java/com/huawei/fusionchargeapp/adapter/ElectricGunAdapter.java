@@ -109,6 +109,8 @@ public class ElectricGunAdapter extends BaseAdapter {
             holder.gunAppointmentTv.setClickable(true);
             holder.gunAppointmentTv.setTextColor(context.getResources().getColor(R.color.app_blue));
             holder.gunAppointmentTv.setBackgroundResource(R.drawable.blue_stroke_90angle_bg);
+            //判断剩余时间 有remindtime说明轮冲 也不能预约 并且显示剩余时间
+
         } else if (gunBean.getGunStatus() == 2) {
             holder.gunStatusIv.setImageResource(R.drawable.dots_fault_red);
             holder.gunStatusTv.setText(R.string.gun_not_using);

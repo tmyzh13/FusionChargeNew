@@ -42,8 +42,6 @@ public class PayCompleteActivity extends BaseActivity {
         nav.setImageBackground(R.drawable.nan_bg);
 
         orderNum=getIntent().getStringExtra("order");
-//        view=new LoadingView(PayCompleteActivity.this);
-//        view.startAnimation(0,100,3000);
     }
 
     @Override
