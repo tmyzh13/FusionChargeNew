@@ -78,6 +78,7 @@
                 android:paddingBottom="@dimen/dp_8"
                 android:layout_gravity="end|center_vertical"
                 android:text="@string/action_next"
+                android:textColor="@color/text_white"
                 android:background="@drawable/blue_shape_bg"
                 android:textSize="@dimen/text_title"/>
 
