@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.corelibs.base.BaseActivity;
 import com.corelibs.base.BasePresenter;
 import com.huawei.fusionchargeapp.R;
+import com.huawei.fusionchargeapp.views.RechargeAndConsumeDetailActivity;
 import com.huawei.fusionchargeapp.weights.NavBar;
 
 import butterknife.Bind;
@@ -56,7 +57,7 @@ public class MyAcountActivity extends BaseActivity {
 
     @OnClick(R.id.rl_detail)
     public void godetail(){
-
+        startActivity(new Intent(this, RechargeAndConsumeDetailActivity.class));
     }
 
     @OnClick(R.id.rl_put_foward)

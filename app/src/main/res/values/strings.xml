@@ -457,4 +457,7 @@
     <string name="see_the_detail">查看</string>
     <string name="commit_toast">请对此次充电做出评价</string>
     <string name="suggestion_yours">请提出您的宝贵意见</string>
+    <string name="invoice_apply_total">%1$d个订单,共%2$f元(满200元包邮)</string>
+    <string name="select_all">全选</string>
+    <string name="charge_time">充电时间</string>
 </resources>

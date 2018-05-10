@@ -149,8 +149,7 @@ public class RechargeAndConsumeDetailActivity extends BaseActivity<RechargeAndCo
                 groupList.add(getGroupStringFromeTime(tempBean.dealTime));
                 itemList.add(new ArrayList<RechargeAndConsumeBean>());
                 itemList.get(itemList.size()-1).add(tempBean);
-            }
-            if (groupList.size() != 0) {
+            }else {
                 if (groupList.contains(getGroupStringFromeTime(tempBean.dealTime))) {
                     itemList.get(itemList.size()-1).add(tempBean);
                 } else {

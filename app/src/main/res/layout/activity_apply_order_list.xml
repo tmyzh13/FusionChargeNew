@@ -2,28 +2,87 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/app_bg">
-
+    android:background="@color/publish_bg_color">
     <com.huawei.fusionchargeapp.weights.NavBar
+        android:id="@+id/nav_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/nav"
-        />
+        android:layout_height="wrap_content"></com.huawei.fusionchargeapp.weights.NavBar>
+
     <com.corelibs.views.ptr.layout.PtrAutoLoadMoreLayout
         android:id="@+id/ptrLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_weight="1"
+        android:layout_height="0dp">
 
-        <com.corelibs.views.ptr.loadmore.widget.AutoLoadMoreListView
-            android:id="@+id/lv_order"
+        <com.corelibs.views.ptr.loadmore.widget.AutoLoadMoreExpandableListView
+            android:id="@+id/list_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:listSelector="#00000000"
             android:scrollbars="none"
-            android:divider="@color/transparent"
-            android:dividerHeight="@dimen/dp_1"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"/>
-
+            android:background="@color/text_white"/>
     </com.corelibs.views.ptr.layout.PtrAutoLoadMoreLayout>
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="@string/list_no_data"
+        android:drawableTop="@drawable/pic_01"
+        android:drawablePadding="@dimen/dp_16"
+        android:layout_marginTop="120dp"
+        android:textSize="@dimen/text_nav"
+        android:visibility="gone">
+    </TextView>
+    <LinearLayout
+        android:id="@+id/bottom_tool"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_5"
+            />
+        <TextView
+            android:id="@+id/apply_total"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/invoice_apply_total"
+            android:textSize="@dimen/text_small"
+            android:paddingRight="@dimen/dp_16"
+            android:paddingLeft="@dimen/dp_16"
+            android:paddingBottom="@dimen/dp_8"
+            android:paddingTop="@dimen/dp_8"
+            />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_16">
+            <CheckBox
+                android:id="@+id/select_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:text="@string/select_all"
+                android:paddingLeft="@dimen/dp_8"
+                android:checked="false"
+                android:button="@drawable/select_view_circle_stytle"/>
+
+            <TextView
+                android:id="@+id/next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dp_16"
+                android:paddingRight="@dimen/dp_16"
+                android:paddingTop="@dimen/dp_8"
+                android:paddingBottom="@dimen/dp_8"
+                android:layout_gravity="end|center_vertical"
+                android:text="@string/action_next"
+                android:background="@drawable/blue_shape_bg"
+                android:textSize="@dimen/text_title"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
 </LinearLayout>

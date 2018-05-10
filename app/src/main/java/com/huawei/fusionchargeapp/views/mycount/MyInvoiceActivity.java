@@ -31,7 +31,7 @@ public class MyInvoiceActivity extends BaseActivity {
     @OnClick(R.id.invoice_ele)
     void goElectroniceInvoice(){
         //进入申请电子发票界面
-        startActivity(ApplyInvoiceActivity.getLauncher(context));
+        startActivity(new Intent(this,ApplyOrderListActivity.class));
     }
 
     @OnClick(R.id.invoce_history)

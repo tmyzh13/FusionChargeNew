@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:padding="@dimen/dp_16"
+    android:background="@color/publish_bg_color"
+    android:text="2018年4月"
+    android:textSize="@dimen/text_title">
+</TextView>

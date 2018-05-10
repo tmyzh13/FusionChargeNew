@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/publish_bg_color"/>
+
+    <LinearLayout
+        android:orientation="horizontal" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_16">
+
+        <CheckBox
+            android:id="@+id/cb_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_16"
+            android:layout_gravity="center_vertical"
+            android:checked="false"
+            android:button="@drawable/select_view_circle_stytle"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_8"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/icon_time"
+                    android:drawablePadding="@dimen/dp_5"
+                    android:paddingRight="@dimen/dp_8"
+                    android:text="@string/charge_time"
+                    android:textSize="@dimen/text_small"/>
+                <TextView
+                    android:id="@+id/charge_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2018-11-23 19:23:23"
+                    android:textSize="@dimen/text_small"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_8"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/icon_content"
+                    android:drawablePadding="@dimen/dp_5"
+                    android:paddingRight="@dimen/dp_8"
+                    android:text="@string/guilding_charging_pile_no"
+                    android:textSize="@dimen/text_small"/>
+                <TextView
+                    android:id="@+id/pile_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="32345456546"
+                    android:textSize="@dimen/text_small"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_8"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/icon_location"
+                    android:drawablePadding="@dimen/dp_5"
+                    android:paddingRight="@dimen/dp_8"
+                    android:text="@string/charge_pile_address"
+                    android:textSize="@dimen/text_small"/>
+                <TextView
+                    android:id="@+id/pile_adress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="南京市风雨小区烟花大道128号"
+                    android:singleLine="true"
+                    android:textSize="@dimen/text_small"/>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:layout_gravity="bottom"
+            android:textSize="@dimen/text_extra"
+            android:text="20元"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+</LinearLayout >
