@@ -125,6 +125,10 @@ public class ApplyOrderListActivity extends BaseActivity implements ApplyInvoice
 
     @OnClick(R.id.next)
     void geNext(){
+        if (nowNum == 0) {
+            showToast(getString(R.string.select_no_consume_item));
+            return;
+        }
         startActivity(ApplyInvoiceActivity.getLauncher(this));
     }
 
