@@ -8,14 +8,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></com.huawei.fusionchargeapp.weights.NavBar>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_16"
-        />
     <com.corelibs.views.ptr.layout.PtrAutoLoadMoreLayout
         android:id="@+id/ptrLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16">
 
         <com.corelibs.views.ptr.loadmore.widget.AutoLoadMoreExpandableListView
             android:id="@+id/list_view"
@@ -25,5 +22,9 @@
             android:scrollbars="none"
             android:background="@color/text_white"/>
     </com.corelibs.views.ptr.layout.PtrAutoLoadMoreLayout>
+    <include
+        layout="@layout/empty_list_view"
+        android:id="@+id/empty_view"
+        android:visibility="gone"/>
 
 </LinearLayout>

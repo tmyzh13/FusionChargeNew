@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import com.corelibs.base.BaseActivity;
 import com.corelibs.base.BasePresenter;
@@ -38,6 +39,8 @@ public class RechargeAndConsumeDetailActivity extends BaseActivity<RechargeAndCo
     AutoLoadMoreExpandableListView lvOrder;
     @Bind(R.id.ptrLayout)
     PtrAutoLoadMoreLayout ptrLayout;
+    @Bind(R.id.empty_view)
+    TextView empty_view;
 
     private List<String> groupList = new ArrayList<>();
     private List<List<RechargeAndConsumeBean>> itemList = new ArrayList<>();
@@ -133,6 +136,10 @@ public class RechargeAndConsumeDetailActivity extends BaseActivity<RechargeAndCo
     public void getBalanceDetail(List<RechargeAndConsumeBean> list) {
         //如果list存在数据才继续处理
         if (!noData(list)) {
+            if (page == PAGE_FIRST_NUM) {
+                empty_view.setVisibility(View.GONE);
+                ptrLayout.setVisibility(View.VISIBLE);
+            }
             setAdapterData(list);
         }
     }
@@ -174,6 +181,10 @@ public class RechargeAndConsumeDetailActivity extends BaseActivity<RechargeAndCo
 
     public boolean noData(List<RechargeAndConsumeBean> bean) {
         if (null == bean || bean.isEmpty()){
+            if (page == PAGE_FIRST_NUM) {
+                empty_view.setVisibility(View.VISIBLE);
+                ptrLayout.setVisibility(View.GONE);
+            }
             showToast(page == PAGE_FIRST_NUM ? "没有账单记录": "没有更多账单记录");
             ptrLayout.disableLoading();
             return true;
