@@ -49,4 +49,19 @@
 
     </ScrollView>
 
+    <TextView
+        android:id="@+id/has_no_picture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:drawableTop="@drawable/pic_no"
+        android:drawablePadding="@dimen/dp_8"
+        android:padding="@dimen/dp_20"
+        android:textSize="@dimen/text_title"
+        android:text="@string/has_no_picture"
+        android:background="@color/text_white"
+        android:visibility="visible"
+        />
+
 </FrameLayout>

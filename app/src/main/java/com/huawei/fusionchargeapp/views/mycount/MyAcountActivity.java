@@ -3,6 +3,7 @@ package com.huawei.fusionchargeapp.views.mycount;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.corelibs.base.BaseActivity;
 import com.corelibs.base.BasePresenter;
@@ -50,19 +51,16 @@ public class MyAcountActivity extends BaseActivity {
         return null;
     }
 
-    @OnClick(R.id.rl_rechage)
-    public void goRechage(){
-
+    @OnClick({R.id.rl_put_foward,R.id.rl_rechage})
+    void gePutForward(View view){
+        Intent intent = new Intent(this,CashPatternActivity.class);
+        intent.putExtra(CashPatternActivity.KEY_CASH_OPERATION_PATTER,view.getId() == R.id.rl_rechage);
+        startActivity(intent);
     }
 
     @OnClick(R.id.rl_detail)
     public void godetail(){
         startActivity(new Intent(this, RechargeAndConsumeDetailActivity.class));
-    }
-
-    @OnClick(R.id.rl_put_foward)
-    public void goPutFoward(){
-
     }
 
     @OnClick(R.id.rl_invoice)
