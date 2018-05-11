@@ -9,5 +9,5 @@ public interface IAdminJump {
     //Bundle别名
     public static final String SERVICES_ALISA = "FusionChargeBundle";
 
-    public String toFusionCharge(String name);
+    public boolean toFusionCharge(String name);
 }

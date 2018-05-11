@@ -4,6 +4,12 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <!-- 在SDCard中创建与删除文件权限 -->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
@@ -53,6 +59,55 @@
         <meta-data
             android:name="com.huawei.hae.mcloud.BUNDLE_TYPE"
             android:value="1" />
+
+
+
+        <!-- ======================配置成主App======================== -->
+        <!--根据所需环境，修改替换value字段的相关信息：
+          sit: http://mcloud-sit.huawei.com 开发环境
+          uat: http://mcloud-uat.huawei.com  测试环境
+          pro: http://w3m.huawei.com  生产环境
+        -->
+        <!--<meta-data
+            android:name="com.huawei.hae.mcloud.domain.internal"
+            android:value="http://mcloud-sit.huawei.com/mcloud/mag"/>
+        <meta-data
+            android:name="com.huawei.hae.mcloud.domain.external"
+            android:value="http://mcloud-sit.huawei.com/mcloud/umag" />
+        <meta-data
+            android:name="env"
+            android:value="sit"/>
+        <service android:name="com.huawei.hae.mcloud.rt.MCloudRunTimeService">
+            <intent-filter>
+                <action android:name="com.huawei.mcloud.runtime.bindservice"></action>
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.huawei.hae.mcloud.rt.mbus.mbusrouter.service.BusRouterService"
+            android:exported="true">
+        </service>
+       &lt;!&ndash; <service android:name="com.huawei.hae.mcloud.rt.mbus.access.MBusAccessProviderService"
+            android:exported="true">
+        </service>&ndash;&gt;
+
+        <activity android:name="com.huawei.hae.mcloud.rt.pluginloader.PluginContainerActivity"
+            android:theme="@android:style/Theme.Translucent"/>
+        <service android:name="com.huawei.hae.mcloud.rt.service.ServiceContainers$ServiceContainer0"/>
+        <service android:name="com.huawei.hae.mcloud.rt.service.ServiceContainers$ServiceContainer1"/>
+        <service android:name="com.huawei.hae.mcloud.rt.service.ServiceContainers$ServiceContainer2"/>
+        <service android:name="com.huawei.hae.mcloud.rt.service.ServiceContainers$ServiceContainer3"/>
+        <service android:name="com.huawei.hae.mcloud.rt.service.ServiceContainers$ServiceContainer4"/>
+        <service android:name="com.huawei.hae.mcloud.rt.service.ServiceContainers$ServiceContainer5"/>
+        <service android:name="com.huawei.hae.mcloud.rt.service.ServiceContainers$ServiceContainer6"/>
+
+        <provider
+            android:authorities="com.huawei.fusionchargeapp.uat.provider"
+            android:name="com.huawei.hae.mcloud.rt.provider.RuntimeProvider"
+            android:exported="true"/>-->
+
+
+
+
 
 
         <activity

@@ -20,7 +20,7 @@ public class IAdminJumpImpl extends BaseServiceProvider implements IAdminJump {
     }
 
     @Override
-    public String toFusionCharge(String name) {
+    public boolean toFusionCharge(String name) {
         Log.e("zw","toFusionCharge : start   " + name);
 
         try{
@@ -30,8 +30,9 @@ public class IAdminJumpImpl extends BaseServiceProvider implements IAdminJump {
 
         } catch (Exception e) {
             Log.e("zw", "toFusionCharge error : " + e.getMessage());
+            return false;
         }
         Log.e("zw","toFusionCharge : end   " + name);
-        return "success";
+        return true;
     }
 }
