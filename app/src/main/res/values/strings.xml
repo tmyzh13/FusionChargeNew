@@ -469,4 +469,5 @@
     <string name="advice_cash_style_selecet">推荐有%1$s的用户使用</string>
     <string name="wei_xin_wallet">微信钱包</string>
     <string name="zhi_fu_bao_account">支付宝账号</string>
+    <string name="has_no_picture">暂无图片</string>
 </resources>
