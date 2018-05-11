@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/publish_bg_color">
+
+    <com.huawei.fusionchargeapp.weights.NavBar
+        android:id="@+id/nav_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.huawei.fusionchargeapp.weights.NavBar>
+
+    <TextView
+        android:id="@+id/cach_pattern"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginBottom="@dimen/dp_1"
+        android:text="@string/cash_select_pattern"
+        android:background="@color/text_white"
+        android:textColor="@color/blue"/>
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/text_white"></ListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/dp_16"
+        android:padding="@dimen/dp_16"
+        android:background="@color/text_white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:paddingRight="@dimen/dp_16"
+            android:text="@string/cash_string"
+            android:textSize="@dimen/text_title"
+            />
+        <EditText
+            android:id="@+id/cash_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/cash_input_with_pattern"
+            android:textSize="@dimen/text_title"
+            android:inputType="number"
+            android:background="@null"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:background="@drawable/blue_shape_bg"
+        android:gravity="center"
+        android:text="@string/my_acount_recharge"
+        android:textSize="@dimen/text_title"
+        android:textColor="@color/text_white" />
+
+</LinearLayout>

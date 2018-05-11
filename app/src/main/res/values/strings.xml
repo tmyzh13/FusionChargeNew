@@ -461,4 +461,12 @@
     <string name="select_all">全选</string>
     <string name="charge_time">充电时间</string>
     <string name="select_no_consume_item">请选择消费记录</string>
+    <string name="cash_select_pattern">选择%1$s方式</string>
+    <string name="cash_input_with_pattern">请输入%1$s金额</string>
+    <string name="cash_string">金额</string>
+    <string name="zhi_fu_bao">支付宝</string>
+    <string name="wei_xin">微信</string>
+    <string name="advice_cash_style_selecet">推荐有%1$s的用户使用</string>
+    <string name="wei_xin_wallet">微信钱包</string>
+    <string name="zhi_fu_bao_account">支付宝账号</string>
 </resources>
