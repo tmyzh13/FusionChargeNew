@@ -12,6 +12,7 @@ import com.corelibs.utils.ToastMgr;
 import com.huawei.fusionchargeapp.constants.Urls;
 import com.huawei.fusionchargeapp.iadmin.IAdminJump;
 import com.huawei.fusionchargeapp.iadmin.IAdminJumpImpl;
+import com.huawei.hae.mcloud.rt.MCloudRunTimeImpl;
 import com.huawei.hae.mcloud.rt.mbus.access.MBusAccess;
 import com.huawei.hae.mcloud.rt.mbus.access.MBusAccessProviderService;
 

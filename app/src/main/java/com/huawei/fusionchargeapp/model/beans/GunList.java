@@ -33,13 +33,21 @@ public class GunList {
     private String voltageA;
     private String voltageB;
     private String voltageC;
+    private int remainingTime;
+
     public void setChargingPileId(int chargingPileId) {
         this.chargingPileId = chargingPileId;
     }
     public int getChargingPileId() {
         return chargingPileId;
     }
+    public int getRemainingTime() {
+        return remainingTime;
+    }
 
+    public void setRemainingTime(int remainingTime){
+        this.remainingTime=remainingTime;
+    }
     public void setCurrentA(String currentA) {
         this.currentA = currentA;
     }

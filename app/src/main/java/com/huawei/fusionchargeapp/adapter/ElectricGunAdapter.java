@@ -73,6 +73,7 @@ public class ElectricGunAdapter extends BaseAdapter {
             holder.gunStatusIv = convertView.findViewById(R.id.gun_status_iv);
             holder.gunStatusTv = convertView.findViewById(R.id.gun_status_tv);
             holder.gunAppointmentTv = convertView.findViewById(R.id.gun_appointment_tv);
+            holder.tv_remiantime_hint=convertView.findViewById(R.id.tv_remindtime_hint);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -106,36 +107,50 @@ public class ElectricGunAdapter extends BaseAdapter {
         if (gunBean.getGunStatus() == 1) {
             holder.gunStatusIv.setImageResource(R.drawable.dots_green);
             holder.gunStatusTv.setText(R.string.statue_free);
-            holder.gunAppointmentTv.setClickable(true);
-            holder.gunAppointmentTv.setTextColor(context.getResources().getColor(R.color.app_blue));
-            holder.gunAppointmentTv.setBackgroundResource(R.drawable.blue_stroke_90angle_bg);
-            //判断剩余时间 有remindtime说明轮冲 也不能预约 并且显示剩余时间
 
+            //判断剩余时间 有remindtime说明轮冲 也不能预约 并且显示剩余时间
+            if(gunBean.getRemainingTime()>0){
+                holder.gunAppointmentTv.setTextColor(context.getResources().getColor(R.color.text_gray));
+                holder.gunAppointmentTv.setBackgroundResource(R.drawable.appoint_gray_bg_shape);
+                holder.gunAppointmentTv.setClickable(false);
+                holder.tv_remiantime_hint.setVisibility(View.VISIBLE);
+                holder.tv_remiantime_hint.setText(context.getString(R.string.tv_remindtime_hint_1)+gunBean.getRemainingTime()+context.getString(R.string.tv_remindtime_hint_2));
+            }else{
+                holder.tv_remiantime_hint.setVisibility(View.GONE);
+                holder.gunAppointmentTv.setClickable(true);
+                holder.gunAppointmentTv.setTextColor(context.getResources().getColor(R.color.app_blue));
+                holder.gunAppointmentTv.setBackgroundResource(R.drawable.blue_stroke_90angle_bg);
+            }
         } else if (gunBean.getGunStatus() == 2) {
+            holder.tv_remiantime_hint.setVisibility(View.GONE);
             holder.gunStatusIv.setImageResource(R.drawable.dots_fault_red);
             holder.gunStatusTv.setText(R.string.gun_not_using);
             holder.gunAppointmentTv.setTextColor(context.getResources().getColor(R.color.text_gray));
             holder.gunAppointmentTv.setBackgroundResource(R.drawable.appoint_gray_bg_shape);
             holder.gunAppointmentTv.setClickable(false);
         } else if (gunBean.getGunStatus() == 3) {
+            holder.tv_remiantime_hint.setVisibility(View.GONE);
             holder.gunStatusIv.setImageResource(R.drawable.dots_yellow);
             holder.gunStatusTv.setText(R.string.useing);
             holder.gunAppointmentTv.setTextColor(context.getResources().getColor(R.color.text_gray));
             holder.gunAppointmentTv.setBackgroundResource(R.drawable.appoint_gray_bg_shape);
             holder.gunAppointmentTv.setClickable(false);
         } else if (gunBean.getGunStatus() == 4 ) {
+            holder.tv_remiantime_hint.setVisibility(View.GONE);
             holder.gunStatusIv.setImageResource(R.drawable.dots_fault_red);
             holder.gunStatusTv.setText(R.string.appoingment_ing);
             holder.gunAppointmentTv.setTextColor(context.getResources().getColor(R.color.text_gray));
             holder.gunAppointmentTv.setBackgroundResource(R.drawable.appoint_gray_bg_shape);
             holder.gunAppointmentTv.setClickable(false);
         } else if (gunBean.getGunStatus() == 5 ) {
+            holder.tv_remiantime_hint.setVisibility(View.GONE);
             holder.gunStatusIv.setImageResource(R.drawable.dots_fault_red);
             holder.gunStatusTv.setText(R.string.stop_server);
             holder.gunAppointmentTv.setTextColor(context.getResources().getColor(R.color.text_gray));
             holder.gunAppointmentTv.setBackgroundResource(R.drawable.appoint_gray_bg_shape);
             holder.gunAppointmentTv.setClickable(false);
         } else if (gunBean.getGunStatus() == 6 ) {
+            holder.tv_remiantime_hint.setVisibility(View.GONE);
             holder.gunStatusIv.setImageResource(R.drawable.dots_fault_red);
             holder.gunStatusTv.setText(R.string.status_fault);
             holder.gunAppointmentTv.setTextColor(context.getResources().getColor(R.color.text_gray));
@@ -155,5 +170,7 @@ public class ElectricGunAdapter extends BaseAdapter {
         public ImageView gunStatusIv;
         public TextView gunStatusTv;
         public TextView gunAppointmentTv;
+
+        public TextView tv_remiantime_hint;
     }
 }

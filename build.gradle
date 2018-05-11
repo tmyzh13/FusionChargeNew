@@ -7,11 +7,19 @@ buildscript {
         jcenter()
         maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
 
+        maven {
+            url "http://mcloud-pub.huawei.com/mcloud/archiva/repository/internal"
+        }
+       maven {
+           url "http://w3cloudnkg-sit1.huawei.com/ccloud/nexus/content/groups/public"
+       }
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
-        
+
+//        classpath 'com.huawei.hae.mcloud.tools.build.hae-tools-public:1.1.6'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -23,6 +31,13 @@ allprojects {
         google()
         jcenter()
         maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+
+        maven {
+            url "http://mcloud-pub.huawei.com/mcloud/archiva/repository/internal"
+        }
+        maven {
+            url "http://w3cloudnkg-sit1.huawei.com/ccloud/nexus/content/groups/public"
+        }
     }
 }
 
@@ -35,6 +50,8 @@ subprojects {
         jcenter()
         mavenLocal()
     }
+
+
 
     version = '3.6.0'
     group = 'com.journeyapps'
