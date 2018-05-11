@@ -57,6 +57,13 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_10"
             android:text="空闲" />
+        <TextView
+            style="@style/text_normal"
+            android:id="@+id/tv_remindtime_hint"
+            android:layout_marginLeft="5dp"
+            android:textSize="@dimen/dp_10"
+            android:textColor="@color/text_light"
+            />
     </LinearLayout>
 
     <TextView

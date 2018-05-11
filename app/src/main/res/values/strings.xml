@@ -461,6 +461,10 @@
     <string name="select_all">全选</string>
     <string name="charge_time">充电时间</string>
     <string name="select_no_consume_item">请选择消费记录</string>
+
+    <string name="tv_remindtime_hint_1">该枪在</string>
+    <string name="tv_remindtime_hint_2">分钟后可使用</string>
+
     <string name="cash_select_pattern">选择%1$s方式</string>
     <string name="cash_input_with_pattern">请输入%1$s金额</string>
     <string name="cash_string">金额</string>
