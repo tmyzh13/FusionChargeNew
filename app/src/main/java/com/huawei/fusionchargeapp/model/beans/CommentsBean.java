@@ -13,6 +13,7 @@ public class CommentsBean implements Serializable{
     public String userName;
     public String createTime;
     public String evaluateContent;
+    public String photoUrl;
 
     public String getUserName() {
         return userName;
@@ -44,6 +45,7 @@ public class CommentsBean implements Serializable{
                 "userName='" + userName + '\'' +
                 ", createTime='" + createTime + '\'' +
                 ", evaluateContent='" + evaluateContent + '\'' +
+                ", photoUrl" +photoUrl+
                 '}';
     }
 }

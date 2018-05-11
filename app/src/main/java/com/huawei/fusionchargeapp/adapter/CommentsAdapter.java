@@ -8,10 +8,14 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.model.beans.CommentsBean;
+import com.huawei.fusionchargeapp.utils.Tools;
 
 import java.util.List;
+
+import retrofit2.http.Url;
 
 /**
  * Created by issuser on 2018/4/23.
@@ -20,6 +24,7 @@ import java.util.List;
 public class CommentsAdapter extends BaseAdapter {
     private List<CommentsBean> datas;
     private LayoutInflater mInflater;
+    private Context context;
 
     public CommentsAdapter(Context context, List<CommentsBean> datas) {
         this.datas = datas;
@@ -62,6 +67,9 @@ public class CommentsAdapter extends BaseAdapter {
         holder.name.setText(bean.getUserName());
         holder.time.setText(bean.getCreateTime());
         holder.content.setText(bean.getEvaluateContent());
+        if (!Tools.isNull(bean.photoUrl)) {
+            Glide.with(context).load(bean.photoUrl).into(holder.headIv);
+        }
 
         return convertView;
     }
