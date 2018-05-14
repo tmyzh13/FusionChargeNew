@@ -175,9 +175,12 @@ public class MyAppointDetailActivity extends BaseActivity<AllAppointmentView,All
         int monthOfYear=calendar.get(Calendar.MONTH);
         int dayOfMonth=calendar.get(Calendar.DAY_OF_MONTH);
         startTime = endTime = getTimeFromYMD(year,monthOfYear,dayOfMonth);
+        Long maxTime = Calendar.getInstance().getTimeInMillis();
 
         start_time.init(year,monthOfYear,dayOfMonth,this);
         end_time.init(year,monthOfYear,dayOfMonth,this);
+        start_time.setMaxDate(maxTime);
+        end_time.setMaxDate(maxTime);
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setView(popupView)
                 .setPositiveButton(getString(R.string.action_confirm), new DialogInterface.OnClickListener() {
@@ -229,11 +232,10 @@ public class MyAppointDetailActivity extends BaseActivity<AllAppointmentView,All
                 //str = null == startTime ? "没有预约信息" : "没有满足条件的预约信息";
                 ptrLayout.setVisibility(View.GONE);
                 empty_view.setVisibility(View.VISIBLE);
-                tv_appointment.setVisibility(View.GONE);
-            } else {
-                //str = null==startTime ? "没有更多预约信息" : "没有更多满足条件的预约信息";
+                if (startTime == null) {
+                    tv_appointment.setVisibility(View.GONE);
+                }
             }
-            //showToast(str);
             ptrLayout.disableLoading();
             return true;
         }
