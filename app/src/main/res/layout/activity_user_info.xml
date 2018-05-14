@@ -103,6 +103,8 @@
             android:hint="填写邮箱"
             android:textColor="@color/setting_blue" />
     </LinearLayout>
+    <ImageView style="@style/view_line"
+        />
     <LinearLayout
         android:id="@+id/layout_birthday"
         style="@style/item_layout_simple"
