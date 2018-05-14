@@ -161,6 +161,11 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
     public void goPay(){
         //选中的支付类型
         String type=list.get(adapter.getCurrentPosition()).type;
+        if(payInfoBean==null){
+            ToastMgr.show(getString(R.string.hint_error_data));
+            finish();
+            return;
+        }
         if(type.equals("0")){
 //            commonDialog.show();
 //            commonDialog.setDialogBackground();

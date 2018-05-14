@@ -61,7 +61,7 @@
     <string name="code_895">该桩被预约或者正在使用中</string>
     <string name="code_896">主站到采集器HTTP错误</string>
     <string name="code_897">不可重复下发指令</string>
-    <string name="code_898">主站到采集器</string>
+    <string name="code_898">主站到采集器错误</string>
     <string name="code_899">已有预约，无法再次预约</string>
 
 

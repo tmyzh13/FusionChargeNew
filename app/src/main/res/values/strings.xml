@@ -68,6 +68,7 @@
     <string name="hint_input_content">请输入内容</string>
     <string name="hint_input_right_email">请输入正确的邮箱</string>
     <string name="hint_right_code">请输入正确的二维码</string>
+    <string name="hint_error_data">错误数据</string>
     <!--登录界面-->
     <string name="login">登录</string>
     <string name="login_type_phone">手机号登录</string>

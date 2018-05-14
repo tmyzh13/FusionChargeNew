@@ -13,8 +13,7 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:listSelector="@color/transparent"
         android:cacheColorHint="@color/transparent"
         android:id="@+id/list_tc"
@@ -25,8 +24,10 @@
     <TextView
         style="@style/text_normal"
         android:text="@string/tao_can_hint"
+        android:textSize="@dimen/text_small"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="15dp"
+        android:textColor="@color/text_light"
         />
 
 </LinearLayout>

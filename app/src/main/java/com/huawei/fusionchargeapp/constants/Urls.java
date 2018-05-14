@@ -8,17 +8,18 @@ package com.huawei.fusionchargeapp.constants;
 public class Urls {
 
 
-//        public static final String ROOT="http://114.115.169.46:8088/charger/api/v1/";//菊
+    //        public static final String ROOT="http://114.115.169.46:8088/charger/api/v1/";//菊
 ////    public static final String ROOT="http://10.40.143.67:8088/charger/api/v1/";//李凯
-////    public static final String ROOT="http://10.40.143.130:8088/charger/api/v1/";//胡明明
+//    public static final String ROOT="http://10.40.143.130:8088/charger/api/v1/";//胡明明
 //    public static final String ROOT="http://10.40.143.130:8088/charger/api/v1/";//菊1
 //    public static final String ROOT = "http://114.115.141.57:8080/charger/api/v1/";
-        public static final String ROOT = "http://114.115.169.46:8088/charger/api/v1/";  //开发环境
-//    public static final String ROOT = "http://114.115.141.57:8080/charger/api/v1/";      //测试环境
+    public static final String ROOT = "http://114.115.169.46:8088/charger/api/v1/";  //开发环境
+    //    public static final String ROOT = "http://114.115.141.57:8080/charger/api/v1/";      //测试环境
 //    public static final String ROOT = "http://114.115.144.154:8080/charger/api/v1/";//新测试环境
 //    public static final String ROOT="http://139.159.134.139:8088/charger/api/v1/";//5-7出包
 //    public static final String ROOT = "http://10.40.143.10:8088/charger/api/v1/";   //大灰灰
 //    public static final String ROOT = "http://10.40.143.17:8088/charger/api/v1/";
+//    public static final String ROOT = "http://10.40.143.72:8088/charger/api/v1/";
 //    public static final String ROOT = "http://10.40.143.72:8088/charger/api/v1/";
 //    public static final String ROOT = "http://10.186.254.65:8088/charger/api/v1/";//张楠
 //        public static final String ROOT="http://mcloud-sit.huawei.com/mcloud/umag/FreeProxyForText/safecampuse_charging/charger/api/v1/";//华为
@@ -31,7 +32,7 @@ public class Urls {
     //修改密码
     public static final String MODIFY_PWD = "user/modifypwd";
     //获取验证码
-    public static final String GET_CODE = "user/captcha";
+    public static final String GET_CODE = "user/sendHuaweiCaptcha";
 
     public static final String GET_USER_INFO = "user/getUserInfo";
 
@@ -81,17 +82,17 @@ public class Urls {
     //我的订单
     public static final String MY_ORDER = "user/queryAllChargeOrder";
     //校验验证码
-    public static final String CHECK_CODE="user/checkCaptcha";
+    public static final String CHECK_CODE = "user/checkCaptcha";
 
     //所有预约信息
-    public static final String ALL_APPOINTMENT_INFO ="charging/getAllReserveByAppUserId";
+    public static final String ALL_APPOINTMENT_INFO = "charging/getAllReserveByAppUserId";
 
     //上传头像
     public static final String MODIFY_IMG = "user/modifyimg";
 
 
     //上传用户信息
-    public static final String REPORT_LOCATION="user/selectUserInfoByRegion";
+    public static final String REPORT_LOCATION = "user/selectUserInfoByRegion";
 
     //用户提意见
     public static final String PUBLISH_SUGGESTION = "appUserRecord/addFeedbackRecord";
