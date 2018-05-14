@@ -539,6 +539,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
             dayOfMonth = Integer.parseInt(date[2]);
         }
 
+        start_time.setMaxDate(Calendar.getInstance().getTimeInMillis());
         start_time.init(year, monthOfYear, dayOfMonth, new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker datePicker, int i, int i1, int i2) {
