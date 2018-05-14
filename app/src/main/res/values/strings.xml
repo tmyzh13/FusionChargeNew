@@ -451,7 +451,7 @@
     <string name="activity_publish">发布评论</string>
     <string name="cancel_publish_toast">您确定要取消评论？</string>
     <string name="input_can_not_be_null">输入不能为空</string>
-    <string name="advice_is_null">意见为空，请重新输入！</string>
+    <string name="advice_is_null">意见不能为空</string>
     <string name="receive_info">接收信息</string>
     <string name="invoice_info">发票信息</string>
     <string name="apply_invoice_time">申请时间</string>
