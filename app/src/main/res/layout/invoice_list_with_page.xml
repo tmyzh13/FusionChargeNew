@@ -14,9 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/publish_bg_color"
-        android:layout_marginTop="@dimen/dp_16"
-        android:layout_marginRight="@dimen/dp_16"
-        android:layout_marginLeft="@dimen/dp_16">
+        android:layout_marginTop="@dimen/dp_16">
 
         <com.corelibs.views.ptr.loadmore.widget.AutoLoadMoreListView
             android:id="@+id/lv_order"
@@ -26,6 +24,8 @@
             android:scrollbars="none"
             android:divider="@color/publish_bg_color"
             android:dividerHeight="@dimen/dp_5"
+            android:layout_marginRight="@dimen/dp_16"
+            android:layout_marginLeft="@dimen/dp_16"
             android:background="@color/text_white"/>
     </com.corelibs.views.ptr.layout.PtrAutoLoadMoreLayout>
 
