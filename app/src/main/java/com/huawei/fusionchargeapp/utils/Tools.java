@@ -400,7 +400,7 @@ public class Tools {
         return bitmap1;
     }
     public static boolean isEmailVailid(String content) {
-       if(!Tools.isNull(content)){
+       if(Tools.isNull(content)){
           return false;
        }
         Pattern pattern = Pattern.compile(".+@.+\\.[a-z]+");

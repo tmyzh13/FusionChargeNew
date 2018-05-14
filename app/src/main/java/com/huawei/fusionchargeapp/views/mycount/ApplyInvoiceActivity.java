@@ -148,10 +148,10 @@ public class ApplyInvoiceActivity extends BaseActivity {
                 //控制按钮的使用
                 if(aBoolean){
                     tv_submit.setBackgroundResource(R.drawable.tv_corner_blue);
-                    tv_submit.setClickable(true);
+                    tv_submit.setEnabled(true);
                 }else{
                     tv_submit.setBackgroundResource(R.drawable.tv_corner_gray);
-                    tv_submit.setClickable(false);
+                    tv_submit.setEnabled(false);
                 }
 
             }
@@ -173,8 +173,14 @@ public class ApplyInvoiceActivity extends BaseActivity {
 
     @OnClick(R.id.tv_submit)
     public void submit(){
+
+        if(!Tools.isChinaPhoneLegal(et_invoice_connect.getText().toString().trim())){
+            ToastMgr.show(getString(R.string.input_correct_phone));
+            return;
+        }
+
         if(!Tools.isEmailVailid(et_invoice_email.getText().toString().trim())){
-            ToastMgr.show(getString(R.string.hint_input_content));
+            ToastMgr.show(getString(R.string.hint_input_right_email));
             return;
         }
         finish();

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.TextView;
 
 import com.corelibs.base.BaseFragment;
 import com.corelibs.subscriber.RxBusSubscriber;
@@ -41,7 +42,9 @@ public class HomeListFragment extends BaseFragment<HomeListView, HomeListPresent
     @Bind(R.id.lv_piles)
     AutoLoadMoreListView lv_piles;
     @Bind(R.id.ptrLayout)
-    PtrAutoLoadMoreLayout<AutoLoadMoreListView> ptrLayout;
+    PtrLollipopLayout<AutoLoadMoreListView> ptrLayout;
+    @Bind(R.id.empty_view)
+    TextView empty_view;
 
     public HomeListAdpter adapter;
 
@@ -65,7 +68,6 @@ public class HomeListFragment extends BaseFragment<HomeListView, HomeListPresent
                 }
             }
         });
-        ptrLayout.disableLoading();
         presenter.setOtherLoading(false);
         if(ChoiceManager.getInstance().getType()==0){
             presenter.getDataType0();
@@ -73,7 +75,7 @@ public class HomeListFragment extends BaseFragment<HomeListView, HomeListPresent
             presenter.getDatas();
         }
 
-        ptrLayout.setRefreshLoadCallback(this);
+        ptrLayout.setRefreshCallback(this);
         RxBus.getDefault().toObservable(Object.class, Constant.REFRESH_MAP_OR_LIST_DATA)
                 .compose(this.<Object>bindToLifecycle())
                 .subscribe(new RxBusSubscriber<Object>() {
@@ -116,22 +118,29 @@ public class HomeListFragment extends BaseFragment<HomeListView, HomeListPresent
         //添加一遍距离 并且做一边筛选
         MyLocationBean bean = PreferencesHelper.getData(MyLocationBean.class);
         List<MapDataBean> temp = new ArrayList<>();
-        if (bean != null) {
-            for (int i = 0; i < list.size(); i++) {
-                double distance = Tools.GetDistance(bean.latitude, bean.longtitude, list.get(i).latitude, list.get(i).longitude);
-                Log.e("yzh","---distance--"+distance);
-                list.get(i).distance = distance;
-                //如果大于distance范围过滤
-                if (distance <= ChoiceManager.getInstance().getDistance()) {
-                    temp.add(list.get(i));
+        if(list!=null&&list.size()!=0){
+            lv_piles.setVisibility(View.VISIBLE);
+            empty_view.setVisibility(View.GONE);
+            if (bean != null) {
+                for (int i = 0; i < list.size(); i++) {
+                    double distance = Tools.GetDistance(bean.latitude, bean.longtitude, list.get(i).latitude, list.get(i).longitude);
+                    list.get(i).distance = distance;
+                    //如果大于distance范围过滤
+                    if (distance <= ChoiceManager.getInstance().getDistance()) {
+                        temp.add(list.get(i));
+                    }
                 }
+                list_datas = temp;
+                adapter.replaceAll(temp);
+            } else {
+                list_datas = list;
+                adapter.replaceAll(list);
             }
-            list_datas = temp;
-            adapter.replaceAll(temp);
-        } else {
-            list_datas = list;
-            adapter.replaceAll(list);
+        }else{
+            lv_piles.setVisibility(View.GONE);
+            empty_view.setVisibility(View.VISIBLE);
         }
+
     }
 
     @Override

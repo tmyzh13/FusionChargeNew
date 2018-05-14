@@ -209,6 +209,7 @@
                         style="@style/edit_apply_invoice"
                         android:hint="@string/apply_invoice_connect_hint"
                         android:inputType="number"
+                        android:maxLength="11"
                         />
                 </LinearLayout>
                 <View
@@ -282,6 +283,7 @@
                 android:layout_marginTop="30dp"
                 android:id="@+id/tv_submit"
                 android:clickable="false"
+                android:enabled="false"
                 />
         </LinearLayout>
     </ScrollView>
