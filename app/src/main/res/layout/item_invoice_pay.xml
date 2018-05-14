@@ -4,7 +4,8 @@
     android:layout_height="@dimen/ll_40"
     android:background="@color/white"
     android:paddingLeft="@dimen/dp_15"
-    android:paddingRight="@dimen/dp_15">
+    android:paddingRight="@dimen/dp_15"
+    android:descendantFocusability="blocksDescendants">
 
     <LinearLayout
         android:layout_centerVertical="true"

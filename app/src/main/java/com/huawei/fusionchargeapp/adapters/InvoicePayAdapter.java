@@ -22,6 +22,7 @@ public class InvoicePayAdapter extends QuickAdapter<PayStyleBean> {
 
     public void setCurrentPosition(int currentPosition){
         this.currentPosition=currentPosition;
+        notifyDataSetChanged();
     }
     public int getCurrentPosition(){
         return currentPosition;
