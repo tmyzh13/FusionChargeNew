@@ -475,4 +475,6 @@
     <string name="wei_xin_wallet">微信钱包</string>
     <string name="zhi_fu_bao_account">支付宝账号</string>
     <string name="has_no_picture">暂无图片</string>
+    <string name="please_bind_phone_number">请您绑定一个手机号</string>
+    <string name="done">完成</string>
 </resources>

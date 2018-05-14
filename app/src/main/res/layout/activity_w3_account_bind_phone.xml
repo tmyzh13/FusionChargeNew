@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.huawei.fusionchargeapp.views.W3AccountBindPhoneActivity">
+
+    <com.huawei.fusionchargeapp.weights.NavBar
+        android:id="@+id/nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="@dimen/text_normal"
+        android:textColor="@color/app_blue"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:text="@string/please_bind_phone_number"/>
+
+    <EditText
+        android:id="@+id/et_bind_input_phone"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:maxLines="1"
+        android:hint="@string/hint_input_phone"
+        android:textSize="@dimen/text_normal"
+        android:paddingLeft="20dp"
+        android:inputType="phone|number"
+        android:background="@drawable/shape_bind_phone_input_phone"
+        />
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:weightSum="5"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_bind_input_vercode"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:maxLines="1"
+            android:hint="@string/hint_input_code"
+            android:textSize="@dimen/text_normal"
+            android:paddingLeft="20dp"
+            android:inputType="phone|number"
+            android:background="@drawable/shape_bind_phone_input_vercode"/>
+
+        <TextView
+            android:id="@+id/tv_getVerCode"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:text="@string/action_get_code"
+            android:gravity="center"
+            android:textSize="@dimen/text_normal"
+            android:textColor="@color/app_blue"
+            android:background="@drawable/shape_bind_phone_getvercod"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/done"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="@dimen/text_normal"
+        android:textColor="@color/white"
+        android:background="@drawable/shape_charge_detail_btn_normal"
+        android:text="@string/done"/>
+
+</LinearLayout>

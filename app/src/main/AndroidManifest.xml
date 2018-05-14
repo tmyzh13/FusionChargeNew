@@ -4,22 +4,22 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
     <!-- 在SDCard中创建与删除文件权限 -->
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <!-- 往SDCard写入数据权限 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 从SDCard读取数据权限 -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <!-- 相机权限 -->
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <!-- 允许程序打开网络套接字 -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -46,10 +46,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppBaseCompactTheme">
 
-
-        <!-- ================ 配置成插件APP  start=========================-->
-        <!--MBusAccessProviderService这个Service必须声明，供Internal Bundle对外提供服务-->
-        <!--<service android:name="com.huawei.hae.mcloud.rt.mbus.access.MBusAccessProviderService" />
+        <!-- ================ 配置成插件APP  start========================= -->
+        <!-- MBusAccessProviderService这个Service必须声明，供Internal Bundle对外提供服务 -->
+        <!--
+        <service android:name="com.huawei.hae.mcloud.rt.mbus.access.MBusAccessProviderService" />
 
         &lt;!&ndash;Bundle别名必须与接口中保持一致&ndash;&gt;
         <meta-data
@@ -61,17 +61,20 @@
         &lt;!&ndash;Bundle类型，此Bundle类型为1，也可以写成internal&ndash;&gt;
         <meta-data
             android:name="com.huawei.hae.mcloud.BUNDLE_TYPE"
-            android:value="1" />-->
-        <!-- ============================ 配置成插件APP  end======================-->
+            android:value="1" />
+        -->
+        <!-- ============================ 配置成插件APP  end====================== -->
 
 
         <!-- ======================配置成主App  start======================== -->
-        <!--根据所需环境，修改替换value字段的相关信息：
+        <!--
+          根据所需环境，修改替换value字段的相关信息：
           sit: http://mcloud-sit.huawei.com 开发环境
           uat: http://mcloud-uat.huawei.com  测试环境
           pro: http://w3m.huawei.com  生产环境
         -->
-        <!--<meta-data
+        <!--
+       <meta-data
             android:name="com.huawei.hae.mcloud.domain.internal"
             android:value="http://mcloud-sit.huawei.com/mcloud/mag"/>
         <meta-data
@@ -106,32 +109,31 @@
         <provider
             android:authorities="com.huawei.fusionchargeapp.uat.provider"
             android:name="com.huawei.hae.mcloud.rt.provider.RuntimeProvider"
-            android:exported="true"/>-->
+            android:exported="true"/>
+        -->
         <!-- ======================配置成主App  end======================== -->
 
-        <!--  ============== 单点登录  start================-->
+
+        <!-- ============== 单点登录  start================ -->
         <!-- 环境:sit/uat/pro -->
         <meta-data
             android:name="env"
-            android:value="pro"/>
+            android:value="pro" />
 
         <!-- 是否为login登录 -->
         <meta-data
             android:name="uniportal"
-            android:value="false"/>
-
+            android:value="false" />
         <meta-data
             android:name="TFEnabled"
-            android:value="true"/>
+            android:value="true" />
 
-        <!--=========================单点登录  end=================-->
-
-
+        <!-- =========================单点登录  end================= -->
 
         <activity
             android:name=".views.WelcomeActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -141,7 +143,7 @@
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".views.LoginActivity"
             android:launchMode="singleTask"
@@ -220,7 +222,7 @@
         <activity
             android:name=".views.ChargeOrderDetailsActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".views.ChargeCaptureActivity"
             android:screenOrientation="portrait" />
@@ -246,51 +248,57 @@
             android:excludeFromRecents="true"
             android:noHistory="true"
             android:screenOrientation="portrait" />
-        <activity android:name=".views.ImageActivity"
-            android:configChanges="orientation|screenSize"
-            android:theme="@style/ImagePickerTheme"></activity>
         <activity
-            android:name="com.huawei.fusionchargeapp.views.MyAppointDetailActivity"
+            android:name=".views.ImageActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/ImagePickerTheme" />
+        <activity
+            android:name=".views.MyAppointDetailActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".views.mycount.MyAcountActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".views.mycount.MyInvoiceActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".views.RechargeAndConsumeDetailActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".views.mycount.ApplyInvoiceActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".views.mycount.InvoiceHistoryActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".views.mycount.InvoiceConsumeActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".views.mycount.InvoiceHistoryItemActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".views.AboutUsActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".views.SuggestionActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".views.MyTcActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".views.TaoCanPayActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".views.mycount.InputContentActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".views.mycount.ApplyOrderListActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".views.mycount.CashPatternActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".views.mycount.MyAcountActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.mycount.MyInvoiceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.RechargeAndConsumeDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.mycount.ApplyInvoiceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.mycount.InvoiceHistoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.mycount.InvoiceConsumeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.mycount.InvoiceHistoryItemActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.AboutUsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.SuggestionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.MyTcActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.TaoCanPayActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.mycount.InputContentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.mycount.ApplyOrderListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.mycount.CashPatternActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".views.W3AccountBindPhoneActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

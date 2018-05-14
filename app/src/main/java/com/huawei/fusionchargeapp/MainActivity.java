@@ -139,7 +139,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        //如果从其他应用过来，去做单点登录，并去获取用户信息
+        //如果从其他应用过来，去登录
         initOtherLogin();
 
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
