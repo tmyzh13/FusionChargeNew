@@ -1,6 +1,7 @@
 package com.huawei.fusionchargeapp.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,10 +67,15 @@ public class CommentsAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.name.setText(bean.getUserName());
-        holder.time.setText(bean.getCreateTime().substring(0,bean.getCreateTime().length()-2));
+        Log.e("liutao","len="+bean.getCreateTime().length()+","+bean.getCreateTime());
+        if (bean.getCreateTime().length() > Tools.DATE_LENGTH_FROM_SERVER) {
+            holder.time.setText(bean.getCreateTime().substring(0,Tools.DATE_LENGTH_FROM_SERVER));
+        } else {
+            holder.time.setText(bean.getCreateTime());
+        }
         holder.content.setText(bean.getEvaluateContent());
         if (!Tools.isNull(bean.photoUrl)) {
-            Glide.with(context).load(bean.photoUrl).into(holder.headIv);
+            Glide.with(context).load(bean.photoUrl).error(R.mipmap.default_head).into(holder.headIv);
         }
 
         return convertView;
