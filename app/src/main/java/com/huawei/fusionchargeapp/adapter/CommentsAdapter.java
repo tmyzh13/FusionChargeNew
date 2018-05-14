@@ -66,7 +66,7 @@ public class CommentsAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.name.setText(bean.getUserName());
-        holder.time.setText(bean.getCreateTime());
+        holder.time.setText(bean.getCreateTime().substring(0,bean.getCreateTime().length()-2));
         holder.content.setText(bean.getEvaluateContent());
         if (!Tools.isNull(bean.photoUrl)) {
             Glide.with(context).load(bean.photoUrl).into(holder.headIv);
