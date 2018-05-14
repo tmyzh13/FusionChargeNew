@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
 
     <!-- 在SDCard中创建与删除文件权限 -->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
@@ -45,24 +46,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppBaseCompactTheme">
 
-        <!--MBusAccessProviderService这个Service必须声明，供Internal Bundle对外提供服务-->
-        <service android:name="com.huawei.hae.mcloud.rt.mbus.access.MBusAccessProviderService" />
 
-        <!--Bundle别名必须与接口中保持一致-->
+        <!-- ================ 配置成插件APP  start=========================-->
+        <!--MBusAccessProviderService这个Service必须声明，供Internal Bundle对外提供服务-->
+        <!--<service android:name="com.huawei.hae.mcloud.rt.mbus.access.MBusAccessProviderService" />
+
+        &lt;!&ndash;Bundle别名必须与接口中保持一致&ndash;&gt;
         <meta-data
             android:name="com.huawei.hae.mcloud.SERVICE_PROVIDER"
             android:value="FusionChargeBundle" />
         <meta-data
             android:name="com.huawei.hae.mcloud.APP_NAME"
             android:value="FusionChargeBundle" />
-        <!--Bundle类型，此Bundle类型为1，也可以写成internal-->
+        &lt;!&ndash;Bundle类型，此Bundle类型为1，也可以写成internal&ndash;&gt;
         <meta-data
             android:name="com.huawei.hae.mcloud.BUNDLE_TYPE"
-            android:value="1" />
+            android:value="1" />-->
+        <!-- ============================ 配置成插件APP  end======================-->
 
 
-
-        <!-- ======================配置成主App======================== -->
+        <!-- ======================配置成主App  start======================== -->
         <!--根据所需环境，修改替换value字段的相关信息：
           sit: http://mcloud-sit.huawei.com 开发环境
           uat: http://mcloud-uat.huawei.com  测试环境
@@ -104,15 +107,31 @@
             android:authorities="com.huawei.fusionchargeapp.uat.provider"
             android:name="com.huawei.hae.mcloud.rt.provider.RuntimeProvider"
             android:exported="true"/>-->
+        <!-- ======================配置成主App  end======================== -->
 
+        <!--  ============== 单点登录  start================-->
+        <!-- 环境:sit/uat/pro -->
+        <meta-data
+            android:name="env"
+            android:value="pro"/>
 
+        <!-- 是否为login登录 -->
+        <meta-data
+            android:name="uniportal"
+            android:value="false"/>
 
+        <meta-data
+            android:name="TFEnabled"
+            android:value="true"/>
+
+        <!--=========================单点登录  end=================-->
 
 
 
         <activity
             android:name=".views.WelcomeActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

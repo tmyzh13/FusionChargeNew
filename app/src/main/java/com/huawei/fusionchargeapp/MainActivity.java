@@ -1,12 +1,16 @@
 package com.huawei.fusionchargeapp;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.text.TextUtils;
 import android.util.Log;
@@ -42,10 +46,15 @@ import com.huawei.fusionchargeapp.views.MyTcActivity;
 import com.huawei.fusionchargeapp.views.SearchStationTitleActivity;
 import com.huawei.fusionchargeapp.views.SettingActivity;
 import com.huawei.fusionchargeapp.views.UserInfoActivity;
+import com.huawei.fusionchargeapp.views.WelcomeActivity;
 import com.huawei.fusionchargeapp.views.home.HomeListFragment;
 import com.huawei.fusionchargeapp.views.home.MapFragment;
 import com.huawei.fusionchargeapp.views.interfaces.MyOrderActivity;
 import com.huawei.fusionchargeapp.views.mycount.MyAcountActivity;
+import com.huawei.hae.mcloud.bundle.base.Lark;
+import com.huawei.hae.mcloud.bundle.base.login.LoginCallback;
+import com.huawei.hae.mcloud.bundle.base.login.model.User;
+
 
 import java.io.File;
 
@@ -99,6 +108,11 @@ public class MainActivity extends BaseActivity {
     public static final String LOGINT_OUT = "loginout";
     public static final String EXIT = "exit";
 
+
+
+    private String w3Account;
+    private String w3Phone;
+
     public static Intent getLauncher(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
         return intent;
@@ -125,6 +139,9 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
+        //如果从其他应用过来，去做单点登录，并去获取用户信息
+        initOtherLogin();
+
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         ViewGroup.LayoutParams lp = view_main_statue.getLayoutParams();
         lp.height = Tools.getStatueHeight(context);
@@ -475,4 +492,34 @@ public class MainActivity extends BaseActivity {
     @Override
     public void goLogin() {
     }
+
+    private void initOtherLogin() {
+
+        //如果没有登录，就去做单点登录
+        if(UserHelper.getSavedUser() != null ) return;;
+
+        Intent intent = getIntent();
+        if(intent == null) return;
+
+        w3Account = intent.getStringExtra(WelcomeActivity.W3_ACCOUNT);
+        w3Phone = intent.getStringExtra(WelcomeActivity.W3_Phone);
+        if(!TextUtils.isEmpty(w3Account) || !TextUtils.isEmpty(w3Phone)) {
+            showLoading();
+            Lark.autoLogin(new LoginCallback() {
+                @Override
+                public void onSuccess(User user) {
+                    hideLoading();
+                    Log.e("zw","user : " + user.toString());
+                }
+
+                @Override
+                public void onFailure(int i, String s) {
+                    hideLoading();
+                    Log.e("zw","user fail: " + s);
+                }
+            });
+        }
+
+    }
+
 }

@@ -5,13 +5,13 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.huawei.fusionchargeapp.MainActivity;
-import com.huawei.hae.mcloud.rt.mbus.access.BaseServiceProvider;
+
 
 /**
  * Created by zhangwei on 2018/5/8.
  */
 
-public class IAdminJumpImpl extends BaseServiceProvider implements IAdminJump {
+/*public class IAdminJumpImpl extends BaseServiceProvider implements IAdminJump {
 
     private Context mContext;
 
@@ -35,4 +35,4 @@ public class IAdminJumpImpl extends BaseServiceProvider implements IAdminJump {
         Log.e("zw","toFusionCharge : end   " + name);
         return true;
     }
-}
+}*/

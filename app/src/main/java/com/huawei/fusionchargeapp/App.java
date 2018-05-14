@@ -10,11 +10,8 @@ import com.corelibs.utils.GalleryFinalConfigurator;
 import com.corelibs.utils.PreferencesHelper;
 import com.corelibs.utils.ToastMgr;
 import com.huawei.fusionchargeapp.constants.Urls;
-import com.huawei.fusionchargeapp.iadmin.IAdminJump;
-import com.huawei.fusionchargeapp.iadmin.IAdminJumpImpl;
-import com.huawei.hae.mcloud.rt.MCloudRunTimeImpl;
-import com.huawei.hae.mcloud.rt.mbus.access.MBusAccess;
-import com.huawei.hae.mcloud.rt.mbus.access.MBusAccessProviderService;
+import com.huawei.hae.mcloud.bundle.base.Lark;
+
 
 /**
  * Created by issuser on 2018/4/18.
@@ -29,9 +26,10 @@ public class App extends MultiDexApplication {
     }
 
     private void init(){
-        MBusAccess.getInstance().init(this);
-        MBusAccessProviderService.setServiceProvider(IAdminJump.SERVICES_ALISA,new IAdminJumpImpl(this));
-
+//        MBusAccess.getInstance().init(this);
+//        MBusAccessProviderService.setServiceProvider(IAdminJump.SERVICES_ALISA,new IAdminJumpImpl(this));
+        //单点登录
+        Lark.init(this);
 
         ToastMgr.init(getApplicationContext());
         Configuration.enableLoggingNetworkParams();
