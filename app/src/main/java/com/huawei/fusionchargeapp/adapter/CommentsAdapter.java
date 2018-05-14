@@ -27,6 +27,7 @@ public class CommentsAdapter extends BaseAdapter {
     private Context context;
 
     public CommentsAdapter(Context context, List<CommentsBean> datas) {
+        this.context = context;
         this.datas = datas;
         mInflater = LayoutInflater.from(context);
     }
