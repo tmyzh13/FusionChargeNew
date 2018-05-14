@@ -122,7 +122,7 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginTop="@dimen/dp_10"
-                android:src="@mipmap/ic_launcher"
+                android:src="@mipmap/default_head"
                 android:id="@+id/iv_user_icon"
                 />
 
