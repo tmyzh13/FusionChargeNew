@@ -17,6 +17,7 @@ import com.huawei.fusionchargeapp.MainActivity;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.constants.Constant;
 import com.huawei.fusionchargeapp.presenter.SettingPresenter;
+import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.interfaces.SettingView;
 import com.huawei.fusionchargeapp.weights.CommonDialog;
 import com.huawei.fusionchargeapp.weights.NavBar;
@@ -33,6 +34,12 @@ public class SettingActivity extends BaseActivity<SettingView, SettingPresenter>
     TextView tv_login_out;
     @Bind(R.id.tv_exit)
     TextView tv_exit;
+    @Bind(R.id.tv_version)
+    TextView new_version;
+    @Bind(R.id.cur_version)
+    TextView cur_version;
+
+    private boolean hasNewVersion = false;
 
     public static Intent startActivity(Context context) {
         Intent intent = new Intent(context, SettingActivity.class);
@@ -52,10 +59,23 @@ public class SettingActivity extends BaseActivity<SettingView, SettingPresenter>
     @Override
     protected void init(Bundle savedInstanceState) {
         navBar.setNavTitle(getResources().getString(R.string.setting_title));
-        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.JELLY_BEAN)
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.JELLY_BEAN) {
             navBar.setBackground(getResources().getDrawable(R.drawable.nan_bg));
-        else
+        } else {
             navBar.setColor(getResources().getColor(R.color.app_blue));
+        }
+        resetVersionShow();
+    }
+
+    private void resetVersionShow(){
+        if (hasNewVersion) {
+            new_version.setVisibility(View.VISIBLE);
+            cur_version.setVisibility(View.GONE);
+        } else {
+            cur_version.setText(Tools.getVersionName(this));
+            cur_version.setVisibility(View.VISIBLE);
+            new_version.setVisibility(View.GONE);
+        }
     }
 
     @OnClick(R.id.tv_login_out)

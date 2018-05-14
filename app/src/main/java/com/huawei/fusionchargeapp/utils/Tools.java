@@ -2,6 +2,7 @@ package com.huawei.fusionchargeapp.utils;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -407,5 +408,21 @@ public class Tools {
         Matcher matcher = pattern.matcher(content);
         boolean result = matcher.matches();
         return result;
+    }
+
+    private static final String VERSION_PREFIX = "v";
+
+    //获取版本名 格式:v1.0
+    public static String getVersionName(Context context) {
+        PackageInfo pi = null;
+        try {
+            PackageManager pm = context.getPackageManager();
+            pi = pm.getPackageInfo(context.getPackageName(),
+                    PackageManager.GET_CONFIGURATIONS);
+            return VERSION_PREFIX+pi.versionName;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }

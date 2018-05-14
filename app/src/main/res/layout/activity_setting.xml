@@ -39,7 +39,16 @@
             android:text="@string/setting_version"
             android:layout_weight="1"
             />
-
+        <TextView
+            style="@style/textview2"
+            android:layout_weight="1"
+            android:gravity="right|center_vertical"
+            android:textColor="@color/setting_blue"
+            android:text="@string/setting_new_version"
+            android:paddingRight="@dimen/dp_16"
+            android:visibility="gone"
+            android:id="@+id/cur_version"
+            />
 
         <TextView
             style="@style/textview2"

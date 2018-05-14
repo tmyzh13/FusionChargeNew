@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.corelibs.base.BaseActivity;
 import com.corelibs.base.BasePresenter;
 import com.huawei.fusionchargeapp.R;
+import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.weights.NavBar;
 
 import butterknife.Bind;
@@ -21,8 +22,6 @@ public class AboutUsActivity extends BaseActivity{
     NavBar bar;
     @Bind(R.id.version_name)
     TextView version_name;
-
-    private static final String VERSION_PREFIX = "v";
 
     @Override
     public void goLogin() {
@@ -38,21 +37,9 @@ public class AboutUsActivity extends BaseActivity{
     protected void init(Bundle savedInstanceState) {
         bar.setColorRes(R.color.app_blue);
         bar.setNavTitle(getString(R.string.activity_about_us));
-        setVersionName();
+        version_name.setText(Tools.getVersionName(this));
     }
 
-    //设置版本名
-    public void setVersionName() {
-        PackageInfo pi = null;
-        try {
-            PackageManager pm = getPackageManager();
-            pi = pm.getPackageInfo(getPackageName(),
-                    PackageManager.GET_CONFIGURATIONS);
-            version_name.setText(VERSION_PREFIX+pi.versionName);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 
     @Override
