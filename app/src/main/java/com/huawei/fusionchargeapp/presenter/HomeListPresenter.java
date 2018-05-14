@@ -11,6 +11,7 @@ import com.huawei.fusionchargeapp.model.beans.BaseData;
 import com.huawei.fusionchargeapp.model.beans.Condition;
 import com.huawei.fusionchargeapp.model.beans.Condition0;
 import com.huawei.fusionchargeapp.model.beans.MapDataBean;
+import com.huawei.fusionchargeapp.model.beans.SearchCondition;
 import com.huawei.fusionchargeapp.utils.ChoiceManager;
 import com.huawei.fusionchargeapp.views.interfaces.HomeListView;
 import com.trello.rxlifecycle.ActivityEvent;
@@ -73,14 +74,14 @@ public class HomeListPresenter extends BasePresenter<HomeListView> {
     }
 
     public void getDatas(String stationName){
-        Condition0 condition = new Condition0();
-        condition.workStatus=ChoiceManager.getInstance().getStatue();
+        SearchCondition condition = new SearchCondition();
         condition.x1=100;
         condition.x2=200;
         condition.y1=30;
         condition.y2=40;
-        condition.selectType=3;
+        condition.selectType = 3;
         condition.stationName =stationName;
+        condition.pileName = stationName;
         api.getMapDatas0(condition)
                 .compose(new ResponseTransformer<>(this.<BaseData<List<MapDataBean>>>bindUntilEvent(ActivityEvent.DESTROY)))
                 .subscribe(new ResponseSubscriber<BaseData<List<MapDataBean>>>(view) {

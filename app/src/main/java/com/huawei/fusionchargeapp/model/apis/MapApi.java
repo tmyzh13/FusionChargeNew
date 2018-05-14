@@ -15,6 +15,7 @@ import com.huawei.fusionchargeapp.model.beans.RequesHomeMapInfo;
 import com.huawei.fusionchargeapp.model.beans.RequestChargeStateBean;
 import com.huawei.fusionchargeapp.model.beans.RequestFeeBean;
 import com.huawei.fusionchargeapp.model.beans.RequestHomeAppointment;
+import com.huawei.fusionchargeapp.model.beans.SearchCondition;
 
 
 import java.util.List;
@@ -35,6 +36,9 @@ public interface MapApi {
 
     @POST(Urls.MAP_DATA)
     Observable<BaseData<List<MapDataBean>>> getMapDatas0(@Body Condition0 bean);
+
+    @POST(Urls.MAP_DATA)
+    Observable<BaseData<List<MapDataBean>>> getMapDatas0(@Body SearchCondition bean);
 
     @POST(Urls.HOME_MAP_INFO)
     Observable<BaseData<MapInfoBean>> getHomeMapInfo(@Body RequesHomeMapInfo info);
