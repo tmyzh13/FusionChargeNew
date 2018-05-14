@@ -242,6 +242,9 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
         bean.sexName = tvSex.getText().toString();
         bean.email = tvEmail.getText().toString();
         bean.birth = tvBirthday.getText().toString();
+        if (bean.birth.length() > Tools.BIRTHDAY_LENGTH) {
+            bean.birth = bean.birth.substring(0,Tools.BIRTHDAY_LENGTH);
+        }
         bean.address = tvAddress.getText().toString();
         bean.vinCode = tvCarVin.getText().toString();
         return bean;
