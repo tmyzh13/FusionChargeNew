@@ -16,12 +16,14 @@
         <EditText
             android:id="@+id/edit_suggestion"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:minHeight="@dimen/dp_200"
+            android:layout_height="wrap_content"
             android:gravity="top"
             android:background="@null"
             android:padding="@dimen/dp_8"
             android:inputType="textMultiLine"
             android:textSize="15sp"
+            android:maxLength="256"
             android:hint="@string/suggestion_yours" />
     </FrameLayout>
 
