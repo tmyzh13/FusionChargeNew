@@ -749,7 +749,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
 
     @OnClick(R.id.ll_appointment_guaild)
     public void goAppointmentGuaild() {
-        startActivity(GuildActivity.getLauncher(getContext(), homeAppointmentBean.latitude, homeAppointmentBean.longitude, homeAppointmentBean, false));
+        startActivity(GuildActivity.getLauncher(getContext(), homeAppointmentBean.latitude, homeAppointmentBean.longitude, homeAppointmentBean, false,homeAppointmentBean.chargingPileId,"pile"));
     }
 
     @OnClick(R.id.iv_guaild)
@@ -766,7 +766,11 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
             } else {
                 choiceNotAppointment = false;
             }
-            startActivity(GuildActivity.getLauncher(getContext(), currentMapDataBean.latitude, currentMapDataBean.longitude, null, choiceNotAppointment));
+            if (UserHelper.getSavedUser() == null || Tools.isNull(UserHelper.getSavedUser().token)) {
+                startActivity(LoginActivity.getLauncher(getContext()));
+            } else {
+                startActivity(GuildActivity.getLauncher(getContext(), currentMapDataBean.latitude, currentMapDataBean.longitude, null, choiceNotAppointment,currentMapDataBean.id,currentMapDataBean.type));
+            }
         }
     }
 

@@ -100,7 +100,7 @@ public class AppointSuccessActivity extends BaseActivity {
                  + " name : " + chargingPileName + " gunCode : " + gunCode + ",lat : " + latitude
                 + " ,lon : " + longitude + " ,runCode : " + runCode);
 
-        startActivity(GuildActivity.getLauncher(this,latitude,longitude,bean,false));
+        startActivity(GuildActivity.getLauncher(this,latitude,longitude,bean,false,bean.chargingPileId,"pile"));
         this.finish();
 
     }

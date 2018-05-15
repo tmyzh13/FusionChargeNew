@@ -2,7 +2,9 @@ package com.huawei.fusionchargeapp.views;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,6 +16,7 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.MapView;
+import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.services.core.AMapException;
@@ -35,6 +38,7 @@ import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.beans.HomeAppointmentBean;
 import com.huawei.fusionchargeapp.model.beans.HomeRefreshBean;
 import com.huawei.fusionchargeapp.model.beans.MyLocationBean;
+import com.huawei.fusionchargeapp.model.beans.RequestChargePileDetailBean;
 import com.huawei.fusionchargeapp.presenter.GuaildPresenter;
 import com.huawei.fusionchargeapp.utils.DrivingRouteOverLay;
 import com.huawei.fusionchargeapp.utils.Tools;
@@ -42,6 +46,7 @@ import com.huawei.fusionchargeapp.views.interfaces.GuaildView;
 import com.huawei.fusionchargeapp.weights.AppointmentTimeOutDialog;
 import com.huawei.fusionchargeapp.weights.CommonDialog;
 import com.huawei.fusionchargeapp.weights.NavBar;
+import com.huawei.fusionchargeapp.weights.NearTargetDialog;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -53,7 +58,7 @@ import butterknife.OnClick;
  * Created by issuser on 2018/4/23.
  */
 
-public class GuildActivity  extends BaseActivity<GuaildView,GuaildPresenter> implements GuaildView, RouteSearch.OnRouteSearchListener {
+public class GuildActivity extends BaseActivity<GuaildView, GuaildPresenter> implements GuaildView, RouteSearch.OnRouteSearchListener {
 
     @Bind(R.id.nav)
     NavBar navBar;
@@ -85,24 +90,31 @@ public class GuildActivity  extends BaseActivity<GuaildView,GuaildPresenter> imp
 
     private LatLonPoint mStartPoint = null;//起点，116.335891,39.942295
     private LatLonPoint mEndPoint = null;//终点，116.481288,39.995576
-    private Context context=GuildActivity.this;
+    private Context context = GuildActivity.this;
     private DrivingRouteOverLay drivingRouteOverlay;
-    private double endLatitude,endLongitude;
+    private double endLatitude, endLongitude;
     private long appointmentTime;
     private HomeAppointmentBean homeAppointmentBean;
     private CommonDialog commonDialog;
     private boolean choiceNotAppointment;
     private AppointmentTimeOutDialog appointmentTimeOutDialog;
     private Timer timerAppointment;
+    //桩，站id
+    private long id;
+    //桩 ，站类型
+    private String type;
+    private NearTargetDialog nearTargetDialog;
 
-    public static Intent getLauncher(Context context,double latitude,double longitude,HomeAppointmentBean bean,boolean choiceNotAppoinment){
-        Intent intent =new Intent(context,GuildActivity.class);
-        intent.putExtra("la",latitude);
-        intent.putExtra("ln",longitude);
-        Bundle bundle =new Bundle();
-        bundle.putSerializable("bean",bean);
-        intent.putExtra("bundle",bundle);
-        intent.putExtra("choice",choiceNotAppoinment);
+    public static Intent getLauncher(Context context, double latitude, double longitude, HomeAppointmentBean bean, boolean choiceNotAppoinment, long id, String type) {
+        Intent intent = new Intent(context, GuildActivity.class);
+        intent.putExtra("la", latitude);
+        intent.putExtra("ln", longitude);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("bean", bean);
+        intent.putExtra("bundle", bundle);
+        intent.putExtra("choice", choiceNotAppoinment);
+        intent.putExtra("id", id);
+        intent.putExtra("type", type);
         return intent;
     }
 
@@ -125,19 +137,24 @@ public class GuildActivity  extends BaseActivity<GuaildView,GuaildPresenter> imp
         navBar.setNavTitle(getString(R.string.guilding));
         navBar.setImageBackground(R.drawable.nan_bg);
 
-        timerAppointment=new Timer();
-        commonDialog=new CommonDialog(context,"",2);
 
-        endLatitude=getIntent().getDoubleExtra("la",0);
-        endLongitude=getIntent().getDoubleExtra("ln",0);
-        homeAppointmentBean=(HomeAppointmentBean) getIntent().getBundleExtra("bundle").getSerializable("bean");
-        choiceNotAppointment=getIntent().getBooleanExtra("choice",false);
+        nearTargetDialog = new NearTargetDialog(context);
 
-        appointmentTimeOutDialog=new AppointmentTimeOutDialog(context);
+        timerAppointment = new Timer();
+        commonDialog = new CommonDialog(context, "", 2);
 
-        if(choiceNotAppointment){
+        id = getIntent().getLongExtra("id", 0);
+        type = getIntent().getStringExtra("type");
+        endLatitude = getIntent().getDoubleExtra("la", 0);
+        endLongitude = getIntent().getDoubleExtra("ln", 0);
+        homeAppointmentBean = (HomeAppointmentBean) getIntent().getBundleExtra("bundle").getSerializable("bean");
+        choiceNotAppointment = getIntent().getBooleanExtra("choice", false);
+
+        appointmentTimeOutDialog = new AppointmentTimeOutDialog(context);
+
+        if (choiceNotAppointment) {
             //提示是否继续导航
-            commonDialog=new CommonDialog(context,"",2);
+            commonDialog = new CommonDialog(context, "", 2);
             commonDialog.show();
             commonDialog.setMsg(getString(R.string.guilding_check_not_appointment));
             commonDialog.setNagitiveListener(new View.OnClickListener() {
@@ -147,15 +164,15 @@ public class GuildActivity  extends BaseActivity<GuaildView,GuaildPresenter> imp
                     finish();
                 }
             });
-        }else{
+        } else {
 
         }
 
-        if(homeAppointmentBean!=null){
+        if (homeAppointmentBean != null) {
             navBar.showCancelAppointment(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    commonDialog=new CommonDialog(context,"",2);
+                    commonDialog = new CommonDialog(context, "", 2);
                     commonDialog.show();
                     commonDialog.setDialogBackground();
                     commonDialog.setMsg(getString(R.string.guilding_cancel_appointment_hint));
@@ -164,7 +181,7 @@ public class GuildActivity  extends BaseActivity<GuaildView,GuaildPresenter> imp
                         public void onClick(View v) {
                             commonDialog.dismiss();
                             //调用接口
-                            presenter.cancelAppointment(homeAppointmentBean.reserveId+"", UserHelper.getSavedUser().appUserId+"",homeAppointmentBean.gunCode,homeAppointmentBean.chargingPileId+"");
+                            presenter.cancelAppointment(homeAppointmentBean.reserveId + "", UserHelper.getSavedUser().appUserId + "", homeAppointmentBean.gunCode, homeAppointmentBean.chargingPileId + "");
                         }
                     });
                 }
@@ -182,25 +199,25 @@ public class GuildActivity  extends BaseActivity<GuaildView,GuaildPresenter> imp
             timerAppointment.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    if(homeAppointmentBean!=null){
-                        if(Tools.isNull(PreferencesHelper.getData(Constant.TIME_APPOINTMENT))){
-                            appointmentTime=0;
-                        }else{
-                            appointmentTime=Long.parseLong(PreferencesHelper.getData(Constant.TIME_APPOINTMENT));
+                    if (homeAppointmentBean != null) {
+                        if (Tools.isNull(PreferencesHelper.getData(Constant.TIME_APPOINTMENT))) {
+                            appointmentTime = 0;
+                        } else {
+                            appointmentTime = Long.parseLong(PreferencesHelper.getData(Constant.TIME_APPOINTMENT));
                         }
-                        appointmentTime-=1000;
-                        if (appointmentTime<=0) {
-                            appointmentTime=0;
+                        appointmentTime -= 1000;
+                        if (appointmentTime <= 0) {
+                            appointmentTime = 0;
                         }
 //                        PreferencesHelper.saveData(Constant.TIME_APPOINTMENT,appointmentTime + "");
-                        PreferencesHelper.saveData(Constant.TIME_APPOINTMENT,appointmentTime+"");
+                        PreferencesHelper.saveData(Constant.TIME_APPOINTMENT, appointmentTime + "");
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 tv_appointment_time.setText(Tools.formatMinute(Long.parseLong(PreferencesHelper.getData(Constant.TIME_APPOINTMENT))));
                             }
                         });
-                        if(appointmentTime<=0){
+                        if (appointmentTime <= 0) {
                             //预约超时
                             //计时器里面操作 RunOnUiThread 注意is your activity running?
                             runOnUiThread(new Runnable() {
@@ -224,22 +241,25 @@ public class GuildActivity  extends BaseActivity<GuaildView,GuaildPresenter> imp
                                 }
                             });
                             timerAppointment.cancel();
-                            timerAppointment=null;
-                            HomeRefreshBean bean =new HomeRefreshBean();
-                            bean.type=1;
-                            RxBus.getDefault().send(bean,Constant.HOME_STATUE_REFRESH);
+                            timerAppointment = null;
+                            HomeRefreshBean bean = new HomeRefreshBean();
+                            bean.type = 1;
+                            RxBus.getDefault().send(bean, Constant.HOME_STATUE_REFRESH);
 //                        cancelTimerAppointment();
                         }
                     }
                 }
-            },1000,1000);
-        }else{
+            }, 1000, 1000);
+        } else {
 
         }
 
         map.onCreate(savedInstanceState);
         if (aMap == null) {
             aMap = map.getMap();
+            UiSettings uiSettings = aMap.getUiSettings();
+            // 去掉缩放按钮==
+            uiSettings.setZoomControlsEnabled(false);
         }
         mRouteSearch = new RouteSearch(this);
         mRouteSearch.setRouteSearchListener(this);
@@ -252,16 +272,6 @@ public class GuildActivity  extends BaseActivity<GuaildView,GuaildPresenter> imp
 //                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.home_ic_position)));
 
 
-        MyLocationBean locationBean=PreferencesHelper.getData(MyLocationBean.class);
-        if(locationBean!=null){
-            mStartPoint=new LatLonPoint(locationBean.latitude,locationBean.longtitude);
-        }
-        if (mStartPoint==null){
-            mStartPoint=new  LatLonPoint(39.9088600000,116.3973900000);
-        }
-        mEndPoint=new LatLonPoint(endLatitude,endLongitude);
-        searchRouteResult(ROUTE_TYPE_DRIVE, RouteSearch.DrivingDefault);
-        aMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(mStartPoint.getLatitude(),mEndPoint.getLongitude())));
         RxBus.getDefault().toObservable(MyLocationBean.class, Constant.REFRESH_LOCATION)
                 .compose(this.<MyLocationBean>bindToLifecycle())
                 .subscribe(new RxBusSubscriber<MyLocationBean>() {
@@ -269,9 +279,9 @@ public class GuildActivity  extends BaseActivity<GuaildView,GuaildPresenter> imp
                     @Override
                     public void receive(MyLocationBean data) {
                         //刷新坐标 位置不一致时才更新路线
-                        if(mStartPoint!=null){
-                            if(mStartPoint.getLatitude()!=data.latitude||mStartPoint.getLongitude()!=data.longtitude){
-                                mStartPoint=new LatLonPoint(data.latitude,data.longtitude);
+                        if (mStartPoint != null) {
+                            if (mStartPoint.getLatitude() != data.latitude || mStartPoint.getLongitude() != data.longtitude) {
+                                mStartPoint = new LatLonPoint(data.latitude, data.longtitude);
                                 searchRouteResult(ROUTE_TYPE_DRIVE, RouteSearch.DrivingDefault);
                             }
                         }
@@ -286,7 +296,7 @@ public class GuildActivity  extends BaseActivity<GuaildView,GuaildPresenter> imp
             }
         });
 
-        RxBus.getDefault().toObservable(Object.class,Constant.APPOINTMENT_TIME_OUT)
+        RxBus.getDefault().toObservable(Object.class, Constant.APPOINTMENT_TIME_OUT)
                 .compose(this.bindToLifecycle())
                 .subscribe(new RxBusSubscriber<Object>() {
                     @Override
@@ -308,13 +318,50 @@ public class GuildActivity  extends BaseActivity<GuaildView,GuaildPresenter> imp
                         });
                     }
                 });
+        final RequestChargePileDetailBean bean = new RequestChargePileDetailBean();
+        bean.setId(id + "");
+        bean.setType(type);
+        aMap.setOnMapLoadedListener(new AMap.OnMapLoadedListener() {
+            @Override
+            public void onMapLoaded() {
+                if (!Tools.isNull(type)) {
+                    if (type.equals("station")) {
+                        presenter.getStationDetail(bean);
+                    } else {
+                        presenter.getPileDetail(bean);
+                    }
+                }
+
+            }
+        });
+
+    }
+
+    private long zoneId;
+    private int zoneGisOpen;
+
+    @Override
+    public void getZoneInfo(long id, int isGisOpen) {
+        //先获取园区信息再路径规划
+        zoneId = id;
+        zoneGisOpen = isGisOpen;
+        MyLocationBean locationBean = PreferencesHelper.getData(MyLocationBean.class);
+        if (locationBean != null) {
+            mStartPoint = new LatLonPoint(locationBean.latitude, locationBean.longtitude);
+        }
+        if (mStartPoint == null) {
+            mStartPoint = new LatLonPoint(39.9088600000, 116.3973900000);
+        }
+        mEndPoint = new LatLonPoint(endLatitude, endLongitude);
+        searchRouteResult(ROUTE_TYPE_DRIVE, RouteSearch.DrivingDefault);
+        aMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(mStartPoint.getLatitude(), mEndPoint.getLongitude())));
     }
 
     @OnClick(R.id.ll_time)
-    public void hideOrShowInfo(){
-        if(ll_hint.getVisibility()==View.VISIBLE){
+    public void hideOrShowInfo() {
+        if (ll_hint.getVisibility() == View.VISIBLE) {
             ll_hint.setVisibility(View.GONE);
-        }else{
+        } else {
             ll_hint.setVisibility(View.VISIBLE);
         }
     }
@@ -325,7 +372,7 @@ public class GuildActivity  extends BaseActivity<GuaildView,GuaildPresenter> imp
      */
     public void searchRouteResult(int routeType, int mode) {
         if (mStartPoint == null) {
-            ToastMgr.show( getString(R.string.guilding_get_location));
+            ToastMgr.show(getString(R.string.guilding_get_location));
             return;
         }
         if (mEndPoint == null) {
@@ -354,9 +401,9 @@ public class GuildActivity  extends BaseActivity<GuaildView,GuaildPresenter> imp
         super.onDestroy();
         map.onDestroy();
 
-        if(timerAppointment!=null){
+        if (timerAppointment != null) {
             timerAppointment.cancel();
-            timerAppointment=null;
+            timerAppointment = null;
         }
     }
 
@@ -404,8 +451,33 @@ public class GuildActivity  extends BaseActivity<GuaildView,GuaildPresenter> imp
                     drivingRouteOverlay.zoomToSpan();
                     int dis = (int) drivePath.getDistance();
                     int dur = (int) drivePath.getDuration();
-                    Log.e("yzh","dur"+"---"+dur+"---"+dis);
+                    Log.e("yzh", "dur" + "---" + dur + "---" + dis);
 
+
+                    if (dis < 200) {
+                        if (zoneGisOpen == 0) {
+                            //没有gis地图
+                        } else {
+                            //提示是否切换地图
+                            View dView = getWindow().getDecorView();
+                            dView.setDrawingCacheEnabled(true);
+                            dView.buildDrawingCache();
+                            Bitmap bitmap = Bitmap.createBitmap(dView.getDrawingCache());
+                            if (!nearTargetDialog.isShowing()) {
+                                nearTargetDialog.show();
+                                nearTargetDialog.setImageContent(bitmap);
+                                nearTargetDialog.setChangerListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        nearTargetDialog.dismiss();
+                                        startActivity(ParkActivity.getLauncher(context, zoneId));
+                                        finish();
+                                    }
+                                });
+                            }
+
+                        }
+                    }
                 } else if (driveRouteResult != null && driveRouteResult.getPaths() == null) {
 //                    ToastUtil.show(mContext, R.string.no_result);
                 }
@@ -431,17 +503,16 @@ public class GuildActivity  extends BaseActivity<GuaildView,GuaildPresenter> imp
     public void cancelAppointmentSuccess() {
         //取消成功
         timerAppointment.cancel();
-        timerAppointment=null;
+        timerAppointment = null;
 //        TimeServiceManager.getInstance().getTimerService().cancelTimerAppointment();
-        HomeRefreshBean bean =new HomeRefreshBean();
-        bean.type=1;
-        RxBus.getDefault().send(bean,Constant.HOME_STATUE_REFRESH);
+        HomeRefreshBean bean = new HomeRefreshBean();
+        bean.type = 1;
+        RxBus.getDefault().send(bean, Constant.HOME_STATUE_REFRESH);
 
         finish();
     }
 
     private TimerService timerService;
-
 
 
     @Override

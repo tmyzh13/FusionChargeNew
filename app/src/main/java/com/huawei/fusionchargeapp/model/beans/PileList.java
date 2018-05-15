@@ -45,6 +45,28 @@ public class PileList {
     private String type;
     private String virtualId;
     private String workStatus;
+
+    private long zoneId;
+    //0 否1 是
+    private int isGis;
+
+
+    public void setZoneId(long zongId){
+        this.zoneId=zongId;
+    }
+
+    public long getZoneId(){
+        return zoneId;
+    }
+
+    public void setIsGis(int gis){
+        this.isGis=gis;
+    }
+
+    public int getGis(){
+        return isGis;
+    }
+
     public void setAddress(String address) {
         this.address = address;
     }
@@ -200,10 +222,10 @@ public class PileList {
     }
 
     public void setType(String type) {
-        this.type = type;
+        this.objType = type;
     }
     public String getType() {
-        return type;
+        return objType;
     }
 
     public void setVirtualId(String virtualId) {

@@ -7,8 +7,12 @@ import com.corelibs.subscriber.ResponseSubscriber;
 import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.apis.GuaildApi;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
+import com.huawei.fusionchargeapp.model.beans.ChargeStationDetailBean;
+import com.huawei.fusionchargeapp.model.beans.PileList;
 import com.huawei.fusionchargeapp.model.beans.RequestCancelAppointment;
+import com.huawei.fusionchargeapp.model.beans.RequestChargePileDetailBean;
 import com.huawei.fusionchargeapp.views.interfaces.GuaildView;
+import com.trello.rxlifecycle.ActivityEvent;
 
 /**
  * Created by issuser on 2018/4/25.
@@ -44,4 +48,29 @@ public class GuaildPresenter extends BasePresenter<GuaildView> {
                     }
                 });
     }
+
+
+    public void getPileDetail(RequestChargePileDetailBean bean){
+        api.getChargePileDetail(UserHelper.getSavedUser().token,bean)
+                .compose(new ResponseTransformer<>(this.<BaseData<PileList>>bindUntilEvent(ActivityEvent.DESTROY)))
+                .subscribe(new ResponseSubscriber<BaseData<PileList>>(view) {
+                    @Override
+                    public void success(BaseData<PileList> pileListBaseData) {
+                            view.getZoneInfo(pileListBaseData.data.getZoneId(),pileListBaseData.data.getGis());
+                    }
+                });
+    }
+
+    public void getStationDetail(RequestChargePileDetailBean bean){
+        api.getChargeStationDetail(UserHelper.getSavedUser().token,bean)
+                .compose(new ResponseTransformer<>(this.<BaseData<ChargeStationDetailBean>>bindUntilEvent(ActivityEvent.DESTROY)))
+                .subscribe(new ResponseSubscriber<BaseData<ChargeStationDetailBean>>(view){
+
+                    @Override
+                    public void success(BaseData<ChargeStationDetailBean> chargeStationDetailBeanBaseData) {
+                            view.getZoneInfo(chargeStationDetailBeanBaseData.data.getZoneId(),chargeStationDetailBeanBaseData.data.getGis());
+                    }
+                });
+    }
+
 }

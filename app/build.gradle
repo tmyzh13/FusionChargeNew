@@ -31,6 +31,11 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
+    repositories {
+        flatDir {
+            dirs 'libs'   // aar目录
+        }
+    }
     buildToolsVersion '26.0.2'
 }
 
@@ -61,8 +66,8 @@ dependencies {
     implementation project(':zxing-android-embedded')
     compile 'com.android.support:multidex:1.0.1'
     implementation 'com.lzy.widget:imagepicker:0.6.1'
-//        compile(name: 'lark-runtime-3.1.9', ext: 'aar')
-
+    //        compile(name: 'lark-runtime-3.1.9', ext: 'aar')
+    implementation files('libs/hwmap-0.4.0.jar')
 }
 
 configurations.all {
