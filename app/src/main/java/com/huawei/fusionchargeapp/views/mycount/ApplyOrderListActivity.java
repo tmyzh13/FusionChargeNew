@@ -226,7 +226,7 @@ public class ApplyOrderListActivity extends BaseActivity<InvoiceView,InvoicePres
                 return;
             }
             nowNum ++;
-            nowMoney -= itemList.get(indexOfGroup).get(indexOfItem).consumeTotalMoney;
+            nowMoney += itemList.get(indexOfGroup).get(indexOfItem).consumeTotalMoney;
         }
         boolean isChange = false;
         if (nowNum == totalNum) {
