@@ -36,6 +36,8 @@ import com.huawei.fusionchargeapp.views.interfaces.ForgetPwdActivity;
 import com.huawei.fusionchargeapp.views.interfaces.LoginView;
 import com.huawei.fusionchargeapp.weights.CommonDialog;
 
+import java.lang.ref.WeakReference;
+
 import butterknife.Bind;
 import butterknife.OnClick;
 
@@ -95,6 +97,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     private int type = 1;//登录方式
 
     private boolean isRegister = false;
+    private MyCountDownTimer timer;
 
     public static Intent getLauncher(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
@@ -272,7 +275,9 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     public void getCode() {
         phoneNumber = phoneNumberEt.getText().toString().trim();
         if (Tools.isChinaPhoneLegal(phoneNumber)) {
-            MyCountDownTimer timer = new MyCountDownTimer(getCodeTv, 60000, 1000);
+            if(timer == null) {
+                timer = new MyCountDownTimer(getCodeTv, 60000, 1000);
+            }
             timer.start();
         } else {
             showHintDialog(getString(R.string.hint),getString(R.string.input_correct_phone));
@@ -474,25 +479,34 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(timer != null ) {
+            timer.cancel();
+            timer = null;
+        }
+    }
 
     public static class MyCountDownTimer extends CountDownTimer {
-        TextView view;
+        WeakReference<TextView> view;
 
         public MyCountDownTimer(TextView v, long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
-            this.view = v;
+            this.view = new WeakReference<TextView>(v);
         }
 
         @Override
         public void onTick(long millisUntilFinished) {
-            view.setClickable(false);
-            view.setText(millisUntilFinished / 1000 + "s");
+            view.get().setClickable(false);
+            view.get().setText(millisUntilFinished / 1000 + "s");
         }
 
         @Override
         public void onFinish() {
-            view.setClickable(true);
-            view.setText(R.string.action_get_code_again);
+            view.get().setClickable(true);
+            view.get().setText(R.string.action_get_code_again);
         }
+
     }
 }

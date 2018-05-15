@@ -1,16 +1,12 @@
 package com.huawei.fusionchargeapp;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.text.TextUtils;
 import android.util.Log;
@@ -28,16 +24,25 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.corelibs.api.ApiFactory;
+import com.corelibs.api.ResponseTransformer;
 import com.corelibs.base.BaseActivity;
 import com.corelibs.base.BasePresenter;
 import com.corelibs.common.AppManager;
-import com.corelibs.subscriber.RxBusSubscriber;
+import com.corelibs.subscriber.ResponseSubscriber;
 import com.corelibs.utils.IMEUtil;
 import com.corelibs.utils.PreferencesHelper;
 import com.corelibs.utils.rxbus.RxBus;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.huawei.fusionchargeapp.constants.Constant;
 import com.huawei.fusionchargeapp.constants.Urls;
 import com.huawei.fusionchargeapp.model.UserHelper;
+import com.huawei.fusionchargeapp.model.apis.ScanApi;
+import com.huawei.fusionchargeapp.model.beans.BaseData;
+import com.huawei.fusionchargeapp.model.beans.RequestIadminLoginBean;
+import com.huawei.fusionchargeapp.model.beans.ScanChargeInfo;
+import com.huawei.fusionchargeapp.model.beans.W3User;
 import com.huawei.fusionchargeapp.utils.ChoiceManager;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.LoginActivity;
@@ -46,6 +51,7 @@ import com.huawei.fusionchargeapp.views.MyTcActivity;
 import com.huawei.fusionchargeapp.views.SearchStationTitleActivity;
 import com.huawei.fusionchargeapp.views.SettingActivity;
 import com.huawei.fusionchargeapp.views.UserInfoActivity;
+import com.huawei.fusionchargeapp.views.W3AccountBindPhoneActivity;
 import com.huawei.fusionchargeapp.views.WelcomeActivity;
 import com.huawei.fusionchargeapp.views.home.HomeListFragment;
 import com.huawei.fusionchargeapp.views.home.MapFragment;
@@ -54,12 +60,19 @@ import com.huawei.fusionchargeapp.views.mycount.MyAcountActivity;
 import com.huawei.hae.mcloud.bundle.base.Lark;
 import com.huawei.hae.mcloud.bundle.base.login.LoginCallback;
 import com.huawei.hae.mcloud.bundle.base.login.model.User;
+import com.huawei.hae.mcloud.bundle.base.network.Network;
+import com.huawei.hae.mcloud.bundle.base.network.callback.NetworkCallback;
+import com.huawei.hae.mcloud.bundle.base.util.AppUtils;
+import com.trello.rxlifecycle.ActivityEvent;
 
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import retrofit2.Retrofit;
 
 public class MainActivity extends BaseActivity {
 
@@ -122,6 +135,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        Log.e("zw","main  onNewIntent");
+        setIntent(intent);
         if (intent == null || intent.getExtras() == null)
             return;
         if (EXIT.equals(intent.getExtras().get(ACTION))) {
@@ -139,8 +154,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        //如果从其他应用过来，去登录
-        initOtherLogin();
+
 
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         ViewGroup.LayoutParams lp = view_main_statue.getLayoutParams();
@@ -493,33 +507,145 @@ public class MainActivity extends BaseActivity {
     public void goLogin() {
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //如果从其他应用过来，去登录
+        initOtherLogin();
+    }
+
     private void initOtherLogin() {
 
-        //如果没有登录，就去做单点登录
-        if(UserHelper.getSavedUser() != null ) return;;
+        //如果没有登录，就去验证
+        if(UserHelper.getSavedUser() != null ) return;
 
         Intent intent = getIntent();
         if(intent == null) return;
 
-        w3Account = intent.getStringExtra(WelcomeActivity.W3_ACCOUNT);
+       /* w3Account = intent.getStringExtra(WelcomeActivity.W3_ACCOUNT);
         w3Phone = intent.getStringExtra(WelcomeActivity.W3_Phone);
-        if(!TextUtils.isEmpty(w3Account) || !TextUtils.isEmpty(w3Phone)) {
-            showLoading();
-            Lark.autoLogin(new LoginCallback() {
-                @Override
-                public void onSuccess(User user) {
-                    hideLoading();
-                    Log.e("zw","user : " + user.toString());
-                }
+        Log.e("zw", "w3Account : " + w3Account  + ", w3Phone : " + w3Phone);*/
 
-                @Override
-                public void onFailure(int i, String s) {
-                    hideLoading();
-                    Log.e("zw","user fail: " + s);
-                }
-            });
+       showLoading();
+       Lark.autoLogin(new LoginCallback() {
+           @Override
+           public void onSuccess(User user) {
+               Log.e("zw","mainactivity : " + user.toString());
+               if( user.getUid() == null || (user.getIsSFReg() != null && user.getIsSFReg().equals("false"))){
+                   hideLoading();
+                   return;
+               }
+               w3Account = user.getUid();
+               getW3PhoneNumber();
+           }
+
+           @Override
+           public void onFailure(int i, String s) {
+               Log.e("zw","mainactivity : " + s);
+           }
+       });
+       if(true)  return;
+        if(!TextUtils.isEmpty(w3Account)) {
+
+            if(!TextUtils.isEmpty(w3Phone)) {
+
+            } else {
+                goToBindW3Account();
+            }
         }
 
+    }
+
+    /**
+     * 去获取手机号码
+     */
+    public void getW3PhoneNumber(){
+        String httpUrl = AppUtils.getHostUrl() + Urls.HUAWEI_GET_INFO;
+        Map<String,String> map = new HashMap<>();
+        map.put("lang","zh");
+        map.put("w3Account",w3Account);
+
+        Network.get(httpUrl, null, map, new NetworkCallback() {
+            @Override
+            public void onSuccess(Map map, Object o) {
+                String userStr = o.toString();
+                Gson gson = new Gson();
+                W3User user = gson.fromJson(userStr, new TypeToken<W3User>() {
+                }.getType());
+                w3Phone = user.getPerson_Mobile_Code();
+                if(!TextUtils.isEmpty(w3Phone) && w3Phone.length() > 11) {
+                    w3Phone = w3Phone.substring(w3Phone.length() - 11);
+                }
+                w3Login();
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                w3Login();
+            }
+
+            @Override
+            public boolean isMainThread() {
+                return false;
+            }
+        });
+
+    }
+
+
+    /**
+     * 登录W3
+     */
+    private void w3Login(){
+        showLoading();
+        if(TextUtils.isEmpty(w3Account)) {
+            hideLoading();
+            return;
+        }
+        RequestIadminLoginBean bean = new RequestIadminLoginBean();
+        if(!TextUtils.isEmpty(w3Phone)) bean.setPhone(w3Phone);
+        bean.setJobNumber(w3Account);
+
+        ScanApi api = ApiFactory.getFactory().create(ScanApi.class);
+        api.iAdminLogin(bean)
+                .compose(new ResponseTransformer<>(this.<BaseData>bindUntilEvent(ActivityEvent.DESTROY)))
+                .subscribe(new ResponseSubscriber<BaseData>() {
+                    @Override
+                    public void success(BaseData baseData) {
+                        hideLoading();
+                        Log.e("zw","success");
+                        Log.e("zw",baseData.toString());
+                        //TODO 去更改本地用户信息
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        hideLoading();
+                        Log.e("zw","onError");
+                        Log.e("zw",e.toString());
+                    }
+
+                    @Override
+                    public boolean operationError(BaseData baseData, int status, String message) {
+                        Log.e("zw","operationError");
+                        Log.e("zw","msg :" + message + ", data : " + baseData.toString());
+                        hideLoading();
+                        if(status == 210) {
+                           goToBindW3Account();
+                        }
+                        return super.operationError(baseData, status, message);
+                    }
+                });
+    }
+
+    private void goToBindW3Account(){
+        //去注册
+        Log.e("zw", " start bind"  );
+        Intent bindIntent = new Intent(this, W3AccountBindPhoneActivity.class);
+        bindIntent.putExtra(WelcomeActivity.W3_ACCOUNT,w3Account);
+        bindIntent.putExtra(WelcomeActivity.W3_Phone,w3Phone);
+        startActivity(bindIntent);
     }
 
 }

@@ -477,4 +477,9 @@
     <string name="has_no_picture">暂无图片</string>
     <string name="please_bind_phone_number">请您绑定一个手机号</string>
     <string name="done">完成</string>
+    <string name="bind_phone_number">绑定手机号</string>
+    <string name="you_must_bind_phone_number">没有绑定手机号码无法正常使用充电桩功能!</string>
+    <string name="vercode_has_send">验证码已发送。</string>
+    <string name="vercode_send_fail">验证码发送失败。</string>
+    <string name="vercode_phone_differ_phone">手机号码与获取验证码手机号不一致！</string>
 </resources>

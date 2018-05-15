@@ -46,6 +46,7 @@ public class WelcomeActivity extends BaseActivity {
         if(fromIntent != null) {
             w3Account = fromIntent.getStringExtra(W3_ACCOUNT);
             w3Phone = fromIntent.getStringExtra(W3_Phone);
+            Log.e("zw", "welcome  ...  w3Account : " + w3Account  + ", w3Phone : " + w3Phone);
         }
 
         //检查有无存储权限
@@ -64,8 +65,8 @@ public class WelcomeActivity extends BaseActivity {
             public void run() {
                 // TODO Auto-generated method stub
                 Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
-                intent.putExtra(w3Account,"");
-                intent.putExtra(w3Phone,"");
+                intent.putExtra(W3_ACCOUNT,w3Account);
+                intent.putExtra(W3_Phone,w3Phone);
                 startActivity(intent);
                 finish();
             }

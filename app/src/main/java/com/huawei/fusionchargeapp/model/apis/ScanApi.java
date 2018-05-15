@@ -13,6 +13,9 @@ import com.huawei.fusionchargeapp.model.beans.PileList;
 import com.huawei.fusionchargeapp.model.beans.RequestChargePileDetailBean;
 import com.huawei.fusionchargeapp.model.beans.RequestChargeQueryFeeBean;
 import com.huawei.fusionchargeapp.model.beans.RequestFeeBean;
+import com.huawei.fusionchargeapp.model.beans.RequestIAdminRegister;
+import com.huawei.fusionchargeapp.model.beans.RequestIAdminVerCode;
+import com.huawei.fusionchargeapp.model.beans.RequestIadminLoginBean;
 import com.huawei.fusionchargeapp.model.beans.RequestMyOrderBean;
 import com.huawei.fusionchargeapp.model.beans.RequestScanBean;
 import com.huawei.fusionchargeapp.model.beans.ScanChargeInfo;
@@ -57,5 +60,17 @@ public interface ScanApi {
 
     @POST(Urls.QUERY_FEE)
     Observable<BaseData<PileFeeBean>> getFeeData(@Body RequestFeeBean bean);
+
+    //华为员工登录
+    @POST(Urls.IADMIN_LOGIN)
+    Observable<BaseData> iAdminLogin(@Body RequestIadminLoginBean bean);
+
+    //华为员工登录
+    @POST(Urls.HUAWEI_CAPTCHA)
+    Observable<BaseData> iAdmingetVerCode(@Body RequestIAdminVerCode bean);
+
+    //华为员工登录
+    @POST(Urls.HUAWE_REGISTER)
+    Observable<BaseData> iAdminRegisger(@Body RequestIAdminRegister bean);
 
 }

@@ -42,6 +42,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:weightSum="5"
+        android:background="@drawable/shape_bind_ll"
         android:orientation="horizontal">
 
         <EditText
@@ -54,7 +55,8 @@
             android:textSize="@dimen/text_normal"
             android:paddingLeft="20dp"
             android:inputType="phone|number"
-            android:background="@drawable/shape_bind_phone_input_vercode"/>
+            android:background="@null"
+            />
 
         <TextView
             android:id="@+id/tv_getVerCode"
