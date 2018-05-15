@@ -185,7 +185,7 @@ public class RechargeAndConsumeDetailActivity extends BaseActivity<RechargeAndCo
                 empty_view.setVisibility(View.VISIBLE);
                 ptrLayout.setVisibility(View.GONE);
             }
-            showToast(page == PAGE_FIRST_NUM ? "没有账单记录": "没有更多账单记录");
+            //showToast(page == PAGE_FIRST_NUM ? "没有账单记录": "没有更多账单记录");
             ptrLayout.disableLoading();
             return true;
         }
