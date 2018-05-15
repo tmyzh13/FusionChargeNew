@@ -5,6 +5,7 @@ package com.huawei.fusionchargeapp.model.beans;
  */
 
 public class ApplyInvoiceBean {
-    public String chargeTime,pileAdress,money;
-    public long pileNum;
+    public String chargeStartTime,address;
+    public double consumeTotalMoney;
+    public long orderNum,id;
 }

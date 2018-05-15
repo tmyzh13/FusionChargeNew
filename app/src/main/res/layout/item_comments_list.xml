@@ -16,7 +16,7 @@
             android:id="@+id/commenter_head_iv"
             android:layout_width="@dimen/tab_height"
             android:layout_height="@dimen/tab_height"
-            android:src="@mipmap/ic_launcher"
+            android:src="@mipmap/default_head"
             app:border="true" />
 
         <RelativeLayout

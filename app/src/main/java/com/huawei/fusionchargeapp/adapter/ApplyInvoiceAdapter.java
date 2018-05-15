@@ -136,10 +136,10 @@ public class ApplyInvoiceAdapter extends BaseExpandableListAdapter {
         }
 
         holder.view.setVisibility(i1==0 ? View.GONE :View.VISIBLE);
-        holder.pileAdress.setText(itemLst.get(i).get(i1).pileAdress);
-        holder.pileNum.setText(itemLst.get(i).get(i1).pileNum+"");
-        holder.creatTime.setText(itemLst.get(i).get(i1).chargeTime);
-        holder.money.setText(itemLst.get(i).get(i1).money);
+        holder.pileAdress.setText(itemLst.get(i).get(i1).address);
+        holder.pileNum.setText(itemLst.get(i).get(i1).orderNum+"");
+        holder.creatTime.setText(itemLst.get(i).get(i1).chargeStartTime);
+        holder.money.setText(itemLst.get(i).get(i1).consumeTotalMoney+"");
         if (stateList.size()>i && stateList.get(i).size() >i1){
             holder.select.setChecked(stateList.get(i).get(i1));
         }

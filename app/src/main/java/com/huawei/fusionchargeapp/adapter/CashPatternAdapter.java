@@ -25,9 +25,9 @@ public class CashPatternAdapter extends BaseAdapter {
     private List<String> sort_name = new ArrayList<>();
     private List<String> sort_description  = new ArrayList<>();
     private List<Integer> sort_img = new ArrayList<>();
-    private List<Boolean> check_state = new ArrayList<>();
     private Context context;
     private LayoutInflater inflater;
+    private int selectPos = 0;
 
     public CashPatternAdapter(Context context) {
         this.context = context;
@@ -41,15 +41,11 @@ public class CashPatternAdapter extends BaseAdapter {
         sort_description.add(context.getString(R.string.advice_cash_style_selecet,context.getString(R.string.wei_xin_wallet)));
         sort_img.add(R.drawable.list_ic_zhifubao);
         sort_img.add(R.drawable.list_ic_weixin);
-        for (int i= 0; i< sort_img.size();i++) {
-            check_state.add(i==0);
-        }
+        selectPos = 0;
     }
 
     public void changeCheckedState(int pos){
-        for (int i= 0; i< sort_img.size();i++) {
-            check_state.set(i,i==pos);
-        }
+        selectPos = pos;
         notifyDataSetChanged();
     }
 
@@ -84,7 +80,7 @@ public class CashPatternAdapter extends BaseAdapter {
         }
 
         holder.select.setOnCheckedChangeListener(null);
-        holder.select.setChecked(check_state.get(i));
+        holder.select.setChecked(selectPos == i);
         holder.select.setOnCheckedChangeListener(new ChechedChangelisten(i));
         holder.sort_img.setImageResource(sort_img.get(i));
         holder.sort_name.setText(sort_name.get(i));
@@ -102,9 +98,7 @@ public class CashPatternAdapter extends BaseAdapter {
 
         @Override
         public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-            if (b) {
-                changeCheckedState(positon);
-            }
+            changeCheckedState(positon);
         }
     }
 

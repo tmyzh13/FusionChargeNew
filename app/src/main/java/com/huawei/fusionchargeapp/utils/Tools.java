@@ -50,6 +50,9 @@ public class Tools {
      * @param dpValue
      * @return
      */
+    public static final int DATE_LENGTH_FROM_SERVER = 19;
+    public static final int BIRTHDAY_LENGTH = 10;
+
     public static final String USER_PHOTO_PATH = "user_photo_path";
     public static int dip2px(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;

@@ -48,6 +48,7 @@
             style="@style/textview"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:maxLength="12"
             android:background="@color/transparent"
             android:gravity="right|center_vertical"
             android:lines="1"
@@ -103,6 +104,8 @@
             android:hint="填写邮箱"
             android:textColor="@color/setting_blue" />
     </LinearLayout>
+    <ImageView style="@style/view_line"
+        />
     <LinearLayout
         android:id="@+id/layout_birthday"
         style="@style/item_layout_simple"
@@ -167,6 +170,7 @@
             android:gravity="right|center_vertical"
             android:lines="1"
             android:hint="填写VIN码"
+            android:maxLength="17"
             android:inputType="number"
             android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:textColor="@color/setting_blue" />

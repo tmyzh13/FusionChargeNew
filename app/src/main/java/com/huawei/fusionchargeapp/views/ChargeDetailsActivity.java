@@ -163,6 +163,7 @@ public class ChargeDetailsActivity extends BaseActivity {
                             chargeStationDetailBean.setLongitude(Double.parseDouble(pileList.getLongitude()));
                             chargeStationDetailBean.setPhotoUrl(pileList.getPhotoUrl());
                             chargeStationDetailBean.setId(pileList.getId());
+                            chargeStationDetailBean.setType("pile");
                             List<GunList> gunLists=pileList.getGunList();
                             if(gunLists!=null){
                                 for(int i=0;i<gunLists.size();i++){
@@ -198,51 +199,55 @@ public class ChargeDetailsActivity extends BaseActivity {
     }
 
     private void getFeeData(){
-        if(feeId < chargeStationDetailBean.getPileList().size()) {
-            RequestChargeQueryFeeBean bean = new RequestChargeQueryFeeBean();
-            bean.setChargePileId(chargeStationDetailBean.getPileList().get(feeId).getId() + "");
-            api.getQueryFee(UserHelper.getSavedUser().token,bean)
-                    .compose(new ResponseTransformer<>(this.<BaseData<ChargeDetailFeeBean>>bindUntilEvent(ActivityEvent.DESTROY)))
-                    .subscribe(new ResponseSubscriber<BaseData<ChargeDetailFeeBean>>() {
-                        @Override
-                        public void success(BaseData<ChargeDetailFeeBean> chargeDetailFeeBean) {
-                            feeList.add(chargeDetailFeeBean.data);
-                            feeId++;
-                            if(feeId < chargeStationDetailBean.getPileList().size()) {
-                                getFeeData();
-                            } else {
-                                initView();
-                                hideLoading();
+        if(chargeStationDetailBean.getPileList()!=null){
+            if(feeId < chargeStationDetailBean.getPileList().size()) {
+                RequestChargeQueryFeeBean bean = new RequestChargeQueryFeeBean();
+                bean.setChargePileId(chargeStationDetailBean.getPileList().get(feeId).getId() + "");
+                api.getQueryFee(UserHelper.getSavedUser().token,bean)
+                        .compose(new ResponseTransformer<>(this.<BaseData<ChargeDetailFeeBean>>bindUntilEvent(ActivityEvent.DESTROY)))
+                        .subscribe(new ResponseSubscriber<BaseData<ChargeDetailFeeBean>>() {
+                            @Override
+                            public void success(BaseData<ChargeDetailFeeBean> chargeDetailFeeBean) {
+                                feeList.add(chargeDetailFeeBean.data);
+                                feeId++;
+                                if(feeId < chargeStationDetailBean.getPileList().size()) {
+                                    getFeeData();
+                                } else {
+                                    initView();
+                                    hideLoading();
+                                }
                             }
-                        }
 
-                        @Override
-                        public boolean operationError(BaseData<ChargeDetailFeeBean> chargeDetailFeeBeanBaseData, int status, String message) {
-                            feeList.add(new ChargeDetailFeeBean());
-                            feeId++;
-                            if(feeId < chargeStationDetailBean.getPileList().size()) {
+                            @Override
+                            public boolean operationError(BaseData<ChargeDetailFeeBean> chargeDetailFeeBeanBaseData, int status, String message) {
+                                feeList.add(new ChargeDetailFeeBean());
+                                feeId++;
+                                if(feeId < chargeStationDetailBean.getPileList().size()) {
 
-                                getFeeData();
-                            } else {
-                                initView();
-                                hideLoading();
+                                    getFeeData();
+                                } else {
+                                    initView();
+                                    hideLoading();
+                                }
+                                return super.operationError(chargeDetailFeeBeanBaseData, status, message);
                             }
-                            return super.operationError(chargeDetailFeeBeanBaseData, status, message);
-                        }
 
-                        @Override
-                        public void onError(Throwable e) {
-                            super.onError(e);
-                            feeList.add(new ChargeDetailFeeBean());
-                            feeId++;
-                            if(feeId < chargeStationDetailBean.getPileList().size()) {
-                                getFeeData();
-                            } else {
-                                initView();
-                                hideLoading();
+                            @Override
+                            public void onError(Throwable e) {
+                                super.onError(e);
+                                feeList.add(new ChargeDetailFeeBean());
+                                feeId++;
+                                if(feeId < chargeStationDetailBean.getPileList().size()) {
+                                    getFeeData();
+                                } else {
+                                    initView();
+                                    hideLoading();
+                                }
                             }
-                        }
-                    });
+                        });
+            }
+        }else{
+            hideLoading();
         }
 
     }
@@ -329,6 +334,6 @@ public class ChargeDetailsActivity extends BaseActivity {
 
     @OnClick(R.id.ll_guild)
     public void goGuild(){
-        startActivity(GuildActivity.getLauncher(context, chargeStationDetailBean.getLatitude(), chargeStationDetailBean.getLongitude(), null, false));
+        startActivity(GuildActivity.getLauncher(context, chargeStationDetailBean.getLatitude(), chargeStationDetailBean.getLongitude(), null, false,chargeStationDetailBean.getId(),chargeStationDetailBean.getType()));
     }
 }

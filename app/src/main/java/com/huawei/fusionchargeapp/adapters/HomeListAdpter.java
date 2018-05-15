@@ -8,8 +8,11 @@ import android.widget.TextView;
 import com.corelibs.utils.adapter.BaseAdapterHelper;
 import com.corelibs.utils.adapter.normal.QuickAdapter;
 import com.huawei.fusionchargeapp.R;
+import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.beans.MapDataBean;
+import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.GuildActivity;
+import com.huawei.fusionchargeapp.views.LoginActivity;
 
 /**
  * Created by issuser on 2018/4/19.
@@ -35,7 +38,11 @@ public class HomeListAdpter extends QuickAdapter<MapDataBean> {
         ll_guild.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(GuildActivity.getLauncher(context, item.latitude, item.longitude, null, false));
+                if (UserHelper.getSavedUser() == null || Tools.isNull(UserHelper.getSavedUser().token)) {
+                    context.startActivity(LoginActivity.getLauncher(context));
+                } else {
+                    context.startActivity(GuildActivity.getLauncher(context, item.latitude, item.longitude, null, false,item.id,item.type));
+                }
             }
         });
     }
