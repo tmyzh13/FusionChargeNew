@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.corelibs.base.BaseActivity;
 import com.corelibs.base.BasePresenter;
+import com.corelibs.views.cube.ptr.PtrFrameLayout;
 import com.corelibs.views.ptr.layout.PtrAutoLoadMoreLayout;
 import com.corelibs.views.ptr.loadmore.widget.AutoLoadMoreExpandableListView;
 import com.huawei.fusionchargeapp.R;
@@ -19,7 +20,10 @@ import com.huawei.fusionchargeapp.adapter.ApplyInvoiceAdapter;
 import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.beans.ApplyInvoiceBean;
 import com.huawei.fusionchargeapp.model.beans.UserBean;
+import com.huawei.fusionchargeapp.presenter.InvoicePresenter;
+import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.LoginActivity;
+import com.huawei.fusionchargeapp.views.interfaces.InvoiceView;
 import com.huawei.fusionchargeapp.weights.NavBar;
 
 import java.util.ArrayList;
@@ -32,7 +36,7 @@ import butterknife.OnClick;
  * Created by john on 2018/5/9.
  */
 
-public class ApplyOrderListActivity extends BaseActivity implements ApplyInvoiceAdapter.OnItemClickListener{
+public class ApplyOrderListActivity extends BaseActivity<InvoiceView,InvoicePresenter> implements InvoiceView, ApplyInvoiceAdapter.OnItemClickListener{
 
     @Bind(R.id.nav_bar)
     NavBar bar;
@@ -61,6 +65,8 @@ public class ApplyOrderListActivity extends BaseActivity implements ApplyInvoice
     private List<List<ApplyInvoiceBean>> itemList = new ArrayList<>();
     private ApplyInvoiceAdapter adpter;
     private CompoundButton.OnCheckedChangeListener allSelectListener;
+    private static final int FIRST_PAGE = 1;
+    private int page = FIRST_PAGE;
 
     @Override
     public void goLogin() {
@@ -98,29 +104,56 @@ public class ApplyOrderListActivity extends BaseActivity implements ApplyInvoice
         };
 
         select_all.setOnCheckedChangeListener(allSelectListener);
-        ptrLayout.disableLoading();
-        ptrLayout.setCanRefresh(false);
 
-        initFakeData();
+        ptrLayout.setRefreshLoadCallback(new PtrAutoLoadMoreLayout.RefreshLoadCallback() {
+            @Override
+            public void onLoading(PtrFrameLayout frame) {
+                ptrLayout.enableLoading();
+                page ++;
+                presenter.getInvoiceConsume(page);
+            }
+
+            @Override
+            public void onRefreshing(PtrFrameLayout frame) {
+                page = FIRST_PAGE;
+                groupList.clear();
+                itemList.clear();
+
+                ptrLayout.enableLoading();
+                if (!frame.isAutoRefresh()) {
+                    presenter.getInvoiceConsume(page);
+                }
+            }
+        });
+
+        if(UserHelper.getSavedUser()==null|| Tools.isNull(UserHelper.getSavedUser().token)){
+            startActivity(LoginActivity.getLauncher(this));
+            return;
+        }
+        showLoading();
+        presenter.getInvoiceConsume(page);
+
     }
 
-    private void initFakeData(){
-        itemList = new ArrayList<>();
-        groupList = new ArrayList<>();
-        ApplyInvoiceBean bean = new ApplyInvoiceBean();
-        bean.chargeTime = "1989-03-10 19:23:23";
-        bean.money="88元";
-        bean.pileAdress= "南京市天下桩无底洞223号气度小区";
-        bean.pileNum = 234546567L;
-        List<ApplyInvoiceBean> list = new ArrayList<>();
-        list.add(bean);
-        ApplyInvoiceBean bean1 = new ApplyInvoiceBean();
-        bean1.chargeTime = "1999-03-10 19:23:23";
-        bean1.money="88元";
-        bean1.pileAdress= "南京市天下桩无底洞223号气度小区";
-        bean1.pileNum = 234546567L;
-        list.add(bean1);
-        setAdapterData(list);
+    @Override
+    public void getInvoiceConsume(List<ApplyInvoiceBean> bean) {
+        if (bean == null || bean.size() <= 0){
+            ptrLayout.setVisibility(View.GONE);
+            empty_view.setVisibility(View.VISIBLE);
+            bootom.setVisibility(View.GONE);
+        } else {
+            ptrLayout.setVisibility(View.VISIBLE);
+            empty_view.setVisibility(View.GONE);
+            bootom.setVisibility(View.VISIBLE);
+            setAdapterData(bean);
+        }
+    }
+
+    @Override
+    public void getInvoiceConsumeFailed() {
+        if (page > FIRST_PAGE) {
+            page --;
+        }
     }
 
     @OnClick(R.id.next)
@@ -140,22 +173,22 @@ public class ApplyOrderListActivity extends BaseActivity implements ApplyInvoice
         for (int i =0; i < list.size(); i++) {
             ApplyInvoiceBean tempBean = list.get(i);
             if (groupList.size() == 0) {
-                groupList.add(getGroupStringFromeTime(tempBean.chargeTime));
+                groupList.add(getGroupStringFromeTime(tempBean.chargeStartTime));
                 itemList.add(new ArrayList<ApplyInvoiceBean>());
                 itemList.get(itemList.size()-1).add(tempBean);
                 totalNum++;
-                totalMoney += Double.parseDouble(tempBean.money.substring(0,tempBean.money.length()-1));
+                totalMoney += tempBean.consumeTotalMoney;
             } else {
-                if (groupList.contains(getGroupStringFromeTime(tempBean.chargeTime))) {
+                if (groupList.contains(getGroupStringFromeTime(tempBean.chargeStartTime))) {
                     itemList.get(itemList.size()-1).add(tempBean);
                     totalNum++;
-                    totalMoney += Double.parseDouble(tempBean.money.substring(0,tempBean.money.length()-1));
+                    totalMoney += tempBean.consumeTotalMoney;
                 } else {
-                    groupList.add(getGroupStringFromeTime(tempBean.chargeTime));
+                    groupList.add(getGroupStringFromeTime(tempBean.chargeStartTime));
                     itemList.add(new ArrayList<ApplyInvoiceBean>());
                     itemList.get(itemList.size()-1).add(tempBean);
                     totalNum++;
-                    totalMoney += Double.parseDouble(tempBean.money.substring(0,tempBean.money.length()-1));
+                    totalMoney += tempBean.consumeTotalMoney;
                 }
             }
         }
@@ -180,11 +213,6 @@ public class ApplyOrderListActivity extends BaseActivity implements ApplyInvoice
     }
 
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
-    }
-
-    @Override
     public void afterClick(int indexOfGroup, int indexOfItem,boolean status) {
         //当点击item时，记录个数和金额进行相应的变化
         if (!status) {
@@ -192,15 +220,13 @@ public class ApplyOrderListActivity extends BaseActivity implements ApplyInvoice
                 return;
             }
             nowNum --;
-            String money = itemList.get(indexOfGroup).get(indexOfItem).money;
-            nowMoney -= Double.parseDouble(money.substring(0,money.length()-1));
+            nowMoney -= itemList.get(indexOfGroup).get(indexOfItem).consumeTotalMoney;
         } else {
             if (nowNum >= totalNum){
                 return;
             }
             nowNum ++;
-            String money = itemList.get(indexOfGroup).get(indexOfItem).money;
-            nowMoney += Double.parseDouble(money.substring(0,money.length()-1));
+            nowMoney -= itemList.get(indexOfGroup).get(indexOfItem).consumeTotalMoney;
         }
         boolean isChange = false;
         if (nowNum == totalNum) {
@@ -216,5 +242,29 @@ public class ApplyOrderListActivity extends BaseActivity implements ApplyInvoice
             select_all.setOnCheckedChangeListener(allSelectListener);
         }
         apply_total.setText(getString(R.string.invoice_apply_total,nowNum,nowMoney));
+    }
+
+    @Override
+    public void onLoadingCompleted() {
+        hideLoading();
+    }
+
+    @Override
+    public void onAllPageLoaded() {
+        ptrLayout.disableLoading();
+    }
+
+    @Override
+    protected InvoicePresenter createPresenter() {
+        return new InvoicePresenter();
+    }
+    @Override
+    public void showLoading() {
+        ptrLayout.setRefreshing();
+    }
+
+    @Override
+    public void hideLoading() {
+        ptrLayout.complete();
     }
 }
