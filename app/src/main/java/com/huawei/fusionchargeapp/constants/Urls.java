@@ -105,4 +105,16 @@ public class Urls {
 
     //园区查询站
     public static final String GET_ZONE_STATION="appZoneGis/queryZoneGis/";
+
+    //iAdmin登录
+    public static final String IADMIN_LOGIN = "user/iadminLogin";
+
+    //华为用户验证码
+    public static final String HUAWEI_CAPTCHA = "user/sendHuaweiCaptcha";
+
+    //华为验证码注册
+    public static final String HUAWE_REGISTER = "user/register ";
+
+    //华为获取手机号码
+    public static final String HUAWEI_GET_INFO = "/ProxyForText/idataws/PersonServlet";
 }
