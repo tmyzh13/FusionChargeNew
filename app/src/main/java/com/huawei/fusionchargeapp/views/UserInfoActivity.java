@@ -110,6 +110,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
     TextView commitUserinfo;
 
     private UserInfoPresenter presenter;
+    private String name;
 
     private final int REQUEST_CODE_SELECT_CAMERA = 0x0001;
 
@@ -174,7 +175,6 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
 
             }
         }); */
-
         initImagePicker();
 
         showLoading();
@@ -239,6 +239,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
             bean.photoUrl = uploadImageName;
         }
         bean.name = etNick.getText().toString();
+        name = bean.name;
         bean.sexName = tvSex.getText().toString();
         bean.email = tvEmail.getText().toString();
         bean.birth = tvBirthday.getText().toString();
@@ -332,6 +333,9 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
 
     @Override
     public void onModifySuccess() {
+        UserBean userBean = UserHelper.getSavedUser();
+        userBean.name = name;
+        UserHelper.saveUser(userBean);
         hideLoading();
         Toast.makeText(this, getString(R.string.user_info_modify_success), Toast.LENGTH_SHORT).show();
         startActivity(MainActivity.getLauncher(UserInfoActivity.this));

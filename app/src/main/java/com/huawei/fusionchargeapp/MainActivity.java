@@ -307,6 +307,7 @@ public class MainActivity extends BaseActivity {
                 Glide.with(context).load(UserHelper.getSavedUser().photoUrl).error(R.mipmap.ic_launcher)
                         .override(320, 320).into(target);
             }
+
             if(Tools.isNull(UserHelper.getSavedUser().name)){
                 tv_user_name.setText(UserHelper.getSavedUser().phone);
             }else{
