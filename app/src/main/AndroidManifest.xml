@@ -128,7 +128,7 @@
             android:value="false" />
         <meta-data
             android:name="TFEnabled"
-            android:value="true" />
+            android:value="false" />
 
         <!-- =========================单点登录  end================= -->
 

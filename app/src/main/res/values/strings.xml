@@ -485,4 +485,5 @@
     <string name="please_get_vercode_first">请先获取验证码！</string>
     <string name="vercode_incorrent">验证码错误。</string>
     <string name="register_fail">注册失败。</string>
+    <string name="w3Account">工号：</string>
 </resources>

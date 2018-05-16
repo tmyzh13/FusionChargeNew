@@ -40,6 +40,8 @@ public class W3AccountBindPhoneActivity extends BaseActivity<W3AccountBindPhoneV
     EditText etBindInputVercode;
     @Bind(R.id.tv_getVerCode)
     TextView tvGetVerCode;
+    @Bind(R.id.tv_id)
+    TextView tvId;
     @Bind(R.id.done)
     Button done;
 
@@ -74,6 +76,7 @@ public class W3AccountBindPhoneActivity extends BaseActivity<W3AccountBindPhoneV
             etBindInputPhone.requestFocus();
             etBindInputPhone.setText(phone);
             etBindInputPhone.setSelection(TextUtils.isEmpty(phone) ?  0 : phone.length());
+            tvId.setText(getString(R.string.w3Account) + w3Account);
             if(TextUtils.isEmpty(w3Account)) {
                 finish();
             }
