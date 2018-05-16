@@ -10,5 +10,9 @@ public interface W3AccountBindPhoneView extends BaseView {
 
     public void getVerCodeSuccess(String verCodePhone);
 
-    public void getVerCodeFailed();
+    public void getVerCodeFailed(String verCodePhone,int status);
+
+    public void registerSuccess();
+
+    public void registerFail();
 }

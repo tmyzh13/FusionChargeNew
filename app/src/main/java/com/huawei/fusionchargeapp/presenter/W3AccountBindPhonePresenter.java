@@ -56,7 +56,7 @@ public class W3AccountBindPhonePresenter extends BasePresenter<W3AccountBindPhon
                     public boolean operationError(BaseData baseData, int status, String message) {
                         Log.e("zw","operationError");
                         Log.e("zw","operationError : " + baseData.toString());
-
+                        view.getVerCodeFailed(phone,status);
                         return super.operationError(baseData, status, message);
                     }
 
@@ -77,18 +77,19 @@ public class W3AccountBindPhonePresenter extends BasePresenter<W3AccountBindPhon
 
         api.iAdminRegisger(bean)
                 .compose(new ResponseTransformer<>(this.<BaseData>bindUntilEvent(ActivityEvent.DESTROY)))
-                .subscribe(new ResponseSubscriber<BaseData>() {
+                .subscribe(new ResponseSubscriber<BaseData>(view) {
                     @Override
                     public void success(BaseData baseData) {
                         Log.e("zw","success");
                         Log.e("zw","success : " + baseData.toString());
+                        view.registerSuccess();
                     }
 
                     @Override
                     public boolean operationError(BaseData baseData, int status, String message) {
                         Log.e("zw","operationError");
                         Log.e("zw","operationError : " + baseData.toString());
-
+                        view.registerFail();
                         return super.operationError(baseData, status, message);
                     }
 

@@ -42,6 +42,7 @@ import com.huawei.fusionchargeapp.model.apis.ScanApi;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
 import com.huawei.fusionchargeapp.model.beans.RequestIadminLoginBean;
 import com.huawei.fusionchargeapp.model.beans.ScanChargeInfo;
+import com.huawei.fusionchargeapp.model.beans.UserBean;
 import com.huawei.fusionchargeapp.model.beans.W3User;
 import com.huawei.fusionchargeapp.utils.ChoiceManager;
 import com.huawei.fusionchargeapp.utils.Tools;
@@ -121,10 +122,17 @@ public class MainActivity extends BaseActivity {
     public static final String LOGINT_OUT = "loginout";
     public static final String EXIT = "exit";
 
+    public static final String W3_ACCOUNT = "w3_account";
+    public static final String W3_PHONE = "w3_phone";
+    public static final String IS_REGISTER_SUCCESS = "is_register_success";
+    public static final int W3_REGISTER_REQUEST_CODE = 0x00123;
+
+
 
 
     private String w3Account;
     private String w3Phone;
+    private boolean isRegisterSuccess = false;
 
     public static Intent getLauncher(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -135,7 +143,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        Log.e("zw","main  onNewIntent");
         setIntent(intent);
         if (intent == null || intent.getExtras() == null)
             return;
@@ -522,16 +529,19 @@ public class MainActivity extends BaseActivity {
         Intent intent = getIntent();
         if(intent == null) return;
 
-       /* w3Account = intent.getStringExtra(WelcomeActivity.W3_ACCOUNT);
-        w3Phone = intent.getStringExtra(WelcomeActivity.W3_Phone);
-        Log.e("zw", "w3Account : " + w3Account  + ", w3Phone : " + w3Phone);*/
+        boolean isFromOtherApp = intent.getBooleanExtra(WelcomeActivity.IS_FROM_OTHER_APP,false);
+        if(isFromOtherApp == false) return;
 
-       showLoading();
-       Lark.autoLogin(new LoginCallback() {
+        if(isRegisterSuccess) return;
+
+        if(!getLoadingDialog().isShowing()) {
+            showLoading();
+        }
+
+        Lark.autoLogin(new LoginCallback() {
            @Override
            public void onSuccess(User user) {
-               Log.e("zw","mainactivity : " + user.toString());
-               if( user.getUid() == null || (user.getIsSFReg() != null && user.getIsSFReg().equals("false"))){
+               if( TextUtils.isEmpty(user.getUid()) || (user.getIsSFReg() != null && user.getIsSFReg().equals("false"))){
                    hideLoading();
                    return;
                }
@@ -541,19 +551,10 @@ public class MainActivity extends BaseActivity {
 
            @Override
            public void onFailure(int i, String s) {
+               hideLoading();
                Log.e("zw","mainactivity : " + s);
            }
        });
-       if(true)  return;
-        if(!TextUtils.isEmpty(w3Account)) {
-
-            if(!TextUtils.isEmpty(w3Phone)) {
-
-            } else {
-                goToBindW3Account();
-            }
-        }
-
     }
 
     /**
@@ -576,12 +577,23 @@ public class MainActivity extends BaseActivity {
                 if(!TextUtils.isEmpty(w3Phone) && w3Phone.length() > 11) {
                     w3Phone = w3Phone.substring(w3Phone.length() - 11);
                 }
-                w3Login();
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        w3Login();
+                    }
+                });
             }
 
             @Override
             public void onFailure(int i, String s) {
-                w3Login();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        w3Login();
+                    }
+                });
             }
 
             @Override
@@ -597,7 +609,10 @@ public class MainActivity extends BaseActivity {
      * 登录W3
      */
     private void w3Login(){
-        showLoading();
+        if(!getLoadingDialog().isShowing()) {
+            showLoading();
+        }
+
         if(TextUtils.isEmpty(w3Account)) {
             hideLoading();
             return;
@@ -608,31 +623,31 @@ public class MainActivity extends BaseActivity {
 
         ScanApi api = ApiFactory.getFactory().create(ScanApi.class);
         api.iAdminLogin(bean)
-                .compose(new ResponseTransformer<>(this.<BaseData>bindUntilEvent(ActivityEvent.DESTROY)))
-                .subscribe(new ResponseSubscriber<BaseData>() {
+                .compose(new ResponseTransformer<>(this.<BaseData<UserBean>>bindUntilEvent(ActivityEvent.DESTROY)))
+                .subscribe(new ResponseSubscriber<BaseData<UserBean>>() {
                     @Override
-                    public void success(BaseData baseData) {
+                    public void success(BaseData<UserBean> baseData) {
                         hideLoading();
-                        Log.e("zw","success");
-                        Log.e("zw",baseData.toString());
-                        //TODO 去更改本地用户信息
+                        if(baseData.data == null) {
+                            goToBindW3Account();
+                        } else {
+                            UserHelper.saveUser(baseData.data);
+                            RxBus.getDefault().send(new Object(), Constant.REFRESH_HOME_STATUE);
+                        }
+
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         super.onError(e);
                         hideLoading();
-                        Log.e("zw","onError");
-                        Log.e("zw",e.toString());
                     }
 
                     @Override
-                    public boolean operationError(BaseData baseData, int status, String message) {
-                        Log.e("zw","operationError");
-                        Log.e("zw","msg :" + message + ", data : " + baseData.toString());
+                    public boolean operationError(BaseData<UserBean> baseData, int status, String message) {
                         hideLoading();
                         if(status == 210) {
-                           goToBindW3Account();
+                            goToBindW3Account();
                         }
                         return super.operationError(baseData, status, message);
                     }
@@ -643,9 +658,17 @@ public class MainActivity extends BaseActivity {
         //去注册
         Log.e("zw", " start bind"  );
         Intent bindIntent = new Intent(this, W3AccountBindPhoneActivity.class);
-        bindIntent.putExtra(WelcomeActivity.W3_ACCOUNT,w3Account);
-        bindIntent.putExtra(WelcomeActivity.W3_Phone,w3Phone);
-        startActivity(bindIntent);
+        bindIntent.putExtra(W3_ACCOUNT,w3Account);
+        bindIntent.putExtra(W3_PHONE,w3Phone);
+        startActivityForResult(bindIntent,W3_REGISTER_REQUEST_CODE);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == W3_REGISTER_REQUEST_CODE) {
+            isRegisterSuccess = data == null ? false : data.getBooleanExtra(IS_REGISTER_SUCCESS,false);
+            w3Login();
+        }
+    }
 }

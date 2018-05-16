@@ -19,6 +19,7 @@ import com.huawei.fusionchargeapp.model.beans.RequestIadminLoginBean;
 import com.huawei.fusionchargeapp.model.beans.RequestMyOrderBean;
 import com.huawei.fusionchargeapp.model.beans.RequestScanBean;
 import com.huawei.fusionchargeapp.model.beans.ScanChargeInfo;
+import com.huawei.fusionchargeapp.model.beans.UserBean;
 
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -63,7 +64,7 @@ public interface ScanApi {
 
     //华为员工登录
     @POST(Urls.IADMIN_LOGIN)
-    Observable<BaseData> iAdminLogin(@Body RequestIadminLoginBean bean);
+    Observable<BaseData<UserBean>> iAdminLogin(@Body RequestIadminLoginBean bean);
 
     //华为员工登录
     @POST(Urls.HUAWEI_CAPTCHA)

@@ -12,7 +12,10 @@ import android.widget.TextView;
 
 import com.corelibs.base.BaseActivity;
 import com.corelibs.base.BasePresenter;
+import com.huawei.fusionchargeapp.MainActivity;
 import com.huawei.fusionchargeapp.R;
+import com.huawei.fusionchargeapp.model.UserHelper;
+import com.huawei.fusionchargeapp.model.beans.UserBean;
 import com.huawei.fusionchargeapp.presenter.W3AccountBindPhonePresenter;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.interfaces.W3AccountBindPhoneView;
@@ -66,9 +69,11 @@ public class W3AccountBindPhoneActivity extends BaseActivity<W3AccountBindPhoneV
 
         Intent intent = getIntent();
         if(intent != null) {
-            w3Account = getIntent().getStringExtra(WelcomeActivity.W3_ACCOUNT);
-            phone = getIntent().getStringExtra(WelcomeActivity.W3_Phone);
+            w3Account = getIntent().getStringExtra(MainActivity.W3_ACCOUNT);
+            phone = getIntent().getStringExtra(MainActivity.W3_PHONE);
+            etBindInputPhone.requestFocus();
             etBindInputPhone.setText(phone);
+            etBindInputPhone.setSelection(TextUtils.isEmpty(phone) ?  0 : phone.length());
             if(TextUtils.isEmpty(w3Account)) {
                 finish();
             }
@@ -118,6 +123,8 @@ public class W3AccountBindPhoneActivity extends BaseActivity<W3AccountBindPhoneV
                 phone = etBindInputPhone.getText().toString();
                 if(TextUtils.isEmpty(verCode)) {
                     showToast(getString(R.string.code_incorrect));
+                } else if(TextUtils.isEmpty(verCodePhone)) {
+                    showToast(getString(R.string.please_get_vercode_first));
                 } else if(!verCodePhone.equals(phone)) {
                     showToast(getString(R.string.vercode_phone_differ_phone));
                 }else {
@@ -131,15 +138,46 @@ public class W3AccountBindPhoneActivity extends BaseActivity<W3AccountBindPhoneV
     public void getVerCodeSuccess(String verCodePhone) {
         this.verCodePhone = verCodePhone;
         showToast(getString(R.string.vercode_has_send));
+
     }
 
     @Override
-    public void getVerCodeFailed() {
-        showToast(getString(R.string.vercode_send_fail));
+    public void getVerCodeFailed(String verCodePhone,int status) {
+        this.verCodePhone = verCodePhone;
+        if(status == 202) {
+            showToast(getString(R.string.vercode_incorrent));
+        } else {
+            showToast(getString(R.string.vercode_send_fail));
+        }
         timer.cancel();
         timer = null;
         tvGetVerCode.setClickable(true);
         tvGetVerCode.setText(R.string.action_get_code_again);
     }
 
+    @Override
+    public void registerSuccess() {
+        Intent intent = new Intent();
+        intent.putExtra(MainActivity.IS_REGISTER_SUCCESS,true);
+        setResult(MainActivity.W3_REGISTER_REQUEST_CODE,intent);
+        finish();
+    }
+
+    @Override
+    public void registerFail() {
+        showToast(getString(R.string.register_fail));
+        timer.cancel();
+        timer = null;
+        tvGetVerCode.setClickable(true);
+        tvGetVerCode.setText(R.string.action_get_code_again);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(timer != null) {
+            timer.cancel();
+            timer = null;
+        }
+    }
 }

@@ -482,4 +482,7 @@
     <string name="vercode_has_send">验证码已发送。</string>
     <string name="vercode_send_fail">验证码发送失败。</string>
     <string name="vercode_phone_differ_phone">手机号码与获取验证码手机号不一致！</string>
+    <string name="please_get_vercode_first">请先获取验证码！</string>
+    <string name="vercode_incorrent">验证码错误。</string>
+    <string name="register_fail">注册失败。</string>
 </resources>

@@ -23,11 +23,11 @@ import com.huawei.fusionchargeapp.R;
 
 public class WelcomeActivity extends BaseActivity {
 
-    public static final String W3_ACCOUNT = "w3_account";
-    public static final String W3_Phone = "w3_phone";
+    public static final String IS_FROM_OTHER_APP = "from_other_app";
 
-    private String w3Account;
-    private String w3Phone;
+
+
+    private boolean isFromOtherApp;
     public static final int REQUEST_EXTERNAL_STRONGE = 0x00888;
 
     @Override
@@ -44,9 +44,7 @@ public class WelcomeActivity extends BaseActivity {
     protected void init(Bundle savedInstanceState) {
         Intent fromIntent = getIntent();
         if(fromIntent != null) {
-            w3Account = fromIntent.getStringExtra(W3_ACCOUNT);
-            w3Phone = fromIntent.getStringExtra(W3_Phone);
-            Log.e("zw", "welcome  ...  w3Account : " + w3Account  + ", w3Phone : " + w3Phone);
+            isFromOtherApp = fromIntent.getBooleanExtra(IS_FROM_OTHER_APP,false);
         }
 
         //检查有无存储权限
@@ -65,8 +63,7 @@ public class WelcomeActivity extends BaseActivity {
             public void run() {
                 // TODO Auto-generated method stub
                 Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
-                intent.putExtra(W3_ACCOUNT,w3Account);
-                intent.putExtra(W3_Phone,w3Phone);
+                intent.putExtra(IS_FROM_OTHER_APP,isFromOtherApp);
                 startActivity(intent);
                 finish();
             }
