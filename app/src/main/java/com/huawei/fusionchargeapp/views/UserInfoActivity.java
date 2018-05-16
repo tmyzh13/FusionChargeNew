@@ -122,6 +122,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
     private long lastInputTime = 0;
     private MyHandler myHandler = new MyHandler(this);
     private boolean isGoToCarema = true;
+    private String theNeedLoadImgPath;
 
     public static Intent startActivity(Context context) {
         Intent intent = new Intent(context, UserInfoActivity.class);
@@ -266,8 +267,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
                 super.onLoadFailed(e, errorDrawable);
                 String path = PreferencesHelper.getData(Tools.USER_PHOTO_PATH);
                 if (!TextUtils.isEmpty(path)) {
-                    File file = new File(path);
-                    Glide.with(UserInfoActivity.this).load(Uri.fromFile(file))
+                    Glide.with(UserInfoActivity.this).load(path)
                             .error(R.mipmap.ic_launcher_round).into(ivUserIcon);
                 }
             }
@@ -341,6 +341,11 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
 
     @Override
     public void onUploadPhotoSuccess(String imgUrl) {
+        if (!Tools.isNull(theNeedLoadImgPath)) {
+            PreferencesHelper.saveData(Tools.USER_PHOTO_PATH,theNeedLoadImgPath);
+            Glide.with(this).load(theNeedLoadImgPath)
+                    .into(ivUserIcon);
+        }
         uploadImageName =imgUrl;
         UserBean userBean = UserHelper.getSavedUser();
         if(userBean != null) {
@@ -503,9 +508,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
                     uploadImageName = "img/" + imgPath[imgPath.length - 1];
                     Log.e("zw","log .to string : " + uploadImageName);
 
-                    Glide.with(this).load(Uri.fromFile(file))
-                            .into(ivUserIcon);
-                    PreferencesHelper.saveData(Tools.USER_PHOTO_PATH,images.get(0).path);
+                    theNeedLoadImgPath = images.get(0).path;
                     presenter.uploadImage(file);
                 }
             } else {
