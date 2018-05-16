@@ -559,6 +559,7 @@ public class MainActivity extends BaseActivity {
         Lark.autoLogin(new LoginCallback() {
            @Override
            public void onSuccess(User user) {
+               Log.e("zw","mainactivity :" + user.toString());
                if( TextUtils.isEmpty(user.getUid()) || (user.getIsSFReg() != null && user.getIsSFReg().equals("false"))){
                    hideLoading();
                    return;
@@ -576,7 +577,7 @@ public class MainActivity extends BaseActivity {
     }
 
     /**
-     * 去获取手机号码
+     * 去获取W3手机号码
      */
     public void getW3PhoneNumber(){
         String httpUrl = AppUtils.getHostUrl() + Urls.HUAWEI_GET_INFO;
@@ -588,6 +589,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onSuccess(Map map, Object o) {
                 String userStr = o.toString();
+                Log.e("zw","phone number : " + userStr);
                 Gson gson = new Gson();
                 W3User user = gson.fromJson(userStr, new TypeToken<W3User>() {
                 }.getType());
@@ -606,6 +608,7 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onFailure(int i, String s) {
+                Log.e("zw","phone number : " + s);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
