@@ -3,6 +3,7 @@ package com.huawei.fusionchargeapp.views.home;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
@@ -89,6 +90,29 @@ public class HomeListFragment extends BaseFragment<HomeListView, HomeListPresent
                         }
                     }
                 });
+
+        lv_piles.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+            }
+
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                View c = view.getChildAt(0);
+                if (c == null) {
+                    return ;
+                }
+                int firstVisiblePosition = view.getFirstVisiblePosition();
+                int top = c.getTop();
+                int i=-top + firstVisiblePosition * c.getHeight() ;
+               if(i>0){
+                   ptrLayout.setCanRefresh(false);
+               }else{
+                   ptrLayout.setCanRefresh(true);
+               }
+            }
+        });
     }
 
     @Override
