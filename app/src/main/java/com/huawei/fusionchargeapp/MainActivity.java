@@ -203,6 +203,11 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onDrawerOpened(View drawerView) {
+                Log.e("liutao","left="+drawerLayout.isDrawerOpen(main_left_drawer_layout)+",right="+drawerLayout.isDrawerOpen(main_right_drawer_layout));
+                if (drawerLayout.isDrawerOpen(main_left_drawer_layout)) {
+                    ChoiceManager.getInstance().setDrawerStatus(true);
+                    return;
+                }
                 if (ChoiceManager.getInstance().getType() == 3) {
                     cb_charge_alternating.setChecked(true);
                     cb_charge_direct.setChecked(true);
@@ -233,6 +238,10 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onDrawerClosed(View drawerView) {
+                Log.e("liutao","left="+drawerLayout.isDrawerOpen(main_left_drawer_layout)+",right="+drawerLayout.isDrawerOpen(main_right_drawer_layout));
+                if (!drawerLayout.isDrawerOpen(main_left_drawer_layout)) {
+                    ChoiceManager.getInstance().setDrawerStatus(false);
+                }
                 IMEUtil.closeIME(et_distance, context);
             }
 
@@ -542,8 +551,14 @@ public class MainActivity extends BaseActivity {
 
     private void initOtherLogin() {
 
-        //如果没有登录，就去验证单点登录
-        if(UserHelper.getSavedUser() != null ) return;
+        //如果没有登录，就去验证
+        if(UserHelper.getSavedUser() != null ) {
+            //如果已经登录，根据状态是否显示左侧抽屉
+            if (ChoiceManager.getInstance().isDrawerStatus()) {
+                openLeft();
+            }
+            return;
+        }
 
         Intent intent = getIntent();
         if(intent == null) return;

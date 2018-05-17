@@ -15,6 +15,8 @@ public class ChoiceManager {
     // 状态空 //“充电方式1快充2慢充3快慢充”  1空闲2繁忙
     private int statue=1;
     //距离 默认距离是100 这里测试改成500
+    //默认为false;true为打开左侧栏
+    private boolean drawerStatus = false;
     private double distance=Constant.DEFAULT_DISTANCE;
 
     private ChoiceManager(){
@@ -56,5 +58,13 @@ public class ChoiceManager {
 
     public void setDistance(double distance) {
         this.distance = distance;
+    }
+
+    public boolean isDrawerStatus() {
+        return drawerStatus;
+    }
+
+    public void setDrawerStatus(boolean drawerStatus) {
+        this.drawerStatus = drawerStatus;
     }
 }
