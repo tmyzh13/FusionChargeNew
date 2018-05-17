@@ -378,7 +378,10 @@ public class ImageActivity extends ImageBaseActivity implements ImageDataSource.
                     setResult(ImagePicker.RESULT_CODE_ITEMS, intent);   //单选不需要裁剪，返回数据
                     finish();
                 }
-            } else if (directPhoto) {
+            } else if (directPhoto && resultCode == RESULT_CANCELED && requestCode == ImagePicker.REQUEST_CODE_CROP) {
+//                finish();
+                imagePicker.takePicture(this, ImagePicker.REQUEST_CODE_TAKE);
+            } else if(directPhoto){
                 finish();
             }
         }
