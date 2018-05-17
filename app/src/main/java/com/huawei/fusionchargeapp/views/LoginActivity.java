@@ -309,7 +309,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
             showHintDialog(getString(R.string.hint),getString(R.string.hint_input_password));
             return false;
         } else if (!Tools.isPwdRight(pwd)) {
-            showHintDialog(getString(R.string.hint),getString(R.string.regist_password_hint));
+            showHintDialog(getString(R.string.hint),getString(R.string.regist_password_mismatch));
             return false;
         }
         return true;
