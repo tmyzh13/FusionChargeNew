@@ -177,6 +177,24 @@ public class MainActivity extends BaseActivity {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(R.id.content, mapFragment).commit();
 
+        cb_charge_alternating.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    cb_charge_direct.setChecked(false);
+                }
+            }
+        });
+
+        cb_charge_direct.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    cb_charge_alternating.setChecked(false);
+                }
+            }
+        });
+
         drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
@@ -289,6 +307,7 @@ public class MainActivity extends BaseActivity {
                 Glide.with(context).load(UserHelper.getSavedUser().photoUrl).error(R.mipmap.ic_launcher)
                         .override(320, 320).into(target);
             }
+
             if(Tools.isNull(UserHelper.getSavedUser().name)){
                 tv_user_name.setText(UserHelper.getSavedUser().phone);
             }else{

@@ -205,9 +205,6 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
             public void run() {
 
                 if (homeAppointmentBean != null) {
-                    if (!AppManager.getAppManager().currentActivity().getClass().equals(MainActivity.class)) {
-                        return;
-                    }
                     if (Tools.isNull(PreferencesHelper.getData(Constant.TIME_APPOINTMENT))) {
                         appointmentTime = 0;
                     } else {
@@ -224,6 +221,10 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                             tv_appointment_time.setText(Tools.formatMinute(Long.parseLong(PreferencesHelper.getData(Constant.TIME_APPOINTMENT))));
                         }
                     });
+                    if (!AppManager.getAppManager().currentActivity().getClass().equals(MainActivity.class)) {
+                        return;
+                    }
+
                     if (appointmentTime <= 0) {
                         //预约超时
                         if (AppManager.getAppManager().currentActivity().getClass().equals(MainActivity.class)) {

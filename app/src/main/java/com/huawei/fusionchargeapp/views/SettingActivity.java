@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -135,6 +136,12 @@ public class SettingActivity extends BaseActivity<SettingView, SettingPresenter>
         startActivity(new Intent(SettingActivity.this,AboutUsActivity.class));
     }
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.e("yzh","ondestroy--");
+    }
 
     @Override
     protected SettingPresenter createPresenter() {

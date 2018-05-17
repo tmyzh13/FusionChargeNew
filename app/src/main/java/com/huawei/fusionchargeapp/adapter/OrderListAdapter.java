@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.model.beans.OrderBean;
 import com.huawei.fusionchargeapp.model.beans.RawRecordBean;
+import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.PayActivity;
 
 import java.util.List;
@@ -72,7 +73,9 @@ public class OrderListAdapter extends BaseAdapter {
         //设置数据
         final RawRecordBean bean = datas.get(position);
         holder.oder_code_tv.setText(bean.getOrderNum());
-        if (bean.getChargeEndTime().length() >2){
+        if (Tools.isNull(bean.getChargeEndTime())) {
+            holder.oder_time_tv.setText("");
+        } else if(bean.getChargeEndTime().length() >2){
             holder.oder_time_tv.setText(bean.getChargeEndTime().substring(0,bean.getChargeEndTime().length()-2));
         } else {
             holder.oder_time_tv.setText(bean.getChargeEndTime());

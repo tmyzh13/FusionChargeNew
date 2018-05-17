@@ -110,6 +110,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
     TextView commitUserinfo;
 
     private UserInfoPresenter presenter;
+    private String name;
 
     private final int REQUEST_CODE_SELECT_CAMERA = 0x0001;
 
@@ -122,7 +123,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
     private long lastInputTime = 0;
     private MyHandler myHandler = new MyHandler(this);
     private boolean isGoToCarema = true;
-    private String datePickerContent = "";
+    private String theNeedLoadImgPath;
 
     public static Intent startActivity(Context context) {
         Intent intent = new Intent(context, UserInfoActivity.class);
@@ -174,7 +175,6 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
 
             }
         }); */
-
         initImagePicker();
 
         showLoading();
@@ -239,6 +239,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
             bean.photoUrl = uploadImageName;
         }
         bean.name = etNick.getText().toString();
+        name = bean.name;
         bean.sexName = tvSex.getText().toString();
         bean.email = tvEmail.getText().toString();
         bean.birth = tvBirthday.getText().toString();
@@ -267,8 +268,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
                 super.onLoadFailed(e, errorDrawable);
                 String path = PreferencesHelper.getData(Tools.USER_PHOTO_PATH);
                 if (!TextUtils.isEmpty(path)) {
-                    File file = new File(path);
-                    Glide.with(UserInfoActivity.this).load(Uri.fromFile(file))
+                    Glide.with(UserInfoActivity.this).load(path)
                             .error(R.mipmap.ic_launcher_round).into(ivUserIcon);
                 }
             }
@@ -333,6 +333,9 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
 
     @Override
     public void onModifySuccess() {
+        UserBean userBean = UserHelper.getSavedUser();
+        userBean.name = name;
+        UserHelper.saveUser(userBean);
         hideLoading();
         Toast.makeText(this, getString(R.string.user_info_modify_success), Toast.LENGTH_SHORT).show();
         startActivity(MainActivity.getLauncher(UserInfoActivity.this));
@@ -342,6 +345,11 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
 
     @Override
     public void onUploadPhotoSuccess(String imgUrl) {
+        if (!Tools.isNull(theNeedLoadImgPath)) {
+            PreferencesHelper.saveData(Tools.USER_PHOTO_PATH,theNeedLoadImgPath);
+            Glide.with(this).load(theNeedLoadImgPath)
+                    .into(ivUserIcon);
+        }
         uploadImageName =imgUrl;
         UserBean userBean = UserHelper.getSavedUser();
         if(userBean != null) {
@@ -504,9 +512,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
                     uploadImageName = "img/" + imgPath[imgPath.length - 1];
                     Log.e("zw","log .to string : " + uploadImageName);
 
-                    Glide.with(this).load(Uri.fromFile(file))
-                            .into(ivUserIcon);
-                    PreferencesHelper.saveData(Tools.USER_PHOTO_PATH,images.get(0).path);
+                    theNeedLoadImgPath = images.get(0).path;
                     presenter.uploadImage(file);
                 }
             } else {
@@ -517,7 +523,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
 
     private void showTimePickerDialog(){
         View popupView = LayoutInflater.from(UserInfoActivity.this).inflate(R.layout.double_date_picker,null);
-        DatePicker start_time,end_time;
+        final DatePicker start_time,end_time;
         TextView tv_start,tv_end;
         start_time = (DatePicker) popupView.findViewById(R.id.start_time);
         end_time = (DatePicker) popupView.findViewById(R.id.end_time);
@@ -534,7 +540,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
             year=calendar.get(Calendar.YEAR);
             monthOfYear=calendar.get(Calendar.MONTH);
             dayOfMonth=calendar.get(Calendar.DAY_OF_MONTH);
-            tvBirthday.setText(getDateFromYMD(year,monthOfYear,dayOfMonth));
+
         } else {
             String[] date = tvBirthday.getText().toString().split("-|\\.");
             year = Integer.parseInt(date[0]);
@@ -543,21 +549,13 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
         }
 
         start_time.setMaxDate(Calendar.getInstance().getTimeInMillis());
-        start_time.init(year, monthOfYear, dayOfMonth, new DatePicker.OnDateChangedListener() {
-            @Override
-            public void onDateChanged(DatePicker datePicker, int i, int i1, int i2) {
-                datePickerContent = getDateFromYMD(i,i1,i2);
-            }
-        });
+        start_time.init(year, monthOfYear, dayOfMonth, null);
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setView(popupView)
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.action_confirm, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if (!Tools.isNull(datePickerContent)) {
-                            tvBirthday.setText(datePickerContent);
-                            datePickerContent = "";
-                        }
+                        tvBirthday.setText(getDateFromYMD(start_time.getYear(),start_time.getMonth(),start_time.getDayOfMonth()));
                     }
                 }).create();
         dialog.show();
