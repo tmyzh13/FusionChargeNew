@@ -563,6 +563,7 @@ public class MainActivity extends BaseActivity {
                Log.e("zw","mainactivity :" + user.toString());
                if( TextUtils.isEmpty(user.getUid()) || (user.getIsSFReg() != null && user.getIsSFReg().equals("false"))){
                    hideLoading();
+                   isRegisterSuccess = true;
                    return;
                }
                w3Account = user.getUid();
@@ -572,6 +573,7 @@ public class MainActivity extends BaseActivity {
            @Override
            public void onFailure(int i, String s) {
                hideLoading();
+               isRegisterSuccess = true;
                Log.e("zw","mainactivity : " + s);
            }
        });
@@ -637,6 +639,7 @@ public class MainActivity extends BaseActivity {
 
         if(TextUtils.isEmpty(w3Account)) {
             hideLoading();
+            isRegisterSuccess = true;
             return;
         }
         RequestIadminLoginBean bean = new RequestIadminLoginBean();
@@ -663,6 +666,7 @@ public class MainActivity extends BaseActivity {
                     public void onError(Throwable e) {
                         super.onError(e);
                         hideLoading();
+                        isRegisterSuccess = true;
                     }
 
                     @Override
@@ -670,6 +674,8 @@ public class MainActivity extends BaseActivity {
                         hideLoading();
                         if(status == 210) {
                             goToBindW3Account();
+                        } else {
+                            isRegisterSuccess = true;
                         }
                         return super.operationError(baseData, status, message);
                     }

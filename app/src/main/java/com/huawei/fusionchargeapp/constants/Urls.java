@@ -99,6 +99,10 @@ public class Urls {
 
     //充值消费记录
     public static final String BALANCE_RECORD = "appUserRecord/getUserBalanceOrderRecord";
+
+    //能够开取发票的消费记录
+    public static final String  INVOICE_RECHARGE_LIST= "invoice/chargerOrderList";
+
     //园区查询站
     public static final String GET_ZONE_STATION="appZoneGis/queryZoneGis/";
 
@@ -113,7 +117,4 @@ public class Urls {
 
     //华为获取手机号码
     public static final String HUAWEI_GET_INFO = "/ProxyForText/idataws/PersonServlet";
-
-    //能够开取发票的消费记录
-    public static final String  INVOICE_RECHARGE_LIST= "invoice/chargerOrderList";
 }
