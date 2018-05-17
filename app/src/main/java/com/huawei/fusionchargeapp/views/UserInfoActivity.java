@@ -552,7 +552,8 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
         start_time.init(year, monthOfYear, dayOfMonth, null);
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setView(popupView)
-                .setPositiveButton(R.string.action_confirm, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.action_cancel,null)
+                .setNegativeButton(R.string.action_confirm, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         tvBirthday.setText(getDateFromYMD(start_time.getYear(),start_time.getMonth(),start_time.getDayOfMonth()));

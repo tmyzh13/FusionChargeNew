@@ -40,10 +40,10 @@
         <TextView
             style="@style/textview"
             android:layout_weight="1"
-            android:text="@string/nick" />
+            android:text="@string/user_info_nick_name" />
 
         <EditText
-            android:hint="@string/write_name"
+            android:hint="@string/user_info_write_nick"
             android:id="@+id/et_nick"
             style="@style/textview"
             android:layout_height="match_parent"
@@ -102,6 +102,7 @@
             android:inputType="textEmailAddress"
             android:lines="1"
             android:hint="填写邮箱"
+            android:maxLength="32"
             android:textColor="@color/setting_blue" />
     </LinearLayout>
     <ImageView style="@style/view_line"
@@ -144,6 +145,7 @@
             style="@style/textview"
             android:layout_weight="1"
             android:lines="1"
+            android:maxLength="40"
             android:layout_height="match_parent"
             android:background="@color/transparent"
             android:gravity="right|center_vertical"
