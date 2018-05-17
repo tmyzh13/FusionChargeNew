@@ -78,10 +78,10 @@ public class W3AccountBindPhoneActivity extends BaseActivity<W3AccountBindPhoneV
             etBindInputPhone.setSelection(TextUtils.isEmpty(phone) ?  0 : phone.length());
             tvId.setText(getString(R.string.w3Account) + w3Account);
             if(TextUtils.isEmpty(w3Account)) {
-                finish();
+                setResultFinish(false);
             }
         } else {
-            finish();
+            setResultFinish(false);
         }
     }
 
@@ -160,10 +160,7 @@ public class W3AccountBindPhoneActivity extends BaseActivity<W3AccountBindPhoneV
 
     @Override
     public void registerSuccess() {
-        Intent intent = new Intent();
-        intent.putExtra(MainActivity.IS_REGISTER_SUCCESS,true);
-        setResult(MainActivity.W3_REGISTER_REQUEST_CODE,intent);
-        finish();
+        setResultFinish(true);
     }
 
     @Override
@@ -182,5 +179,12 @@ public class W3AccountBindPhoneActivity extends BaseActivity<W3AccountBindPhoneV
             timer.cancel();
             timer = null;
         }
+    }
+
+    private void setResultFinish(boolean isRegisterSuccess){
+        Intent intent = new Intent();
+        intent.putExtra(MainActivity.IS_REGISTER_SUCCESS,isRegisterSuccess);
+        setResult(MainActivity.W3_REGISTER_REQUEST_CODE,intent);
+        finish();
     }
 }

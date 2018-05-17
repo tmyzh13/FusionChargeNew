@@ -132,7 +132,7 @@ public class MainActivity extends BaseActivity {
 
     private String w3Account;
     private String w3Phone;
-    private boolean isRegisterSuccess = false;
+    private boolean notNeedRegister = false;
 
     public static Intent getLauncher(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -542,7 +542,7 @@ public class MainActivity extends BaseActivity {
 
     private void initOtherLogin() {
 
-        //如果没有登录，就去验证
+        //如果没有登录，就去验证单点登录
         if(UserHelper.getSavedUser() != null ) return;
 
         Intent intent = getIntent();
@@ -551,7 +551,7 @@ public class MainActivity extends BaseActivity {
         boolean isFromOtherApp = intent.getBooleanExtra(WelcomeActivity.IS_FROM_OTHER_APP,false);
         if(isFromOtherApp == false) return;
 
-        if(isRegisterSuccess) return;
+        if(notNeedRegister) return;
 
         if(!getLoadingDialog().isShowing()) {
             showLoading();
@@ -561,9 +561,9 @@ public class MainActivity extends BaseActivity {
            @Override
            public void onSuccess(User user) {
                Log.e("zw","mainactivity :" + user.toString());
-               if( TextUtils.isEmpty(user.getUid()) || (user.getIsSFReg() != null && user.getIsSFReg().equals("false"))){
+               if( TextUtils.isEmpty(user.getUid()) ){
                    hideLoading();
-                   isRegisterSuccess = true;
+                   notNeedRegister = true;
                    return;
                }
                w3Account = user.getUid();
@@ -573,7 +573,7 @@ public class MainActivity extends BaseActivity {
            @Override
            public void onFailure(int i, String s) {
                hideLoading();
-               isRegisterSuccess = true;
+               notNeedRegister = true;
                Log.e("zw","mainactivity : " + s);
            }
        });
@@ -639,7 +639,7 @@ public class MainActivity extends BaseActivity {
 
         if(TextUtils.isEmpty(w3Account)) {
             hideLoading();
-            isRegisterSuccess = true;
+            notNeedRegister = true;
             return;
         }
         RequestIadminLoginBean bean = new RequestIadminLoginBean();
@@ -665,8 +665,8 @@ public class MainActivity extends BaseActivity {
                     @Override
                     public void onError(Throwable e) {
                         super.onError(e);
+                        notNeedRegister = true;
                         hideLoading();
-                        isRegisterSuccess = true;
                     }
 
                     @Override
@@ -675,7 +675,7 @@ public class MainActivity extends BaseActivity {
                         if(status == 210) {
                             goToBindW3Account();
                         } else {
-                            isRegisterSuccess = true;
+                            notNeedRegister = true;
                         }
                         return super.operationError(baseData, status, message);
                     }
@@ -695,8 +695,11 @@ public class MainActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == W3_REGISTER_REQUEST_CODE) {
-            isRegisterSuccess = data == null ? false : data.getBooleanExtra(IS_REGISTER_SUCCESS,false);
-            w3Login();
+            notNeedRegister = true;
+            boolean goLogin = data == null ? false : data.getBooleanExtra(IS_REGISTER_SUCCESS,false);
+            if(goLogin) {
+                w3Login();
+            }
         }
     }
 }
