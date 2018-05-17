@@ -243,11 +243,10 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".views.UserInfoActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize"
             android:screenOrientation="portrait" />
         <activity
             android:name=".views.SettingActivity"
-            android:excludeFromRecents="true"
-            android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".views.ImageActivity"
