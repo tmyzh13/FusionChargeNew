@@ -82,11 +82,9 @@ public class SearchStationTitleActivity extends BaseActivity<HomeListView,HomeLi
         if (TextUtils.isEmpty(key) || TextUtils.isEmpty(key.trim())) {
             showToast(getString(R.string.input_can_not_be_null));
         } else {
-            //信息不为空保存数据
-            if (!StringUtils.isEmpty(key)) {
-                CachedSearchTitleUtils.addHistoryData(new CachedSearchTitleUtils.CachedData(key, key, key));
-                CachedSearchTitleUtils.saveHistoryData();
-            }
+            //保存搜索数据
+            CachedSearchTitleUtils.addHistoryData(new CachedSearchTitleUtils.CachedData(key, key, key));
+            CachedSearchTitleUtils.saveHistoryData();
             presenter.getDatas(key);
         }
     }
