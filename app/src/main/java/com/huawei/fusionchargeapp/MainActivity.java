@@ -305,14 +305,13 @@ public class MainActivity extends BaseActivity {
                         super.onLoadFailed(e, errorDrawable);
                         String path = PreferencesHelper.getData(Tools.USER_PHOTO_PATH);
                         if (!TextUtils.isEmpty(path)) {
-                            File file = new File(path);
-                            Glide.with(context).load(Uri.fromFile(file))
+                            //File file = new File(path);
+                            Glide.with(context).load(path)
                                     .error(R.mipmap.ic_launcher_round).into(iv_user_icon);
                         }
                     }
                 };
-                Glide.with(context).load(UserHelper.getSavedUser().photoUrl).error(R.mipmap.ic_launcher)
-                        .override(320, 320).into(target);
+                Glide.with(context).load(UserHelper.getSavedUser().photoUrl).into(target);
             }
 
             if(Tools.isNull(UserHelper.getSavedUser().name)){
