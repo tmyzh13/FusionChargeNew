@@ -82,6 +82,11 @@ public class SearchStationTitleActivity extends BaseActivity<HomeListView,HomeLi
         if (TextUtils.isEmpty(key) || TextUtils.isEmpty(key.trim())) {
             showToast(getString(R.string.input_can_not_be_null));
         } else {
+            //信息不为空保存数据
+            if (!StringUtils.isEmpty(key)) {
+                CachedSearchTitleUtils.addHistoryData(new CachedSearchTitleUtils.CachedData(key, key, key));
+                CachedSearchTitleUtils.saveHistoryData();
+            }
             presenter.getDatas(key);
         }
     }
@@ -91,12 +96,6 @@ public class SearchStationTitleActivity extends BaseActivity<HomeListView,HomeLi
             ToastMgr.show(getString(R.string.no_search_station));
             adapter.resetShowHistoryData();
             return;
-        }
-        //搜索成功，且信息不为空保存数据
-        String key=tvSearchContent.getText().toString();
-        if (!StringUtils.isEmpty(key)) {
-            CachedSearchTitleUtils.addHistoryData(new CachedSearchTitleUtils.CachedData(key, key, key));
-            CachedSearchTitleUtils.saveHistoryData();
         }
 
         adapter.setResultData(list);
