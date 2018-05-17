@@ -44,7 +44,7 @@ public class UserInfoPresenter extends BasePresenter<UserInfoView> {
      * 获取用户信息请求
      */
     public void doGetUserInfoRequest() {
-        api.getUserInfo(PreferencesHelper.getData("token"))
+        api.getUserInfo(UserHelper.getSavedUser().token)
                 .compose(new ResponseTransformer<>(this.<BaseData<UserInfoBean>>bindUntilEvent(ActivityEvent.DESTROY)))
                 .subscribe(new ResponseSubscriber<BaseData<UserInfoBean>>(view) {
                     @Override
