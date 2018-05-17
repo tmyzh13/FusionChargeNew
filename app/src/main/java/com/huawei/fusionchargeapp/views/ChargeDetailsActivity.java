@@ -281,7 +281,7 @@ public class ChargeDetailsActivity extends BaseActivity {
             mAdapter = new ChargePileTypeAdapter(getSupportFragmentManager(),chargeStationDetailBean,feeList);
             myViewPager.setAdapter(mAdapter);
 
-            chosePicture();
+            choicePosition();
         }
     }
 
