@@ -21,13 +21,6 @@
         android:divider="@color/transparent"
         ></ListView>
 
-    <TextView
-        style="@style/text_normal"
-        android:text="@string/tao_can_hint"
-        android:textSize="@dimen/text_small"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="15dp"
-        android:textColor="@color/text_light"
-        />
+
 
 </LinearLayout>

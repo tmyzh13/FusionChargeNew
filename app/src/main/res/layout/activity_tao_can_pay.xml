@@ -50,7 +50,6 @@
                         style="@style/text_normal"
                         android:textColor="@color/red"
                         android:id="@+id/tv_total_fee"
-                        android:text="200"
                         />
                     <TextView
                         style="@style/text_normal"

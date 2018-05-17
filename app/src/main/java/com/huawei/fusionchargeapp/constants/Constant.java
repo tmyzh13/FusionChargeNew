@@ -10,7 +10,14 @@ public class Constant {
 
     //默认筛选距离 这里测试设置500
     public static final double DEFAULT_DISTANCE=10000;
-
+//    condition.x1=73;
+//    condition.x2=135;
+//    condition.y1=10;
+//    condition.y2=50;
+    public static final double X1=73;
+    public static final double X2=135;
+    public static final double Y1=10;
+    public static final double Y2=50;
     //记住密码
     public static final String REMEMBER="remember";
 

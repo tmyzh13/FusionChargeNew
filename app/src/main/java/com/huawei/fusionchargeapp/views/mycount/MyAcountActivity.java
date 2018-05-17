@@ -67,4 +67,9 @@ public class MyAcountActivity extends BaseActivity {
     public void goInvoice(){
         startActivity(MyInvoiceActivity.getLauncher(context));
     }
+
+    @OnClick(R.id.rl_my_taocan)
+    public void goMyTaocan(){
+        startActivity(MyTaoCanActivity.getLauncher(context));
+    }
 }

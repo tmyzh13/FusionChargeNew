@@ -487,8 +487,23 @@
     <string name="vercode_incorrent">验证码错误。</string>
     <string name="register_fail">注册失败。</string>
     <string name="w3Account">工号：</string>
+
+
+    <!--我的套餐-->
+    <string name="my_tao_can">我的套餐</string>
+    <string name="my_tao_can_limit">限制\n电量</string>
+    <string name="my_tao_can_surplus">剩余套餐:</string>
+    <string name="my_tao_can_end_time">到期时间:</string>
+    <string name="my_tao_can_buy_time">购买时间:</string>
+    <string name="my_tao_can_hint">套餐费用￥</string>
+    <string name="my_tao_can_hint1">有效期:购买日期起一个月内</string>
+    <string name="my_tao_can_hint2">有效期:购买日期起一年内</string>
+    <string name="my_tao_can_electronic">电量</string>
+    <string name="my_tao_can_month">当月使用</string>
+    <string name="my_tao_can_unlimit">无限</string>
+    <string name="my_tao_can_unlimit_1">无限量</string>
     <string name="password_can_not_null">密码不能为空</string>
     <string name="reset_password_mismatch">密码长度必须介于6~12位，密码至少包含（数字，字母，特殊字符）3类字符，且不能包含空格</string>
     <string name="regist_password_mismatch">密码长度必须介于6~12位，密码至少包含（数字，字母，特殊字符）3类字符</string>
-    
+
 </resources>

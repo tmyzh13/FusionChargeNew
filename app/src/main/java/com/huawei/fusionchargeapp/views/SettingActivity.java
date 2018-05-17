@@ -42,7 +42,7 @@ public class SettingActivity extends BaseActivity<SettingView, SettingPresenter>
 
     private boolean hasNewVersion = false;
 
-    public static Intent startActivity(Context context) {
+    public static Intent getLauncher(Context context) {
         Intent intent = new Intent(context, SettingActivity.class);
         return intent;
     }
@@ -132,7 +132,7 @@ public class SettingActivity extends BaseActivity<SettingView, SettingPresenter>
     }
 
     @OnClick(R.id.tv_about_us)
-    void goAboutUs(){
+    public void goAboutUs(){
         startActivity(new Intent(SettingActivity.this,AboutUsActivity.class));
     }
 
@@ -140,7 +140,6 @@ public class SettingActivity extends BaseActivity<SettingView, SettingPresenter>
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.e("yzh","ondestroy--");
     }
 
     @Override

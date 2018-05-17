@@ -1,6 +1,7 @@
 package com.huawei.fusionchargeapp.views;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.EditText;
 
 import com.corelibs.base.BaseActivity;

@@ -14,20 +14,26 @@ import com.corelibs.views.NoScrollingListView;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.adapters.PayStyleAdpter;
 import com.huawei.fusionchargeapp.model.UserHelper;
+import com.huawei.fusionchargeapp.model.beans.PayInfoBean;
 import com.huawei.fusionchargeapp.model.beans.PayStyleBean;
 import com.huawei.fusionchargeapp.model.beans.UserBean;
+import com.huawei.fusionchargeapp.presenter.PayPresenter;
+import com.huawei.fusionchargeapp.presenter.TaocanPayPresenter;
+import com.huawei.fusionchargeapp.views.interfaces.PayView;
+import com.huawei.fusionchargeapp.views.interfaces.TaoCanPayView;
 import com.huawei.fusionchargeapp.weights.NavBar;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 /**
  * Created by john on 2018/5/8.
  */
 
-public class TaoCanPayActivity extends BaseActivity {
+public class TaoCanPayActivity extends BaseActivity<TaoCanPayView,TaocanPayPresenter> implements TaoCanPayView {
 
     @Bind(R.id.nav)
     NavBar nav;
@@ -39,8 +45,13 @@ public class TaoCanPayActivity extends BaseActivity {
     private Context context=TaoCanPayActivity.this;
     private PayStyleAdpter adapter;
     private List<PayStyleBean> list;
-    public static Intent getLauncher(Context context){
+    private int appBussinessId;
+    private double totalFee;
+
+    public static Intent getLauncher(Context context,int appBussinessId,double totalFee){
         Intent intent=new Intent(context,TaoCanPayActivity.class);
+        intent.putExtra("id",appBussinessId);
+        intent.putExtra("total",totalFee);
         return intent;
     }
 
@@ -59,6 +70,11 @@ public class TaoCanPayActivity extends BaseActivity {
     protected void init(Bundle savedInstanceState) {
         nav.setNavTitle(getString(R.string.pay));
         nav.setImageBackground(R.drawable.nan_bg);
+
+        appBussinessId=getIntent().getIntExtra("id",0);
+        totalFee=getIntent().getDoubleExtra("total",0);
+
+        tv_total_fee.setText(totalFee+"");
 
         adapter=new PayStyleAdpter(context);
         list =new ArrayList<>();
@@ -92,7 +108,20 @@ public class TaoCanPayActivity extends BaseActivity {
     }
 
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected TaocanPayPresenter createPresenter() {
+        return new TaocanPayPresenter();
+    }
+
+    @Override
+    public void paySuccess() {
+        finish();
+    }
+
+    @OnClick(R.id.tv_pay)
+    public void goPay(){
+        if(adapter.getCurrentPosition()==0){
+            //余额支付
+            presenter.payTaocan(appBussinessId,totalFee);
+        }
     }
 }

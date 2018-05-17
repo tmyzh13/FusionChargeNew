@@ -10,6 +10,8 @@ import com.corelibs.base.BasePresenter;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.adapter.TaoCanAdapter;
 import com.huawei.fusionchargeapp.model.beans.TaocanBean;
+import com.huawei.fusionchargeapp.presenter.MyTcPresenter;
+import com.huawei.fusionchargeapp.views.interfaces.MyTcView;
 import com.huawei.fusionchargeapp.weights.NavBar;
 
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ import butterknife.Bind;
  * Created by john on 2018/5/8.
  */
 
-public class MyTcActivity extends BaseActivity {
+public class MyTcActivity extends BaseActivity<MyTcView,MyTcPresenter> implements MyTcView  {
 
     @Bind(R.id.nav)
     NavBar nav;
@@ -54,15 +56,22 @@ public class MyTcActivity extends BaseActivity {
 
         adapter=new TaoCanAdapter(context);
         listView.setAdapter(adapter);
-        List<TaocanBean> list =new ArrayList<>();
-        TaocanBean taocanBean =new TaocanBean();
-        list.add(taocanBean);
-        list.add(taocanBean);
-        adapter.replaceAll(list);
+//        List<TaocanBean> list =new ArrayList<>();
+//        TaocanBean taocanBean =new TaocanBean();
+//        list.add(taocanBean);
+//        list.add(taocanBean);
+//        adapter.replaceAll(list);
+
+        presenter.getTaocan();
     }
 
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected MyTcPresenter createPresenter() {
+        return new MyTcPresenter();
+    }
+
+    @Override
+    public void renderTaocanDatas(List<TaocanBean> list) {
+        adapter.replaceAll(list);
     }
 }

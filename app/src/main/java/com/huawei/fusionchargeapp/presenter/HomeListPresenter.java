@@ -6,11 +6,14 @@ import com.corelibs.api.ApiFactory;
 import com.corelibs.api.ResponseTransformer;
 import com.corelibs.base.BasePresenter;
 import com.corelibs.subscriber.ResponseSubscriber;
+import com.corelibs.utils.PreferencesHelper;
+import com.huawei.fusionchargeapp.constants.Constant;
 import com.huawei.fusionchargeapp.model.apis.MapApi;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
 import com.huawei.fusionchargeapp.model.beans.Condition;
 import com.huawei.fusionchargeapp.model.beans.Condition0;
 import com.huawei.fusionchargeapp.model.beans.MapDataBean;
+import com.huawei.fusionchargeapp.model.beans.MyLocationBean;
 import com.huawei.fusionchargeapp.model.beans.SearchCondition;
 import com.huawei.fusionchargeapp.utils.ChoiceManager;
 import com.huawei.fusionchargeapp.views.interfaces.HomeListView;
@@ -58,10 +61,20 @@ public class HomeListPresenter extends BasePresenter<HomeListView> {
         }
         Condition0 condition=new Condition0();
         condition.workStatus=ChoiceManager.getInstance().getStatue();
-        condition.x1=100;
-        condition.x2=200;
-        condition.y1=30;
-        condition.y2=40;
+        MyLocationBean bean = PreferencesHelper.getData(MyLocationBean.class);
+        if(bean != null) {
+
+            condition.x1=bean.longtitude-1;
+            condition.x2=bean.longtitude+1;
+            condition.y1=bean.latitude-1;
+            condition.y2=bean.latitude+1;
+        }else{
+            condition.x1= Constant.X1;
+            condition.x2=Constant.X2;
+            condition.y1=Constant.Y1;
+            condition.y2=Constant.Y2;
+        }
+
         condition.selectType=3;
         api.getMapDatas0(condition)
                 .compose(new ResponseTransformer<>(this.<BaseData<List<MapDataBean>>>bindUntilEvent(ActivityEvent.DESTROY)))
@@ -75,10 +88,19 @@ public class HomeListPresenter extends BasePresenter<HomeListView> {
 
     public void getDatas(String stationName){
         SearchCondition condition = new SearchCondition();
-        condition.x1=100;
-        condition.x2=200;
-        condition.y1=30;
-        condition.y2=40;
+        MyLocationBean bean = PreferencesHelper.getData(MyLocationBean.class);
+        if(bean != null) {
+            condition.x1=bean.longtitude-1;
+            condition.x2=bean.longtitude+1;
+            condition.y1=bean.latitude-1;
+            condition.y2=bean.latitude+1;
+        }else{
+            condition.x1=Constant.X1;
+            condition.x2=Constant.X2;
+            condition.y1=Constant.Y1;
+            condition.y2=Constant.Y2;
+        }
+
         condition.selectType = 3;
         condition.stationName =stationName;
         condition.pileName = stationName;
@@ -101,10 +123,20 @@ public class HomeListPresenter extends BasePresenter<HomeListView> {
         }
 
             condition.workStatus=ChoiceManager.getInstance().getStatue();
-        condition.x1=100;
-        condition.x2=200;
-        condition.y1=30;
-        condition.y2=40;
+        MyLocationBean bean = PreferencesHelper.getData(MyLocationBean.class);
+        if(bean != null) {
+
+            condition.x1=bean.longtitude-1;
+            condition.x2=bean.longtitude+1;
+            condition.y1=bean.latitude-1;
+            condition.y2=bean.latitude+1;
+        }else{
+            condition.x1=Constant.X1;
+            condition.x2=Constant.X2;
+            condition.y1=Constant.Y1;
+            condition.y2=Constant.Y2;
+        }
+
         condition.selectType=3;
         return condition;
     }

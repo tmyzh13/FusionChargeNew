@@ -26,8 +26,14 @@
             <TextView
                 style="@style/text_normal"
                 android:textColor="@color/white"
-                android:textSize="18sp"
-                android:text="100度"
+                android:textSize="16sp"
+                android:id="@+id/tv_limit"
+                />
+            <TextView
+                style="@style/text_normal"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:text="@string/my_tao_can_unlimit"
                 />
             <TextView
                 style="@style/text_normal"
@@ -36,30 +42,46 @@
                 android:textSize="@dimen/text_small"
                 />
         </LinearLayout>
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="15dp">
+            android:layout_marginLeft="15dp"
+            android:orientation="vertical">
             <TextView
                 style="@style/text_normal"
                 android:textSize="14sp"
                 android:textColor="@color/black"
                 android:text="@string/tao_can_electronic"
                 />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    style="@style/text_normal"
+                    android:textColor="@color/red"
+                    android:text="@string/my_tao_can_hint"
+                    android:layout_centerVertical="true"
+                    />
+                <TextView
+                    style="@style/text_normal"
+                    android:textColor="@color/red"
+                    android:id="@+id/tv_fee"/>
+            </LinearLayout>
             <TextView
-              style="@style/text_normal"
-                android:textColor="@color/red"
-                android:text="兑换需要话费￥100"
-                android:layout_centerVertical="true"
+                style="@style/text_normal"
+                android:id="@+id/tv_validate_date"
+                android:text="@string/my_tao_can_hint1"
                 />
             <TextView
                 style="@style/text_normal"
                 android:text="2018.02.19-2018.04.10"
-                android:layout_alignParentBottom="true"
+                android:id="@+id/tv_time"
                 />
 
             
-        </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
     <View
         android:layout_width="1dip"

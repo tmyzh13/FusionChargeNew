@@ -6,8 +6,10 @@ import com.corelibs.api.ApiFactory;
 import com.corelibs.api.ResponseTransformer;
 import com.corelibs.base.BasePresenter;
 import com.corelibs.subscriber.ResponseSubscriber;
+import com.corelibs.utils.PreferencesHelper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.huawei.fusionchargeapp.constants.Constant;
 import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.apis.MapApi;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
@@ -18,6 +20,7 @@ import com.huawei.fusionchargeapp.model.beans.HomeChargeOrderBean;
 import com.huawei.fusionchargeapp.model.beans.HomeOrderBean;
 import com.huawei.fusionchargeapp.model.beans.MapDataBean;
 import com.huawei.fusionchargeapp.model.beans.MapInfoBean;
+import com.huawei.fusionchargeapp.model.beans.MyLocationBean;
 import com.huawei.fusionchargeapp.model.beans.PileFeeBean;
 import com.huawei.fusionchargeapp.model.beans.ReportUserLocation;
 import com.huawei.fusionchargeapp.model.beans.RequesHomeMapInfo;
@@ -54,10 +57,20 @@ public class MapPresenter extends BasePresenter<MapHomeView> {
         Condition0 condition=new Condition0();
         condition.selectType=3;
         condition.workStatus=ChoiceManager.getInstance().getStatue();
-        condition.x1=100;
-        condition.x2=200;
-        condition.y1=30;
-        condition.y2=40;
+        MyLocationBean bean = PreferencesHelper.getData(MyLocationBean.class);
+        if(bean != null) {
+
+            condition.x1=bean.longtitude-1;
+            condition.x2=bean.longtitude+1;
+            condition.y1=bean.latitude-1;
+            condition.y2=bean.latitude+1;
+        }else{
+            condition.x1= Constant.X1;
+            condition.x2=Constant.X2;
+            condition.y1=Constant.Y1;
+            condition.y2=Constant.Y2;
+        }
+
         api.getMapDatas0(condition)
                 .compose(new ResponseTransformer<>(this.<BaseData<List<MapDataBean>>>bindUntilEvent(ActivityEvent.DESTROY)))
                 .subscribe(new ResponseSubscriber<BaseData<List<MapDataBean>>>(view) {
@@ -97,10 +110,20 @@ public class MapPresenter extends BasePresenter<MapHomeView> {
 
 //        condition.pileName="";
 //        condition.stationName="";
-        condition.x1=100;
-        condition.x2=200;
-        condition.y1=30;
-        condition.y2=40;
+        MyLocationBean bean = PreferencesHelper.getData(MyLocationBean.class);
+        if(bean != null) {
+
+            condition.x1=bean.longtitude-1;
+            condition.x2=bean.longtitude+1;
+            condition.y1=bean.latitude-1;
+            condition.y2=bean.latitude+1;
+        }else{
+            condition.x1=Constant.X1;
+            condition.x2=Constant.X2;
+            condition.y1=Constant.Y1;
+            condition.y2=Constant.Y2;
+        }
+
 //        condition.workStatus=1;
         api.getMapDatas(condition)
                 .compose(new ResponseTransformer<>(this.<BaseData<List<MapDataBean>>>bindUntilEvent(ActivityEvent.DESTROY)))

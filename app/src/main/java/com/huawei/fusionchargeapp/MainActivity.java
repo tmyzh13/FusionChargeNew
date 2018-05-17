@@ -329,27 +329,13 @@ public class MainActivity extends BaseActivity {
     @OnClick(R.id.ll_user_icon)
     public void gotoUserinfo() {
         startActivity(UserInfoActivity.startActivity(context));
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (drawerLayout.isDrawerOpen(main_left_drawer_layout)) {
-                    drawerLayout.closeDrawer(main_left_drawer_layout);
-                }
-            }
-        }, 500);
+
     }
 
     @OnClick(R.id.ll_setting)
     public void gotoSetting() {
-        startActivity(SettingActivity.startActivity(context));
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (drawerLayout.isDrawerOpen(main_left_drawer_layout)) {
-                    drawerLayout.closeDrawer(main_left_drawer_layout);
-                }
-            }
-        }, 500);
+        startActivity(SettingActivity.getLauncher(context));
+
     }
 
     @OnClick(R.id.iv_choice)
@@ -424,10 +410,10 @@ public class MainActivity extends BaseActivity {
         int type = 0;
         int statue = 0;
         if (cb_charge_direct.isChecked()) {
-            type = 1;
+            type = 2;
         }
         if (cb_charge_alternating.isChecked()) {
-            type = 2;
+            type = 1;
         }
         if (cb_charge_direct.isChecked() && cb_charge_alternating.isChecked()) {
             type = 3;

@@ -21,12 +21,12 @@ public class TaoCanAdapter extends QuickAdapter<TaocanBean> {
     }
 
     @Override
-    protected void convert(BaseAdapterHelper helper, TaocanBean item, int position) {
+    protected void convert(BaseAdapterHelper helper, final TaocanBean item, int position) {
         LinearLayout ll_pay=helper.getView(R.id.ll_pay);
         ll_pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(TaoCanPayActivity.getLauncher(context));
+                context.startActivity(TaoCanPayActivity.getLauncher(context,item.id,item.fee));
             }
         });
     }
