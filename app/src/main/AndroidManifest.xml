@@ -243,7 +243,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".views.UserInfoActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize"
+            android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="portrait" />
         <activity
             android:name=".views.SettingActivity"

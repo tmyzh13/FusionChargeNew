@@ -34,6 +34,8 @@
 
     <LinearLayout
         android:id="@+id/layout_nick"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         style="@style/item_layout_simple"
         android:background="@drawable/list_selector">
 
@@ -84,6 +86,8 @@
     <LinearLayout
         android:id="@+id/layout_email"
         style="@style/item_layout_simple"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:background="@drawable/list_selector">
 
         <TextView
@@ -132,6 +136,8 @@
     <LinearLayout
         android:id="@+id/layout_address"
         style="@style/item_layout_simple"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:background="@drawable/list_selector">
 
         <TextView
@@ -155,6 +161,8 @@
         />
     <LinearLayout
         android:id="@+id/layout_car_vin"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         style="@style/item_layout_simple"
         android:background="@drawable/list_selector">
 
