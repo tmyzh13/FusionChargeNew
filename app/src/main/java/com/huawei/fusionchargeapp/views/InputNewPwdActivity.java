@@ -63,7 +63,9 @@ public class InputNewPwdActivity extends BaseActivity<LoginView, LoginPresenter>
     public void actionSubmit() {
         newPwd1 = inputNewPwdEt.getText().toString().trim();
         newPwd2 = confirmPwdEt.getText().toString().trim();
-        if (Tools.isPwdRight(newPwd1)) {
+        if (Tools.isNull(newPwd1) || Tools.isNull(newPwd2)){
+            showHintDialog(getString(R.string.hint),getString(R.string.password_can_not_null));
+        } else if (Tools.isPwdRight(newPwd1) && Tools.isPwdRight(newPwd2)) {
             if (newPwd1.equals(newPwd2)) {
                 RestPwdRequestBean bean = new RestPwdRequestBean();
                 bean.phone = phone;
@@ -74,7 +76,7 @@ public class InputNewPwdActivity extends BaseActivity<LoginView, LoginPresenter>
                 showHintDialog(getString(R.string.hint),getString(R.string.pwd2_not_agumention));
             }
         }else {
-            showHintDialog(getString(R.string.hint),getString(R.string.regist_password_hint));
+            showHintDialog(getString(R.string.hint),getString(R.string.reset_password_mismatch));
         }
     }
 

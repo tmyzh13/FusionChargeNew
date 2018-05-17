@@ -487,4 +487,7 @@
     <string name="vercode_incorrent">验证码错误。</string>
     <string name="register_fail">注册失败。</string>
     <string name="w3Account">工号：</string>
+    <string name="password_can_not_null">密码不能为空</string>
+    <string name="reset_password_mismatch">密码长度必须介于6~12位，密码至少包含（数字，字母，特殊字符）3类字符，且不能包含空格</string>
+    
 </resources>
