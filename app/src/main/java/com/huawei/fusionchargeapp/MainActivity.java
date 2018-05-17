@@ -203,7 +203,6 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onDrawerOpened(View drawerView) {
-                Log.e("liutao","left="+drawerLayout.isDrawerOpen(main_left_drawer_layout)+",right="+drawerLayout.isDrawerOpen(main_right_drawer_layout));
                 if (drawerLayout.isDrawerOpen(main_left_drawer_layout)) {
                     ChoiceManager.getInstance().setDrawerStatus(true);
                     return;
@@ -238,7 +237,6 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onDrawerClosed(View drawerView) {
-                Log.e("liutao","left="+drawerLayout.isDrawerOpen(main_left_drawer_layout)+",right="+drawerLayout.isDrawerOpen(main_right_drawer_layout));
                 if (!drawerLayout.isDrawerOpen(main_left_drawer_layout)) {
                     ChoiceManager.getInstance().setDrawerStatus(false);
                 }
@@ -559,6 +557,8 @@ public class MainActivity extends BaseActivity {
             }
             return;
         }
+        //如果需要登录，则登录后不需要打开左侧状态栏
+        ChoiceManager.getInstance().setDrawerStatus(false);
 
         Intent intent = getIntent();
         if(intent == null) return;
