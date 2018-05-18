@@ -159,6 +159,9 @@
                     android:id="@+id/tv_map_info_address"
                     style="@style/text_normal"
                     android:text="南京市雨花台区花神大道117号"
+                    android:layout_marginRight="70dp"
+                    android:singleLine="true"
+                    android:ellipsize="end"
                     />
                 <TextView
                     android:layout_alignParentRight="true"

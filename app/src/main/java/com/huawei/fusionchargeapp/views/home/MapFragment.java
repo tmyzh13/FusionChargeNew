@@ -8,6 +8,7 @@ import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -163,6 +164,8 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
         UiSettings uiSettings = aMap.getUiSettings();
         // 去掉缩放按钮==
         uiSettings.setZoomControlsEnabled(false);
+        //去掉地图手势
+        uiSettings.setRotateGesturesEnabled(false);
 //        uiSettings.setMyLocationButtonEnabled(true);
         aMap.setOnMapClickListener(new AMap.OnMapClickListener() {
             @Override
@@ -387,6 +390,9 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                 .fromView(imageView);
         myLocationStyle.myLocationIcon(markerIcon);
         myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE_NO_CENTER);//连续定位、蓝点不会移动到地图中心点，地图依照设备方向旋转，并且蓝点会跟随设备移动。
+        //让定位点周围的圈显示不出来
+        myLocationStyle.strokeColor(Color.argb(0, 0, 0, 0));// 设置圆形的边框颜色
+        myLocationStyle.radiusFillColor(Color.argb(0, 0, 0, 0));// 设置圆形的填充颜色
         aMap.setMyLocationStyle(myLocationStyle);
         //移动时 不让地图到定位点
         aMap.setOnMapTouchListener(this);

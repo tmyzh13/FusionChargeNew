@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.huawei.fusionchargeapp"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -68,6 +68,7 @@ dependencies {
     implementation 'com.lzy.widget:imagepicker:0.6.1'
     //        compile(name: 'lark-runtime-3.1.9', ext: 'aar')
     implementation files('libs/hwmap-0.4.0.jar')
+    compile(name:'gisnavisdk', ext:'aar')
 }
 
 configurations.all {

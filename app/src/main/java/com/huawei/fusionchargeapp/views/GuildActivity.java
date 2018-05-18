@@ -261,6 +261,7 @@ public class GuildActivity extends BaseActivity<GuaildView, GuaildPresenter> imp
             UiSettings uiSettings = aMap.getUiSettings();
             // 去掉缩放按钮==
             uiSettings.setZoomControlsEnabled(false);
+            uiSettings.setRotateGesturesEnabled(false);
         }
         mRouteSearch = new RouteSearch(this);
         mRouteSearch.setRouteSearchListener(this);
@@ -471,7 +472,7 @@ public class GuildActivity extends BaseActivity<GuaildView, GuaildPresenter> imp
                                     @Override
                                     public void onClick(View v) {
                                         nearTargetDialog.dismiss();
-                                        startActivity(ParkActivity.getLauncher(context, zoneId));
+                                        startActivity(ParkActivity.getLauncher(context, zoneId,endLatitude,endLongitude));
                                         finish();
                                     }
                                 });

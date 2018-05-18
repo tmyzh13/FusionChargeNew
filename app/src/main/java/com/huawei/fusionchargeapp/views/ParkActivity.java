@@ -18,7 +18,9 @@ import com.corelibs.base.BaseActivity;
 import com.corelibs.base.BasePresenter;
 import com.corelibs.subscriber.RxBusSubscriber;
 import com.corelibs.utils.PreferencesHelper;
+import com.corelibs.utils.ToastMgr;
 import com.corelibs.utils.rxbus.RxBus;
+import com.google.gson.Gson;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.constants.Constant;
@@ -28,12 +30,15 @@ import com.huawei.fusionchargeapp.model.beans.MapDataBean;
 import com.huawei.fusionchargeapp.model.beans.MapInfoBean;
 import com.huawei.fusionchargeapp.model.beans.MyLocationBean;
 import com.huawei.fusionchargeapp.model.beans.PileFeeBean;
+import com.huawei.fusionchargeapp.model.beans.RouteBean;
 import com.huawei.fusionchargeapp.model.beans.ZoneStationBean;
 import com.huawei.fusionchargeapp.presenter.ParkPresenter;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.interfaces.ParkView;
 import com.huawei.fusionchargeapp.weights.ChargeFeeDialog;
 import com.huawei.fusionchargeapp.weights.NavBar;
+import com.huawei.gis.locsdk.gisnavisdk.GisNaviClient;
+import com.huawei.gis.locsdk.gisnavisdk.PointEntity;
 import com.huawei.map.mapapi.CameraUpdate;
 import com.huawei.map.mapapi.CameraUpdateFactory;
 import com.huawei.map.mapapi.HWMap;
@@ -43,7 +48,9 @@ import com.huawei.map.mapapi.model.CameraPosition;
 import com.huawei.map.mapapi.model.LatLng;
 import com.huawei.map.mapapi.model.Marker;
 import com.huawei.map.mapapi.model.MarkerOptions;
+import com.huawei.map.mapapi.model.NavilineOptions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -53,7 +60,7 @@ import butterknife.OnClick;
  * Created by issuser on 2018/4/24.
  */
 
-public class ParkActivity extends BaseActivity<ParkView, ParkPresenter> implements ParkView {
+public class ParkActivity extends BaseActivity<ParkView, ParkPresenter> implements ParkView, GisNaviClient.IGetNaviResult {
 
     @Bind(R.id.nav)
     NavBar navBar;
@@ -92,11 +99,15 @@ public class ParkActivity extends BaseActivity<ParkView, ParkPresenter> implemen
     private static final String OUTDOOR_URL = "http://api-beta.hwmap.cn/NaviModePullMapServer/V1.1.0?tileid={z},{x},{y}&apikey=5ca3029553574cbb83a170bece7a5daa&c=1.0.1";
     private static final String INDOOR_URL = "http://api-beta.hwmap.cn/pullmap/indoor/drive/V1?indoorid={x}&c=1.0.1";
     private static final String LAYER_URl = "http://114.115.148.209:8080/geowebcache/service/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&FORMAT=image%2Fpng&TRANSPARENT=true&LAYERS=MapServerB&MAPNAME=MapServer&WIDTH=256&HEIGHT=256&SRS=EPSG%3A3857&STYLES=&BBOX={MnX},{MnY},{MxX},{MxY}";
+    private double endlatitude;
+    private double endlongitude;
+    private GisNaviClient gisNaviClient;
 
-
-    public static Intent getLauncher(Context context, long id) {
+    public static Intent getLauncher(Context context, long id,double endlatitude,double endlongitude) {
         Intent intent = new Intent(context, ParkActivity.class);
         intent.putExtra("id", id);
+        intent.putExtra("la",endlatitude);
+        intent.putExtra("ln",endlongitude);
         return intent;
     }
 
@@ -111,6 +122,9 @@ public class ParkActivity extends BaseActivity<ParkView, ParkPresenter> implemen
         navBar.setImageBackground(R.drawable.nan_bg);
 
         zoneId = getIntent().getLongExtra("id", 0);
+        endlatitude=getIntent().getDoubleExtra("la",0);
+        endlongitude=getIntent().getDoubleExtra("ln",0);
+
         mapView.onCreate(savedInstanceState);
         mIMapImpl = mapView.getMap();
         mIMapImpl.getUiSettings().setZoomControlsEnabled(false);
@@ -169,6 +183,17 @@ public class ParkActivity extends BaseActivity<ParkView, ParkPresenter> implemen
                                 locationMark = mIMapImpl.addMarker(new MarkerOptions()
                                         .position(new LatLng(data.latitude, data.longtitude)).title("location").icon(com.huawei.map.mapapi.model.BitmapDescriptorFactory.fromBitmap(BitmapFactory
                                                 .decodeResource(getResources(), R.mipmap.location))));
+                                //删除之前的路线重新获取
+                                mIMapImpl.getInnerMap().deleteAllNavilines();
+                                PointEntity startPoint =new PointEntity();
+                                startPoint.setLat(data.latitude);
+                                startPoint.setLon(data.longtitude);
+                                startPoint.setFloorid("");
+                                PointEntity endPoint=new PointEntity();
+                                endPoint.setLat(endlatitude);
+                                endPoint.setLon(endlongitude);
+                                endPoint.setFloorid("");
+                                gisNaviClient.startGisNavi(startPoint,endPoint,null);
                             }
                         } else {
                             locationMark = mIMapImpl.addMarker(new MarkerOptions()
@@ -178,6 +203,8 @@ public class ParkActivity extends BaseActivity<ParkView, ParkPresenter> implemen
 
                     }
                 });
+
+        gisNaviClient=new GisNaviClient(this,this);
     }
 
     @Override
@@ -261,6 +288,15 @@ public class ParkActivity extends BaseActivity<ParkView, ParkPresenter> implemen
             locationMark = mIMapImpl.addMarker(new MarkerOptions()
                     .position(new LatLng(locationBean.latitude, locationBean.longtitude)).title("location").icon(com.huawei.map.mapapi.model.BitmapDescriptorFactory.fromBitmap(BitmapFactory
                             .decodeResource(getResources(), R.mipmap.location))));
+            PointEntity startPoint =new PointEntity();
+            startPoint.setLat(locationBean.latitude);
+            startPoint.setLon(locationBean.longtitude);
+            startPoint.setFloorid("");
+            PointEntity endPoint=new PointEntity();
+            endPoint.setLat(endlatitude);
+            endPoint.setLon(endlongitude);
+            endPoint.setFloorid("");
+            gisNaviClient.startGisNavi(startPoint,endPoint,null);
         }
 
 
@@ -360,6 +396,46 @@ public class ParkActivity extends BaseActivity<ParkView, ParkPresenter> implemen
             startActivity(LoginActivity.getLauncher(context));
         } else {
             startActivity(ChargeDetailsActivity.getLauncher(context, currentMapDataBean.id + "", currentMapDataBean.type));
+        }
+    }
+
+    @Override
+    public void OnNaviSuccess(String s) {
+        RouteBean bean=new Gson().fromJson(s, RouteBean.class);
+        if(bean.ishasRute){
+            List<List<Double>> outData=bean.points16.outData;
+            List<List<Double>> parkData=bean.points16.parkData.get(0);
+            ArrayList<LatLng> latLngs0 = new ArrayList<>();
+            for(int i=0;i<outData.size();i++){
+                latLngs0.add(new LatLng(outData.get(i).get(1), outData.get(i).get(0)));
+            }
+
+            ArrayList<LatLng> latLngs1=new ArrayList<>();
+            for(int i=0;i<parkData.size();i++){
+                latLngs1.add(new LatLng(parkData.get(i).get(1), parkData.get(i).get(0)));
+            }
+
+            List<List<LatLng>> lists = new ArrayList<List<LatLng>>();
+            lists.add(latLngs0);//第一条线
+            lists.add(latLngs1);
+            NavilineOptions option = new NavilineOptions()
+                    .latLngsList(lists)//线集合
+//                    .status(0, 1)//第一条线的样式
+//                    .status(1, 2)//第二条线的样式
+//                    .status(2, 3)//第三条线的样式
+                    .naviType(0)//导航线的类型
+                    .scene(1)//当前的导航场景
+                    .hybrid(-1)//当前导航多段线组合方式
+                    .subwayType(-1)// 设置地铁对应的ID,非地铁传-1
+                    .selected(false);//当前线是否被选中
+            long naviid = mIMapImpl.getInnerMap().addNaviline(option);
+        }
+    }
+
+    @Override
+    public void OnNaviFailed(int i, String s) {
+        if(Tools.isNull(s)){
+            ToastMgr.show(s);
         }
     }
 }
