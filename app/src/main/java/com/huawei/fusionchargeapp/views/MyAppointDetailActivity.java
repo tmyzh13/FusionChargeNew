@@ -41,8 +41,11 @@ import com.huawei.fusionchargeapp.views.interfaces.AllAppointmentView;
 import com.huawei.fusionchargeapp.weights.NavBar;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
@@ -71,6 +74,7 @@ public class MyAppointDetailActivity extends BaseActivity<AllAppointmentView,All
     private int page = PAGE_FIRST_NUM;
     private static final int PAGE_LIMIT_NUM = 10;
     private String startTime,endTime;
+    private DatePicker start_time,end_time;
 
     @Override
     public void goLogin() {
@@ -106,9 +110,27 @@ public class MyAppointDetailActivity extends BaseActivity<AllAppointmentView,All
     public void onDateChanged(DatePicker datePicker, int i, int i1, int i2) {
         if (datePicker.getId() == R.id.start_time) {
             startTime = getTimeFromYMD(i,i1,i2);
+            if (end_time != null){
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    Date date = sdf.parse(startTime);
+                    end_time.setMinDate(date.getTime());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         if (datePicker.getId() == R.id.end_time) {
             endTime = getTimeFromYMD(i,i1,i2);
+            if (start_time != null){
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    Date date = sdf.parse(endTime);
+                    start_time.setMaxDate(date.getTime());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -165,7 +187,6 @@ public class MyAppointDetailActivity extends BaseActivity<AllAppointmentView,All
     @OnClick(R.id.tv_appointment)
     void doAppointmentFind(){
         View popupView = LayoutInflater.from(MyAppointDetailActivity.this).inflate(R.layout.double_date_picker,null);
-        DatePicker start_time,end_time;
         TextView tv_ok;
         start_time = (DatePicker) popupView.findViewById(R.id.start_time);
         end_time = (DatePicker) popupView.findViewById(R.id.end_time);
