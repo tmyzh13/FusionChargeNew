@@ -35,6 +35,7 @@ public class AboutUsActivity extends BaseActivity{
 
     @Override
     protected void init(Bundle savedInstanceState) {
+        
         bar.setColorRes(R.color.app_blue);
         bar.setNavTitle(getString(R.string.activity_about_us));
         version_name.setText(Tools.getVersionName(this));
