@@ -6,8 +6,8 @@ package com.huawei.fusionchargeapp.constants;
  */
 
 public class Urls {
-
-
+ 
+   
     //        public static final String ROOT="http://114.115.169.46:8088/charger/api/v1/";//菊
 ////    public static final String ROOT="http://10.40.143.67:8088/charger/api/v1/";//李凯
 //    public static final String ROOT="http://10.40.143.130:8088/charger/api/v1/";//胡明明
@@ -39,7 +39,6 @@ public class Urls {
     public static final String MODIFY_USER_INFO = "user/modifyUserInfo";
     //预约
     public static final String APPOINT_CHARGE = "charging/reserve";
-
     //首页地图和列表
     public static final String MAP_DATA = "appMap/search";
     //首页标记简介
