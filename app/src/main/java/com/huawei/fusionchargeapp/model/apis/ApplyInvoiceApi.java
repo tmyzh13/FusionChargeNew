@@ -14,6 +14,7 @@ import rx.Observable;
 
 public interface ApplyInvoiceApi {
 
+    
     @POST(Urls.APPLY_INVOICE)
     Observable<BaseData> applyInvoice(@Body RequestApplyInvoiceBean bean);
 }
