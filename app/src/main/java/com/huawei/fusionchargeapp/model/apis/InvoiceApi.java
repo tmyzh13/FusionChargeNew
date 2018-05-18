@@ -16,5 +16,5 @@ import rx.Observable;
 public interface InvoiceApi {
 
     @POST(Urls.INVOICE_RECHARGE_LIST)
-    Observable<InvoiceConsumeResultBean> getInvoiceConsume(@Body InvoiceConsumeRequestBean bean);
+    Observable<InvoiceConsumeResultBean> getInvoiceConsume(@Header("AccessToken") String token,@Body InvoiceConsumeRequestBean bean);
 }

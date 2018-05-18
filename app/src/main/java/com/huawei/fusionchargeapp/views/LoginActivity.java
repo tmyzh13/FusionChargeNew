@@ -31,6 +31,7 @@ import com.huawei.fusionchargeapp.MainActivity;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.constants.Constant;
 import com.huawei.fusionchargeapp.presenter.LoginPresenter;
+import com.huawei.fusionchargeapp.utils.ChoiceManager;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.interfaces.ForgetPwdActivity;
 import com.huawei.fusionchargeapp.views.interfaces.LoginView;
@@ -189,6 +190,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     }
 
     private void initView() {
+        ChoiceManager.getInstance().setDrawerStatus(false);
         typeCodeLl.setVisibility(View.GONE);
         phoneIv.setOnClickListener(this);
         forgetPwdTv.setOnClickListener(this);

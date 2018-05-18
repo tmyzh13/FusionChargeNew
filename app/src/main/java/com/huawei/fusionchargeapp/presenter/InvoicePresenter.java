@@ -38,7 +38,7 @@ public class InvoicePresenter extends BasePresenter<InvoiceView> {
         bean.setCondition(UserHelper.getSavedUser().appUserId);
 //        bean.setCondition(16703L);//调试使用
 
-        api.getInvoiceConsume(bean)
+        api.getInvoiceConsume(UserHelper.getSavedUser().token,bean)
                 .compose(new ResponseTransformer<>(this.<InvoiceConsumeResultBean>bindUntilEvent(ActivityEvent.DESTROY)))
                 .subscribe(new ResponseSubscriber<InvoiceConsumeResultBean>(view) {
                     @Override
