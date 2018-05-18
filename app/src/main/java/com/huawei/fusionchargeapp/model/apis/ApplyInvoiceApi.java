@@ -15,7 +15,6 @@ import rx.Observable;
 
 public interface ApplyInvoiceApi {
 
-    
     @POST(Urls.APPLY_INVOICE)
     Observable<BaseData> applyInvoice(@Header("AccessToken") String token, @Body RequestApplyInvoiceBean bean);
 }
