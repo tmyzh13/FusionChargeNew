@@ -56,6 +56,7 @@ import com.huawei.fusionchargeapp.views.interfaces.UserInfoView;
 import com.huawei.fusionchargeapp.weights.NavBar;
 import com.huawei.fusionchargeapp.weights.UserHeadPhoteDialog;
 import com.huawei.fusionchargeapp.weights.UserSexDialog;
+import com.huawei.hae.mcloud.bundle.base.login.Login;
 import com.lzy.imagepicker.ImageDataSource;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
@@ -190,7 +191,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
 
     @Override
     public void goLogin() {
-
+        startActivity(LoginActivity.getLauncher(UserInfoActivity.this));
     }
 
     private void initImagePicker(){

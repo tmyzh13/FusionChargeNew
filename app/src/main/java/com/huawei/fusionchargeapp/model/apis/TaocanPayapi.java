@@ -5,6 +5,7 @@ import com.huawei.fusionchargeapp.model.beans.BaseData;
 import com.huawei.fusionchargeapp.model.beans.RequestPayTaocanBean;
 
 import retrofit2.http.Body;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import rx.Observable;
 
@@ -14,5 +15,5 @@ import rx.Observable;
 
 public interface TaocanPayapi {
     @POST(Urls.APP_TAO_CAN_PAY)
-    Observable<BaseData> payTaocan(@Body RequestPayTaocanBean bean);
+    Observable<BaseData> payTaocan(@Header("AccessToken") String token, @Body RequestPayTaocanBean bean);
 }

@@ -146,7 +146,7 @@
                     <TextView
                         style="@style/text_normal"
                         android:layout_width="80dp"
-                        android:text="@string/apply_invoice_money" />
+                        android:text="@string/apply_invoice_more_info" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -251,6 +251,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/ll_post"
                 android:orientation="vertical"
+                android:visibility="gone"
                 >
                 <TextView
                     style="@style/text_normal"

@@ -23,7 +23,7 @@ public class ChargerStatueBean {
     public String remainingTime;
     public String remainingTimeElectricity;
     public String serviceFee;
-    public String soc;
+    public double soc;
     public String virtualId;
 //    0失败1成功2检测中
     public int isStart;

@@ -491,15 +491,17 @@
 
     <!--我的套餐-->
     <string name="my_tao_can">我的套餐</string>
-    <string name="my_tao_can_limit">限制\n电量</string>
+    <string name="my_tao_can_limit">限制</string>
     <string name="my_tao_can_surplus">剩余套餐:</string>
     <string name="my_tao_can_end_time">到期时间:</string>
     <string name="my_tao_can_buy_time">购买时间:</string>
+    <string name="my_tao_can_charge">充电电量</string>
     <string name="my_tao_can_hint">套餐费用￥</string>
     <string name="my_tao_can_hint1">有效期:购买日期起一个月内</string>
     <string name="my_tao_can_hint2">有效期:购买日期起一年内</string>
     <string name="my_tao_can_electronic">电量</string>
     <string name="my_tao_can_month">当月使用</string>
+    <string name="my_tao_can_year">当年使用</string>
     <string name="my_tao_can_unlimit">无限</string>
     <string name="my_tao_can_unlimit_1">无限量</string>
     <string name="password_can_not_null">密码不能为空</string>
@@ -511,5 +513,8 @@
     <string name="least_charge_power">最少充电量为1度！</string>
     <string name="lease_charge_money">最少充电金额为1元！</string>
     <string name="lease_charge_time">最少充电时间为10分钟！</string>
+
+    <string name="invoice_company">企业发票</string>
+    <string name="invoice_people">个人发票</string>
 
 </resources>

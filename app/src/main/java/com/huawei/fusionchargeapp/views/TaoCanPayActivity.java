@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.corelibs.base.BaseActivity;
 import com.corelibs.base.BasePresenter;
+import com.corelibs.utils.ToastMgr;
 import com.corelibs.views.NoScrollingListView;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.adapters.PayStyleAdpter;
@@ -114,6 +115,7 @@ public class TaoCanPayActivity extends BaseActivity<TaoCanPayView,TaocanPayPrese
 
     @Override
     public void paySuccess() {
+        ToastMgr.show(getString(R.string.pay_success));
         finish();
     }
 

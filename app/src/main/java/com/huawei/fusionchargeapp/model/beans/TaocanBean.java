@@ -15,5 +15,6 @@ public class TaocanBean {
 //    packageType 0：包月 1：包电量 2：包年无限
 //    limitType 0：包电量 1：无限制
     public int packageType;
+    public int limitType;
 
 }

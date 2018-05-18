@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.corelibs.base.BaseActivity;
@@ -16,8 +17,14 @@ import com.corelibs.utils.ToastMgr;
 import com.corelibs.views.NoScrollingListView;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.adapters.InvoicePayAdapter;
+import com.huawei.fusionchargeapp.model.apis.ApplyInvoiceApi;
+import com.huawei.fusionchargeapp.model.beans.AppointResponseBean;
 import com.huawei.fusionchargeapp.model.beans.PayStyleBean;
+import com.huawei.fusionchargeapp.presenter.ApplyInvoicePresenter;
 import com.huawei.fusionchargeapp.utils.Tools;
+import com.huawei.fusionchargeapp.views.LoginActivity;
+import com.huawei.fusionchargeapp.views.interfaces.ApplyInvoiceView;
+import com.huawei.fusionchargeapp.views.interfaces.AppointView;
 import com.huawei.fusionchargeapp.weights.NavBar;
 import com.jakewharton.rxbinding.widget.RxTextView;
 
@@ -35,7 +42,7 @@ import rx.functions.Func6;
  * Created by john on 2018/5/7.
  */
 
-public class ApplyInvoiceActivity extends BaseActivity {
+public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyInvoicePresenter> implements ApplyInvoiceView{
 
     @Bind(R.id.nav)
     NavBar navBar;
@@ -59,10 +66,16 @@ public class ApplyInvoiceActivity extends BaseActivity {
     TextView tv_submit;
     @Bind(R.id.tv_more_info)
     TextView tv_more_info;
+    @Bind(R.id.rb_company)
+    RadioButton rb_company;
+    @Bind(R.id.rb_people)
+    RadioButton rb_people;
 
     private Context context=ApplyInvoiceActivity.this;
     private InvoicePayAdapter adapter;
-
+    private ArrayList<String> orderNums;
+    private double total;
+    private String moreContent="";
 
     public static Intent getLauncher(Context context){
         Intent intent =new Intent(context,ApplyInvoiceActivity.class);
@@ -71,7 +84,7 @@ public class ApplyInvoiceActivity extends BaseActivity {
 
     @Override
     public void goLogin() {
-
+        startActivity(LoginActivity.getLauncher(context));
     }
 
     @Override
@@ -83,6 +96,11 @@ public class ApplyInvoiceActivity extends BaseActivity {
     protected void init(Bundle savedInstanceState) {
         navBar.setNavTitle(getString(R.string.apply_invoice));
         navBar.setImageBackground(R.drawable.nan_bg);
+
+        total=getIntent().getDoubleExtra("selected_totaol_money",0);
+        orderNums=getIntent().getStringArrayListExtra("selected_order_num");
+
+        tv_invoice_money.setText(total+"");
 
         adapter=new InvoicePayAdapter(context);
         List<PayStyleBean> list =new ArrayList<>();
@@ -162,8 +180,8 @@ public class ApplyInvoiceActivity extends BaseActivity {
     }
 
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected ApplyInvoicePresenter createPresenter() {
+        return new ApplyInvoicePresenter();
     }
 
     @OnClick(R.id.ll_go_input)
@@ -183,15 +201,27 @@ public class ApplyInvoiceActivity extends BaseActivity {
             ToastMgr.show(getString(R.string.hint_input_right_email));
             return;
         }
-        finish();
+        String type="";
+        if(rb_company.isChecked()){
+            type=getString(R.string.invoice_company);
+        }else if(rb_people.isChecked()){
+            type=getString(R.string.invoice_people);
+        }
+        presenter.applyInvoice(orderNums,type,et_invoice_title.getText().toString(),
+                et_invoice_tax.getText().toString().trim(),et_invoice_connect.getText().toString().trim(),
+                total,moreContent,et_invoice_receive.getText().toString().trim(),et_invoice_connect.getText().toString().trim(),
+                et_invoice_address.getText().toString().trim(),et_invoice_email.getText().toString().trim());
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode==10){
             if(resultCode==100){
+                moreContent=data.getStringExtra("content");
                 tv_more_info.setText(data.getStringExtra("content"));
             }
         }
     }
+
+
 }

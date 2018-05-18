@@ -7,7 +7,9 @@ import android.os.Bundle;
 import com.corelibs.base.BaseActivity;
 import com.corelibs.base.BasePresenter;
 import com.huawei.fusionchargeapp.R;
+import com.huawei.fusionchargeapp.presenter.MyTaocanPresenter;
 import com.huawei.fusionchargeapp.views.LoginActivity;
+import com.huawei.fusionchargeapp.views.interfaces.MyTaocanView;
 import com.huawei.fusionchargeapp.weights.NavBar;
 
 import butterknife.Bind;
@@ -16,7 +18,7 @@ import butterknife.Bind;
  * Created by issuser on 2018/5/17.
  */
 
-public class MyTaoCanActivity extends BaseActivity {
+public class MyTaoCanActivity extends BaseActivity<MyTaocanView,MyTaocanPresenter> implements MyTaocanView {
 
     @Bind(R.id.nav)
     NavBar nav;
@@ -42,10 +44,11 @@ public class MyTaoCanActivity extends BaseActivity {
     protected void init(Bundle savedInstanceState) {
         nav.setNavTitle(getString(R.string.my_tao_can));
         nav.setImageBackground(R.drawable.nan_bg);
+        presenter.getMyTaoCan();
     }
 
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected MyTaocanPresenter createPresenter() {
+        return new MyTaocanPresenter();
     }
 }

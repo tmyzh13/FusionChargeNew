@@ -36,7 +36,7 @@ public class TaocanPayPresenter extends BasePresenter<TaoCanPayView> {
         bean.businessPackageId=businessPackageId;
         bean.totalFee=totalFee;
         bean.appUserId= UserHelper.getSavedUser().appUserId;
-        api.payTaocan(bean)
+        api.payTaocan(UserHelper.getSavedUser().token,bean)
                 .compose(new ResponseTransformer<>(this.<BaseData>bindUntilEvent(ActivityEvent.DESTROY)))
                 .subscribe(new ResponseSubscriber<BaseData>(view) {
                     @Override
