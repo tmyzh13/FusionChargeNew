@@ -137,4 +137,7 @@ public class Urls {
     //每个历史开票详情
     public static String INVOICE_HISTORY_ITEM = "invoice/getInvoiceDetail/";
 
+    //开票记录中相关的消费记录
+    public static final String INVOICE_HISTORY_ITEM_CONSUME = "invoice/getInvoiceBoundOrder/";
+
 }

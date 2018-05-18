@@ -13,7 +13,9 @@ import com.corelibs.views.ptr.loadmore.widget.AutoLoadMoreListView;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.adapter.InvoiceHistoryAdapter;
 import com.huawei.fusionchargeapp.model.UserHelper;
+import com.huawei.fusionchargeapp.model.beans.InvoiceConsumeBean;
 import com.huawei.fusionchargeapp.model.beans.InvoiceHistoryBean;
+import com.huawei.fusionchargeapp.model.beans.InvoiceHistoryItemBean;
 import com.huawei.fusionchargeapp.presenter.InvoiceHistoryPresenter;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.LoginActivity;
@@ -134,7 +136,15 @@ public class InvoiceHistoryActivity extends BaseActivity<InvoiceHistoryView,Invo
     }
 
     @Override
+    public void getInvoiceHistoryItem(InvoiceHistoryItemBean bean) {
+    }
+
+    @Override
     protected InvoiceHistoryPresenter createPresenter() {
         return new InvoiceHistoryPresenter();
+    }
+
+    @Override
+    public void getInvoiceHistoryConsume(List<InvoiceConsumeBean> bean) {
     }
 }

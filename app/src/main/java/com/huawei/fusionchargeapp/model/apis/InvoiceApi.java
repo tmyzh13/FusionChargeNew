@@ -1,9 +1,15 @@
 package com.huawei.fusionchargeapp.model.apis;
 
 import com.huawei.fusionchargeapp.constants.Urls;
+import com.huawei.fusionchargeapp.model.beans.BaseData;
+import com.huawei.fusionchargeapp.model.beans.InvoiceConsumeBean;
+import com.huawei.fusionchargeapp.model.beans.InvoiceConsumeRequest;
 import com.huawei.fusionchargeapp.model.beans.InvoiceConsumeRequestBean;
 import com.huawei.fusionchargeapp.model.beans.InvoiceConsumeResultBean;
+import com.huawei.fusionchargeapp.model.beans.InvoiceHistoryItemBean;
 import com.huawei.fusionchargeapp.model.beans.InvoiceHistoryResultBean;
+
+import java.util.List;
 
 import retrofit2.http.Body;
 import retrofit2.http.Header;
@@ -24,5 +30,8 @@ public interface InvoiceApi {
     Observable<InvoiceHistoryResultBean> getInvoiceHistory(@Header("AccessToken") String token, @Body InvoiceConsumeRequestBean bean);
 
     @POST
-    Observable<InvoiceHistoryResultBean> getInvoiceHistory(@Header("AccessToken") String token, @Url String url);
+    Observable<BaseData<InvoiceHistoryItemBean>> getInvoiceHistoryItem(@Header("AccessToken") String token, @Url String url);
+
+    @POST(Urls.INVOICE_HISTORY_ITEM_CONSUME)
+    Observable<BaseData<List<InvoiceConsumeBean>>> getInvoiceHistoryConsume(@Header("AccessToken") String token, @Body InvoiceConsumeRequest bean);
 }
