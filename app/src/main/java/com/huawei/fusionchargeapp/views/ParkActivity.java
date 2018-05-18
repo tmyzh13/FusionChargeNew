@@ -111,7 +111,6 @@ public class ParkActivity extends BaseActivity<ParkView, ParkPresenter> implemen
         navBar.setImageBackground(R.drawable.nan_bg);
 
         zoneId = getIntent().getLongExtra("id", 0);
-
         mapView.onCreate(savedInstanceState);
         mIMapImpl = mapView.getMap();
         mIMapImpl.getUiSettings().setZoomControlsEnabled(false);
