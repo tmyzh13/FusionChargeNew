@@ -64,6 +64,7 @@ import com.huawei.fusionchargeapp.utils.ActionControl;
 import com.huawei.fusionchargeapp.utils.ChoiceManager;
 import com.huawei.fusionchargeapp.utils.TimeServiceManager;
 import com.huawei.fusionchargeapp.utils.Tools;
+import com.huawei.fusionchargeapp.views.AppointmentChargeActivity;
 import com.huawei.fusionchargeapp.views.ChagerStatueActivity;
 import com.huawei.fusionchargeapp.views.ChargeCaptureActivity;
 import com.huawei.fusionchargeapp.views.ChargeDetailsActivity;
@@ -242,13 +243,14 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                                                 public void onClick(View v) {
                                                     appointmentTimeOutDialog.dismiss();
                                                 }
-                                            });
-                                            appointmentTimeOutDialog.setReAppointment(new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View v) {
-                                                    appointmentTimeOutDialog.dismiss();
-                                                }
-                                            });
+                                        });
+                                        appointmentTimeOutDialog.setReAppointment(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                appointmentTimeOutDialog.dismiss();
+                                                startActivity(new Intent(getActivity(),AppointmentChargeActivity.class));
+                                            }
+                                        });
                                         homeAppointmentBean = null;
                                         }
 //                                    }

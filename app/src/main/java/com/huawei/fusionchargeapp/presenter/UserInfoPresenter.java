@@ -71,7 +71,7 @@ public class UserInfoPresenter extends BasePresenter<UserInfoView> {
      * @param userInfoRequest
      */
     public void doModifyUserInfo(ModifyUserInfoRequestBean userInfoRequest) {
-        api.modifyUserInfo(PreferencesHelper.getData("token"),userInfoRequest)
+        api.modifyUserInfo(UserHelper.getSavedUser().token,userInfoRequest)
                 .compose(new ResponseTransformer<>(this.<BaseData<ResponseMessageBean>>bindUntilEvent(ActivityEvent.DESTROY)))
                 .subscribe(new ResponseSubscriber<BaseData<ResponseMessageBean>>(view) {
                     @Override

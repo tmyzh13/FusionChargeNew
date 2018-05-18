@@ -236,6 +236,7 @@ public class GuildActivity extends BaseActivity<GuaildView, GuaildPresenter> imp
                                         public void onClick(View v) {
                                             appointmentTimeOutDialog.dismiss();
                                             finish();
+                                            startActivity(new Intent(GuildActivity.this,AppointmentChargeActivity.class));
                                         }
                                     });
                                 }

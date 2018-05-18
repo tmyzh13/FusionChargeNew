@@ -9,7 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.corelibs.utils.PreferencesHelper;
 import com.huawei.fusionchargeapp.R;
+import com.huawei.fusionchargeapp.model.beans.AppointTimeOutBean;
 import com.huawei.fusionchargeapp.model.beans.GunList;
 import com.huawei.fusionchargeapp.model.beans.PileList;
 import com.huawei.fusionchargeapp.views.AppointmentChargeActivity;
@@ -99,6 +101,15 @@ public class ElectricGunAdapter extends BaseAdapter {
                 intent.putExtra("longitude",longitude);
                 intent.putExtra("address",address);
                 intent.putExtra("runCode",runCode);
+
+                AppointTimeOutBean bean = new AppointTimeOutBean();
+                bean.setGunCode(gunBean.getGunCode());
+                bean.setAddress(address);
+                bean.setChargingPileId(gunBean.getChargingPileId());
+                bean.setLatitude(latitude);
+                bean.setLongitude(longitude);
+                bean.setRunCode(runCode);
+                PreferencesHelper.saveData(bean);
                 context.startActivity(intent);
             }
         });

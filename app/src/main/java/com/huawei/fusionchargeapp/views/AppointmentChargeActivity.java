@@ -4,18 +4,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.corelibs.base.BaseActivity;
+import com.corelibs.utils.PreferencesHelper;
 import com.corelibs.utils.ToastMgr;
 import com.corelibs.utils.rxbus.RxBus;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.constants.Constant;
 import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.beans.AppointResponseBean;
+import com.huawei.fusionchargeapp.model.beans.AppointTimeOutBean;
 import com.huawei.fusionchargeapp.model.beans.UserBean;
 import com.huawei.fusionchargeapp.presenter.AppointPresenter;
 import com.huawei.fusionchargeapp.utils.ActionControl;
@@ -65,14 +68,29 @@ public class AppointmentChargeActivity extends BaseActivity<AppointView, Appoint
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        gunCode = getIntent().getStringExtra("gunCode");
-        chargingPileId = getIntent().getIntExtra("chargingPileId",0);
-        chargingPileName = getIntent().getStringExtra("chargingPileName");
-        runCode = getIntent().getStringExtra("runCode");
-        address = getIntent().getStringExtra("address");
 
-        latitude = getIntent().getDoubleExtra("latitude",0);
-        longitude = getIntent().getDoubleExtra("longitude",0);
+        AppointTimeOutBean timeOutBean = PreferencesHelper.getData(AppointTimeOutBean.class);
+        if(timeOutBean == null || TextUtils.isEmpty(timeOutBean.getGunCode())) {
+            gunCode = getIntent().getStringExtra("gunCode");
+            chargingPileId = getIntent().getIntExtra("chargingPileId",0);
+            chargingPileName = getIntent().getStringExtra("chargingPileName");
+            runCode = getIntent().getStringExtra("runCode");
+            address = getIntent().getStringExtra("address");
+
+            latitude = getIntent().getDoubleExtra("latitude",0);
+            longitude = getIntent().getDoubleExtra("longitude",0);
+        } else {
+            Log.e("zw","AppointmentChargeActivity : " + timeOutBean.toString());
+            gunCode = timeOutBean.getGunCode();
+            chargingPileId = timeOutBean.getChargingPileId();
+            chargingPileName = timeOutBean.getChargingPileName();
+            runCode = timeOutBean.getRunCode();
+            address = timeOutBean.getAddress();
+            latitude = timeOutBean.getLatitude();
+            longitude = timeOutBean.getLongitude();
+        }
+
+
 
         navBar.setColorRes(R.color.app_blue);
         navBar.setNavTitle(context.getString(R.string.appoint_charge));
