@@ -348,6 +348,12 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
     }
 
     @Override
+    protected void onDestroy() {
+        ChoiceManager.getInstance().setFromActivity(ChoiceManager.USER_INFO);
+        super.onDestroy();
+    }
+
+    @Override
     public void onUploadPhotoSuccess(String imgUrl) {
         if (!Tools.isNull(theNeedLoadImgPath)) {
             PreferencesHelper.saveData(Tools.USER_PHOTO_PATH,theNeedLoadImgPath);
