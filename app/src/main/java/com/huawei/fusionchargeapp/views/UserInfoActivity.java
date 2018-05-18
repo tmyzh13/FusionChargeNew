@@ -49,6 +49,7 @@ import com.huawei.fusionchargeapp.model.beans.ModifyUserInfoRequestBean;
 import com.huawei.fusionchargeapp.model.beans.UserBean;
 import com.huawei.fusionchargeapp.model.beans.UserInfoBean;
 import com.huawei.fusionchargeapp.presenter.UserInfoPresenter;
+import com.huawei.fusionchargeapp.utils.ChoiceManager;
 import com.huawei.fusionchargeapp.utils.GlideImageLoader;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.interfaces.UserInfoView;
@@ -338,7 +339,9 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
         UserHelper.saveUser(userBean);
         hideLoading();
         Toast.makeText(this, getString(R.string.user_info_modify_success), Toast.LENGTH_SHORT).show();
-        startActivity(MainActivity.getLauncher(UserInfoActivity.this));
+//        startActivity(MainActivity.getLauncher(UserInfoActivity.this));
+        ChoiceManager.getInstance().setFromActivity(ChoiceManager.USER_INFO);
+        finish();
         // 提交成功再请求获取用户信息接口
         //presenter.doGetUserInfoRequest();
     }

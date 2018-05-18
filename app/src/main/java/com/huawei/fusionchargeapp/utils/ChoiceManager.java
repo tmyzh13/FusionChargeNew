@@ -8,7 +8,7 @@ import com.huawei.fusionchargeapp.constants.Constant;
 
 public class ChoiceManager {
 
-    public static ChoiceManager instance;
+    private static ChoiceManager instance;
 
     // 方式空 1交流2直流3交直流一体
     private int type=0;
@@ -18,6 +18,9 @@ public class ChoiceManager {
     //默认为false;true为打开左侧栏
     private boolean drawerStatus = false;
     private double distance=Constant.DEFAULT_DISTANCE;
+
+    public static final int USER_INFO = 123;
+    private int fromActivity = -1;
 
     private ChoiceManager(){
 
@@ -66,5 +69,13 @@ public class ChoiceManager {
 
     public void setDrawerStatus(boolean drawerStatus) {
         this.drawerStatus = drawerStatus;
+    }
+
+    public void setFromActivity(int fromActivity) {
+        this.fromActivity = fromActivity;
+    }
+
+    public int getFromActivity(){
+        return this.fromActivity;
     }
 }

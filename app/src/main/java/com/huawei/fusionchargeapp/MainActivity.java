@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -322,7 +323,7 @@ public class MainActivity extends BaseActivity {
     @OnClick(R.id.ll_user_icon)
     public void gotoUserinfo() {
         startActivity(UserInfoActivity.startActivity(context));
-
+        drawerLayout.closeDrawer(main_left_drawer_layout);
     }
 
     @OnClick(R.id.ll_setting)
@@ -528,7 +529,11 @@ public class MainActivity extends BaseActivity {
     private void initOtherLogin() {
         if (UserHelper.getSavedUser() == null && drawerLayout.isDrawerOpen(main_left_drawer_layout)) {
             drawerLayout.closeDrawer(main_left_drawer_layout);
+        } else if(UserHelper.getSavedUser() != null
+                    && (ChoiceManager.getInstance().getFromActivity() == ChoiceManager.USER_INFO)) {
+            openLeft();
         }
+
         //如果没有登录，就去验证
         if(UserHelper.getSavedUser() != null ) {
             return;

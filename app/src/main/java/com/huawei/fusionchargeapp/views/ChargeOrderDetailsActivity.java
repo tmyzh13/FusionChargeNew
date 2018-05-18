@@ -283,7 +283,17 @@ public class ChargeOrderDetailsActivity extends BaseActivity<ChargeOrderDetailVi
                 String count = etChargeCount.getText().toString();
                 if (!TextUtils.isEmpty(count)) {
                     chargePowerCount = Integer.parseInt(count);
-                    if (chargePowerCount > 999 || chargePowerCount < 1) {
+                    if(chooseStyle == WITH_POWER && chargePowerCount < 1) {
+                        showToast(getString(R.string.least_charge_power));
+                        return;
+                    } else if(chooseStyle == WITH_MONEY && chargePowerCount < 1) {
+                        showToast(getString(R.string.lease_charge_money));
+                        return;
+                    } else if(chooseStyle == WITH_TIME && chargePowerCount < 10) {
+                        showToast(getString(R.string.lease_charge_time));
+                        return;
+                    }
+                    if (chargePowerCount > 999) {
                         ToastMgr.show(getString(R.string.please_enter_1_999_int));
                         return;
                     } else {

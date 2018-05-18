@@ -76,7 +76,6 @@ public class UserInfoPresenter extends BasePresenter<UserInfoView> {
                 .subscribe(new ResponseSubscriber<BaseData<ResponseMessageBean>>(view) {
                     @Override
                     public void success(BaseData<ResponseMessageBean> baseData) {
-
                         if (baseData.code == 0) {
                             view.onModifySuccess();
                         } else {
