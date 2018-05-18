@@ -7,4 +7,6 @@ import com.corelibs.base.BaseView;
  */
 
 public interface ApplyInvoiceView extends BaseView{
+    void applySuccess();
 }
+

@@ -224,4 +224,8 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
     }
 
 
+    @Override
+    public void applySuccess() {
+        finish();
+    }
 }

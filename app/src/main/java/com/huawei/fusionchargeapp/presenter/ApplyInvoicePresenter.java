@@ -9,6 +9,7 @@ import com.huawei.fusionchargeapp.model.apis.ApplyInvoiceApi;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
 import com.huawei.fusionchargeapp.model.beans.RequestApplyInvoiceBean;
 import com.huawei.fusionchargeapp.views.interfaces.ApplyInvoiceView;
+import com.huawei.hae.mcloud.bundle.base.login.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,12 +49,12 @@ public class ApplyInvoicePresenter  extends BasePresenter<ApplyInvoiceView> {
         bean.recAddr=recAddr;
         bean.email=email;
         view.showLoading();
-        api.applyInvoice(bean)
+        api.applyInvoice(UserHelper.getSavedUser().token,bean)
                 .compose(new ResponseTransformer(this.<BaseData>bindToLifeCycle()))
                 .subscribe(new ResponseSubscriber<BaseData>(view) {
                     @Override
                     public void success(BaseData baseData) {
-
+                        view.applySuccess();
                     }
                 });
     }

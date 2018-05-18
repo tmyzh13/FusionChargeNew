@@ -158,9 +158,10 @@
                         <TextView
                             style="@style/text_normal"
                             android:singleLine="true"
-                            android:text="@string/apply_invoice_more_info_hint"
+                            android:hint="@string/apply_invoice_more_info_hint"
                             android:textColor="@color/text_color_shallow"
                             android:ellipsize="end"
+                            android:gravity="right"
                             android:id="@+id/tv_more_info"/>
 
                         <ImageView

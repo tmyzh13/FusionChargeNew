@@ -5,6 +5,7 @@ import com.huawei.fusionchargeapp.model.beans.BaseData;
 import com.huawei.fusionchargeapp.model.beans.RequestApplyInvoiceBean;
 
 import retrofit2.http.Body;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import rx.Observable;
 
@@ -16,5 +17,5 @@ public interface ApplyInvoiceApi {
 
     
     @POST(Urls.APPLY_INVOICE)
-    Observable<BaseData> applyInvoice(@Body RequestApplyInvoiceBean bean);
+    Observable<BaseData> applyInvoice(@Header("AccessToken") String token, @Body RequestApplyInvoiceBean bean);
 }

@@ -175,6 +175,7 @@ public class ApplyOrderListActivity extends BaseActivity<InvoiceView,InvoicePres
         intent.putStringArrayListExtra(SELECTED_ORDER_NUM,adpter.getSelectedOrderNum());
         intent.putExtra(SELECTED_TOTOAL_MONEY,nowMoney);
         startActivity(intent);
+        finish();
     }
 
     private void setAdapterData(List<ApplyInvoiceBean> list){

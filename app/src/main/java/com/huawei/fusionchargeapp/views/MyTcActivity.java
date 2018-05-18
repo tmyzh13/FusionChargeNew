@@ -41,7 +41,7 @@ public class MyTcActivity extends BaseActivity<MyTcView,MyTcPresenter> implement
 
     @Override
     public void goLogin() {
-
+        startActivity(LoginActivity.getLauncher(context));
     }
 
     @Override
