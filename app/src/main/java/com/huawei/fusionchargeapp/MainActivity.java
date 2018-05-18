@@ -203,10 +203,6 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onDrawerOpened(View drawerView) {
-                if (drawerLayout.isDrawerOpen(main_left_drawer_layout)) {
-                    ChoiceManager.getInstance().setDrawerStatus(true);
-                    return;
-                }
                 if (ChoiceManager.getInstance().getType() == 3) {
                     cb_charge_alternating.setChecked(true);
                     cb_charge_direct.setChecked(true);
@@ -237,9 +233,6 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onDrawerClosed(View drawerView) {
-                if (!drawerLayout.isDrawerOpen(main_left_drawer_layout)) {
-                    ChoiceManager.getInstance().setDrawerStatus(false);
-                }
                 IMEUtil.closeIME(et_distance, context);
             }
 
@@ -533,26 +526,22 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initOtherLogin() {
-        Log.e("zw","11111111111111");
+        if (UserHelper.getSavedUser() == null && drawerLayout.isDrawerOpen(main_left_drawer_layout)) {
+            drawerLayout.closeDrawer(main_left_drawer_layout);
+        }
         //如果没有登录，就去验证
         if(UserHelper.getSavedUser() != null ) {
-            //如果已经登录，根据状态是否显示左侧抽屉
-            if (ChoiceManager.getInstance().isDrawerStatus()) {
-                openLeft();
-            }
             return;
         }
-        //如果需要登录，则登录后不需要打开左侧状态栏
-        ChoiceManager.getInstance().setDrawerStatus(false);
-        Log.e("zw","2222222222222222222222222");
+
         Intent intent = getIntent();
         if(intent == null) return;
-        Log.e("zw","333333333333333333333333");
+
         boolean isFromOtherApp = intent.getBooleanExtra(WelcomeActivity.IS_FROM_OTHER_APP,false);
         if(isFromOtherApp == false) return;
-        Log.e("zw","4444444444444444444444444");
+
         if(notNeedRegister) return;
-        Log.e("zw","5555555555555555555555555");
+
         if(!getLoadingDialog().isShowing()) {
             showLoading();
         }

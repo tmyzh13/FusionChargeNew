@@ -190,7 +190,6 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     }
 
     private void initView() {
-        ChoiceManager.getInstance().setDrawerStatus(false);
         typeCodeLl.setVisibility(View.GONE);
         phoneIv.setOnClickListener(this);
         forgetPwdTv.setOnClickListener(this);
