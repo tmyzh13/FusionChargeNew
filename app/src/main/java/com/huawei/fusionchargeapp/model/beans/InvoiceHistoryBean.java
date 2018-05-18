@@ -7,9 +7,7 @@ import java.util.List;
  */
 
 public class InvoiceHistoryBean {
-    public String time,status,sort,money;
-    public String receiveAddr,invoiceHead,invoiceContent;
-    public long taxNum;
-    public int invoiceNum,eleNum;
-    public List<ElectronicConsumeBean> eleList;
+    public String createTime,amount;
+    public int status;//1已开票，0未开票
+    public int id;
 }

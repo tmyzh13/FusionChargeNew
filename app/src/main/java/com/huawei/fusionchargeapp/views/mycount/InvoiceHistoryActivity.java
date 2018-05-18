@@ -12,7 +12,12 @@ import com.corelibs.views.ptr.layout.PtrAutoLoadMoreLayout;
 import com.corelibs.views.ptr.loadmore.widget.AutoLoadMoreListView;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.adapter.InvoiceHistoryAdapter;
+import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.beans.InvoiceHistoryBean;
+import com.huawei.fusionchargeapp.presenter.InvoiceHistoryPresenter;
+import com.huawei.fusionchargeapp.utils.Tools;
+import com.huawei.fusionchargeapp.views.LoginActivity;
+import com.huawei.fusionchargeapp.views.interfaces.InvoiceHistoryView;
 import com.huawei.fusionchargeapp.weights.NavBar;
 
 import java.util.ArrayList;
@@ -24,15 +29,18 @@ import butterknife.Bind;
  * Created by john on 2018/5/7.
  */
 
-public class InvoiceHistoryActivity extends BaseActivity {
+public class InvoiceHistoryActivity extends BaseActivity<InvoiceHistoryView,InvoiceHistoryPresenter> implements InvoiceHistoryView {
     @Bind(R.id.nav_bar)
     NavBar bar;
     @Bind(R.id.lv_order)
     AutoLoadMoreListView listView;
     @Bind(R.id.ptrLayout)
-    PtrAutoLoadMoreLayout ptyLayout;
+    PtrAutoLoadMoreLayout ptrLayout;
     private InvoiceHistoryAdapter adapter;
     private List<InvoiceHistoryBean> data = new ArrayList<>();
+    private static final int FIRST_PAGE = 1;
+    private int page = FIRST_PAGE;
+    public static final String ORDER_ID = "order_id";
 
     @Override
     public void goLogin() {
@@ -48,8 +56,6 @@ public class InvoiceHistoryActivity extends BaseActivity {
         bar.setNavTitle(getString(R.string.invoice_histroy));
         bar.setColorRes(R.color.blue);
 
-        //假数据
-        initFakeData();
 
         adapter  = new InvoiceHistoryAdapter(this,data);
         listView.setAdapter(adapter);
@@ -58,37 +64,77 @@ public class InvoiceHistoryActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //进入详细界面
                 Intent intent = new Intent(InvoiceHistoryActivity.this,InvoiceHistoryItemActivity.class);
+                intent.putExtra(ORDER_ID,adapter.getClickOrderId(i));
                 startActivity(intent);
             }
         });
-        ptyLayout.setRefreshLoadCallback(new PtrAutoLoadMoreLayout.RefreshLoadCallback() {
+        ptrLayout.setRefreshLoadCallback(new PtrAutoLoadMoreLayout.RefreshLoadCallback() {
             @Override
             public void onLoading(PtrFrameLayout frame) {
-
+                ptrLayout.enableLoading();
+                page ++;
+                presenter.getInvoiceConsume(page);
             }
 
             @Override
             public void onRefreshing(PtrFrameLayout frame) {
-
+                page = FIRST_PAGE;
+                ptrLayout.enableLoading();
+                if (!frame.isAutoRefresh()) {
+                    presenter.getInvoiceConsume(page);
+                }
             }
         });
-        ptyLayout.setCanRefresh(false);
-    }
 
-    private void initFakeData(){
-        InvoiceHistoryBean bean = new InvoiceHistoryBean();
-        bean.money = "48.5元";
-        bean.sort = "纸质发票 充电发票";
-        bean.status = "已开票";
-        bean.time = "2016-12-23 19:00:34";
-        data.add(bean);
-        data.add(bean);
-        data.add(bean);
-        data.add(bean);
+        if(UserHelper.getSavedUser()==null|| Tools.isNull(UserHelper.getSavedUser().token)){
+            startActivity(LoginActivity.getLauncher(this));
+            return;
+        }
+        showLoading();
+        presenter.getInvoiceConsume(page);
     }
 
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    public void onLoadingCompleted() {
+        hideLoading();
+    }
+
+    @Override
+    public void onAllPageLoaded() {
+        ptrLayout.disableLoading();
+    }
+
+    @Override
+    public void showLoading() {
+        ptrLayout.setRefreshing();
+    }
+
+    @Override
+    public void hideLoading() {
+        ptrLayout.complete();
+    }
+
+    @Override
+    public void getInvoiceHistory(List<InvoiceHistoryBean> bean) {
+        if (page == FIRST_PAGE) {
+            data = bean;
+        } else {
+            for (int i=0;i<bean.size();i++){
+                data.add(bean.get(i));
+            }
+        }
+        adapter.setData(data);
+    }
+
+    @Override
+    public void getInvoiceConsumeFailed() {
+        if (page > FIRST_PAGE) {
+            page --;
+        }
+    }
+
+    @Override
+    protected InvoiceHistoryPresenter createPresenter() {
+        return new InvoiceHistoryPresenter();
     }
 }

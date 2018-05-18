@@ -510,6 +510,7 @@
     <string name="are_you_sure_to_logout">您确定要注销账户？</string>
     <string name="log_out_message">账户%1$s下所有相关信息将不可找回！</string>
     <string name="logout_fail">网络异常，注销失败。</string>
+    <string name="item_invoice_hitory_sort">纸质发票 充电发票</string>
     <string name="least_charge_power">最少充电量为1度！</string>
     <string name="lease_charge_money">最少充电金额为1元！</string>
     <string name="lease_charge_time">最少充电时间为10分钟！</string>

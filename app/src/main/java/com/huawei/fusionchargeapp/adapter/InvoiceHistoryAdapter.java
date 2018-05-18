@@ -27,6 +27,7 @@ public class InvoiceHistoryAdapter extends BaseAdapter {
     private List<InvoiceHistoryBean> data = new ArrayList<>();
     private Context context;
     private LayoutInflater inflater;
+    private static final String[] STTAUS= {"未开票","已开票"};
 
     public InvoiceHistoryAdapter(Context context, List<InvoiceHistoryBean> data) {
         this.data = data;
@@ -54,6 +55,10 @@ public class InvoiceHistoryAdapter extends BaseAdapter {
         return i;
     }
 
+    public int getClickOrderId(int i){
+        return data.get(i).id;
+    }
+
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder holder;
@@ -63,26 +68,26 @@ public class InvoiceHistoryAdapter extends BaseAdapter {
             holder.time = (TextView) view.findViewById(R.id.tv_time);
             holder.status = (TextView) view.findViewById(R.id.invoice_status);
             holder.money = (TextView) view.findViewById(R.id.invoice_money);
-            holder.sort = (TextView) view.findViewById(R.id.invoice_sort);
+//            holder.sort = (TextView) view.findViewById(R.id.invoice_sort);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
         }
-        holder.time.setText(data.get(i).time);
-        holder.status.setText(data.get(i).status);
-        holder.sort.setText(data.get(i).sort);
-        holder.money.setText(getSpanString(data.get(i).money));
+        holder.time.setText(data.get(i).createTime);
+        holder.status.setText(STTAUS[data.get(i).status]);
+//        holder.sort.setText(data.get(i).sort);
+        holder.money.setText(getSpanString(data.get(i).amount));
         return view;
     }
 
     private SpannableString getSpanString(String str){
         SpannableString sp = new SpannableString(str);
-        sp.setSpan(new StyleSpan(android.graphics.Typeface.BOLD),0,str.length()-1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-        sp.setSpan(new AbsoluteSizeSpan(context.getResources().getDimensionPixelSize(R.dimen.text_extra)),0,str.length()-1,Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        sp.setSpan(new StyleSpan(android.graphics.Typeface.BOLD),0,str.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        sp.setSpan(new AbsoluteSizeSpan(context.getResources().getDimensionPixelSize(R.dimen.text_extra)),0,str.length(),Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         return sp;
     }
 
     public class ViewHolder{
-        TextView time,money,status,sort;
+        TextView time,money,status;
     }
 }

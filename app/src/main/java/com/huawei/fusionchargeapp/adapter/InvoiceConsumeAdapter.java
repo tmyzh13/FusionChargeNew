@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.model.beans.ElectronicConsumeBean;
-import com.huawei.fusionchargeapp.model.beans.InvoiceHistoryBean;
 
 import java.util.ArrayList;
 import java.util.List;

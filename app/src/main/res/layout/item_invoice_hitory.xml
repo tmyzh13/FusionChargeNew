@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start|center_vertical"
-            android:text="纸质发票 充电发票"
+            android:text="@string/item_invoice_hitory_sort"
             android:textSize="@dimen/text_normal"
             android:paddingLeft="@dimen/dp_16" />
 
