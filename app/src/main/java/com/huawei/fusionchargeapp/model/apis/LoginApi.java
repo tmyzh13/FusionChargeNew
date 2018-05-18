@@ -7,6 +7,7 @@ import com.huawei.fusionchargeapp.model.beans.CheckCodeBean;
 import com.huawei.fusionchargeapp.model.beans.LoginRequestBean;
 import com.huawei.fusionchargeapp.model.beans.ModifyPwdRequestBean;
 import com.huawei.fusionchargeapp.model.beans.ModifyUserInfoRequestBean;
+import com.huawei.fusionchargeapp.model.beans.RequestLogoutBean;
 import com.huawei.fusionchargeapp.model.beans.ResponseMessageBean;
 import com.huawei.fusionchargeapp.model.beans.RestPwdRequestBean;
 import com.huawei.fusionchargeapp.model.beans.UploadImageBean;
@@ -62,4 +63,7 @@ public interface LoginApi {
     //表示请求发送multipart数据，需要配合使用@Part
     Observable<BaseData<UploadImageBean>> upload(@Header("AccessToken")String accessToken, @Part("userImage"+ RequestBodyCreator.MULTIPART_JEPG) RequestBody file);
 
+    //注销用户
+    @POST(Urls.USER_LOGOUT)
+    Observable<BaseData> logOut(@Header("AccessToken")String accessToken, @Body RequestLogoutBean bean);
 }

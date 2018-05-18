@@ -17,6 +17,7 @@ import com.huawei.fusionchargeapp.App;
 import com.huawei.fusionchargeapp.MainActivity;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.constants.Constant;
+import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.presenter.SettingPresenter;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.interfaces.SettingView;
@@ -81,19 +82,15 @@ public class SettingActivity extends BaseActivity<SettingView, SettingPresenter>
 
     @OnClick(R.id.tv_login_out)
     public void gotoLoginout() {
-        final CommonDialog dialog = new CommonDialog(this,"","您确定要注销账户？",2);
+        String message = String.format(getString(R.string.log_out_message), UserHelper.getSavedUser().phone);
+        final CommonDialog dialog = new CommonDialog(this,getString(R.string.are_you_sure_to_logout),message,2);
         dialog.show();
         dialog.setPositiveListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                RxBus.getDefault().send(new Object(), Constant.LOGIN_OUT_SET_APPOINT_VIEW_GONE);
-                PreferencesHelper.clearData();
-                Intent intent=MainActivity.getLauncher(SettingActivity.this);
-                intent.putExtra(MainActivity.ACTION,MainActivity.LOGINT_OUT);
-                startActivity(intent);
-
-                SettingActivity.this.finish();
+                showLoading();
+                presenter.logout(UserHelper.getSavedUser().appUserId + "");
             }
         });
         dialog.setNagitiveListener(new View.OnClickListener() {
@@ -150,5 +147,23 @@ public class SettingActivity extends BaseActivity<SettingView, SettingPresenter>
     @Override
     public void goLogin() {
 
+    }
+
+    @Override
+    public void onLogoutSuccess() {
+        hideLoading();
+        RxBus.getDefault().send(new Object(), Constant.LOGIN_OUT_SET_APPOINT_VIEW_GONE);
+        PreferencesHelper.clearData();
+        Intent intent=MainActivity.getLauncher(SettingActivity.this);
+        intent.putExtra(MainActivity.ACTION,MainActivity.LOGINT_OUT);
+        startActivity(intent);
+
+        SettingActivity.this.finish();
+    }
+
+    @Override
+    public void onLogoutFail() {
+        hideLoading();
+        showToast(getString(R.string.logout_fail));
     }
 }
