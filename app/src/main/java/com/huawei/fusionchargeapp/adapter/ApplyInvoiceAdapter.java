@@ -33,6 +33,8 @@ public class ApplyInvoiceAdapter extends BaseExpandableListAdapter {
     private List<List<ApplyInvoiceBean>> itemLst = new ArrayList<>();
     private List<List<Boolean>> stateList = new ArrayList<>();
     private OnItemClickListener listener;
+    private int selectedNum;
+    private double selectedMoney;
 
 
     public ApplyInvoiceAdapter(Context context, List<String> groupList, List<List<ApplyInvoiceBean>> itemLst, OnItemClickListener listener) {
@@ -44,11 +46,73 @@ public class ApplyInvoiceAdapter extends BaseExpandableListAdapter {
         resetStateList(false);
     }
 
+    public ArrayList<String> getSelectedOrderNum(){
+        ArrayList<String> result = new ArrayList<>();
+        for (int i=0;i<stateList.size();i++) {
+            for (int j=0;j<stateList.get(i).size();j++){
+                if (stateList.get(i).get(j)) {
+                    result.add(itemLst.get(i).get(j).orderNum+"");
+                }
+            }
+        }
+        return result;
+    }
+
+    public int getSelectedNum() {
+        return selectedNum;
+    }
+
+    public double getSelectedMoney() {
+        return selectedMoney;
+    }
+
     private void resetStateList(boolean state){
         for(int i=0;i<itemLst.size();i++){
             stateList.add(new ArrayList<Boolean>());
             for(int j=0;j<itemLst.get(i).size();j++){
                 stateList.get(i).add(state);
+            }
+        }
+        selectedNum =0;
+        selectedMoney =0;
+    }
+    private void refreshStateList(boolean isAdd){
+        if (isAdd) {
+            //往下拉刷新数据，增加数据选择状态，都为false
+            for(int i= stateList.size()-1;i<itemLst.size();i++){
+                if (i != stateList.size()-1){
+                    stateList.add(new ArrayList<Boolean>());
+                }
+                for(int j=stateList.get(i).size();j<itemLst.get(i).size();j++){
+                    stateList.get(i).add(false);
+                }
+            }
+        } else {
+            //第一页数据状态使用之前的选择状态
+            int size = stateList.size();
+            int itemSize = itemLst.get(size-1).size();
+            for (int i= stateList.get(size-1).size();i< itemSize;i++) {
+                stateList.remove(i);
+            }
+            for (int i = size;i<itemLst.size();i++){
+                stateList.remove(i);
+            }
+        }
+        computeSelectedNumAndMoney();
+    }
+
+    private void computeSelectedNumAndMoney(){
+        selectedNum=0;
+        selectedMoney=0;
+        if (stateList.size() == 0){
+            return;
+        }
+        for (int i = 0;i<stateList.size();i++){
+            for (int j=0;j<stateList.get(i).size();j++){
+                if(stateList.get(i).get(j)) {
+                    selectedNum++;
+                    selectedMoney += itemLst.get(i).get(j).consumeTotalMoney;
+                }
             }
         }
     }
@@ -60,13 +124,15 @@ public class ApplyInvoiceAdapter extends BaseExpandableListAdapter {
     public void setDatas(List<String> groupList, List<List<ApplyInvoiceBean>> itemLst){
         this.groupList = groupList;
         this.itemLst = itemLst;
-        resetStateList(false);
         notifyDataSetChanged();
     }
 
-    public void setDatas(List<List<Boolean>> stateList){
-        this.stateList = stateList;
-        notifyDataSetChanged();
+    public void setSelectedStatus(boolean isFirst){
+        if (stateList.size() == 0) {
+            resetStateList(false);
+        } else {
+            refreshStateList(!isFirst);
+        }
     }
 
 
@@ -140,10 +206,10 @@ public class ApplyInvoiceAdapter extends BaseExpandableListAdapter {
         holder.pileNum.setText(itemLst.get(i).get(i1).orderNum+"");
         holder.creatTime.setText(itemLst.get(i).get(i1).chargeStartTime);
         holder.money.setText(itemLst.get(i).get(i1).consumeTotalMoney+"");
+        holder.select.setOnCheckedChangeListener(new OnViewClickListener(i,i1,listener));
         if (stateList.size()>i && stateList.get(i).size() >i1){
             holder.select.setChecked(stateList.get(i).get(i1));
         }
-        holder.select.setOnCheckedChangeListener(new OnViewClickListener(i,i1,listener));
         return view;
     }
     @Override

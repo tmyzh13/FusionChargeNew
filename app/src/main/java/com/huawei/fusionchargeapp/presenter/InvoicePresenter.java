@@ -43,6 +43,9 @@ public class InvoicePresenter extends BasePresenter<InvoiceView> {
                 .subscribe(new ResponseSubscriber<InvoiceConsumeResultBean>(view) {
                     @Override
                     public void success(InvoiceConsumeResultBean baseData) {
+                        if (baseData.total < PAGE_NUM) {
+                            view.onAllPageLoaded();
+                        }
                         view.getInvoiceConsume(baseData.rawRecords);
                     }
 

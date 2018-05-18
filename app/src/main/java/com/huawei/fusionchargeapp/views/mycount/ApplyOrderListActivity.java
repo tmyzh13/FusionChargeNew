@@ -1,6 +1,7 @@
 package com.huawei.fusionchargeapp.views.mycount;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -67,6 +68,8 @@ public class ApplyOrderListActivity extends BaseActivity<InvoiceView,InvoicePres
     private CompoundButton.OnCheckedChangeListener allSelectListener;
     private static final int FIRST_PAGE = 1;
     private int page = FIRST_PAGE;
+    public static final String SELECTED_ORDER_NUM = "selected_order_num";
+    public static final String SELECTED_TOTOAL_MONEY = "selected_totaol_money";
 
     @Override
     public void goLogin() {
@@ -118,6 +121,8 @@ public class ApplyOrderListActivity extends BaseActivity<InvoiceView,InvoicePres
                 page = FIRST_PAGE;
                 groupList.clear();
                 itemList.clear();
+                totalMoney = 0;
+                totalNum = 0;
 
                 ptrLayout.enableLoading();
                 if (!frame.isAutoRefresh()) {
@@ -138,13 +143,17 @@ public class ApplyOrderListActivity extends BaseActivity<InvoiceView,InvoicePres
     @Override
     public void getInvoiceConsume(List<ApplyInvoiceBean> bean) {
         if (bean == null || bean.size() <= 0){
-            ptrLayout.setVisibility(View.GONE);
-            empty_view.setVisibility(View.VISIBLE);
-            bootom.setVisibility(View.GONE);
+            if (page == FIRST_PAGE){
+                ptrLayout.setVisibility(View.GONE);
+                empty_view.setVisibility(View.VISIBLE);
+                bootom.setVisibility(View.GONE);
+            }
         } else {
-            ptrLayout.setVisibility(View.VISIBLE);
-            empty_view.setVisibility(View.GONE);
-            bootom.setVisibility(View.VISIBLE);
+            if (page == FIRST_PAGE){
+                ptrLayout.setVisibility(View.VISIBLE);
+                empty_view.setVisibility(View.GONE);
+                bootom.setVisibility(View.VISIBLE);
+            }
             setAdapterData(bean);
         }
     }
@@ -162,14 +171,17 @@ public class ApplyOrderListActivity extends BaseActivity<InvoiceView,InvoicePres
             showToast(getString(R.string.select_no_consume_item));
             return;
         }
-        startActivity(ApplyInvoiceActivity.getLauncher(this));
+        Intent intent = ApplyInvoiceActivity.getLauncher(this);
+        intent.putStringArrayListExtra(SELECTED_ORDER_NUM,adpter.getSelectedOrderNum());
+        intent.putExtra(SELECTED_TOTOAL_MONEY,nowMoney);
+        startActivity(intent);
     }
 
     private void setAdapterData(List<ApplyInvoiceBean> list){
         /*数据处理逻辑，数据分组以时间来分，即时间的年和月来分
         如果有不同的年和月，就加入组，相应子数据开始增加；
          */
-        Log.e("liutao",list.size()+"");
+
         for (int i =0; i < list.size(); i++) {
             ApplyInvoiceBean tempBean = list.get(i);
             if (groupList.size() == 0) {
@@ -192,6 +204,9 @@ public class ApplyOrderListActivity extends BaseActivity<InvoiceView,InvoicePres
                 }
             }
         }
+        adpter.setSelectedStatus(page == FIRST_PAGE);
+        nowNum = adpter.getSelectedNum();
+        nowMoney = adpter.getSelectedMoney();
         adpter.setDatas(groupList,itemList);
         setExpandableListViewShowProperty();
     }
