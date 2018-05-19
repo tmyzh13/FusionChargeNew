@@ -144,6 +144,7 @@ public class InvoiceHistoryActivity extends BaseActivity<InvoiceHistoryView,Invo
         if (page > FIRST_PAGE) {
             page --;
         }
+        hideLoading();
     }
 
     @Override
