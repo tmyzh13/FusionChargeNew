@@ -8,6 +8,7 @@ import com.huawei.fusionchargeapp.constants.Urls;
 import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.apis.MyTaoCanApi;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
+import com.huawei.fusionchargeapp.model.beans.MyTaocanBean;
 import com.huawei.fusionchargeapp.views.interfaces.MyTaocanView;
 
 /**
@@ -32,11 +33,11 @@ public class MyTaocanPresenter extends BasePresenter<MyTaocanView> {
     public void getMyTaoCan(){
         view.showLoading();
         api.getMyTaocan(UserHelper.getSavedUser().token, Urls.MY_TAO_CAN+UserHelper.getSavedUser().appUserId)
-                .compose(new ResponseTransformer(this.<BaseData>bindToLifeCycle()))
-                .subscribe(new ResponseSubscriber<BaseData>(view) {
+                .compose(new ResponseTransformer(this.<BaseData<MyTaocanBean>>bindToLifeCycle()))
+                .subscribe(new ResponseSubscriber<BaseData<MyTaocanBean>>(view) {
                     @Override
-                    public void success(BaseData baseData) {
-
+                    public void success(BaseData<MyTaocanBean> baseData) {
+                            view.renderMyTaoCan(baseData.data);
                     }
                 });
     }

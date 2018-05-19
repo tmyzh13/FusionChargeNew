@@ -2,6 +2,7 @@ package com.huawei.fusionchargeapp.model.apis;
 
 import com.huawei.fusionchargeapp.constants.Urls;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
+import com.huawei.fusionchargeapp.model.beans.MyTaocanBean;
 
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -14,5 +15,5 @@ import rx.Observable;
 
 public interface MyTaoCanApi {
     @POST
-    Observable<BaseData> getMyTaocan(@Header("AccessToken") String token,@Url String url);
+    Observable<BaseData<MyTaocanBean>> getMyTaocan(@Header("AccessToken") String token, @Url String url);
 }

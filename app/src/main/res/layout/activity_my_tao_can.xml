@@ -32,14 +32,18 @@
                 style="@style/text_normal"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                android:text="@string/my_tao_can_limit"
+                android:id="@+id/tv_hint_1"/>
+            <TextView
+                style="@style/text_normal"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:id="@+id/tv_hint_2"
                 />
             <TextView
                 style="@style/text_normal"
                 android:textColor="@color/white"
-                android:text="400度"
                 android:textSize="@dimen/text_small"
-
+                android:id="@+id/tv_hint_3"
                 />
         </LinearLayout>
         <LinearLayout
@@ -47,16 +51,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginLeft="15dp"
+            android:gravity="center_vertical"
             >
             <TextView
                 style="@style/text_normal"
-                android:text="包月包电量套餐"
+                android:id="@+id/tv_name"
                 />
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="7dp"
+                android:id="@+id/ll_surplus"
                 >
                 <TextView
                     style="@style/text_normal"
@@ -68,7 +74,26 @@
                     style="@style/text_normal"
                     android:textColor="@color/color_red"
                     android:textSize="@dimen/text_small"
-                    android:text="20度"
+                    android:id="@+id/tv_surpluse"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                >
+                <TextView
+                    style="@style/text_normal"
+                    android:text="@string/my_tao_can_buy_time"
+                    android:textColor="@color/text_light"
+                    android:textSize="@dimen/text_small"
+                    />
+                <TextView
+                    style="@style/text_normal"
+                    android:textColor="@color/text_light"
+                    android:textSize="@dimen/text_small"
+                    android:id="@+id/tv_buy_time"
                     />
             </LinearLayout>
             <LinearLayout
@@ -87,26 +112,7 @@
                     style="@style/text_normal"
                     android:textColor="@color/text_light"
                     android:textSize="@dimen/text_small"
-                    android:text="2018/02/16 15:00:00"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp"
-                >
-                <TextView
-                    style="@style/text_normal"
-                    android:text="@string/my_tao_can_end_time"
-                    android:textColor="@color/text_light"
-                    android:textSize="@dimen/text_small"
-                    />
-                <TextView
-                    style="@style/text_normal"
-                    android:textColor="@color/text_light"
-                    android:textSize="@dimen/text_small"
-                    android:text="2018/02/16 15:00:00"
+                    android:id="@+id/tv_end_time"
                     />
             </LinearLayout>
         </LinearLayout>
