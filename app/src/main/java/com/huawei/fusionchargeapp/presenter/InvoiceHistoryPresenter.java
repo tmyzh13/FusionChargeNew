@@ -11,6 +11,7 @@ import com.huawei.fusionchargeapp.model.beans.BaseData;
 import com.huawei.fusionchargeapp.model.beans.InvoiceConsumeBean;
 import com.huawei.fusionchargeapp.model.beans.InvoiceConsumeRequest;
 import com.huawei.fusionchargeapp.model.beans.InvoiceConsumeRequestBean;
+import com.huawei.fusionchargeapp.model.beans.InvoiceConsumerResultBean;
 import com.huawei.fusionchargeapp.model.beans.InvoiceHistoryItemBean;
 import com.huawei.fusionchargeapp.model.beans.InvoiceHistoryResultBean;
 import com.huawei.fusionchargeapp.views.interfaces.InvoiceHistoryView;
@@ -42,7 +43,7 @@ public class InvoiceHistoryPresenter extends BasePresenter<InvoiceHistoryView> {
         bean.page = page;
         bean.rp = PAGE_NUM;
         bean.setCondition(UserHelper.getSavedUser().appUserId);
-//        bean.setCondition(16703L);//调试使用
+//        bean.setCondition(16822);//调试使用
 
         api.getInvoiceHistory(UserHelper.getSavedUser().token,bean)
                 .compose(new ResponseTransformer<>(this.<InvoiceHistoryResultBean>bindUntilEvent(ActivityEvent.DESTROY)))
@@ -80,11 +81,21 @@ public class InvoiceHistoryPresenter extends BasePresenter<InvoiceHistoryView> {
         bean.rp = PAGE_NUM;
         bean.setCondition(id);
         api.getInvoiceHistoryConsume(UserHelper.getSavedUser().token,bean)
-                .compose(new ResponseTransformer<>(this.<BaseData<List<InvoiceConsumeBean>>>bindUntilEvent(ActivityEvent.DESTROY)))
-                .subscribe(new ResponseSubscriber<BaseData<List<InvoiceConsumeBean>>>(view) {
+                .compose(new ResponseTransformer<>(this.<InvoiceConsumerResultBean>bindUntilEvent(ActivityEvent.DESTROY)))
+                .subscribe(new ResponseSubscriber<InvoiceConsumerResultBean>(view) {
                     @Override
-                    public void success(BaseData<List<InvoiceConsumeBean>> baseData) {
-                        view.getInvoiceHistoryConsume((List<InvoiceConsumeBean>)baseData.data());
+                    public void success(InvoiceConsumerResultBean baseData) {
+                        view.getInvoiceHistoryConsume(baseData.rawRecords);
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        view.getInvoiceConsumeFailed();
+                    }
+
+                    @Override
+                    public boolean operationError(InvoiceConsumerResultBean listBaseData, int status, String message) {
+                        view.getInvoiceConsumeFailed();
+                        return super.operationError(listBaseData, status, message);
                     }
                 });
     }

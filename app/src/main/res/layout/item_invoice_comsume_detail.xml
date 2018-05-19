@@ -13,7 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start|center_vertical"
-            android:text="充电消费"
+            android:text="@string/charger_consume"
             android:textSize="@dimen/text_small"
             android:paddingLeft="@dimen/dp_16"
             android:textStyle="bold"/>

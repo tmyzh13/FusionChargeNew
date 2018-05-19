@@ -66,20 +66,20 @@ public class InvoiceHistoryItemActivity extends BaseActivity<InvoiceHistoryView,
         bar.setColorRes(R.color.blue);
         bar.setNavTitle(getString(R.string.invoice_detail));
 
-        id = getIntent().getIntExtra(InvoiceHistoryActivity.ORDER_ID,0);
+        id = getIntent().getIntExtra(InvoiceHistoryActivity.ORDER_ID,InvoiceHistoryActivity.DEFAULT_ID);
         presenter.getInvoiceHistoryItem(id);
-        presenter.getInvoiceHistoryConsume(id,1);
+//        presenter.getInvoiceHistoryConsume(id,1);
     }
 
     private void initAllTextView(InvoiceHistoryItemBean bean){
         consume_detail.setText(getString(R.string.invoice_and_consume_num,1,bean.count));
-        invoice_create_time.setText(bean.detail.createTime.substring(0, Tools.DATE_LENGTH_FROM_SERVER));
+        invoice_create_time.setText(bean.detail.createTime);
         rec_adress.setText(bean.detail.recAddr);
         invoice_head.setText(bean.detail.title);
         tax_num.setText(bean.detail.code);
         invoice_content.setText(bean.detail.content);
         money.setText(bean.detail.amount+"");
-        invoice_time.setText(bean.detail.createTime.substring(0, Tools.DATE_LENGTH_FROM_SERVER));
+        invoice_time.setText(bean.detail.createTime);
         consume_time.setText(bean.startEndTime);
 
     }

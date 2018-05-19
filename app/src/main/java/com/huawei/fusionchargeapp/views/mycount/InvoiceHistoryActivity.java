@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.TextView;
 
 import com.corelibs.base.BaseActivity;
 import com.corelibs.base.BasePresenter;
@@ -38,11 +39,14 @@ public class InvoiceHistoryActivity extends BaseActivity<InvoiceHistoryView,Invo
     AutoLoadMoreListView listView;
     @Bind(R.id.ptrLayout)
     PtrAutoLoadMoreLayout ptrLayout;
+    @Bind(R.id.empty_view)
+    TextView emptyView;
     private InvoiceHistoryAdapter adapter;
     private List<InvoiceHistoryBean> data = new ArrayList<>();
     private static final int FIRST_PAGE = 1;
     private int page = FIRST_PAGE;
     public static final String ORDER_ID = "order_id";
+    public static final int DEFAULT_ID = 29;
 
     @Override
     public void goLogin() {
@@ -120,6 +124,13 @@ public class InvoiceHistoryActivity extends BaseActivity<InvoiceHistoryView,Invo
     public void getInvoiceHistory(List<InvoiceHistoryBean> bean) {
         if (page == FIRST_PAGE) {
             data = bean;
+            if (data == null || data.size() == 0) {
+                ptrLayout.setVisibility(View.GONE);
+                emptyView.setVisibility(View.VISIBLE);
+            } else {
+                ptrLayout.setVisibility(View.VISIBLE);
+                emptyView.setVisibility(View.GONE);
+            }
         } else {
             for (int i=0;i<bean.size();i++){
                 data.add(bean.get(i));

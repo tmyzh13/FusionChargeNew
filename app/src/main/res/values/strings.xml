@@ -517,5 +517,5 @@
 
     <string name="invoice_company">企业发票</string>
     <string name="invoice_people">个人发票</string>
-
+    <string name="charger_consume">充电消费</string>
 </resources>
