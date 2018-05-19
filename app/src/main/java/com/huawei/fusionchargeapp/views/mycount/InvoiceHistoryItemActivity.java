@@ -80,7 +80,12 @@ public class InvoiceHistoryItemActivity extends BaseActivity<InvoiceHistoryView,
         invoice_content.setText(bean.detail.content);
         money.setText(bean.detail.amount+"");
         invoice_time.setText(bean.detail.createTime);
-        consume_time.setText(bean.startEndTime);
+        if (Tools.isNull(bean.startEndTime)) {
+            consume_time.setText(bean.detail.earlyTime+" ~ "+bean.detail.endTime);
+        } else {
+            consume_time.setText(bean.startEndTime);
+        }
+
 
     }
 
