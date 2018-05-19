@@ -12,6 +12,7 @@ import com.huawei.fusionchargeapp.model.beans.InvoiceConsumeBean;
 import com.huawei.fusionchargeapp.model.beans.InvoiceHistoryBean;
 import com.huawei.fusionchargeapp.model.beans.InvoiceHistoryItemBean;
 import com.huawei.fusionchargeapp.presenter.InvoiceHistoryPresenter;
+import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.interfaces.InvoiceHistoryView;
 import com.huawei.fusionchargeapp.weights.NavBar;
 
@@ -71,13 +72,24 @@ public class InvoiceHistoryItemActivity extends BaseActivity<InvoiceHistoryView,
     }
 
     private void initAllTextView(InvoiceHistoryItemBean bean){
-        consume_detail.setText(getString(R.string.invoice_and_consume_num,1,4));
+        consume_detail.setText(getString(R.string.invoice_and_consume_num,1,bean.count));
+        invoice_create_time.setText(bean.detail.createTime.substring(0, Tools.DATE_LENGTH_FROM_SERVER));
+        rec_adress.setText(bean.detail.recAddr);
+        invoice_head.setText(bean.detail.title);
+        tax_num.setText(bean.detail.code);
+        invoice_content.setText(bean.detail.content);
+        money.setText(bean.detail.amount+"");
+        invoice_time.setText(bean.detail.createTime.substring(0, Tools.DATE_LENGTH_FROM_SERVER));
+        consume_time.setText(bean.startEndTime);
+
     }
 
     @OnClick(R.id.go_consume)
     void goConsumeDetail(){
         //进入消费详情
-        startActivity(new Intent(this,InvoiceConsumeActivity.class));
+        Intent intent = new Intent(this,InvoiceConsumeActivity.class);
+        intent.putExtra(InvoiceHistoryActivity.ORDER_ID,id);
+        startActivity(intent);
     }
 
 
@@ -99,7 +111,7 @@ public class InvoiceHistoryItemActivity extends BaseActivity<InvoiceHistoryView,
 
     @Override
     public void getInvoiceHistoryItem(InvoiceHistoryItemBean bean) {
-
+        initAllTextView(bean);
     }
 
     @Override
