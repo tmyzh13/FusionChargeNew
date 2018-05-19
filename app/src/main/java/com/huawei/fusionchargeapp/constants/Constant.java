@@ -9,7 +9,7 @@ public class Constant {
 
 
     //默认筛选距离 这里测试设置500
-    public static final double DEFAULT_DISTANCE=10000;
+    public static final double DEFAULT_DISTANCE=300;
 //    condition.x1=73;
 //    condition.x2=135;
 //    condition.y1=10;

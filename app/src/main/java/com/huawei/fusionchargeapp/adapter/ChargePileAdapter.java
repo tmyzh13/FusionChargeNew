@@ -1,6 +1,7 @@
 package com.huawei.fusionchargeapp.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -109,7 +110,7 @@ public class ChargePileAdapter extends BaseAdapter {
                 context.getString(R.string.statue_offline) : context.getString(R.string.statue_online));
 
         gunList = chargePileBean.getGunList();
-
+        Log.e("yzh","---"+chargePileBean.getName());
         ElectricGunAdapter adapter = new ElectricGunAdapter(context, gunList,chargePileBean,bean.getAddress(),bean.getLatitude(),bean.getLongitude());
         holder.electricGunLv.setAdapter(adapter);
 //        adapter.setData(gunList);

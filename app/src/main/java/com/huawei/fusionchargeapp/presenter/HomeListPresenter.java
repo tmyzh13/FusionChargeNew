@@ -62,18 +62,18 @@ public class HomeListPresenter extends BasePresenter<HomeListView> {
         Condition0 condition=new Condition0();
         condition.workStatus=ChoiceManager.getInstance().getStatue();
         MyLocationBean bean = PreferencesHelper.getData(MyLocationBean.class);
-        if(bean != null) {
-
-            condition.x1=bean.longtitude-1;
-            condition.x2=bean.longtitude+1;
-            condition.y1=bean.latitude-1;
-            condition.y2=bean.latitude+1;
-        }else{
+//        if(bean != null) {
+//
+//            condition.x1=bean.longtitude-1;
+//            condition.x2=bean.longtitude+1;
+//            condition.y1=bean.latitude-1;
+//            condition.y2=bean.latitude+1;
+//        }else{
             condition.x1= Constant.X1;
             condition.x2=Constant.X2;
             condition.y1=Constant.Y1;
             condition.y2=Constant.Y2;
-        }
+//        }
 
         condition.selectType=3;
         api.getMapDatas0(condition)
@@ -89,17 +89,17 @@ public class HomeListPresenter extends BasePresenter<HomeListView> {
     public void getDatas(String stationName){
         SearchCondition condition = new SearchCondition();
         MyLocationBean bean = PreferencesHelper.getData(MyLocationBean.class);
-        if(bean != null) {
-            condition.x1=bean.longtitude-1;
-            condition.x2=bean.longtitude+1;
-            condition.y1=bean.latitude-1;
-            condition.y2=bean.latitude+1;
-        }else{
+//        if(bean != null) {
+//            condition.x1=bean.longtitude-1;
+//            condition.x2=bean.longtitude+1;
+//            condition.y1=bean.latitude-1;
+//            condition.y2=bean.latitude+1;
+//        }else{
             condition.x1=Constant.X1;
             condition.x2=Constant.X2;
             condition.y1=Constant.Y1;
             condition.y2=Constant.Y2;
-        }
+//        }
 
         condition.selectType = 3;
         condition.stationName =stationName;
@@ -124,18 +124,18 @@ public class HomeListPresenter extends BasePresenter<HomeListView> {
 
             condition.workStatus=ChoiceManager.getInstance().getStatue();
         MyLocationBean bean = PreferencesHelper.getData(MyLocationBean.class);
-        if(bean != null) {
-
-            condition.x1=bean.longtitude-1;
-            condition.x2=bean.longtitude+1;
-            condition.y1=bean.latitude-1;
-            condition.y2=bean.latitude+1;
-        }else{
+//        if(bean != null) {
+//
+//            condition.x1=bean.longtitude-1;
+//            condition.x2=bean.longtitude+1;
+//            condition.y1=bean.latitude-1;
+//            condition.y2=bean.latitude+1;
+//        }else{
             condition.x1=Constant.X1;
             condition.x2=Constant.X2;
             condition.y1=Constant.Y1;
             condition.y2=Constant.Y2;
-        }
+//        }
 
         condition.selectType=3;
         return condition;

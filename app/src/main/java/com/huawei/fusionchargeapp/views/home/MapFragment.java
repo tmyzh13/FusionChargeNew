@@ -77,6 +77,7 @@ import com.huawei.fusionchargeapp.views.interfaces.MapHomeView;
 import com.huawei.fusionchargeapp.weights.AppointmentTimeOutDialog;
 import com.huawei.fusionchargeapp.weights.ChargeFeeDialog;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -584,11 +585,15 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
 
     }
 
+    private List<Marker> listMark=new ArrayList<>();
+
     @Override
     public void renderMapData(List<MapDataBean> list) {
         this.list = list;
+
         MyLocationBean bean = PreferencesHelper.getData(MyLocationBean.class);
-        aMap.clear();
+        clearMark();
+        listMark=new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
             //距离筛选
             if (bean != null) {
@@ -613,7 +618,16 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
 //                    .decodeResource(getResources(), R.mipmap.home_ic_position)));
             // 将Marker设置为贴地显示，可以双指下拉地图查看效果
             markerOption.setFlat(false);//设置marker平贴地图效果
-            aMap.addMarker(markerOption);
+            Marker marker=aMap.addMarker(markerOption);
+            listMark.add(marker);
+        }
+    }
+
+    private void clearMark(){
+        for(int i=0;i<listMark.size();i++){
+            if(listMark.get(i)!=null){
+                listMark.get(i).remove();
+            }
         }
     }
 

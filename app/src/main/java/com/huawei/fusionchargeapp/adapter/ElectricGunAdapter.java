@@ -105,6 +105,7 @@ public class ElectricGunAdapter extends BaseAdapter {
                 AppointTimeOutBean bean = new AppointTimeOutBean();
                 bean.setGunCode(gunBean.getGunCode());
                 bean.setAddress(address);
+                bean.setChargingPileName(pileName);
                 bean.setChargingPileId(gunBean.getChargingPileId());
                 bean.setLatitude(latitude);
                 bean.setLongitude(longitude);

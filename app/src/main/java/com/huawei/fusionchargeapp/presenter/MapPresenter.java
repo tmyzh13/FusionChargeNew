@@ -58,18 +58,18 @@ public class MapPresenter extends BasePresenter<MapHomeView> {
         condition.selectType=3;
         condition.workStatus=ChoiceManager.getInstance().getStatue();
         MyLocationBean bean = PreferencesHelper.getData(MyLocationBean.class);
-        if(bean != null) {
-
-            condition.x1=bean.longtitude-1;
-            condition.x2=bean.longtitude+1;
-            condition.y1=bean.latitude-1;
-            condition.y2=bean.latitude+1;
-        }else{
+//        if(bean != null) {
+//
+//            condition.x1=bean.longtitude-1;
+//            condition.x2=bean.longtitude+1;
+//            condition.y1=bean.latitude-1;
+//            condition.y2=bean.latitude+1;
+//        }else{
             condition.x1= Constant.X1;
             condition.x2=Constant.X2;
             condition.y1=Constant.Y1;
             condition.y2=Constant.Y2;
-        }
+//        }
 
         api.getMapDatas0(condition)
                 .compose(new ResponseTransformer<>(this.<BaseData<List<MapDataBean>>>bindUntilEvent(ActivityEvent.DESTROY)))
@@ -111,18 +111,18 @@ public class MapPresenter extends BasePresenter<MapHomeView> {
 //        condition.pileName="";
 //        condition.stationName="";
         MyLocationBean bean = PreferencesHelper.getData(MyLocationBean.class);
-        if(bean != null) {
-
-            condition.x1=bean.longtitude-1;
-            condition.x2=bean.longtitude+1;
-            condition.y1=bean.latitude-1;
-            condition.y2=bean.latitude+1;
-        }else{
+//        if(bean != null) {
+//
+//            condition.x1=bean.longtitude-1;
+//            condition.x2=bean.longtitude+1;
+//            condition.y1=bean.latitude-1;
+//            condition.y2=bean.latitude+1;
+//        }else{
             condition.x1=Constant.X1;
             condition.x2=Constant.X2;
             condition.y1=Constant.Y1;
             condition.y2=Constant.Y2;
-        }
+//        }
 
 //        condition.workStatus=1;
         api.getMapDatas(condition)
