@@ -14,6 +14,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.corelibs.base.BaseFragment;
 import com.corelibs.base.BasePresenter;
 import com.huawei.fusionchargeapp.R;
+import com.huawei.fusionchargeapp.constants.Urls;
 import com.huawei.fusionchargeapp.model.beans.ChargeStationDetailBean;
 import com.huawei.fusionchargeapp.utils.Tools;
 
@@ -38,7 +39,7 @@ public class PictureFragment extends BaseFragment {
     TextView noPicture;
 
     //TODO  后期需要替换URL
-    private static final String IMG_URL = "http://10.40.143.10:8088/charger/";
+    private static final String IMG_URL = Urls.IMAGE_URL;
 
     public ChargeStationDetailBean data;
 
