@@ -17,6 +17,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:id="@+id/ll_appointment_guaild"
+                android:layout_marginRight="70dp"
                 >
                 <ImageView
                     android:layout_width="wrap_content"
@@ -28,7 +29,8 @@
                 <TextView
                     android:layout_marginLeft="7dp"
                     style="@style/text_normal"
-                    android:text="南京市雨花台区花神大道17号"
+                    android:singleLine="true"
+                    android:ellipsize="end"
                     android:id="@+id/tv_appointment_address"/>
             </LinearLayout>
             <LinearLayout

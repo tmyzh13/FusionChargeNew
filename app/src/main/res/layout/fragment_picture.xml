@@ -61,7 +61,7 @@
         android:textSize="@dimen/text_title"
         android:text="@string/has_no_picture"
         android:background="@color/text_white"
-        android:visibility="visible"
+        android:visibility="gone"
         />
 
 </FrameLayout>

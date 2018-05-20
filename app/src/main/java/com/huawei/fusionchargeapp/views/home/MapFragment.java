@@ -210,6 +210,10 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
             public void run() {
 
                 if (homeAppointmentBean != null) {
+
+                    if (!AppManager.getAppManager().currentActivity().getClass().equals(MainActivity.class)) {
+                        return;
+                    }
                     if (Tools.isNull(PreferencesHelper.getData(Constant.TIME_APPOINTMENT))) {
                         appointmentTime = 0;
                     } else {
@@ -226,10 +230,6 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                             tv_appointment_time.setText(Tools.formatMinute(Long.parseLong(PreferencesHelper.getData(Constant.TIME_APPOINTMENT))));
                         }
                     });
-                    if (!AppManager.getAppManager().currentActivity().getClass().equals(MainActivity.class)) {
-                        return;
-                    }
-
                     if (appointmentTime <= 0) {
                         //预约超时
                         if (AppManager.getAppManager().currentActivity().getClass().equals(MainActivity.class)) {
@@ -490,6 +490,9 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                 ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.READ_PHONE_STATE}, 10);
             }
         }
+        if(UserHelper.getSavedUser()!=null){
+            presenter.getUserAppointment();
+        }
 
     }
 
@@ -633,6 +636,10 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
 
     @Override
     public void getMarkInfo(long id, MapInfoBean mapInfoBean) {
+        if(mapInfoBean==null){
+            ToastMgr.show(getString(R.string.no_data));
+            return;
+        }
         //充电桩获取费率数据
         if (mapInfoBean.objType.equals("pile")) {
             presenter.getFeeInfo(id);

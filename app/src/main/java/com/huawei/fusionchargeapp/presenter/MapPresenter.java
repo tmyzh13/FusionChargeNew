@@ -160,7 +160,6 @@ public class MapPresenter extends BasePresenter<MapHomeView> {
                 .subscribe(new ResponseSubscriber<BaseData<MapInfoBean>>(view) {
                     @Override
                     public void success(BaseData<MapInfoBean> baseData) {
-                        Log.e("zw","hahaha : " + baseData.data.toString());
                         view.getMarkInfo(id,baseData.data);
                     }
                 });

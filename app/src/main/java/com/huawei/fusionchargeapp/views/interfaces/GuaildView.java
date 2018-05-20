@@ -9,4 +9,5 @@ import com.corelibs.base.BaseView;
 public interface GuaildView extends BaseView{
     void cancelAppointmentSuccess();
     void getZoneInfo(long id,int isGisOpen);
+    void noZoneInfo();
 }

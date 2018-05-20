@@ -341,7 +341,7 @@ public class GuildActivity extends BaseActivity<GuaildView, GuaildPresenter> imp
 
     private long zoneId;
     private int zoneGisOpen;
-
+    private boolean isNoZone=false;
     @Override
     public void getZoneInfo(long id, int isGisOpen) {
         //先获取园区信息再路径规划
@@ -358,6 +358,22 @@ public class GuildActivity extends BaseActivity<GuaildView, GuaildPresenter> imp
         searchRouteResult(ROUTE_TYPE_DRIVE, RouteSearch.DrivingDefault);
         aMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(mStartPoint.getLatitude(), mEndPoint.getLongitude())));
     }
+
+    @Override
+    public void noZoneInfo() {
+        isNoZone=true;
+        MyLocationBean locationBean = PreferencesHelper.getData(MyLocationBean.class);
+        if (locationBean != null) {
+            mStartPoint = new LatLonPoint(locationBean.latitude, locationBean.longtitude);
+        }
+        if (mStartPoint == null) {
+            mStartPoint = new LatLonPoint(39.9088600000, 116.3973900000);
+        }
+        mEndPoint = new LatLonPoint(endLatitude, endLongitude);
+        searchRouteResult(ROUTE_TYPE_DRIVE, RouteSearch.DrivingDefault);
+        aMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(mStartPoint.getLatitude(), mEndPoint.getLongitude())));
+    }
+
 
     @OnClick(R.id.ll_time)
     public void hideOrShowInfo() {

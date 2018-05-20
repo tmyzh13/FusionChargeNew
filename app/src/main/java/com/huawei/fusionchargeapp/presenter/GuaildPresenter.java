@@ -56,7 +56,11 @@ public class GuaildPresenter extends BasePresenter<GuaildView> {
                 .subscribe(new ResponseSubscriber<BaseData<PileList>>(view) {
                     @Override
                     public void success(BaseData<PileList> pileListBaseData) {
-                            view.getZoneInfo(pileListBaseData.data.getZoneId(),pileListBaseData.data.getGis());
+                           if(pileListBaseData.data!=null){
+                               view.getZoneInfo(pileListBaseData.data.getZoneId(),pileListBaseData.data.getGis());
+                           }else{
+                               view.noZoneInfo();
+                           }
                     }
                 });
     }
@@ -68,7 +72,11 @@ public class GuaildPresenter extends BasePresenter<GuaildView> {
 
                     @Override
                     public void success(BaseData<ChargeStationDetailBean> chargeStationDetailBeanBaseData) {
-                            view.getZoneInfo(chargeStationDetailBeanBaseData.data.getZoneId(),chargeStationDetailBeanBaseData.data.getGis());
+                            if(chargeStationDetailBeanBaseData.data!=null){
+                                view.getZoneInfo(chargeStationDetailBeanBaseData.data.getZoneId(),chargeStationDetailBeanBaseData.data.getGis());
+                            }else{
+                                view.noZoneInfo();
+                            }
                     }
                 });
     }
