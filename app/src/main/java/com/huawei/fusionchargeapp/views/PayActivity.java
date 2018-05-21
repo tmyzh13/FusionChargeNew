@@ -27,10 +27,13 @@ import com.huawei.fusionchargeapp.adapters.PayStyleAdpter;
 import com.huawei.fusionchargeapp.constants.Constant;
 import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.beans.HomeRefreshBean;
+import com.huawei.fusionchargeapp.model.beans.MyTaocanBean;
 import com.huawei.fusionchargeapp.model.beans.PayInfoBean;
 import com.huawei.fusionchargeapp.model.beans.PayStyleBean;
+import com.huawei.fusionchargeapp.model.beans.TaocanBean;
 import com.huawei.fusionchargeapp.model.beans.UserBean;
 import com.huawei.fusionchargeapp.presenter.PayPresenter;
+import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.utils.alipay.AuthResult;
 import com.huawei.fusionchargeapp.utils.alipay.OrderInfoUtil2_0;
 import com.huawei.fusionchargeapp.utils.alipay.PayResult;
@@ -74,6 +77,7 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
     private String orderNum;
     //type 0 订单查询  type 1 页面带值
     private String type;
+    private long id;
 
     public static Intent getLauncher(Context context,String orderNum,String type){
         Intent intent =new Intent(context,PayActivity.class);
@@ -99,6 +103,7 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
 
     @Override
     protected void init(Bundle savedInstanceState) {
+        presenter.getMyTaoCan();
         nav.setNavTitle(getString(R.string.pay));
         nav.setImageBackground(R.drawable.nan_bg);
 
@@ -107,6 +112,7 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
 
         adapter=new PayStyleAdpter(context);
         list =new ArrayList<>();
+
         PayStyleBean bean =new PayStyleBean();
         bean.imgRes=R.mipmap.pay_money;
         bean.name=getString(R.string.pay_balance);
@@ -153,6 +159,29 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
     }
 
     @Override
+    public void renderMyTaoCan(MyTaocanBean tcBean) {
+        if (tcBean != null) {
+            id = tcBean.businessPackageId;
+            PayStyleBean bean =new PayStyleBean();
+            bean.type="5";
+            bean.imgRes=R.mipmap.list_ic_money;
+            bean.name=tcBean.businessName;
+            if (tcBean.limitType == 0) {
+                bean.hint = getString(R.string.remain_charge_num,tcBean.businessStartTime.substring(0, Tools.DATE_LENGTH_FROM_SERVER)+"~"+tcBean.businessEndTime.substring(0, Tools.DATE_LENGTH_FROM_SERVER));
+            } else {
+                bean.hint = getString(R.string.invalid_time,tcBean.limitCondition+"");
+            }
+            List<PayStyleBean> temp = new ArrayList<>();
+            temp.add(bean);
+            for (int i= 0;i<list.size();i++){
+                temp.add(list.get(i));
+            }
+            list = temp;
+            adapter.replaceAll(list);
+        }
+    }
+
+    @Override
     protected PayPresenter createPresenter() {
         return new PayPresenter();
     }
@@ -181,6 +210,9 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
 //            });
         }else if(type.equals("2")){
 //            startActivity(PayCompleteActivity.getLauncher(context));
+        } else if (type.equals("5")) {
+
+            presenter.payAction(orderNum,payInfoBean.consumeTotalMoney,5,id);
         }
     }
 

@@ -6,13 +6,19 @@ import com.corelibs.api.ApiFactory;
 import com.corelibs.api.ResponseTransformer;
 import com.corelibs.base.BasePresenter;
 import com.corelibs.subscriber.ResponseSubscriber;
+import com.huawei.fusionchargeapp.constants.Urls;
 import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.apis.PayApi;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
+import com.huawei.fusionchargeapp.model.beans.MyTaocanBean;
 import com.huawei.fusionchargeapp.model.beans.PayInfoBean;
 import com.huawei.fusionchargeapp.model.beans.RequestPayBean;
 import com.huawei.fusionchargeapp.model.beans.RequestPayDetailBean;
+import com.huawei.fusionchargeapp.model.beans.RequestPayTCBean;
+import com.huawei.fusionchargeapp.model.beans.TaocanBean;
 import com.huawei.fusionchargeapp.views.interfaces.PayView;
+
+import java.util.List;
 
 /**
  * Created by issuser on 2018/4/25.
@@ -73,7 +79,49 @@ public class PayPresenter extends BasePresenter<PayView> {
                         return super.operationError(baseData,status,message);
                     }
 
+                });
+    }
 
+    public void payAction(String orderNum,double total,int payType,long id){
+        RequestPayTCBean bean=new RequestPayTCBean();
+        bean.orderRecordNum=orderNum;
+        bean.payType=payType;
+        bean.totalFee=total;
+
+        bean.businessPackageId = id;
+        view.showLoading();
+        api.balancePay(UserHelper.getSavedUser().token,bean)
+                .compose(new ResponseTransformer<>(this.<BaseData>bindToLifeCycle()))
+                .subscribe(new ResponseSubscriber<BaseData>(view) {
+                    @Override
+                    public void success(BaseData baseData) {
+                        view.paySuccess();
+                    }
+
+                    @Override
+                    public boolean operationError(BaseData baseData, int status, String message) {
+                        if(status==214){
+                            //余额不足
+                            Log.e("yzh","余额不足");
+                            view.payBalanceNotEnough();
+                        }else{
+                            view.payFail();
+                        }
+                        return super.operationError(baseData,status,message);
+                    }
+
+                });
+    }
+
+    public void getMyTaoCan(){
+        view.showLoading();
+        api.getMyTaocan(UserHelper.getSavedUser().token, Urls.MY_TAO_CAN+UserHelper.getSavedUser().appUserId)
+                .compose(new ResponseTransformer(this.<BaseData<MyTaocanBean>>bindToLifeCycle()))
+                .subscribe(new ResponseSubscriber<BaseData<MyTaocanBean>>(view) {
+                    @Override
+                    public void success(BaseData<MyTaocanBean> baseData) {
+                        view.renderMyTaoCan(baseData.data);
+                    }
                 });
     }
 }

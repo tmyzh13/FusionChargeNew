@@ -23,4 +23,6 @@ public class MyTaocanBean {
     public int limitType;
     public int packageType;
     public int limitCondition;
+
+    public long businessPackageId;
 }

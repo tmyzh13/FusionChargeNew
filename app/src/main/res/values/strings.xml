@@ -518,4 +518,7 @@
     <string name="invoice_company">企业发票</string>
     <string name="invoice_people">个人发票</string>
     <string name="charger_consume">充电消费</string>
+
+    <string name="invalid_time">有效期：%1$s</string>
+    <string name="remain_charge_num">剩余电量：%1$s度</string>
 </resources>
