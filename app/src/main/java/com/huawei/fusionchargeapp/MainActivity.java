@@ -31,6 +31,7 @@ import com.corelibs.base.BaseActivity;
 import com.corelibs.base.BasePresenter;
 import com.corelibs.common.AppManager;
 import com.corelibs.subscriber.ResponseSubscriber;
+import com.corelibs.subscriber.RxBusSubscriber;
 import com.corelibs.utils.IMEUtil;
 import com.corelibs.utils.PreferencesHelper;
 import com.corelibs.utils.rxbus.RxBus;
@@ -244,19 +245,46 @@ public class MainActivity extends BaseActivity {
 
             }
         });
-        /*
         RxBus.getDefault().toObservable(Object.class,Constant.REFRESH_MAIN_HEAD_PHOTO)
                 .compose(this.bindToLifecycle())
                 .subscribe(new RxBusSubscriber<Object>() {
 
                     @Override
                     public void receive(Object data) {
-                        if(UserHelper.getSavedUser() != null){
-                            Glide.with(MainActivity.this).load(UserHelper.getSavedUser().photoUrl)
-                                    .override(320,320).error(R.mipmap.ic_launcher_round).into(iv_user_icon);
+                        if (!Tools.isNull(UserHelper.getSavedUser().photoUrl)) {
+                            //头像
+                            SimpleTarget<GlideDrawable> target = new SimpleTarget<GlideDrawable>() {
+                                @Override
+                                public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
+                                    iv_user_icon.setImageDrawable(resource);
+                                }
+
+                                @Override
+                                public void onLoadFailed(Exception e, Drawable errorDrawable) {
+                                    super.onLoadFailed(e, errorDrawable);
+                                    String path = PreferencesHelper.getData(Tools.USER_PHOTO_PATH);
+                                    if (!TextUtils.isEmpty(path)) {
+                                        //File file = new File(path);
+                                        Glide.with(context).load(path)
+                                                .error(R.mipmap.ic_launcher_round).into(iv_user_icon);
+                                    }
+                                }
+                            };
+
+                            Glide.with(context).load(UserHelper.getSavedUser().photoUrl).into(target);
                         }
+
+                        if(Tools.isNull(UserHelper.getSavedUser().name)){
+                            tv_user_name.setText(UserHelper.getSavedUser().phone);
+                        }else{
+                            tv_user_name.setText(UserHelper.getSavedUser().name);
+                        }
+
+                        tv_favourite.setText(UserHelper.getSavedUser().score+"");
                     }
-                });*/
+                });
+
+
         cb_free.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -288,7 +316,6 @@ public class MainActivity extends BaseActivity {
         if (UserHelper.getSavedUser() == null) {
             startActivity(LoginActivity.getLauncher(context));
         } else {
-            Log.e("zw","photo url : " + UserHelper.getSavedUser().photoUrl);
             if (!Tools.isNull(UserHelper.getSavedUser().photoUrl)) {
                 //头像
                 SimpleTarget<GlideDrawable> target = new SimpleTarget<GlideDrawable>() {
@@ -327,7 +354,6 @@ public class MainActivity extends BaseActivity {
     @OnClick(R.id.ll_user_icon)
     public void gotoUserinfo() {
         startActivity(UserInfoActivity.startActivity(context));
-        drawerLayout.closeDrawer(main_left_drawer_layout);
     }
 
     @OnClick(R.id.ll_setting)
@@ -533,10 +559,6 @@ public class MainActivity extends BaseActivity {
     private void initOtherLogin() {
         if (UserHelper.getSavedUser() == null && drawerLayout.isDrawerOpen(main_left_drawer_layout)) {
             drawerLayout.closeDrawer(main_left_drawer_layout);
-        } else if(UserHelper.getSavedUser() != null
-                    && (ChoiceManager.getInstance().getFromActivity() == ChoiceManager.USER_INFO)) {
-            openLeft();
-            ChoiceManager.getInstance().setFromActivity(ChoiceManager.NO_INFO);
         }
 
         //如果没有登录，就去验证
