@@ -31,11 +31,12 @@ public class TaocanPayPresenter extends BasePresenter<TaoCanPayView> {
         api= ApiFactory.getFactory().create(TaocanPayapi.class);
     }
 
-    public void payTaocan(int businessPackageId,double totalFee){
+    public void payTaocan(int type, int businessPackageId,double totalFee){
         RequestPayTaocanBean bean =new RequestPayTaocanBean();
-        bean.businessPackageId=businessPackageId;
+        bean.packageId=businessPackageId;
         bean.totalFee=totalFee;
-        bean.appUserId= UserHelper.getSavedUser().appUserId;
+//        bean.appUserId= UserHelper.getSavedUser().appUserId;
+        bean.payType = type;
         api.payTaocan(UserHelper.getSavedUser().token,bean)
                 .compose(new ResponseTransformer<>(this.<BaseData>bindUntilEvent(ActivityEvent.DESTROY)))
                 .subscribe(new ResponseSubscriber<BaseData>(view) {

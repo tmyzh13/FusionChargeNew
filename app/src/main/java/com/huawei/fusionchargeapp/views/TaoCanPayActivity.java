@@ -83,17 +83,17 @@ public class TaoCanPayActivity extends BaseActivity<TaoCanPayView,TaocanPayPrese
         bean.imgRes=R.mipmap.pay_money;
         bean.name=getString(R.string.pay_balance);
         bean.hint=getString(R.string.pay_balance_hint);
-        bean.type="0";
+        bean.type="3";
         PayStyleBean bean1=new PayStyleBean();
         bean1.imgRes=R.mipmap.list_ic_weixin;
         bean1.name=getString(R.string.pay_wechat);
         bean1.hint=getString(R.string.pay_wechat_hint);
-        bean1.type="1";
+        bean1.type="2";
         PayStyleBean bean2=new PayStyleBean();
         bean2.imgRes=R.mipmap.list_ic_zhi;
         bean2.name=getString(R.string.pay_alipay);
         bean2.hint=getString(R.string.pay_alipay_hint);
-        bean2.type="2";
+        bean2.type="1";
         list.add(bean);
         list.add(bean1);
         list.add(bean2);
@@ -121,9 +121,7 @@ public class TaoCanPayActivity extends BaseActivity<TaoCanPayView,TaocanPayPrese
 
     @OnClick(R.id.tv_pay)
     public void goPay(){
-        if(adapter.getCurrentPosition()==0){
-            //余额支付
-            presenter.payTaocan(appBussinessId,totalFee);
-        }
+
+        presenter.payTaocan(Integer.parseInt(list.get(adapter.getCurrentPosition()).type),appBussinessId,totalFee);
     }
 }

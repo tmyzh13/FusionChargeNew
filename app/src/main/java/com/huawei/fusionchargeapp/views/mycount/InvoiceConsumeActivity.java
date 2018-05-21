@@ -125,7 +125,9 @@ public class InvoiceConsumeActivity extends BaseActivity<InvoiceHistoryView,Invo
                 data.add(bean.get(i));
             }
         }
-        adapter.setData(data);
+        if (data != null && data.size() != 0) {
+            adapter.setData(data);
+        }
     }
 
     @Override
