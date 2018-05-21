@@ -105,7 +105,7 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
         adapter=new InvoicePayAdapter(context);
         List<PayStyleBean> list =new ArrayList<>();
         PayStyleBean bean =new PayStyleBean();
-        bean.imgRes=R.mipmap.account_03;
+        bean.imgRes=R.drawable.list_04;
         bean.name=getString(R.string.apply_invoice_to_pay);
         bean.hint=getString(R.string.apply_invoice_to_pay_postage);
         bean.type="0";

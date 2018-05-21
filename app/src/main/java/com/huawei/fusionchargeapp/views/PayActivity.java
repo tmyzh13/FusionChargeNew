@@ -164,7 +164,7 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
             id = tcBean.businessPackageId;
             PayStyleBean bean =new PayStyleBean();
             bean.type="5";
-            bean.imgRes=R.mipmap.list_ic_money;
+            bean.imgRes=R.drawable.list_01;
             bean.name=tcBean.businessName;
             if (tcBean.limitType == 0) {
                 bean.hint = getString(R.string.remain_charge_num,tcBean.limitCondition+"");
