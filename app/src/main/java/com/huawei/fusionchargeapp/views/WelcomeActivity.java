@@ -23,7 +23,7 @@ import com.huawei.fusionchargeapp.R;
 
 public class WelcomeActivity extends BaseActivity {
 
-    public static final String IS_FROM_OTHER_APP = "from_other_app";
+    public static final String IS_FROM_OTHER_APP = "fromIAdmin";
 
 
 

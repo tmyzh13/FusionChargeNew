@@ -532,6 +532,7 @@ public class MainActivity extends BaseActivity {
         } else if(UserHelper.getSavedUser() != null
                     && (ChoiceManager.getInstance().getFromActivity() == ChoiceManager.USER_INFO)) {
             openLeft();
+            ChoiceManager.getInstance().setFromActivity(ChoiceManager.NO_INFO);
         }
 
         //如果没有登录，就去验证

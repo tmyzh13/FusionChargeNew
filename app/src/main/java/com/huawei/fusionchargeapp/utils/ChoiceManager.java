@@ -20,6 +20,8 @@ public class ChoiceManager {
     private double distance=Constant.DEFAULT_DISTANCE;
 
     public static final int USER_INFO = 123;
+    public static final int NO_INFO = -1;
+
     private int fromActivity = -1;
 
     private ChoiceManager(){

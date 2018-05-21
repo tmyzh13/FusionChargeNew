@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.corelibs.base.BaseActivity;
+import com.corelibs.common.AppManager;
 import com.corelibs.utils.PreferencesHelper;
 import com.corelibs.utils.ToastMgr;
 import com.corelibs.utils.rxbus.RxBus;
@@ -269,6 +270,7 @@ public class AppointmentChargeActivity extends BaseActivity<AppointView, Appoint
         intent.putExtra("runCode",runCode);
         intent.putExtra("reserveId",bean.getReserveId() + "");
         startActivity(intent);
+        AppManager.getAppManager().finishActivity(ChargeDetailsActivity.class);
         this.finish();
     }
 
