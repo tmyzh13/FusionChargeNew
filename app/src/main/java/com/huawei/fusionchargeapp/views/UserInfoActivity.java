@@ -341,7 +341,6 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
         hideLoading();
         Toast.makeText(this, getString(R.string.user_info_modify_success), Toast.LENGTH_SHORT).show();
 //        startActivity(MainActivity.getLauncher(UserInfoActivity.this));
-        RxBus.getDefault().send(new Object(),Constant.REFRESH_MAIN_HEAD_PHOTO);
         finish();
         // 提交成功再请求获取用户信息接口
         //presenter.doGetUserInfoRequest();
@@ -349,7 +348,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
 
     @Override
     protected void onDestroy() {
-        ChoiceManager.getInstance().setFromActivity(ChoiceManager.USER_INFO);
+        RxBus.getDefault().send(new Object(),Constant.REFRESH_MAIN_HEAD_PHOTO);
         super.onDestroy();
     }
 
