@@ -295,7 +295,7 @@ public class ChagerStatueActivity extends BaseActivity<ChargerStatueView, Charge
                 enableEndButton();
             }
 
-            tv_current_charge.setText(bean.soc*100 + "%");
+            tv_current_charge.setText(bean.soc + "%");
             //kwh 当前电量
             tv_charged_enegy.setText(bean.kwh + getString(R.string.du));
             //05:04:25

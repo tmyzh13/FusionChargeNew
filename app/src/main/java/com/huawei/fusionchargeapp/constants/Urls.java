@@ -13,12 +13,12 @@ public class Urls {
 //    public static final String ROOT="http://10.40.143.130:8088/charger/api/v1/";//胡明明
 //    public static final String ROOT="http://10.40.143.130:8088/charger/api/v1/";//菊1
 //    public static final String ROOT = "http://114.115.141.57:8080/charger/api/v1/";
-    public static final String ROOT = "http://114.115.169.46:8088/charger/api/v1/";  //开发环境
+//    public static final String ROOT = "http://114.115.169.46:8088/charger/api/v1/";  //开发环境
     //    public static final String ROOT = "http://114.115.141.57:8080/charger/api/v1/";      //测试环境
 //    public static final String ROOT = "http://114.115.144.154:8088/charger/api/v1/";//新测试环境
 //    public static final String ROOT="http://139.159.134.139:8088/charger/api/v1/";//5-7出包
 //    public static final String ROOT = "http://10.40.143.10:8088/charger/api/v1/";   //大灰灰
-//    public static final String ROOT = "http://10.40.143.49:8088/charger/api/v1/";
+    public static final String ROOT = "http://10.40.143.49:8088/charger/api/v1/";
 //    public static final String ROOT = "http://10.40.143.72:8088/charger/api/v1/";
 //    public static final String ROOT = "http://10.40.143.72:8088/charger/api/v1/";
 //    public static final String ROOT = "http://10.186.254.65:8088/charger/api/v1/";//张楠
@@ -123,12 +123,12 @@ public class Urls {
     //app上可用套餐
     public static final String APP_TAO_CAN="appBusinessPackage/queryUsefulBusinessPackage";
     //购买套餐
-    public static final String APP_TAO_CAN_PAY="appBusinessPackage/appUserPayForBusinessPackage";
+    public static final String APP_TAO_CAN_PAY="orderPay/buyPackage";
 
     //用户注销
     public static final String USER_LOGOUT="user/userLogOut";
     //我的套餐
-    public static final String MY_TAO_CAN="appBusinessPackage/appUserPayByBusinessPackage/";
+    public static final String MY_TAO_CAN="appBusinessPackage/queryMyBusinessPackage/";
     //申请开票
     public static final String APPLY_INVOICE="invoice/saveInvoinceInfo";
 
