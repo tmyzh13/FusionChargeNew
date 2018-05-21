@@ -119,9 +119,15 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
         bean2.name=getString(R.string.pay_alipay);
         bean2.hint=getString(R.string.apply_invoice_ali_postage);
         bean2.type="2";
+        PayStyleBean bean3=new PayStyleBean();
+        bean3.imgRes=R.mipmap.account_03;
+        bean3.name=getString(R.string.remain_pay);
+        bean3.hint=getString(R.string.apply_invoice_to_pay_postage);
+        bean3.type="3";
         list.add(bean1);
         list.add(bean2);
         list.add(bean);
+        list.add(bean3);
 
         adapter.addAll(list);
         listView.setAdapter(adapter);
