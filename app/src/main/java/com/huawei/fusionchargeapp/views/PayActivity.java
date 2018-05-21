@@ -167,9 +167,9 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
             bean.imgRes=R.mipmap.list_ic_money;
             bean.name=tcBean.businessName;
             if (tcBean.limitType == 0) {
-                bean.hint = getString(R.string.remain_charge_num,tcBean.businessStartTime.substring(0, Tools.DATE_LENGTH_FROM_SERVER)+"~"+tcBean.businessEndTime.substring(0, Tools.DATE_LENGTH_FROM_SERVER));
+                bean.hint = getString(R.string.remain_charge_num,tcBean.limitCondition+"");
             } else {
-                bean.hint = getString(R.string.invalid_time,tcBean.limitCondition+"");
+                bean.hint = getString(R.string.invalid_time,tcBean.businessStartTime.substring(0, Tools.DATE_LENGTH_FROM_SERVER)+"~"+tcBean.businessEndTime.substring(0, Tools.DATE_LENGTH_FROM_SERVER));
             }
             List<PayStyleBean> temp = new ArrayList<>();
             temp.add(bean);
