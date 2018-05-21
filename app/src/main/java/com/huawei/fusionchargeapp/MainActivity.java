@@ -39,11 +39,13 @@ import com.google.gson.reflect.TypeToken;
 import com.huawei.fusionchargeapp.constants.Constant;
 import com.huawei.fusionchargeapp.constants.Urls;
 import com.huawei.fusionchargeapp.model.UserHelper;
+import com.huawei.fusionchargeapp.model.apis.LoginApi;
 import com.huawei.fusionchargeapp.model.apis.ScanApi;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
 import com.huawei.fusionchargeapp.model.beans.RequestIadminLoginBean;
 import com.huawei.fusionchargeapp.model.beans.ScanChargeInfo;
 import com.huawei.fusionchargeapp.model.beans.UserBean;
+import com.huawei.fusionchargeapp.model.beans.UserInfoBean;
 import com.huawei.fusionchargeapp.model.beans.W3User;
 import com.huawei.fusionchargeapp.utils.ChoiceManager;
 import com.huawei.fusionchargeapp.utils.Tools;
@@ -286,6 +288,7 @@ public class MainActivity extends BaseActivity {
         if (UserHelper.getSavedUser() == null) {
             startActivity(LoginActivity.getLauncher(context));
         } else {
+            Log.e("zw","photo url : " + UserHelper.getSavedUser().photoUrl);
             if (!Tools.isNull(UserHelper.getSavedUser().photoUrl)) {
                 //头像
                 SimpleTarget<GlideDrawable> target = new SimpleTarget<GlideDrawable>() {
@@ -305,6 +308,7 @@ public class MainActivity extends BaseActivity {
                         }
                     }
                 };
+
                 Glide.with(context).load(UserHelper.getSavedUser().photoUrl).into(target);
             }
 
@@ -652,6 +656,7 @@ public class MainActivity extends BaseActivity {
                             goToBindW3Account();
                         } else {
                             UserHelper.saveUser(baseData.data);
+                            getUserInfo();
                             RxBus.getDefault().send(new Object(), Constant.REFRESH_HOME_STATUE);
                         }
 
@@ -674,6 +679,36 @@ public class MainActivity extends BaseActivity {
                         }
                         return super.operationError(baseData, status, message);
                     }
+                });
+    }
+
+    /**
+     * W3登录成功后去获取用户的详细信息
+     */
+    private void getUserInfo(){
+        LoginApi api = ApiFactory.getFactory().create(LoginApi.class);
+        api.getUserInfo(UserHelper.getSavedUser().token)
+                .compose(new ResponseTransformer<>(this.<BaseData<UserInfoBean>>bindUntilEvent(ActivityEvent.DESTROY)))
+                .subscribe(new ResponseSubscriber<BaseData<UserInfoBean>>() {
+                    @Override
+                    public void success(BaseData<UserInfoBean> baseData) {
+                        UserInfoBean userInfoBean = baseData.data;
+                        UserHelper.saveUserInfo(baseData.data);
+                        //保存用户信息
+                        UserBean userBean = UserHelper.getSavedUser();
+
+                        userBean.photoUrl = userInfoBean.photoUrl;
+                        userBean.name = userInfoBean.name;
+                        userBean.sex = userInfoBean.sex;
+                        userBean.sexName = userInfoBean.sexName;
+                        userBean.email = userInfoBean.email;
+                        userBean.birthDay = userInfoBean.birth;
+                        userBean.address = userInfoBean.address;
+                        userBean.vinCode = userInfoBean.vinCode;
+
+                        UserHelper.saveUser(userBean);
+                    }
+
                 });
     }
 

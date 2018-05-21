@@ -17,6 +17,7 @@ import com.huawei.fusionchargeapp.model.beans.CheckCodeBean;
 import com.huawei.fusionchargeapp.model.beans.LoginRequestBean;
 import com.huawei.fusionchargeapp.model.beans.RestPwdRequestBean;
 import com.huawei.fusionchargeapp.model.beans.UserBean;
+import com.huawei.fusionchargeapp.model.beans.UserInfoBean;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.interfaces.LoginView;
 import com.trello.rxlifecycle.ActivityEvent;
@@ -73,7 +74,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                                 PreferencesHelper.remove("token");
                             }
                             PreferencesHelper.saveData("token", baseData.data.token);
-                            view.loginSuccess();
+                            getUserInfo();
                         } else {
                             view.loginFailure();
                         }
@@ -82,6 +83,48 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                     public boolean operationError(BaseData<UserBean> userBeanBaseData, int status, String message) {
 
                         return super.operationError(userBeanBaseData, status, message);
+                    }
+                });
+    }
+
+    /**
+     * 登录成功后去请求用户详细信息
+     */
+    private void getUserInfo(){
+        api.getUserInfo(UserHelper.getSavedUser().token)
+                .compose(new ResponseTransformer<>(this.<BaseData<UserInfoBean>>bindUntilEvent(ActivityEvent.DESTROY)))
+                .subscribe(new ResponseSubscriber<BaseData<UserInfoBean>>() {
+                    @Override
+                    public void success(BaseData<UserInfoBean> userInfoBeanBaseData) {
+                        UserInfoBean userInfoBean = userInfoBeanBaseData.data;
+                        UserHelper.saveUserInfo(userInfoBean);
+                        //保存用户信息
+                        UserBean userBean = UserHelper.getSavedUser();
+
+                        userBean.photoUrl = userInfoBean.photoUrl;
+                        userBean.name = userInfoBean.name;
+                        userBean.sex = userInfoBean.sex;
+                        userBean.sexName = userInfoBean.sexName;
+                        userBean.email = userInfoBean.email;
+                        userBean.birthDay = userInfoBean.birth;
+                        userBean.address = userInfoBean.address;
+                        userBean.vinCode = userInfoBean.vinCode;
+
+                        UserHelper.saveUser(userBean);
+
+                        view.loginSuccess();
+                    }
+
+                    @Override
+                    public boolean operationError(BaseData<UserInfoBean> userInfoBeanBaseData, int status, String message) {
+                        view.loginSuccess();
+                        return super.operationError(userInfoBeanBaseData, status, message);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        view.loginSuccess();
                     }
                 });
     }
