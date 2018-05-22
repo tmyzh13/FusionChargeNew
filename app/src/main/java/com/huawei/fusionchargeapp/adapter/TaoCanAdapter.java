@@ -28,7 +28,7 @@ public class TaoCanAdapter extends QuickAdapter<TaocanBean> {
         ll_pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(TaoCanPayActivity.getLauncher(context,item.id,item.fee));
+                context.startActivity(TaoCanPayActivity.getLauncher(context,item.id,item.fee,item.limitType,item.name,item.limitCondition,item.startTime,item.endTime));
             }
         });
         helper.setText(R.id.tv_taocan_name,item.name)

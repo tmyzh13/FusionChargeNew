@@ -1,60 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/app_bg">
+    android:background="@color/app_bg"
+    android:orientation="vertical">
 
     <com.huawei.fusionchargeapp.weights.NavBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/nav"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
-        app:cardElevation="2dp"
         android:background="@color/white"
-        >
+        app:cardElevation="2dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_tao_can_name"
+                style="@style/text_normal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp" />
+
+            <View style="@style/view_line" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp">
+
+                <TextView
+                    android:id="@+id/tv_style"
+                    style="@style/text_normal"
+                    android:layout_centerVertical="true" />
+
+                <LinearLayout
+                    android:id="@+id/ll_electronic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_electronic"
+                        style="@style/text_normal"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true" />
+
+                    <TextView
+                        style="@style/text_normal"
+                        android:text="@string/du" />
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <View style="@style/view_line" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
+
                 <TextView
                     style="@style/text_normal"
-                    android:text="@string/pay_total"
                     android:layout_centerVertical="true"
-                    />
+                    android:text="@string/pay_validate_time" />
+
+                <TextView
+                    android:id="@+id/tv_validate_date"
+                    style="@style/text_normal"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true" />
+
+
+            </RelativeLayout>
+
+            <View style="@style/view_line" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
+
+                <TextView
+                    style="@style/text_normal"
+                    android:layout_centerVertical="true"
+                    android:text="@string/pay_tao_can_fee" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
                     android:layout_alignParentRight="true"
-                    >
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
                     <TextView
+                        android:id="@+id/tv_total_fee"
+                        style="@style/text_normal"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        style="@style/text_normal"
-                        android:textColor="@color/red"
-                        android:id="@+id/tv_total_fee"
-                        />
+                        android:textColor="@color/red" />
+
                     <TextView
                         style="@style/text_normal"
-                        android:text="@string/yuan"
-                        />
+                        android:text="@string/yuan" />
                 </LinearLayout>
 
 
@@ -62,56 +128,55 @@
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
+
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
-        app:cardElevation="2dp"
         android:background="@color/white"
-        >
+        app:cardElevation="2dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
             <TextView
                 style="@style/text_normal"
-                android:textColor="@color/app_blue"
-                android:text="@string/pay_choice_pay"
+                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                />
-            <View
-                style="@style/view_line"/>
+                android:text="@string/pay_choice_pay"
+                android:textColor="@color/app_blue" />
+
+            <View style="@style/view_line" />
+
             <com.corelibs.views.NoScrollingListView
+                android:id="@+id/list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="none"
-                android:dividerHeight="1dp"
-                android:divider="@color/line"
-                android:listSelector="@color/transparent"
                 android:cacheColorHint="@color/transparent"
-                android:id="@+id/list"
-                />
+                android:divider="@color/line"
+                android:dividerHeight="1dp"
+                android:listSelector="@color/transparent"
+                android:scrollbars="none" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
     <TextView
+        android:id="@+id/tv_pay"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:text="@string/action_confirm_pay"
-        android:background="@drawable/tv_corner_blue"
         android:layout_marginTop="30dp"
-        android:id="@+id/tv_pay"
-        />
+        android:background="@drawable/tv_corner_blue"
+        android:gravity="center"
+        android:text="@string/action_confirm_pay"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
 
 </LinearLayout>

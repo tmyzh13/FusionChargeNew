@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.corelibs.base.BaseActivity;
@@ -20,6 +21,7 @@ import com.huawei.fusionchargeapp.model.beans.PayStyleBean;
 import com.huawei.fusionchargeapp.model.beans.UserBean;
 import com.huawei.fusionchargeapp.presenter.PayPresenter;
 import com.huawei.fusionchargeapp.presenter.TaocanPayPresenter;
+import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.interfaces.PayView;
 import com.huawei.fusionchargeapp.views.interfaces.TaoCanPayView;
 import com.huawei.fusionchargeapp.weights.NavBar;
@@ -42,17 +44,38 @@ public class TaoCanPayActivity extends BaseActivity<TaoCanPayView,TaocanPayPrese
     NoScrollingListView listView;
     @Bind(R.id.tv_total_fee)
     TextView tv_total_fee;
+    @Bind(R.id.tv_tao_can_name)
+    TextView tv_tao_can_name;
+    @Bind(R.id.tv_style)
+    TextView tv_style;
+    @Bind(R.id.ll_electronic)
+    LinearLayout ll_electronic;
+    @Bind(R.id.tv_electronic)
+    TextView tv_electronic;
+    @Bind(R.id.tv_validate_date)
+    TextView tv_validate_date;
 
     private Context context=TaoCanPayActivity.this;
     private PayStyleAdpter adapter;
     private List<PayStyleBean> list;
     private int appBussinessId;
     private double totalFee;
+    private int limitType;
+    private String name;
+    private int electronic;
+    private String startTime;
+    private String endTime;
 
-    public static Intent getLauncher(Context context,int appBussinessId,double totalFee){
+    public static Intent getLauncher(Context context,int appBussinessId,double totalFee,
+                                     int limitType,String name,int electronic,String startTime,String endTime){
         Intent intent=new Intent(context,TaoCanPayActivity.class);
         intent.putExtra("id",appBussinessId);
         intent.putExtra("total",totalFee);
+        intent.putExtra("type",limitType);
+        intent.putExtra("name",name);
+        intent.putExtra("electronic",electronic);
+        intent.putExtra("start",startTime);
+        intent.putExtra("end",endTime);
         return intent;
     }
 
@@ -74,9 +97,22 @@ public class TaoCanPayActivity extends BaseActivity<TaoCanPayView,TaocanPayPrese
 
         appBussinessId=getIntent().getIntExtra("id",0);
         totalFee=getIntent().getDoubleExtra("total",0);
+        limitType=getIntent().getIntExtra("type",0);
+        name=getIntent().getStringExtra("name");
+        electronic=getIntent().getIntExtra("electronic",0);
+        startTime=getIntent().getStringExtra("start");
+        endTime=getIntent().getStringExtra("end");
 
+        tv_tao_can_name.setText(name);
         tv_total_fee.setText(totalFee+"");
-
+        if(limitType==0){
+            tv_style.setText(getString(R.string.pay_limite));
+            tv_electronic.setText(electronic+"");
+        }else{
+            tv_style.setText(getString(R.string.pay_unlimite));
+            ll_electronic.setVisibility(View.GONE);
+        }
+        tv_validate_date.setText(startTime.substring(0, Tools.BIRTHDAY_LENGTH)+"-"+endTime.substring(0,Tools.BIRTHDAY_LENGTH));
         adapter=new PayStyleAdpter(context);
         list =new ArrayList<>();
         PayStyleBean bean =new PayStyleBean();
