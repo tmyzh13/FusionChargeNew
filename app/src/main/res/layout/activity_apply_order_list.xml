@@ -40,11 +40,9 @@
         android:id="@+id/bottom_tool"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:background="@color/text_white"
         android:orientation="vertical">
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_5"
-            />
         <TextView
             android:id="@+id/apply_total"
             android:layout_width="match_parent"
