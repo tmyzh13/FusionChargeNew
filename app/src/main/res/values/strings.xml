@@ -522,4 +522,5 @@
     <string name="invalid_time">有效期：%1$s</string>
     <string name="remain_charge_num">剩余电量：%1$s度</string>
     <string name="remain_pay">余额支付</string>
+    <string name="no_tao_can">没有套餐</string>
 </resources>

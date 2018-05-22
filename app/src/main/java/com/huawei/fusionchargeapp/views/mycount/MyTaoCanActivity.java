@@ -79,7 +79,7 @@ public class MyTaoCanActivity extends BaseActivity<MyTaocanView,MyTaocanPresente
     @Override
     public void renderMyTaoCan(MyTaocanBean bean) {
         if(bean==null){
-            ToastMgr.show("没有套餐");
+            ToastMgr.show(R.string.no_tao_can);
             finish();
         }else{
             tv_name.setText(bean.businessName);

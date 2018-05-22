@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -70,6 +71,8 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
     RadioButton rb_company;
     @Bind(R.id.rb_people)
     RadioButton rb_people;
+    @Bind(R.id.ll_post)
+    LinearLayout ll_post;
 
     private Context context=ApplyInvoiceActivity.this;
     private InvoicePayAdapter adapter;
@@ -181,6 +184,9 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
             }
         });
 
+        if(total<200){
+            ll_post.setVisibility(View.VISIBLE);
+        }
 
 
     }
@@ -213,6 +219,11 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
         }else if(rb_people.isChecked()){
             type=getString(R.string.invoice_people);
         }
+
+        if(ll_post.getVisibility()==View.VISIBLE){
+            //支付有票费用的 逻辑
+        }
+
         presenter.applyInvoice(orderNums,type,et_invoice_title.getText().toString(),
                 et_invoice_tax.getText().toString().trim(),et_invoice_connect.getText().toString().trim(),
                 total,moreContent,et_invoice_receive.getText().toString().trim(),et_invoice_connect.getText().toString().trim(),

@@ -32,6 +32,7 @@
     <string name="code_221">有进行中的订单</string>
     <string name="code_222">车辆被其他用户占用</string>
     <string name="code_223">附近没有可用车辆</string>
+    <string name="code_230">已有套餐，不能重复购买</string>
     <string name="code_250">订单未支付</string>
     <string name="code_251">订单已支付</string>
     <string name="code_295">启动充电失败</string>
