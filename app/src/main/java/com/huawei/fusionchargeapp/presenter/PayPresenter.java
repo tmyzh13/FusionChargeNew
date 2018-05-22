@@ -88,7 +88,7 @@ public class PayPresenter extends BasePresenter<PayView> {
         bean.payType=payType;
         bean.totalFee=total;
 
-        bean.businessPackageId = id;
+        bean.packageId = id;
         view.showLoading();
         api.balancePay(UserHelper.getSavedUser().token,bean)
                 .compose(new ResponseTransformer<>(this.<BaseData>bindToLifeCycle()))

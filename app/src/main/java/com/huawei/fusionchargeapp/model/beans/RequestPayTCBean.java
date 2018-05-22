@@ -8,5 +8,5 @@ public class RequestPayTCBean {
     public String orderRecordNum;
     public double totalFee;
     public int payType;
-    public long businessPackageId;
+    public long packageId;
 }

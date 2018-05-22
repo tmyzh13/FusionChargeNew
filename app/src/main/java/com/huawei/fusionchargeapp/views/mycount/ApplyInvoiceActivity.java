@@ -129,8 +129,8 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
         bean3.type="3";
         list.add(bean1);
         list.add(bean2);
-        list.add(bean);
         list.add(bean3);
+        list.add(bean);
 
         adapter.addAll(list);
         listView.setAdapter(adapter);
