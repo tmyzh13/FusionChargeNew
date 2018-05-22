@@ -9,7 +9,9 @@ import com.corelibs.base.BaseActivity;
 import com.corelibs.base.BasePresenter;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.adapter.TaoCanAdapter;
+import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.beans.TaocanBean;
+import com.huawei.fusionchargeapp.model.beans.UserBean;
 import com.huawei.fusionchargeapp.presenter.MyTcPresenter;
 import com.huawei.fusionchargeapp.views.interfaces.MyTcView;
 import com.huawei.fusionchargeapp.weights.NavBar;
@@ -41,6 +43,7 @@ public class MyTcActivity extends BaseActivity<MyTcView,MyTcPresenter> implement
 
     @Override
     public void goLogin() {
+        UserHelper.clearUserInfo(UserBean.class);
         startActivity(LoginActivity.getLauncher(context));
     }
 

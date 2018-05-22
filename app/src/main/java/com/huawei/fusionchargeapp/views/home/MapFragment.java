@@ -485,7 +485,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                     != PackageManager.PERMISSION_GRANTED
                     || ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_PHONE_STATE)
                     != PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(getContext(), "没有权限,请手动开启定位权限", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.no_permission_location), Toast.LENGTH_SHORT).show();
                 // 申请一个（或多个）权限，并提供用于回调返回的获取码（用户定义）
                 ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.READ_PHONE_STATE}, 10);
             }
@@ -663,7 +663,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
         paintAddress.setFakeBoldText(true);
         if (mapInfoBean.averageScore.equals("-1.0")) {
             tv_map_info_score.setText("");
-            scoreUnit.setText("暂无评分");
+            scoreUnit.setText(getString(R.string.no_score));
         } else {
             tv_map_info_score.setText(mapInfoBean.averageScore);
             scoreUnit.setText(R.string.score);
@@ -718,7 +718,6 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
     @Override
     public void renderAppoinmentInfo(boolean has, HomeAppointmentBean bean) {
         ActionControl.getInstance(getContext()).setHasAppointment(has, bean);
-        Log.e("yzh", "renderAppointmentInfp");
         homeAppointmentBean = bean;
         if (has) {
             tv_pile_num.setText(bean.runCode);

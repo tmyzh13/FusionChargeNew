@@ -9,7 +9,9 @@ import android.widget.TextView;
 import com.corelibs.base.BaseActivity;
 import com.corelibs.base.BasePresenter;
 import com.huawei.fusionchargeapp.R;
+import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.beans.BalanceBean;
+import com.huawei.fusionchargeapp.model.beans.UserBean;
 import com.huawei.fusionchargeapp.presenter.MyAcountPresenter;
 import com.huawei.fusionchargeapp.views.LoginActivity;
 import com.huawei.fusionchargeapp.views.RechargeAndConsumeDetailActivity;
@@ -38,6 +40,7 @@ public class MyAcountActivity extends BaseActivity<MyAcountView,MyAcountPresente
 
     @Override
     public void goLogin() {
+        UserHelper.clearUserInfo(UserBean.class);
         startActivity(LoginActivity.getLauncher(context));
     }
 

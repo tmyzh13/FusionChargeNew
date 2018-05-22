@@ -18,9 +18,11 @@ import com.corelibs.utils.ToastMgr;
 import com.corelibs.views.NoScrollingListView;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.adapters.InvoicePayAdapter;
+import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.apis.ApplyInvoiceApi;
 import com.huawei.fusionchargeapp.model.beans.AppointResponseBean;
 import com.huawei.fusionchargeapp.model.beans.PayStyleBean;
+import com.huawei.fusionchargeapp.model.beans.UserBean;
 import com.huawei.fusionchargeapp.presenter.ApplyInvoicePresenter;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.LoginActivity;
@@ -87,6 +89,7 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
 
     @Override
     public void goLogin() {
+        UserHelper.clearUserInfo(UserBean.class);
         startActivity(LoginActivity.getLauncher(context));
     }
 

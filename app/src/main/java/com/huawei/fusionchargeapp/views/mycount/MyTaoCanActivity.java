@@ -12,7 +12,9 @@ import com.corelibs.base.BasePresenter;
 import com.corelibs.utils.ToastMgr;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.constants.Constant;
+import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.beans.MyTaocanBean;
+import com.huawei.fusionchargeapp.model.beans.UserBean;
 import com.huawei.fusionchargeapp.presenter.MyTaocanPresenter;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.LoginActivity;
@@ -56,6 +58,7 @@ public class MyTaoCanActivity extends BaseActivity<MyTaocanView,MyTaocanPresente
 
     @Override
     public void goLogin() {
+        UserHelper.clearUserInfo(UserBean.class);
         startActivity(LoginActivity.getLauncher(context));
     }
 
