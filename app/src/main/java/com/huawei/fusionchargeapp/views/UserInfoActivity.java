@@ -354,6 +354,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
 
     @Override
     public void onUploadPhotoSuccess(String imgUrl) {
+        hideLoading();
         if (!Tools.isNull(theNeedLoadImgPath)) {
             PreferencesHelper.saveData(Tools.USER_PHOTO_PATH,theNeedLoadImgPath);
             Glide.with(this).load(theNeedLoadImgPath)
@@ -371,6 +372,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
 
     @Override
     public void onUploadPhotoFail() {
+        hideLoading();
         showToast(getString(R.string.upload_photo_error));
     }
 
@@ -522,6 +524,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
                     Log.e("zw","log .to string : " + uploadImageName);
 
                     theNeedLoadImgPath = images.get(0).path;
+                    showLoading();
                     presenter.uploadImage(file);
                 }
             } else {
