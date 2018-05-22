@@ -289,7 +289,6 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    Log.e("yzh","1111111111111111");
                     cb_busy.setChecked(false);
                 }
             }

@@ -146,5 +146,5 @@ public class Urls {
     //获取我的账户余额
     public static final String GET_MY_BALANCE="balance";
     //获取用户积分
-    public static final String GET_USER_SCORE="api/v1/user/getUserScore";
+    public static final String GET_USER_SCORE="user/getUserScore";
 }

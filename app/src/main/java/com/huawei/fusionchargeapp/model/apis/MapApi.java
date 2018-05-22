@@ -22,6 +22,7 @@ import com.huawei.fusionchargeapp.model.beans.SearchCondition;
 import java.util.List;
 
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import rx.Observable;
@@ -65,7 +66,7 @@ public interface MapApi {
     @POST(Urls.REPORT_LOCATION)
     Observable<BaseData> reportUserLocation(@Body ReportUserLocation bean);
 
-    @POST(Urls.GET_USER_SCORE)
+    @GET(Urls.GET_USER_SCORE)
     Observable<BaseData<ScoreBean>> getUserScore(@Header("AccessToken") String token);
 
 }
