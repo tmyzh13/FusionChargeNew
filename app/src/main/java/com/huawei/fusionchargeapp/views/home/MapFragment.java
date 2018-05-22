@@ -492,6 +492,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
         }
         if (UserHelper.getSavedUser() != null) {
             presenter.getUserAppointment();
+            presenter.getUserScore();
         }
 
     }

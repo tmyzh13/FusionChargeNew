@@ -137,7 +137,6 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.e("yzh","---"+position);
                 adapter.setCurrentPosition(position);
             }
         });

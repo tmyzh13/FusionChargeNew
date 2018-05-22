@@ -145,4 +145,6 @@ public class Urls {
     public static final String INVOICE_HISTORY_ITEM_CONSUME = "invoice/getInvoiceBoundOrder/";
     //获取我的账户余额
     public static final String GET_MY_BALANCE="balance";
+    //获取用户积分
+    public static final String GET_USER_SCORE="api/v1/user/getUserScore";
 }

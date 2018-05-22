@@ -28,6 +28,8 @@ import com.huawei.fusionchargeapp.model.beans.RequestChargeStateBean;
 import com.huawei.fusionchargeapp.model.beans.RequestFeeBean;
 import com.huawei.fusionchargeapp.model.beans.RequestHomeAppointment;
 import com.huawei.fusionchargeapp.model.beans.RequestOnlyUserId;
+import com.huawei.fusionchargeapp.model.beans.ScoreBean;
+import com.huawei.fusionchargeapp.model.beans.UserBean;
 import com.huawei.fusionchargeapp.utils.ChoiceManager;
 import com.huawei.fusionchargeapp.views.interfaces.MapHomeView;
 import com.trello.rxlifecycle.ActivityEvent;
@@ -291,6 +293,21 @@ public class MapPresenter extends BasePresenter<MapHomeView> {
                     @Override
                     public void success(BaseData baseData) {
                         view.reportUserLocationSuccess();
+                    }
+                });
+    }
+
+    public void getUserScore(){
+        api.getUserScore(UserHelper.getSavedUser().token)
+                .compose(new ResponseTransformer<>(this.<BaseData<ScoreBean>>bindToLifeCycle()))
+                .subscribe(new ResponseSubscriber<BaseData<ScoreBean>>(view) {
+                    @Override
+                    public void success(BaseData<ScoreBean> scoreBeanBaseData) {
+                        if(scoreBeanBaseData.data!=null){
+                            UserBean userBean=UserHelper.getSavedUser();
+                            userBean.score=scoreBeanBaseData.data.score;
+                            UserHelper.saveUser(userBean);
+                        }
                     }
                 });
     }

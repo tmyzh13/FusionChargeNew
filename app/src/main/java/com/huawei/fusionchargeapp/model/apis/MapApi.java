@@ -15,6 +15,7 @@ import com.huawei.fusionchargeapp.model.beans.RequesHomeMapInfo;
 import com.huawei.fusionchargeapp.model.beans.RequestChargeStateBean;
 import com.huawei.fusionchargeapp.model.beans.RequestFeeBean;
 import com.huawei.fusionchargeapp.model.beans.RequestHomeAppointment;
+import com.huawei.fusionchargeapp.model.beans.ScoreBean;
 import com.huawei.fusionchargeapp.model.beans.SearchCondition;
 
 
@@ -63,5 +64,8 @@ public interface MapApi {
 
     @POST(Urls.REPORT_LOCATION)
     Observable<BaseData> reportUserLocation(@Body ReportUserLocation bean);
+
+    @POST(Urls.GET_USER_SCORE)
+    Observable<BaseData<ScoreBean>> getUserScore(@Header("AccessToken") String token);
 
 }
