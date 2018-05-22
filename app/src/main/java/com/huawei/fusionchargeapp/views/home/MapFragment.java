@@ -233,30 +233,30 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                     if (appointmentTime <= 0) {
                         //预约超时
                         if (AppManager.getAppManager().currentActivity().getClass().equals(MainActivity.class)) {
-                            Log.e("yzh",(homeAppointmentBean==null)+"--");
+                            Log.e("yzh", (homeAppointmentBean == null) + "--");
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     //结束时间小于=当前时间
-                                    if(homeAppointmentBean!=null){
-                                        if(!appointmentTimeOutDialog.isShowing()){
+                                    if (homeAppointmentBean != null) {
+                                        if (!appointmentTimeOutDialog.isShowing()) {
                                             appointmentTimeOutDialog.show();
                                         }
                                         appointmentTimeOutDialog.setIvDeleteListener(new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View v) {
-                                                    appointmentTimeOutDialog.dismiss();
-                                                }
+                                            @Override
+                                            public void onClick(View v) {
+                                                appointmentTimeOutDialog.dismiss();
+                                            }
                                         });
                                         appointmentTimeOutDialog.setReAppointment(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
                                                 appointmentTimeOutDialog.dismiss();
-                                                startActivity(new Intent(getActivity(),AppointmentChargeActivity.class));
+                                                startActivity(new Intent(getActivity(), AppointmentChargeActivity.class));
                                             }
                                         });
                                         homeAppointmentBean = null;
-                                        }
+                                    }
 //                                    }
                                 }
                             });
@@ -287,13 +287,13 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                             ActionControl.getInstance(getViewContext()).setHasNoPayOrder(false, null);
                         } else if (data.type == 1) {
                             //预约结束 屏蔽预约提示
-                            homeAppointmentBean=null;
+                            homeAppointmentBean = null;
                             ActionControl.getInstance(getViewContext()).setHasAppointment(false, null);
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     ll_appontment.setVisibility(View.GONE);
-                                    if(appointmentTimeOutDialog.isShowing()){
+                                    if (appointmentTimeOutDialog.isShowing()) {
                                         appointmentTimeOutDialog.dismiss();
                                     }
                                 }
@@ -310,9 +310,9 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
 
                     @Override
                     public void receive(Object data) {
-                        if(ChoiceManager.getInstance().getType()==0){
+                        if (ChoiceManager.getInstance().getType() == 0) {
                             presenter.getDataType0();
-                        }else{
+                        } else {
                             presenter.getData();
                         }
 
@@ -358,9 +358,9 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
 
     //获取地图数据
     private void initMapData() {
-        if(ChoiceManager.getInstance().getType()==0){
+        if (ChoiceManager.getInstance().getType() == 0) {
             presenter.getDataType0();
-        }else{
+        } else {
             presenter.getData();
         }
 
@@ -436,9 +436,9 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
             case 10:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // 获取到权限，作相应处理（调用定位SDK应当确保相关权限均被授权，否则可能引起定位失败）
-                    if(ChoiceManager.getInstance().getType()==0){
+                    if (ChoiceManager.getInstance().getType() == 0) {
                         presenter.getDataType0();
-                    }else{
+                    } else {
                         presenter.getData();
                     }
                 } else {
@@ -453,7 +453,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
 
     @OnClick(R.id.tv_pay)
     public void goPay() {
-        startActivity(PayActivity.getLauncher(getContext(), homeOrderBean.orderRecordNum,"0"));
+        startActivity(PayActivity.getLauncher(getContext(), homeOrderBean.orderRecordNum, "0"));
     }
 
     @Override
@@ -490,7 +490,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                 ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.READ_PHONE_STATE}, 10);
             }
         }
-        if(UserHelper.getSavedUser()!=null){
+        if (UserHelper.getSavedUser() != null) {
             presenter.getUserAppointment();
         }
 
@@ -542,7 +542,8 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
     }
 
     private boolean followMove = true;
-    private boolean isReportUserLocation=false;
+    private boolean isReportUserLocation = false;
+
     @Override
     public void onLocationChanged(AMapLocation aMapLocation) {
         if (mListener != null && aMapLocation != null) {
@@ -559,11 +560,11 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                 }
 
                 //在登陆的情况下上报一次用户坐标信息
-                if(UserHelper.getSavedUser()!=null){
+                if (UserHelper.getSavedUser() != null) {
                     //登陆过了
-                    if(!isReportUserLocation){
+                    if (!isReportUserLocation) {
                         //还没上报
-                        presenter.reportUserLocation(aMapLocation.getLatitude(),aMapLocation.getLongitude());
+                        presenter.reportUserLocation(aMapLocation.getLatitude(), aMapLocation.getLongitude());
                     }
                 }
 
@@ -588,7 +589,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
 
     }
 
-    private List<Marker> listMark=new ArrayList<>();
+    private List<Marker> listMark = new ArrayList<>();
 
     @Override
     public void renderMapData(List<MapDataBean> list) {
@@ -596,7 +597,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
 
         MyLocationBean bean = PreferencesHelper.getData(MyLocationBean.class);
         clearMark();
-        listMark=new ArrayList<>();
+        listMark = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
             //距离筛选
             if (bean != null) {
@@ -610,25 +611,25 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
             //点标记的标题和内容；
             markerOption.title(i + "");
             markerOption.draggable(true);//设置Marker可拖动
-            if(list.get(i).type.equals("pile")){
+            if (list.get(i).type.equals("pile")) {
                 markerOption.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory
-                    .decodeResource(getResources(), R.mipmap.home_ic_position)));
-            }else{
-                markerOption.icon(BitmapDescriptorFactory.fromBitmap(Tools.getNumberBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.home_ic_position1).copy(Bitmap.Config.ARGB_8888, true),list.get(i).pileNum+"")));
+                        .decodeResource(getResources(), R.mipmap.home_ic_position)));
+            } else {
+                markerOption.icon(BitmapDescriptorFactory.fromBitmap(Tools.getNumberBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.home_ic_position1).copy(Bitmap.Config.ARGB_8888, true), list.get(i).pileNum + "")));
 
             }
 //            markerOption.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory
 //                    .decodeResource(getResources(), R.mipmap.home_ic_position)));
             // 将Marker设置为贴地显示，可以双指下拉地图查看效果
             markerOption.setFlat(false);//设置marker平贴地图效果
-            Marker marker=aMap.addMarker(markerOption);
+            Marker marker = aMap.addMarker(markerOption);
             listMark.add(marker);
         }
     }
 
-    private void clearMark(){
-        for(int i=0;i<listMark.size();i++){
-            if(listMark.get(i)!=null){
+    private void clearMark() {
+        for (int i = 0; i < listMark.size(); i++) {
+            if (listMark.get(i) != null) {
                 listMark.get(i).remove();
             }
         }
@@ -636,7 +637,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
 
     @Override
     public void getMarkInfo(long id, MapInfoBean mapInfoBean) {
-        if(mapInfoBean==null){
+        if (mapInfoBean == null) {
             ToastMgr.show(getString(R.string.no_data));
             return;
         }
@@ -693,7 +694,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                 }
             }
             tv_map_info_current_fee.setText(min + getString(R.string.yuan_du) + "~" + max + getString(R.string.yuan_du));
-        }else{
+        } else {
             tv_map_info_current_fee.setText("0.0" + getString(R.string.yuan_du) + "~" + "0.0" + getString(R.string.yuan_du));
         }
 
@@ -717,7 +718,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
     @Override
     public void renderAppoinmentInfo(boolean has, HomeAppointmentBean bean) {
         ActionControl.getInstance(getContext()).setHasAppointment(has, bean);
-        Log.e("yzh","renderAppointmentInfp");
+        Log.e("yzh", "renderAppointmentInfp");
         homeAppointmentBean = bean;
         if (has) {
             tv_pile_num.setText(bean.runCode);
@@ -727,7 +728,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
 
             if (bean.reserveEndTime <= bean.nowTime) {
                 ll_appontment.setVisibility(View.GONE);
-                homeAppointmentBean=null;
+                homeAppointmentBean = null;
                 ActionControl.getInstance(getContext()).setHasAppointment(false, null);
             } else {
                 ll_appontment.setVisibility(View.VISIBLE);
@@ -760,7 +761,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
 
     @Override
     public void reportUserLocationSuccess() {
-        isReportUserLocation=true;
+        isReportUserLocation = true;
     }
 
     private ServiceConnection mConnection = new ServiceConnection() {
@@ -779,7 +780,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
 
     @OnClick(R.id.ll_appointment_guaild)
     public void goAppointmentGuaild() {
-        startActivity(GuildActivity.getLauncher(getContext(), homeAppointmentBean.latitude, homeAppointmentBean.longitude, homeAppointmentBean, false,homeAppointmentBean.chargingPileId,"pile"));
+        startActivity(GuildActivity.getLauncher(getContext(), homeAppointmentBean.latitude, homeAppointmentBean.longitude, homeAppointmentBean, false, homeAppointmentBean.chargingPileId, "pile"));
     }
 
     @OnClick(R.id.iv_guaild)
@@ -787,7 +788,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
         if (currentMapDataBean != null) {
             boolean choiceNotAppointment = false;
             if (homeAppointmentBean != null) {
-                Log.e("yzh",homeAppointmentBean.latitude+"--"+currentMapDataBean.latitude);
+                Log.e("yzh", homeAppointmentBean.latitude + "--" + currentMapDataBean.latitude);
                 if (homeAppointmentBean.latitude != currentMapDataBean.latitude || homeAppointmentBean.longitude != currentMapDataBean.longitude) {
                     choiceNotAppointment = true;
                 } else {
@@ -799,16 +800,16 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
             if (UserHelper.getSavedUser() == null || Tools.isNull(UserHelper.getSavedUser().token)) {
                 startActivity(LoginActivity.getLauncher(getContext()));
             } else {
-                startActivity(GuildActivity.getLauncher(getContext(), currentMapDataBean.latitude, currentMapDataBean.longitude, null, choiceNotAppointment,currentMapDataBean.id,currentMapDataBean.type));
+                startActivity(GuildActivity.getLauncher(getContext(), currentMapDataBean.latitude, currentMapDataBean.longitude, null, choiceNotAppointment, currentMapDataBean.id, currentMapDataBean.type));
             }
         }
     }
 
     @OnClick(R.id.iv_my_location)
-    public void backLcation(){
-        MyLocationBean  bean =PreferencesHelper.getData(MyLocationBean.class);
-        if(bean!=null){
-            aMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(bean.latitude,bean.longtitude), 14));
+    public void backLcation() {
+        MyLocationBean bean = PreferencesHelper.getData(MyLocationBean.class);
+        if (bean != null) {
+            aMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(bean.latitude, bean.longtitude), 14));
         }
     }
 

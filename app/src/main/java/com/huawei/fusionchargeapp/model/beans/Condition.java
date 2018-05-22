@@ -17,5 +17,5 @@ public class Condition {
     public double y2;
     
     //:1//工作状态1空闲2繁忙3故障
-    public int workStatus;
+    public String workStatus;
 }

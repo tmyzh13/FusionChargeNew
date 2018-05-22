@@ -56,7 +56,11 @@ public class MapPresenter extends BasePresenter<MapHomeView> {
     public void getDataType0(){
         Condition0 condition=new Condition0();
         condition.selectType=3;
-        condition.workStatus=ChoiceManager.getInstance().getStatue();
+        if(ChoiceManager.getInstance().getStatue()==0){
+            condition.workStatus="";
+        }else{
+            condition.workStatus = ChoiceManager.getInstance().getStatue()+"";
+        }
         MyLocationBean bean = PreferencesHelper.getData(MyLocationBean.class);
 //        if(bean != null) {
 //
@@ -105,7 +109,11 @@ public class MapPresenter extends BasePresenter<MapHomeView> {
             condition.pileType= ChoiceManager.getInstance().getType();
         }
 
-            condition.workStatus=ChoiceManager.getInstance().getStatue();
+        if(ChoiceManager.getInstance().getStatue()==0){
+            condition.workStatus="";
+        }else{
+            condition.workStatus = ChoiceManager.getInstance().getStatue()+"";
+        }
 
 
 //        condition.pileName="";

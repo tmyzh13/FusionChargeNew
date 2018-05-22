@@ -220,7 +220,7 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
         }
 
         if(ll_post.getVisibility()==View.VISIBLE){
-            //支付有票费用的 逻辑
+            //支付邮费费用的 逻辑
         }
 
         presenter.applyInvoice(orderNums,type,et_invoice_title.getText().toString(),

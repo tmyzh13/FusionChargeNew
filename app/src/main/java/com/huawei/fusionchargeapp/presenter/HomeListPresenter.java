@@ -32,35 +32,41 @@ public class HomeListPresenter extends BasePresenter<HomeListView> {
     @Override
     protected void onViewAttach() {
         super.onViewAttach();
-        api= ApiFactory.getFactory().create(MapApi.class);
+        api = ApiFactory.getFactory().create(MapApi.class);
     }
 
     @Override
     public void onStart() {
 
     }
-    private  boolean otherLoading=false;
 
-    public void setOtherLoading(boolean otherLoading){
-        this.otherLoading=otherLoading;
+    private boolean otherLoading = false;
+
+    public void setOtherLoading(boolean otherLoading) {
+        this.otherLoading = otherLoading;
     }
 
-    public void getDatas(){
-        if(otherLoading){
-        }else{
+    public void getDatas() {
+        if (otherLoading) {
+        } else {
             view.showLoading();
         }
         doGetDatas(newCondition());
 
     }
 
-    public void getDataType0(){
-        if(otherLoading){
-        }else{
+    public void getDataType0() {
+        if (otherLoading) {
+        } else {
             view.showLoading();
         }
-        Condition0 condition=new Condition0();
-        condition.workStatus=ChoiceManager.getInstance().getStatue();
+        Condition0 condition = new Condition0();
+        if(ChoiceManager.getInstance().getStatue()==0){
+            condition.workStatus="";
+        }else{
+            condition.workStatus = ChoiceManager.getInstance().getStatue()+"";
+        }
+
         MyLocationBean bean = PreferencesHelper.getData(MyLocationBean.class);
 //        if(bean != null) {
 //
@@ -69,13 +75,13 @@ public class HomeListPresenter extends BasePresenter<HomeListView> {
 //            condition.y1=bean.latitude-1;
 //            condition.y2=bean.latitude+1;
 //        }else{
-            condition.x1= Constant.X1;
-            condition.x2=Constant.X2;
-            condition.y1=Constant.Y1;
-            condition.y2=Constant.Y2;
+        condition.x1 = Constant.X1;
+        condition.x2 = Constant.X2;
+        condition.y1 = Constant.Y1;
+        condition.y2 = Constant.Y2;
 //        }
 
-        condition.selectType=3;
+        condition.selectType = 3;
         api.getMapDatas0(condition)
                 .compose(new ResponseTransformer<>(this.<BaseData<List<MapDataBean>>>bindUntilEvent(ActivityEvent.DESTROY)))
                 .subscribe(new ResponseSubscriber<BaseData<List<MapDataBean>>>(view) {
@@ -86,7 +92,7 @@ public class HomeListPresenter extends BasePresenter<HomeListView> {
                 });
     }
 
-    public void getDatas(String stationName){
+    public void getDatas(String stationName) {
         SearchCondition condition = new SearchCondition();
         MyLocationBean bean = PreferencesHelper.getData(MyLocationBean.class);
 //        if(bean != null) {
@@ -95,14 +101,14 @@ public class HomeListPresenter extends BasePresenter<HomeListView> {
 //            condition.y1=bean.latitude-1;
 //            condition.y2=bean.latitude+1;
 //        }else{
-            condition.x1=Constant.X1;
-            condition.x2=Constant.X2;
-            condition.y1=Constant.Y1;
-            condition.y2=Constant.Y2;
+        condition.x1 = Constant.X1;
+        condition.x2 = Constant.X2;
+        condition.y1 = Constant.Y1;
+        condition.y2 = Constant.Y2;
 //        }
 
         condition.selectType = 3;
-        condition.stationName =stationName;
+        condition.stationName = stationName;
         condition.pileName = stationName;
         api.getMapDatas0(condition)
                 .compose(new ResponseTransformer<>(this.<BaseData<List<MapDataBean>>>bindUntilEvent(ActivityEvent.DESTROY)))
@@ -114,15 +120,19 @@ public class HomeListPresenter extends BasePresenter<HomeListView> {
                 });
     }
 
-    private Condition newCondition(){
-        Condition condition=new Condition();
-        if(ChoiceManager.getInstance().getType()==0){
-            condition.pileType=3;
-        }else{
-            condition.pileType= ChoiceManager.getInstance().getType();
+    private Condition newCondition() {
+        Condition condition = new Condition();
+        if (ChoiceManager.getInstance().getType() == 0) {
+            condition.pileType = 3;
+        } else {
+            condition.pileType = ChoiceManager.getInstance().getType();
         }
 
-            condition.workStatus=ChoiceManager.getInstance().getStatue();
+        if(ChoiceManager.getInstance().getStatue()==0){
+            condition.workStatus="";
+        }else{
+            condition.workStatus = ChoiceManager.getInstance().getStatue()+"";
+        }
         MyLocationBean bean = PreferencesHelper.getData(MyLocationBean.class);
 //        if(bean != null) {
 //
@@ -131,15 +141,16 @@ public class HomeListPresenter extends BasePresenter<HomeListView> {
 //            condition.y1=bean.latitude-1;
 //            condition.y2=bean.latitude+1;
 //        }else{
-            condition.x1=Constant.X1;
-            condition.x2=Constant.X2;
-            condition.y1=Constant.Y1;
-            condition.y2=Constant.Y2;
+        condition.x1 = Constant.X1;
+        condition.x2 = Constant.X2;
+        condition.y1 = Constant.Y1;
+        condition.y2 = Constant.Y2;
 //        }
 
-        condition.selectType=3;
+        condition.selectType = 3;
         return condition;
     }
+
     private void doGetDatas(Condition condition) {
         api.getMapDatas(condition)
                 .compose(new ResponseTransformer<>(this.<BaseData<List<MapDataBean>>>bindUntilEvent(ActivityEvent.DESTROY)))

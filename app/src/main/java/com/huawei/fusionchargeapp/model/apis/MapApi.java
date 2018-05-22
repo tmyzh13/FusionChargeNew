@@ -37,6 +37,8 @@ public interface MapApi {
     @POST(Urls.MAP_DATA)
     Observable<BaseData<List<MapDataBean>>> getMapDatas0(@Body Condition0 bean);
 
+
+
     @POST(Urls.MAP_DATA)
     Observable<BaseData<List<MapDataBean>>> getMapDatas0(@Body SearchCondition bean);
 
