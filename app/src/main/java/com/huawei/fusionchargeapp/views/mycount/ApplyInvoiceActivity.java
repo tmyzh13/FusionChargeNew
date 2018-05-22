@@ -188,7 +188,6 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
             ll_post.setVisibility(View.VISIBLE);
         }
 
-
     }
 
     @Override
