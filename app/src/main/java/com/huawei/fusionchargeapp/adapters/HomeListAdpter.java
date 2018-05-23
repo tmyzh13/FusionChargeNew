@@ -30,7 +30,10 @@ public class HomeListAdpter extends QuickAdapter<MapDataBean> {
         helper.setText(R.id.tv_name,item.title)
                 .setText(R.id.tv_address,item.address)
                 .setText(R.id.tv_direct,item.directNum+"")
-                .setText(R.id.tv_alter,item.alterNum+"");
+                .setText(R.id.tv_alter,item.alterNum+"")
+                .setText(R.id.tv_map_info_pile_num,item.pileNum+"")
+                .setText(R.id.tv_map_info_gun_num,item.gunNum+"")
+                .setText(R.id.tv_map_info_free_num,item.freeNum+"");
         TextView tv_distance=helper.getView(R.id.tv_distance);
 
         tv_distance.setText(item.distance+"KM");

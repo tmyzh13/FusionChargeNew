@@ -180,6 +180,8 @@ public class ResponseHandler<T> {
                         handleOperationError(context.getString(R.string.code_222));
                     }else if(data.status()==223){
                         handleOperationError(context.getString(R.string.code_223));
+                    }else if(data.status()==230){
+                        handleOperationError(context.getString(R.string.code_230));
                     }else if(data.status()==250){
                         handleOperationError(context.getString(R.string.code_250));
                     }else if(data.status()==251){

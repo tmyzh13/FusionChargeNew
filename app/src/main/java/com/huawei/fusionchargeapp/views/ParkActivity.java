@@ -402,9 +402,15 @@ public class ParkActivity extends BaseActivity<ParkView, ParkPresenter> implemen
     @Override
     public void OnNaviSuccess(String s) {
         RouteBean bean=new Gson().fromJson(s, RouteBean.class);
+        Log.e("yzh","----"+bean.toString());
         if(bean.ishasRute){
             List<List<Double>> outData=bean.points16.outData;
-            List<List<Double>> parkData=bean.points16.parkData.get(0);
+            List<List<Double>> parkData;
+            if(bean.points16.parkData!=null&&bean.points16.parkData.size()!=0){
+                parkData=bean.points16.parkData.get(0);
+            }else{
+                parkData=new ArrayList<>();
+            }
             ArrayList<LatLng> latLngs0 = new ArrayList<>();
             for(int i=0;i<outData.size();i++){
                 latLngs0.add(new LatLng(outData.get(i).get(1), outData.get(i).get(0)));
@@ -416,8 +422,12 @@ public class ParkActivity extends BaseActivity<ParkView, ParkPresenter> implemen
             }
 
             List<List<LatLng>> lists = new ArrayList<List<LatLng>>();
-            lists.add(latLngs0);//第一条线
-            lists.add(latLngs1);
+            if(latLngs0.size()!=0){
+                lists.add(latLngs0);//第一条线
+            }
+            if(latLngs1.size()!=0){
+                lists.add(latLngs1);
+            }
             NavilineOptions option = new NavilineOptions()
                     .latLngsList(lists)//线集合
 //                    .status(0, 1)//第一条线的样式

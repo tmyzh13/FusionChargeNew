@@ -85,7 +85,18 @@ public class OrderListAdapter extends BaseAdapter {
         holder.charge_pile_address.setText(bean.getAddress());
         //0 未支付 1 已支付
         if(bean.getPayStatus() == 0) {
-            holder.pay_status.setText(R.string.no_pay);
+//            '当前状态(0:充电中，1：充电结束，2：充电启动失败，3：充电停止失败)' 在未支付的状态下判断
+            if(bean.getStatus()==0){
+                holder.pay_status.setText(R.string.order_charging);
+            }else if(bean.getStatus()==1){
+                holder.pay_status.setText(R.string.order_charge_end);
+            }else if(bean.getStatus()==2){
+                holder.pay_status.setText(R.string.order_charge_start_failed);
+            }else if(bean.getStatus()==3){
+                holder.pay_status.setText(R.string.order_charge_stop_failed);
+            }else{
+                holder.pay_status.setText(R.string.no_pay);
+            }
             holder.pay_status.setTextColor(Color.RED);
         } else if(bean.getPayStatus() == 1) {
             holder.pay_status.setText(R.string.has_pay);
@@ -96,7 +107,9 @@ public class OrderListAdapter extends BaseAdapter {
             public void onClick(View view) {
                 if (bean.getPayStatus() == 0) {
                     //未完成订单处理
-                    context.startActivity(PayActivity.getLauncher(context,bean.getOrderNum(),"0"));
+                    if(bean.getStatus()!=0&&bean.getStatus()!=1&&bean.getStatus()!=2&&bean.getStatus()!=3){
+                        context.startActivity(PayActivity.getLauncher(context,bean.getOrderNum(),"0"));
+                    }
                 }
             }
         });

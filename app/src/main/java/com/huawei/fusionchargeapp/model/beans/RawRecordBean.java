@@ -24,7 +24,16 @@ public class RawRecordBean {
     private int payStatus;
     private String runCode;
     private double serviceCharge;
+//    充电状态  '当前状态(0:充电中，1：充电结束，2：充电启动失败，3：充电停止失败)' 在未支付的状态下判断
+    private int status;
 
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getStatus() {
+        return status;
+    }
 
     public String getChargTime() {
         return chargTime;

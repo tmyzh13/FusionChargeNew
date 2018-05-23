@@ -17,6 +17,9 @@ public class MapDataBean {
     public String type;
     public double distance;
     public int pileNum;
+    public int gunNum;
+    public int freeNum;
+    public int busyNum;
 
     @Override
     public String toString() {
@@ -30,6 +33,10 @@ public class MapDataBean {
                 ", title='" + title + '\'' +
                 ", type='" + type + '\'' +
                 ", distance=" + distance +
+                ", pileNum=" + pileNum +
+                ", gunNum=" + gunNum +
+                ", freeNum=" + freeNum +
+                ", busyNum=" + busyNum +
                 '}';
     }
 }

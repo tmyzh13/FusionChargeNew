@@ -560,6 +560,9 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                 MyLocationBean bean = new MyLocationBean();
                 bean.latitude = aMapLocation.getLatitude();
                 bean.longtitude = aMapLocation.getLongitude();
+                //todo
+//                bean.latitude = 22.6552090201;
+//                bean.longtitude = 114.0643603795;
                 PreferencesHelper.saveData(bean);
                 RxBus.getDefault().send(bean, Constant.REFRESH_LOCATION);
                 if (followMove) {

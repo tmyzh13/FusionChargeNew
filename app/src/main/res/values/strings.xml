@@ -355,6 +355,10 @@
     <string name="charger_info_fee_unit">¥</string>
     <string name="has_pay">已支付</string>
     <string name="no_pay">未支付</string>
+    <string name="order_charging">充电中</string>
+    <string name="order_charge_end">充电结束</string>
+    <string name="order_charge_start_failed">充电启动失败</string>
+    <string name="order_charge_stop_failed">充电停止失败</string>
 
     <string name="charge_gun_">充电枪：</string>
     <string name="gun_status_free">空闲</string>
