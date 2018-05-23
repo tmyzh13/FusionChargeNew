@@ -1,6 +1,7 @@
 package com.huawei.fusionchargeapp.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -40,6 +41,7 @@ public class TaoCanAdapter extends QuickAdapter<TaocanBean> {
         TextView tv_limit_3=helper.getView(R.id.tv_limit_3);
         tv_time.setText(item.startTime.substring(0,Tools.BIRTHDAY_LENGTH)+"-"+item.endTime.substring(0,Tools.BIRTHDAY_LENGTH));
         if(item.packageType==0){
+            tv_limit_1.setVisibility(View.VISIBLE);
             if(item.limitType==0){
                 //包电量
                 tv_limit_1.setText(context.getString(R.string.my_tao_can_limit));
@@ -53,6 +55,7 @@ public class TaoCanAdapter extends QuickAdapter<TaocanBean> {
             tv_validate_date.setVisibility(View.VISIBLE);
             tv_validate_date.setText(context.getString(R.string.my_tao_can_hint1));
         }else if(item.packageType==2){
+            tv_limit_1.setVisibility(View.VISIBLE);
             if(item.limitType==0){
                 //包电量
                 tv_limit_1.setText(context.getString(R.string.my_tao_can_limit));

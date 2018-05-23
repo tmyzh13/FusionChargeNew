@@ -300,7 +300,7 @@ public class MapPresenter extends BasePresenter<MapHomeView> {
     public void getUserScore(){
         api.getUserScore(UserHelper.getSavedUser().token)
                 .compose(new ResponseTransformer<>(this.<BaseData<ScoreBean>>bindToLifeCycle()))
-                .subscribe(new ResponseSubscriber<BaseData<ScoreBean>>(view) {
+                .subscribe(new ResponseSubscriber<BaseData<ScoreBean>>() {
                     @Override
                     public void success(BaseData<ScoreBean> scoreBeanBaseData) {
                         if(scoreBeanBaseData.data!=null){

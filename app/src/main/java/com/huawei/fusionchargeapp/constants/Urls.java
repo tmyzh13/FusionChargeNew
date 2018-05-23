@@ -6,8 +6,8 @@ package com.huawei.fusionchargeapp.constants;
  */
 
 public class Urls {
- 
-   
+
+
     //        public static final String ROOT="http://114.115.169.46:8088/charger/api/v1/";//菊
 ////    public static final String ROOT="http://10.40.143.67:8088/charger/api/v1/";//李凯
 //    public static final String ROOT="http://10.40.143.130:8088/charger/api/v1/";//胡明明
@@ -22,7 +22,7 @@ public class Urls {
 //    public static final String ROOT = "http://10.40.143.72:8088/charger/api/v1/";
 //    public static final String ROOT = "http://10.40.143.72:8088/charger/api/v1/";
 //    public static final String ROOT = "http://10.186.254.65:8088/charger/api/v1/";//张楠
-//        public static final String ROOT="http://mcloud-sit.huawei.com/mcloud/umag/FreeProxyForText/safecampuse_charging/charger/api/v1/";//华为
+//    public static final String ROOT = "http://mcloud-sit.huawei.com/mcloud/umag/FreeProxyForText/safecampuse_charging/charger/api/v1/";//华为
 
      //打包一并修改地址
     public static final String IMAGE_URL="http://114.115.169.46:8088/charger/";
@@ -105,10 +105,10 @@ public class Urls {
     public static final String BALANCE_RECORD = "appUserRecord/getUserBalanceOrderRecord";
 
     //能够开取发票的消费记录
-    public static final String  INVOICE_RECHARGE_LIST= "invoice/chargerOrderList";
+    public static final String INVOICE_RECHARGE_LIST = "invoice/chargerOrderList";
 
     //园区查询站
-    public static final String GET_ZONE_STATION="appZoneGis/queryZoneGis/";
+    public static final String GET_ZONE_STATION = "appZoneGis/queryZoneGis/";
 
     //iAdmin登录
     public static final String IADMIN_LOGIN = "user/iadminLogin";
@@ -124,16 +124,16 @@ public class Urls {
 
 
     //app上可用套餐
-    public static final String APP_TAO_CAN="appBusinessPackage/queryUsefulBusinessPackage";
+    public static final String APP_TAO_CAN = "appBusinessPackage/queryUsefulBusinessPackage";
     //购买套餐
-    public static final String APP_TAO_CAN_PAY="orderPay/buyPackage";
+    public static final String APP_TAO_CAN_PAY = "orderPay/buyPackage";
 
     //用户注销
-    public static final String USER_LOGOUT="user/userLogOut";
+    public static final String USER_LOGOUT = "user/userLogOut";
     //我的套餐
-    public static final String MY_TAO_CAN="appBusinessPackage/queryMyBusinessPackage/";
+    public static final String MY_TAO_CAN = "appBusinessPackage/queryMyBusinessPackage/";
     //申请开票
-    public static final String APPLY_INVOICE="invoice/saveInvoinceInfo";
+    public static final String APPLY_INVOICE = "invoice/saveInvoinceInfo";
 
     //获取用户历史开票记录
     public static final String INVOICE_HISTORY = "invoice/getInvoinceList";
@@ -144,7 +144,7 @@ public class Urls {
     //开票记录中相关的消费记录
     public static final String INVOICE_HISTORY_ITEM_CONSUME = "invoice/getInvoiceBoundOrder/";
     //获取我的账户余额
-    public static final String GET_MY_BALANCE="balance";
+    public static final String GET_MY_BALANCE = "balance";
     //获取用户积分
-    public static final String GET_USER_SCORE="user/getUserScore";
+    public static final String GET_USER_SCORE = "user/getUserScore";
 }

@@ -32,7 +32,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:paddingLeft="15dp"
-                android:paddingRight="15dp" />
+                android:paddingRight="15dp"
+                android:gravity="center_vertical"/>
 
             <View style="@style/view_line" />
 
