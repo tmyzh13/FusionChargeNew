@@ -270,8 +270,8 @@ public class MainActivity extends BaseActivity {
                                     }
                                 }
                             };
-
-                            Glide.with(context).load(UserHelper.getSavedUser().photoUrl).placeholder(R.mipmap.default_head).into(target);
+                            Glide.with(context).load(UserHelper.getSavedUser().photoUrl).placeholder(R.mipmap.default_head)
+                                         .dontAnimate().into(target);
                         }
 
                         if(Tools.isNull(UserHelper.getSavedUser().name)){

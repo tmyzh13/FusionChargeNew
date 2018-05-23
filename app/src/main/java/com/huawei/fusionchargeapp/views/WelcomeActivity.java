@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.corelibs.base.BaseActivity;
@@ -23,10 +24,13 @@ import com.huawei.fusionchargeapp.R;
 
 public class WelcomeActivity extends BaseActivity {
 
-    public static final String IS_FROM_OTHER_APP = "fromIAdmin";
+    public static final String IS_FROM_OTHER_APP = "from_other_app";
+    public static final String FROM_APP = "fromApp";
+    public static final String FROM_IADMIN = "iAdmin";
 
 
 
+    private String fromAppStr;
     private boolean isFromOtherApp;
     public static final int REQUEST_EXTERNAL_STRONGE = 0x00888;
 
@@ -44,7 +48,12 @@ public class WelcomeActivity extends BaseActivity {
     protected void init(Bundle savedInstanceState) {
         Intent fromIntent = getIntent();
         if(fromIntent != null) {
-            isFromOtherApp = fromIntent.getBooleanExtra(IS_FROM_OTHER_APP,false);
+            fromAppStr = fromIntent.getStringExtra(FROM_APP);
+            if(!TextUtils.isEmpty(fromAppStr)){
+                if(FROM_IADMIN.equals(fromAppStr)) {
+                    isFromOtherApp = true;
+                }
+            }
         }
 
         //检查有无存储权限
