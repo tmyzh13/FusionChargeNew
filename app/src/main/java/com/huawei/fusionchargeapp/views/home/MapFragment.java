@@ -495,12 +495,18 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
             presenter.getUserScore();
         }
 
+        if(mlocationClient!=null){
+            mlocationClient.startLocation();
+        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
         map.onPause();
+        if(mlocationClient!=null){
+            mlocationClient.stopLocation();
+        }
     }
 
     @Override

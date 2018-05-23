@@ -465,7 +465,7 @@ public class GuildActivity extends BaseActivity<GuaildView, GuaildPresenter> imp
                     drivingRouteOverlay.setNodeIconVisibility(false);//设置节点marker是否显示
                     drivingRouteOverlay.setIsColorfulline(false);//是否用颜色展示交通拥堵情况，默认true
                     drivingRouteOverlay.removeFromMap();
-                    drivingRouteOverlay.addToMap();
+                     drivingRouteOverlay.addToMap();
                     drivingRouteOverlay.zoomToSpan();
                     int dis = (int) drivePath.getDistance();
                     int dur = (int) drivePath.getDuration();
