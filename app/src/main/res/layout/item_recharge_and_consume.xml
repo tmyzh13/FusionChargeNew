@@ -62,6 +62,15 @@
                     android:layout_gravity="center_vertical"
                     android:text="充值50"
                     android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/tv_remain"
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="结余50"
+                    android:textSize="12dp" />
             </LinearLayout>
 
         </LinearLayout>

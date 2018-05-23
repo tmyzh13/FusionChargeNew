@@ -529,4 +529,5 @@
     <string name="no_tao_can">没有套餐</string>
     <string name="no_score">暂无评分</string>
     <string name="no_permission_location">没有权限,请手动开启定位权限</string>
+    <string name="detail_remain_money">结余%1$s元</string>
 </resources>

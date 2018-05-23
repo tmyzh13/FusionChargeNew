@@ -116,6 +116,7 @@ public class RechargeAndConsumeDetailAdapter extends BaseExpandableListAdapter {
             holder.tv_money = (TextView) view.findViewById(R.id.tv_money);
             holder.tv_time = (TextView) view.findViewById(R.id.tv_time);
             holder.tv_money_subscription = (TextView) view.findViewById(R.id.tv_money_subscription);
+            holder.tv_remain = (TextView) view.findViewById(R.id.tv_remain);
             view.setTag(holder);
         } else {
             holder = (ItemViewHolder) view.getTag();
@@ -135,6 +136,7 @@ public class RechargeAndConsumeDetailAdapter extends BaseExpandableListAdapter {
         holder.tv_time.setText(bean.dealTime.substring(11,16));
         holder.tv_money.setText(DEL_OR_ADD[bean.isAdd]+bean.occurCost);
         holder.tv_money_subscription.setText(BALANCE[bean.isAdd]+bean.occurCost);
+        holder.tv_remain.setText(context.getString(R.string.detail_remain_money,bean.afterBalance));
 
         return view;
     }
@@ -145,7 +147,7 @@ public class RechargeAndConsumeDetailAdapter extends BaseExpandableListAdapter {
     }
 
     public class ItemViewHolder{
-        public TextView tv_week,tv_time,tv_money,tv_money_subscription,recharge_sort;
+        public TextView tv_week,tv_time,tv_money,tv_money_subscription,recharge_sort,tv_remain;
         public ImageView img_sort;
     }
 

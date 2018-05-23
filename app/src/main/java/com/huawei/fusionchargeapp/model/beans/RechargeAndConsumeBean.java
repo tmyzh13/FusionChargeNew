@@ -10,4 +10,5 @@ public class RechargeAndConsumeBean {
     public String occurCost;
     public int isAdd;
     public int type;
+    public String afterBalance;
 }
