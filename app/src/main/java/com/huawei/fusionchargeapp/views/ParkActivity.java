@@ -33,6 +33,7 @@ import com.huawei.fusionchargeapp.model.beans.PileFeeBean;
 import com.huawei.fusionchargeapp.model.beans.RouteBean;
 import com.huawei.fusionchargeapp.model.beans.ZoneStationBean;
 import com.huawei.fusionchargeapp.presenter.ParkPresenter;
+import com.huawei.fusionchargeapp.utils.GPSUtil;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.interfaces.ParkView;
 import com.huawei.fusionchargeapp.weights.ChargeFeeDialog;
@@ -176,28 +177,30 @@ public class ParkActivity extends BaseActivity<ParkView, ParkPresenter> implemen
                     @Override
                     public void receive(MyLocationBean data) {
                         //刷新坐标 位置不一致时才更新路线
+                        double[] datas= GPSUtil.gcj02_To_Gps84(data.latitude, data.longtitude);
                         if (locationMark != null) {
 
                             if (locationMark.getPosition().latitude != data.latitude || locationMark.getPosition().longitude != data.longtitude) {
                                 locationMark.remove();
                                 locationMark = mIMapImpl.addMarker(new MarkerOptions()
-                                        .position(new LatLng(data.latitude, data.longtitude)).title("location").icon(com.huawei.map.mapapi.model.BitmapDescriptorFactory.fromBitmap(BitmapFactory
+                                        .position(new LatLng(datas[0], datas[1])).title("location").icon(com.huawei.map.mapapi.model.BitmapDescriptorFactory.fromBitmap(BitmapFactory
                                                 .decodeResource(getResources(), R.mipmap.location))));
                                 //删除之前的路线重新获取
                                 mIMapImpl.getInnerMap().deleteAllNavilines();
                                 PointEntity startPoint =new PointEntity();
-                                startPoint.setLat(data.latitude);
-                                startPoint.setLon(data.longtitude);
+                                startPoint.setLat(datas[0]);
+                                startPoint.setLon(datas[1]);
                                 startPoint.setFloorid("");
                                 PointEntity endPoint=new PointEntity();
-                                endPoint.setLat(endlatitude);
-                                endPoint.setLon(endlongitude);
+                                double[] endDatas= GPSUtil.gcj02_To_Gps84(data.latitude, data.longtitude);
+                                endPoint.setLat(endDatas[0]);
+                                endPoint.setLon(endDatas[1]);
                                 endPoint.setFloorid("");
                                 gisNaviClient.startGisNavi(startPoint,endPoint,null);
                             }
                         } else {
                             locationMark = mIMapImpl.addMarker(new MarkerOptions()
-                                    .position(new LatLng(data.latitude, data.longtitude)).title("location").icon(com.huawei.map.mapapi.model.BitmapDescriptorFactory.fromBitmap(BitmapFactory
+                                    .position(new LatLng(datas[0], datas[1])).title("location").icon(com.huawei.map.mapapi.model.BitmapDescriptorFactory.fromBitmap(BitmapFactory
                                             .decodeResource(getResources(), R.mipmap.location))));
                         }
 
@@ -267,14 +270,16 @@ public class ParkActivity extends BaseActivity<ParkView, ParkPresenter> implemen
         if (list != null) {
             this.list = list;
             for (int i = 0; i < list.size(); i++) {
-                LatLng latlng = new LatLng(list.get(i).latitude, list.get(i).longitude);
+                double[] datas= GPSUtil.gcj02_To_Gps84(list.get(i).latitude, list.get(i).longitude);
+                LatLng latlng = new LatLng(datas[0], datas[1]);
                 mIMapImpl.addMarker(new MarkerOptions()
                         .position(latlng).title(i + "").icon(com.huawei.map.mapapi.model.BitmapDescriptorFactory.fromBitmap(BitmapFactory
                                 .decodeResource(getResources(), R.mipmap.home_ic_position))));
             }
             if (list.size() != 0) {
+                double[] datas= GPSUtil.gcj02_To_Gps84(list.get(0).latitude, list.get(0).longitude);
                 CameraPosition cameraPosition = new CameraPosition(
-                        new LatLng(list.get(0).latitude, list.get(0).longitude), 17, 0, 0);
+                        new LatLng(datas[0], datas[1]), 17, 0, 0);
                 CameraUpdate cameraUpdate = CameraUpdateFactory
                         .newCameraPosition(cameraPosition);
                 mIMapImpl.animateCamera(cameraUpdate);
@@ -284,17 +289,18 @@ public class ParkActivity extends BaseActivity<ParkView, ParkPresenter> implemen
 
         MyLocationBean locationBean = PreferencesHelper.getData(MyLocationBean.class);
         if (locationBean != null) {
-
+            double[] datas= GPSUtil.gcj02_To_Gps84(locationBean.latitude, locationBean.longtitude);
             locationMark = mIMapImpl.addMarker(new MarkerOptions()
-                    .position(new LatLng(locationBean.latitude, locationBean.longtitude)).title("location").icon(com.huawei.map.mapapi.model.BitmapDescriptorFactory.fromBitmap(BitmapFactory
+                    .position(new LatLng(datas[0],datas[1])).title("location").icon(com.huawei.map.mapapi.model.BitmapDescriptorFactory.fromBitmap(BitmapFactory
                             .decodeResource(getResources(), R.mipmap.location))));
             PointEntity startPoint =new PointEntity();
-            startPoint.setLat(locationBean.latitude);
-            startPoint.setLon(locationBean.longtitude);
+            startPoint.setLat(datas[0]);
+            startPoint.setLon(datas[1]);
             startPoint.setFloorid("");
             PointEntity endPoint=new PointEntity();
-            endPoint.setLat(endlatitude);
-            endPoint.setLon(endlongitude);
+            double[] endDatas= GPSUtil.gcj02_To_Gps84(endlatitude, endlongitude);
+            endPoint.setLat(endDatas[0]);
+            endPoint.setLon(endDatas[1]);
             endPoint.setFloorid("");
             gisNaviClient.startGisNavi(startPoint,endPoint,null);
         }
