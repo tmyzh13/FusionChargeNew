@@ -33,7 +33,7 @@ public class TaocanPayPresenter extends BasePresenter<TaoCanPayView> {
 
     public void payTaocan(int type, int businessPackageId,double totalFee){
         RequestPayTaocanBean bean =new RequestPayTaocanBean();
-        bean.packageId=businessPackageId;
+        bean.businessPackageId=businessPackageId;
         bean.totalFee=totalFee;
 //        bean.appUserId= UserHelper.getSavedUser().appUserId;
         bean.payType = type;
