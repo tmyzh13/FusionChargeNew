@@ -236,7 +236,7 @@ public class GuildActivity extends BaseActivity<GuaildView, GuaildPresenter> imp
                                         public void onClick(View v) {
                                             appointmentTimeOutDialog.dismiss();
                                             finish();
-                                            startActivity(new Intent(GuildActivity.this,AppointmentChargeActivity.class));
+                                            startActivity(new Intent(GuildActivity.this, AppointmentChargeActivity.class));
                                         }
                                     });
                                 }
@@ -341,7 +341,8 @@ public class GuildActivity extends BaseActivity<GuaildView, GuaildPresenter> imp
 
     private long zoneId;
     private int zoneGisOpen;
-    private boolean isNoZone=false;
+    private boolean isNoZone = false;
+
     @Override
     public void getZoneInfo(long id, int isGisOpen) {
         //先获取园区信息再路径规划
@@ -361,7 +362,7 @@ public class GuildActivity extends BaseActivity<GuaildView, GuaildPresenter> imp
 
     @Override
     public void noZoneInfo() {
-        isNoZone=true;
+        isNoZone = true;
         MyLocationBean locationBean = PreferencesHelper.getData(MyLocationBean.class);
         if (locationBean != null) {
             mStartPoint = new LatLonPoint(locationBean.latitude, locationBean.longtitude);
@@ -465,7 +466,7 @@ public class GuildActivity extends BaseActivity<GuaildView, GuaildPresenter> imp
                     drivingRouteOverlay.setNodeIconVisibility(false);//设置节点marker是否显示
                     drivingRouteOverlay.setIsColorfulline(false);//是否用颜色展示交通拥堵情况，默认true
                     drivingRouteOverlay.removeFromMap();
-                     drivingRouteOverlay.addToMap();
+                    drivingRouteOverlay.addToMap();
                     drivingRouteOverlay.zoomToSpan();
                     int dis = (int) drivePath.getDistance();
                     int dur = (int) drivePath.getDuration();
@@ -488,7 +489,7 @@ public class GuildActivity extends BaseActivity<GuaildView, GuaildPresenter> imp
                                     @Override
                                     public void onClick(View v) {
                                         nearTargetDialog.dismiss();
-                                        startActivity(ParkActivity.getLauncher(context, zoneId,endLatitude,endLongitude));
+                                        startActivity(ParkActivity.getLauncher(context, zoneId, endLatitude, endLongitude));
                                         finish();
                                     }
                                 });
