@@ -24,7 +24,7 @@ public class Urls {
 //    public static final String ROOT = "http://10.186.254.65:8088/charger/api/v1/";//张楠
 //        public static final String ROOT="http://mcloud-sit.huawei.com/mcloud/umag/FreeProxyForText/safecampuse_charging/charger/api/v1/";//华为
 
-    //打包一并修改地址
+     //打包一并修改地址
     public static final String IMAGE_URL="http://114.115.169.46:8088/charger/";
 
 
