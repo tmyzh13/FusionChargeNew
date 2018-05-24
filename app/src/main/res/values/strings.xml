@@ -534,4 +534,6 @@
     <string name="no_score">暂无评分</string>
     <string name="no_permission_location">没有权限,请手动开启定位权限</string>
     <string name="detail_remain_money">结余%1$s元</string>
+    <string name="invoice_status_ok">纸质发票已开票</string>
+    <string name="invoice_status_doing">纸质发票未开票</string>
 </resources>

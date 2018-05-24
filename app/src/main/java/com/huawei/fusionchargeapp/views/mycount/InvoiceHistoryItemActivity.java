@@ -52,6 +52,7 @@ public class InvoiceHistoryItemActivity extends BaseActivity<InvoiceHistoryView,
     TextView consume_time;
 
     private int id;
+    private int status;
     @Override
     public void goLogin() {
     }
@@ -67,6 +68,7 @@ public class InvoiceHistoryItemActivity extends BaseActivity<InvoiceHistoryView,
         bar.setNavTitle(getString(R.string.invoice_detail));
 
         id = getIntent().getIntExtra(InvoiceHistoryActivity.ORDER_ID,InvoiceHistoryActivity.DEFAULT_ID);
+        status = getIntent().getIntExtra(InvoiceHistoryActivity.INVOICE_STATE,0);
         presenter.getInvoiceHistoryItem(id);
 //        presenter.getInvoiceHistoryConsume(id,1);
     }
@@ -85,7 +87,7 @@ public class InvoiceHistoryItemActivity extends BaseActivity<InvoiceHistoryView,
         } else {
             consume_time.setText(bean.startEndTime);
         }
-
+        sort_and_status.setText(status == 0 ? R.string.invoice_status_doing : R.string.invoice_status_ok);
 
     }
 

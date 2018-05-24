@@ -59,6 +59,10 @@ public class InvoiceHistoryAdapter extends BaseAdapter {
         return data.get(i).id;
     }
 
+    public int getClickOrderStatus(int i){
+        return data.get(i).status;
+    }
+
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder holder;

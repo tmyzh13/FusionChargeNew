@@ -20,7 +20,9 @@ import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.adapters.InvoicePayAdapter;
 import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.apis.ApplyInvoiceApi;
+import com.huawei.fusionchargeapp.model.beans.ApplyInvoiceResultBean;
 import com.huawei.fusionchargeapp.model.beans.AppointResponseBean;
+import com.huawei.fusionchargeapp.model.beans.BaseData;
 import com.huawei.fusionchargeapp.model.beans.PayStyleBean;
 import com.huawei.fusionchargeapp.model.beans.UserBean;
 import com.huawei.fusionchargeapp.presenter.ApplyInvoicePresenter;
@@ -81,6 +83,8 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
     private ArrayList<String> orderNums;
     private double total;
     private String moreContent="";
+    private List<PayStyleBean> list =new ArrayList<>();
+    private double postage = 10;
 
     public static Intent getLauncher(Context context){
         Intent intent =new Intent(context,ApplyInvoiceActivity.class);
@@ -109,22 +113,23 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
         tv_invoice_money.setText(total+"");
 
         adapter=new InvoicePayAdapter(context);
-        List<PayStyleBean> list =new ArrayList<>();
+
         PayStyleBean bean =new PayStyleBean();
         bean.imgRes=R.drawable.list_04;
         bean.name=getString(R.string.apply_invoice_to_pay);
         bean.hint=getString(R.string.apply_invoice_to_pay_postage);
-        bean.type="0";
+        bean.type="6";
+        bean.needMoney = 10;
         PayStyleBean bean1=new PayStyleBean();
         bean1.imgRes=R.mipmap.list_ic_weixin;
         bean1.name=getString(R.string.pay_wechat);
         bean1.hint=getString(R.string.apply_invoice_wechat_postage);
-        bean1.type="1";
+        bean1.type="2";
         PayStyleBean bean2=new PayStyleBean();
         bean2.imgRes=R.mipmap.account_02;
         bean2.name=getString(R.string.pay_alipay);
         bean2.hint=getString(R.string.apply_invoice_ali_postage);
-        bean2.type="2";
+        bean2.type="1";
         PayStyleBean bean3=new PayStyleBean();
         bean3.imgRes=R.mipmap.account_03;
         bean3.name=getString(R.string.remain_pay);
@@ -190,6 +195,7 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
         if(total<200){
             ll_post.setVisibility(View.VISIBLE);
         }
+        postage = total < 200 ? list.get(adapter.getCurrentPosition()).needMoney: 0;
 
     }
 
@@ -229,7 +235,7 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
             }
         }
 
-        presenter.applyInvoice(orderNums,type,et_invoice_title.getText().toString(),
+        presenter.applyInvoice(orderNums,Integer.parseInt(list.get(adapter.getCurrentPosition()).type),postage,type,et_invoice_title.getText().toString(),
                 et_invoice_tax.getText().toString().trim(),et_invoice_connect.getText().toString().trim(),
                 total,moreContent,et_invoice_receive.getText().toString().trim(),et_invoice_connect.getText().toString().trim(),
                 et_invoice_address.getText().toString().trim(),et_invoice_email.getText().toString().trim());
@@ -247,7 +253,11 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
 
 
     @Override
-    public void applySuccess() {
-        finish();
+    public void applySuccess(ApplyInvoiceResultBean bean) {
+        if (bean.isNeedPay == 0) {
+            finish();
+        } else {
+            //根据支付类型调用相应接口
+        }
     }
 }

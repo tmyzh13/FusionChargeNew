@@ -6,6 +6,7 @@ import com.corelibs.base.BasePresenter;
 import com.corelibs.subscriber.ResponseSubscriber;
 import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.apis.ApplyInvoiceApi;
+import com.huawei.fusionchargeapp.model.beans.ApplyInvoiceResultBean;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
 import com.huawei.fusionchargeapp.model.beans.RequestApplyInvoiceBean;
 import com.huawei.fusionchargeapp.views.interfaces.ApplyInvoiceView;
@@ -33,28 +34,31 @@ public class ApplyInvoicePresenter  extends BasePresenter<ApplyInvoiceView> {
 
     }
 
-    public void applyInvoice(ArrayList<String> orderNums, String type, String title, String code, String content, double amount,
+    public void applyInvoice(ArrayList<String> orderNums, int payType,double postage, String type, String title, String code, String content, double amount,
                              String kpRemark, String name, String phone, String recAddr, String email){
         RequestApplyInvoiceBean bean =new RequestApplyInvoiceBean();
         bean.orderRecordNums=orderNums;
-        bean.appUserId= UserHelper.getSavedUser().appUserId;
-        bean.type=type;
-        bean.title=title;
-        bean.code=code;
-        bean.content=content;
-        bean.amount=amount;
-        bean.kpRemark=kpRemark;
-        bean.name=name;
-        bean.phone=phone;
-        bean.recAddr=recAddr;
-        bean.email=email;
+        bean.chargeOrderTotalFee = amount;
+        bean.payType = payType;
+        bean.postage = postage;
+//        bean.invoiceInfo.appUserId= UserHelper.getSavedUser().appUserId;
+        bean.invoiceInfo.type=type;
+        bean.invoiceInfo.title=title;
+        bean.invoiceInfo.code=code;
+        bean.invoiceInfo.content=content;
+        bean.invoiceInfo.amount=amount;
+        bean.invoiceInfo.kpRemark=kpRemark;
+        bean.invoiceInfo.name=name;
+        bean.invoiceInfo.phone=phone;
+        bean.invoiceInfo.recAddr=recAddr;
+        bean.invoiceInfo.email=email;
         view.showLoading();
         api.applyInvoice(UserHelper.getSavedUser().token,bean)
-                .compose(new ResponseTransformer(this.<BaseData>bindToLifeCycle()))
-                .subscribe(new ResponseSubscriber<BaseData>(view) {
+                .compose(new ResponseTransformer(this.<BaseData<ApplyInvoiceResultBean>>bindToLifeCycle()))
+                .subscribe(new ResponseSubscriber<BaseData<ApplyInvoiceResultBean>>(view) {
                     @Override
-                    public void success(BaseData baseData) {
-                        view.applySuccess();
+                    public void success(BaseData<ApplyInvoiceResultBean> baseData) {
+                        view.applySuccess(baseData.data);
                     }
                 });
     }
