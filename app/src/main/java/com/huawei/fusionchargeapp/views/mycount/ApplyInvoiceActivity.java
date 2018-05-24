@@ -133,7 +133,7 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
         PayStyleBean bean3=new PayStyleBean();
         bean3.imgRes=R.mipmap.account_03;
         bean3.name=getString(R.string.remain_pay);
-        bean3.hint=getString(R.string.apply_invoice_to_pay_postage);
+        bean3.hint=getString(R.string.apply_invoice_to_pay_postage_8);
         bean3.type="3";
         list.add(bean1);
         list.add(bean2);
@@ -195,7 +195,6 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
         if(total<200){
             ll_post.setVisibility(View.VISIBLE);
         }
-        postage = total < 200 ? list.get(adapter.getCurrentPosition()).needMoney: 0;
 
     }
 
@@ -228,6 +227,8 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
             type=getString(R.string.invoice_people);
         }
 
+        postage = total < 200 ? list.get(adapter.getCurrentPosition()).needMoney: 0;
+        int payType = total < 200 ? Integer.parseInt(list.get(adapter.getCurrentPosition()).type) : 3;
         if(ll_post.getVisibility()==View.VISIBLE){
             //支付邮费费用的 逻辑
             if(adapter.getCurrentPosition()==2){
@@ -235,7 +236,7 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
             }
         }
 
-        presenter.applyInvoice(orderNums,Integer.parseInt(list.get(adapter.getCurrentPosition()).type),postage,type,et_invoice_title.getText().toString(),
+        presenter.applyInvoice(orderNums,payType,postage,type,et_invoice_title.getText().toString(),
                 et_invoice_tax.getText().toString().trim(),et_invoice_connect.getText().toString().trim(),
                 total,moreContent,et_invoice_receive.getText().toString().trim(),et_invoice_connect.getText().toString().trim(),
                 et_invoice_address.getText().toString().trim(),et_invoice_email.getText().toString().trim());
@@ -254,7 +255,8 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
 
     @Override
     public void applySuccess(ApplyInvoiceResultBean bean) {
-        if (bean.isNeedPay == 0) {
+
+        if (bean == null || bean.isNeedPay == 0) {
             finish();
         } else {
             //根据支付类型调用相应接口
