@@ -544,10 +544,21 @@
     <string name="no_camera_pemisson">权限被禁止，无法打开相机</string>
     <string name="confirm_clear_user">您确定要清除账户信息且退出应用？</string>
     <string name="please_choose_birthday">请选择出生日期</string>
-    <string name="edit_emial">填写邮箱</string>
-    <string name="edit_vin_code">填写VIN码</string>
-    <string name="jiaoliu">交流</string>
-    <string name="kongxian">空闲</string>
 
+    <string name="doing">进行中</string>
+    <string name="has_done">已完成</string>
+    <string name="has_canceled">已取消</string>
+    <string name="had_time_out">已超时</string>
+    <string name="has_invoiced">已开票</string>
+    <string name="has_not_invoiced">未开票</string>
+    <string name="my_account_consume">消费</string>
+    <string name="hold_scord">积分</string>
+    <string name="write_email_hint">填写邮箱</string>
+    <string name="write_vin_code">填写VIN码</string>
+    <string name="start_time">开始时间</string>
+    <string name="end_time">结束时间</string>
+
+
+    <string name="charging_time">充电时长</string>
 
 </resources>

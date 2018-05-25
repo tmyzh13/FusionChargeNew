@@ -204,7 +204,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="充电时长"
+            android:text="@string/charging_time"
             android:textSize="12dp"/>
 
         <TextView

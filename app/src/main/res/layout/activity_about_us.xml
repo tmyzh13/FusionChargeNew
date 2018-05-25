@@ -34,8 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_8"
             android:textSize="14sp"
-            android:layout_gravity="center"
-            android:text="v1.0"/>
+            android:layout_gravity="center" />
     </LinearLayout>
 
 </FrameLayout>

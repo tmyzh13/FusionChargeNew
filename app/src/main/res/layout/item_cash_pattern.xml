@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center_vertical"
-                android:text="微信支付"
+                android:text="@string/pay_wechat"
                 android:textSize="@dimen/text_normal"
                 android:textStyle="bold" />
 
@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center_vertical"
-                android:text="推荐有微信钱包的用户使用"
+                android:text="@string/pay_wechat_hint"
                 android:textSize="@dimen/text_small" />
         </LinearLayout>
 

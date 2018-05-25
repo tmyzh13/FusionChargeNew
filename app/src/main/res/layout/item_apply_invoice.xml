@@ -46,7 +46,6 @@
                     android:id="@+id/charge_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2018-11-23 19:23:23"
                     android:textSize="@dimen/text_small"/>
 
 
@@ -69,7 +68,6 @@
                     android:id="@+id/pile_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="32345456546"
                     android:textSize="@dimen/text_small"/>
 
 
@@ -92,7 +90,6 @@
                     android:id="@+id/pile_adress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="南京市风雨小区烟花大道128号"
                     android:singleLine="true"
                     android:textSize="@dimen/text_small"/>
 
@@ -109,7 +106,6 @@
             android:layout_marginLeft="@dimen/dp_8"
             android:layout_gravity="bottom"
             android:textSize="@dimen/text_extra"
-            android:text="20元"
             android:textStyle="bold" />
 
 

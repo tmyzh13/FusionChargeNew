@@ -38,7 +38,6 @@
                 android:textSize="50sp"
                 android:textColor="@color/black"
                 android:layout_marginTop="15dp"
-                android:text="0.00"
                 android:layout_marginBottom="20dp"
                 android:id="@+id/tv_blance"
                 />

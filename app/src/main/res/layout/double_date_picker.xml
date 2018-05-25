@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:text="开始时间"
+        android:text="@string/start_time"
         android:textSize="@dimen/dp_15"
         android:textStyle="bold"/>
     <DatePicker
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:text="结束时间"
+        android:text="@string/end_time"
         android:textSize="@dimen/dp_15"
         android:textStyle="bold"/>
     <DatePicker

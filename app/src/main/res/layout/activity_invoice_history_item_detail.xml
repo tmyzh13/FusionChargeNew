@@ -19,7 +19,6 @@
         android:paddingTop="@dimen/dp_8"
         android:paddingBottom="@dimen/dp_5"
         android:background="@color/text_white"
-        android:text="纸质发票已开票"
         android:textStyle="bold"
         android:textSize="@dimen/text_title"/>
 
@@ -31,7 +30,6 @@
         android:paddingBottom="@dimen/dp_8"
         android:layout_gravity="bottom"
         android:background="@color/text_white"
-        android:text="2012-04-20 13:22"
         android:textSize="@dimen/text_normal"/>
 
     <TextView
@@ -60,7 +58,6 @@
             android:id="@+id/receive_adress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="武汉市江夏区户口社区户口28栋"
             android:textStyle="bold"
             android:textSize="@dimen/text_normal"/>
     </LinearLayout>
@@ -91,7 +88,6 @@
             android:id="@+id/invoice_head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="武汉软通东西湖技术开发区技术有限公司"
             android:textStyle="bold"
             android:textSize="@dimen/text_normal"/>
     </LinearLayout>
@@ -114,7 +110,6 @@
             android:id="@+id/tax_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="9123 2324 3232 3234de"
             android:textStyle="bold"
             android:textSize="@dimen/text_normal"/>
     </LinearLayout>
@@ -137,7 +132,6 @@
             android:id="@+id/invoice_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="电动汽车充电消费"
             android:textStyle="bold"
             android:textSize="@dimen/text_normal"/>
     </LinearLayout>
@@ -160,7 +154,6 @@
             android:id="@+id/money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="99.4元"
             android:textStyle="bold"
             android:textSize="@dimen/text_normal"/>
     </LinearLayout>
@@ -183,7 +176,6 @@
             android:id="@+id/invoice_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="99.4元"
             android:textStyle="bold"
             android:textSize="@dimen/text_normal"/>
     </LinearLayout>
@@ -214,7 +206,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_5"
-                android:text="2012-04-20 13:22 - 2012-04-20 13:22"
                 android:textSize="@dimen/text_small"/>
         </LinearLayout>
 
