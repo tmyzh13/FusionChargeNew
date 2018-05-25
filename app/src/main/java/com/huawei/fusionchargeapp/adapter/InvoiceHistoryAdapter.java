@@ -59,6 +59,10 @@ public class InvoiceHistoryAdapter extends BaseAdapter {
         return data.get(i).id;
     }
 
+    public String getClickOrderNumber(int i){
+        return data.get(i).orderNumber;
+    }
+
     public int getClickOrderStatus(int i){
         return data.get(i).status;
     }
@@ -78,7 +82,7 @@ public class InvoiceHistoryAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
         holder.time.setText(data.get(i).createTime);
-        holder.status.setText(STTAUS[data.get(i).status]);
+        holder.status.setText(data.get(i).payStatus == 1 ? STTAUS[data.get(i).status] : context.getString(R.string.no_pay));
 //        holder.sort.setText(data.get(i).sort);
         holder.money.setText(getSpanString(data.get(i).amount));
         return view;

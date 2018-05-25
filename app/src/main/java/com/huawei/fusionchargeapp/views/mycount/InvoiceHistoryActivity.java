@@ -47,6 +47,7 @@ public class InvoiceHistoryActivity extends BaseActivity<InvoiceHistoryView,Invo
     private int page = FIRST_PAGE;
     public static final String ORDER_ID = "order_id";
     public static final String INVOICE_STATE = "invoice_status";
+    public static final String UNPAY_INVOICE = "order_no_pay_but_had_invoiced";
     public static final int DEFAULT_ID = 29;
 
     @Override
@@ -69,11 +70,20 @@ public class InvoiceHistoryActivity extends BaseActivity<InvoiceHistoryView,Invo
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //进入详细界面
-                Intent intent = new Intent(InvoiceHistoryActivity.this,InvoiceHistoryItemActivity.class);
-                intent.putExtra(ORDER_ID,adapter.getClickOrderId(i));
-                intent.putExtra(INVOICE_STATE,adapter.getClickOrderStatus(i));
-                startActivity(intent);
+                if (data.get(i).payStatus==0) {
+                    //重新支付
+                    Intent intent = new Intent(InvoiceHistoryActivity.this,ApplyInvoiceActivity.class);
+                    intent.putExtra(ORDER_ID,adapter.getClickOrderNumber(i));
+                    intent.putExtra(UNPAY_INVOICE,true);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    //进入详细界面
+                    Intent intent = new Intent(InvoiceHistoryActivity.this,InvoiceHistoryItemActivity.class);
+                    intent.putExtra(ORDER_ID,adapter.getClickOrderId(i));
+                    intent.putExtra(INVOICE_STATE,adapter.getClickOrderStatus(i));
+                    startActivity(intent);
+                }
             }
         });
         ptrLayout.setRefreshLoadCallback(new PtrAutoLoadMoreLayout.RefreshLoadCallback() {
