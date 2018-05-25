@@ -73,7 +73,7 @@ public class ChargeDetails2Activity extends BaseActivity<ChargeDetails2View, Cha
     private ChargeStationDetailBean detailBean;
 
     public static Intent getLauncher(Context context, String id, String type) {
-        Intent intent = new Intent(context, ChargeDetailsActivity.class);
+        Intent intent = new Intent(context, ChargeDetails2Activity.class);
         intent.putExtra("id", id);
         intent.putExtra("type", type);
         return intent;

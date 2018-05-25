@@ -401,7 +401,7 @@ public class ParkActivity extends BaseActivity<ParkView, ParkPresenter> implemen
         if (UserHelper.getSavedUser() == null || Tools.isNull(UserHelper.getSavedUser().token)) {
             startActivity(LoginActivity.getLauncher(context));
         } else {
-            startActivity(ChargeDetailsActivity.getLauncher(context, currentMapDataBean.id + "", currentMapDataBean.type));
+            startActivity(ChargeDetails2Activity.getLauncher(context, currentMapDataBean.id + "", currentMapDataBean.type));
         }
     }
 

@@ -270,7 +270,7 @@ public class AppointmentChargeActivity extends BaseActivity<AppointView, Appoint
         intent.putExtra("runCode",runCode);
         intent.putExtra("reserveId",bean.getReserveId() + "");
         startActivity(intent);
-        AppManager.getAppManager().finishActivity(ChargeDetailsActivity.class);
+        AppManager.getAppManager().finishActivity(ChargeDetails2Activity.class);
         this.finish();
     }
 

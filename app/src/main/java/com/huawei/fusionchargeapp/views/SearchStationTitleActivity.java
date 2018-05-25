@@ -168,7 +168,7 @@ public class SearchStationTitleActivity extends BaseActivity<HomeListView,HomeLi
         if (UserHelper.getSavedUser() == null || Tools.isNull(UserHelper.getSavedUser().token)){
             startActivity(LoginActivity.getLauncher(SearchStationTitleActivity.this));
         }else{
-            Intent intent =new Intent(SearchStationTitleActivity.this,ChargeDetailsActivity.class);
+            Intent intent =new Intent(SearchStationTitleActivity.this,ChargeDetails2Activity.class);
             intent.putExtras(bundle);
             startActivity(intent);
         }
