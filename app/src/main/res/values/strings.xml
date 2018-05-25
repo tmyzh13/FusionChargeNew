@@ -539,4 +539,5 @@
     <string name="detail_remain_money">结余%1$s元</string>
     <string name="invoice_status_ok">纸质发票已开票</string>
     <string name="invoice_status_doing">纸质发票未开票</string>
+
 </resources>
