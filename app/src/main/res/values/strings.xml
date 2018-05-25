@@ -543,5 +543,6 @@
     <string name="no_camera_pemisson">权限被禁止，无法打开相机</string>
     <string name="confirm_clear_user">您确定要清除账户信息且退出应用？</string>
 
+    
 
 </resources>
