@@ -166,7 +166,7 @@ public class ImageActivity extends ImageBaseActivity implements ImageDataSource.
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 imagePicker.takePicture(this, ImagePicker.REQUEST_CODE_TAKE);
             } else {
-                showToast("权限被禁止，无法打开相机");
+                showToast(getString(R.string.no_camera_pemisson));
 //                finish();
             }
         }
@@ -188,7 +188,6 @@ public class ImageActivity extends ImageBaseActivity implements ImageDataSource.
             finish();
         } else if (id == R.id.ll_dir) {
             if (mImageFolders == null) {
-                Log.i("ImageActivity", "您的手机没有图片");
                 return;
             }
             //点击文件夹按钮

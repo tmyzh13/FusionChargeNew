@@ -71,7 +71,6 @@ public class PayPresenter extends BasePresenter<PayView> {
                     public boolean operationError(BaseData baseData, int status, String message) {
                         if(status==214){
                             //余额不足
-                            Log.e("yzh","余额不足");
                             view.payBalanceNotEnough();
                         }else{
                             view.payFail();
@@ -102,7 +101,6 @@ public class PayPresenter extends BasePresenter<PayView> {
                     public boolean operationError(BaseData baseData, int status, String message) {
                         if(status==214){
                             //余额不足
-                            Log.e("yzh","余额不足");
                             view.payBalanceNotEnough();
                         }else{
                             view.payFail();

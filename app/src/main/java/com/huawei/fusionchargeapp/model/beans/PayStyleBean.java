@@ -10,4 +10,5 @@ public class PayStyleBean {
     public String name;
     public String hint;
     public String type;
+    public double needMoney = 8;
 }

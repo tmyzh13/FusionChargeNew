@@ -20,15 +20,21 @@ public class RequestApplyInvoiceBean {
 //            "recAddr": "龙眠大道", //详细地址
 //            "email": "123@qq.com"  //电子邮箱
     public List<String> orderRecordNums;
-    public long appUserId;
-    public String type;
-    public String title;
-    public String code;
-    public String content;
-    public double amount;
-    public String kpRemark;
-    public String name;
-    public String phone;
-    public String recAddr;
-    public String email;
+    public int payType;
+    public double chargeOrderTotalFee;
+    public double postage;
+    public InvoiceInfo invoiceInfo = new InvoiceInfo();
+
+    public class InvoiceInfo{
+        public String type;
+        public String title;
+        public String code;
+        public String content;
+        public double amount;
+        public String kpRemark;
+        public String name;
+        public String phone;
+        public String recAddr;
+        public String email;
+    }
 }
