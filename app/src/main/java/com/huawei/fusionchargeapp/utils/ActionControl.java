@@ -2,6 +2,7 @@ package com.huawei.fusionchargeapp.utils;
 
 import android.content.Context;
 
+import com.corelibs.common.AppManager;
 import com.corelibs.utils.ToastMgr;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.model.UserHelper;
@@ -36,7 +37,7 @@ public class ActionControl {
 
     public static ActionControl getInstance(Context context) {
         if (instant == null) {
-            instant = new ActionControl(context);
+            instant = new ActionControl(AppManager.getAppManager().getAppContext());
         }
 
         return instant;
