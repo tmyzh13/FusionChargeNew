@@ -229,12 +229,12 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
 
         postage = total < 200 ? list.get(adapter.getCurrentPosition()).needMoney: 0;
         int payType = total < 200 ? Integer.parseInt(list.get(adapter.getCurrentPosition()).type) : 3;
-        if(ll_post.getVisibility()==View.VISIBLE){
-            //支付邮费费用的 逻辑
-            if(adapter.getCurrentPosition()==2){
-                //支付邮费
-            }
-        }
+//        if(ll_post.getVisibility()==View.VISIBLE){
+//            //支付邮费费用的 逻辑
+//            if(adapter.getCurrentPosition()==2){
+//                //支付邮费
+//            }
+//        }
 
         presenter.applyInvoice(orderNums,payType,postage,type,et_invoice_title.getText().toString(),
                 et_invoice_tax.getText().toString().trim(),et_invoice_connect.getText().toString().trim(),

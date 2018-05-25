@@ -212,7 +212,7 @@ public class ApplyOrderListActivity extends BaseActivity<InvoiceView,InvoicePres
         setExpandableListViewShowProperty();
     }
     private String getGroupStringFromeTime(String date) {
-        return (date.substring(0,4) + "年" +date.substring(5,7) + "月");
+        return (date.substring(0,4) + getString(R.string.year) +date.substring(5,7) + getString(R.string.month));
     }
 
     private void setExpandableListViewShowProperty(){

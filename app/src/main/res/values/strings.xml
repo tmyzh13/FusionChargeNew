@@ -13,6 +13,8 @@
     <string name="yuan">元</string>
     <string name="yuan_du">元&#047;度</string>
     <string name="du">度</string>
+    <string name="year">年</string>
+    <string name="month">月</string>
 
     <!--action-->
     <string name="action_get_code">获取验证码</string>
