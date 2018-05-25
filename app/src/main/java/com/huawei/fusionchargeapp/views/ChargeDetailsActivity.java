@@ -261,7 +261,7 @@ public class ChargeDetailsActivity extends BaseActivity {
             chargePileAddressTv.setText(chargeStationDetailBean.getAddress());
             if ("-1.0".equals(chargeStationDetailBean.getAverageScore())){
                 scoreTv.setText("");
-                scoreUnit.setText("暂无评分");
+                scoreUnit.setText(getString(R.string.no_score));
             }else {
                 scoreTv.setText(chargeStationDetailBean.getAverageScore() + "");
                 scoreUnit.setText(R.string.score);
