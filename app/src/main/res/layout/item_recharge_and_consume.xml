@@ -29,7 +29,6 @@
                     android:id="@+id/tv_week"
                     android:layout_width="@dimen/item_text_width"
                     android:layout_height="wrap_content"
-                    android:text="周二"
                     android:layout_gravity="center_vertical"
                     android:textSize="12dp"
                     android:textStyle="bold"/>
@@ -38,7 +37,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="+50"
                     android:textSize="12dp"
                     android:textColor="@color/blue"/>
             </LinearLayout>
@@ -52,7 +50,6 @@
                     android:id="@+id/tv_time"
                     android:layout_width="@dimen/item_text_width"
                     android:layout_height="wrap_content"
-                    android:text="13:22"
                     android:layout_gravity="center_vertical"
                     android:textSize="12dp" />
                 <TextView
@@ -60,7 +57,6 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="充值50"
                     android:textSize="12dp" />
 
                 <TextView
@@ -68,7 +64,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="结余50"
                     android:textSize="12dp" />
             </LinearLayout>
 
@@ -83,15 +78,13 @@
             <ImageView
                 android:id="@+id/recharge_sort_image"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/list_ic_zhifubao"/>
+                android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/recharge_sort_name"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="@dimen/dp_8"
-                android:text="支付宝"
                 android:textSize="12dp"/>
 
         </LinearLayout>

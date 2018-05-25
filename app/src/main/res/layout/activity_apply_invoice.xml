@@ -129,7 +129,6 @@
                     <TextView
                         android:id="@+id/tv_invoice_money"
                         style="@style/text_normal"
-                        android:text="9.40"
                         android:textColor="@color/app_blue" />
 
                     <TextView

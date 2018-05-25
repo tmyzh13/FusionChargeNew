@@ -6,7 +6,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
-        android:text="本月"
         android:paddingTop="@dimen/dp_8"
         android:paddingBottom="@dimen/dp_8"
         android:paddingLeft="@dimen/dp_16"

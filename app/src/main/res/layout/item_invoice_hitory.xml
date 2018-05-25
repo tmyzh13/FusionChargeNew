@@ -14,7 +14,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start|center_vertical"
-            android:text="2016-12-23 19:00:34"
             android:drawablePadding="@dimen/dp_8"
             android:drawableLeft="@drawable/icon_time"
             android:textSize="@dimen/text_small"
@@ -26,7 +25,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|center_vertical"
-            android:text="已开票"
             android:textSize="@dimen/text_small"
             android:drawableRight="@mipmap/list_ic_back"
             android:drawablePadding="@dimen/dp_8"
@@ -56,7 +54,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|center_vertical"
-            android:text="48.5元"
             android:textSize="@dimen/text_small"
             android:paddingRight="@dimen/dp_16"
             />

@@ -552,6 +552,11 @@
     <string name="has_invoiced">已开票</string>
     <string name="has_not_invoiced">未开票</string>
     <string name="my_account_consume">消费</string>
+    <string name="hold_scord">积分</string>
+    <string name="write_email_hint">填写邮箱</string>
+    <string name="write_vin_code">填写VIN码</string>
+    <string name="start_time">开始时间</string>
+    <string name="end_time">结束时间</string>
 
 
     <string name="charging_time">充电时长</string>

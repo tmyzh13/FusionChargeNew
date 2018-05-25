@@ -30,7 +30,6 @@
                 style="@style/text_normal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="sss"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
             <TextView
@@ -87,7 +86,6 @@
             <TextView
                 android:layout_marginTop="5dp"
                 style="@style/text_normal"
-                android:text="2018.02.19-2018.04.10"
                 android:id="@+id/tv_time"
                 android:textSize="12sp"
                 />

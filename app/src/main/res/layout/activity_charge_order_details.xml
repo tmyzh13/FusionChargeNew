@@ -44,8 +44,7 @@
                     <TextView
                         android:id="@+id/charge_station_name"
                         style="@style/charge_order_detail_text"
-                        android:layout_alignParentRight="true"
-                        android:text="南京市雨花台大道17号" />
+                        android:layout_alignParentRight="true" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -62,8 +61,7 @@
                     <TextView
                         android:id="@+id/charge_zhuang_number"
                         style="@style/charge_order_detail_text"
-                        android:layout_alignParentRight="true"
-                        android:text="284642" />
+                        android:layout_alignParentRight="true" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -89,8 +87,7 @@
                         android:id="@+id/charge_cost"
                         style="@style/charge_order_detail_text"
                         android:layout_marginRight="3dp"
-                        android:layout_toLeftOf="@id/iv_charge_cost_ask"
-                        android:text="0.092元/度" />
+                        android:layout_toLeftOf="@id/iv_charge_cost_ask" />
 
                 </RelativeLayout>
 
@@ -108,8 +105,7 @@
                     <TextView
                         android:id="@+id/charge_service_cost"
                         style="@style/charge_order_detail_text"
-                        android:layout_alignParentRight="true"
-                        android:text="0.54元/度" />
+                        android:layout_alignParentRight="true" />
                 </RelativeLayout>
 
             </LinearLayout>

@@ -31,14 +31,12 @@
                 android:id="@+id/charge_location_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="华博智慧元"
                 android:textSize="15dp"
                 android:textStyle="bold"/>
             <TextView
                 android:id="@+id/charge_location_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="南京市雨花台区花神大道17号"
                 android:textSize="13dp"/>
         </LinearLayout>
 
@@ -60,13 +58,11 @@
                 <TextView
                     android:id="@+id/charge_time_start"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2017-6-15 16:42:23" />
+                    android:layout_height="wrap_content" />
                 <TextView
                     android:id="@+id/charge_time_end"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2017-6-15 16:42:23" />
+                    android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
     </FrameLayout>
@@ -90,8 +86,7 @@
             android:id="@+id/charge_info_kw"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|end"
-            android:text="40kw"/>
+            android:layout_gravity="center_vertical|end" />
     </FrameLayout>
 
     <FrameLayout
@@ -109,8 +104,7 @@
             android:id="@+id/charge_info_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|end"
-            android:text="¥10.00"/>
+            android:layout_gravity="center_vertical|end" />
     </FrameLayout>
 
     <FrameLayout
@@ -128,8 +122,7 @@
             android:id="@+id/charge_info_tips"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|end"
-            android:text="¥10.00"/>
+            android:layout_gravity="center_vertical|end" />
     </FrameLayout>
 
     <FrameLayout
@@ -147,8 +140,7 @@
             android:id="@+id/charge_info_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|end"
-            android:text="¥20.00"/>
+            android:layout_gravity="center_vertical|end" />
     </FrameLayout>
     <View
         android:layout_marginTop="8dp"
