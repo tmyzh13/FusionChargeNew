@@ -224,7 +224,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
         }
         //生日不能为空
         if(Tools.isNull(tvBirthday.getText().toString())) {
-            showToast("请选择出生日期");
+            showToast(getString(R.string.please_choose_birthday));
             return null;
         }
        /* if(Tools.isNull(tvEmail.getText().toString())) {
@@ -232,7 +232,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
         }*/
        //vin码校验，长度为17位
         if (!Tools.isNull(tvCarVin.getText().toString()) && tvCarVin.getText().toString().length() != 17) {
-            showToast("车辆识别号码必须是17位字母和数字组合");
+            showToast(getString(R.string.hint_vin));
             return null;
         }
 
@@ -461,7 +461,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
 
     private boolean isEmailVailid() {
         if (null == tvEmail.getText() || tvEmail.getText().toString().isEmpty()) {
-            showToast("邮箱不能为空！");
+            showToast(getString(R.string.hint_input_right_email));
             return false;
         }
         Pattern pattern = Pattern.compile(".+@.+\\.[a-z]+");
@@ -528,7 +528,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
                     presenter.uploadImage(file);
                 }
             } else {
-                Toast.makeText(this, "没有数据", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.no_data), Toast.LENGTH_SHORT).show();
             }
         }
     }

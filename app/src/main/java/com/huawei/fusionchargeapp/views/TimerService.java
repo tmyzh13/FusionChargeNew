@@ -46,7 +46,6 @@ public class TimerService extends Service{
     //更新预约时间
     public void timeAppointment(){
         if(isAppointmentCharge){
-            Log.e("yzh","已经开始");
             return;
         }else{
             isAppointmentCharge=true;
@@ -89,7 +88,6 @@ public class TimerService extends Service{
         //一分钟更新一次时间
         if(isStartCharge){
             //已经开始了不用再执行一个操作
-            Log.e("yzh","已经开始了不用再执行一个操作");
             return;
         }else{
             isStartCharge=true;

@@ -71,6 +71,7 @@
     <string name="hint_input_right_email">请输入正确的邮箱</string>
     <string name="hint_right_code">请输入正确的二维码</string>
     <string name="hint_error_data">错误数据</string>
+    <string name="hint_vin">车辆识别号码必须是17位字母和数字组合</string>
     <!--登录界面-->
     <string name="login">登录</string>
     <string name="login_type_phone">手机号登录</string>
@@ -542,6 +543,7 @@
 
     <string name="no_camera_pemisson">权限被禁止，无法打开相机</string>
     <string name="confirm_clear_user">您确定要清除账户信息且退出应用？</string>
+    <string name="please_choose_birthday">请选择出生日期</string>
 
     
 
