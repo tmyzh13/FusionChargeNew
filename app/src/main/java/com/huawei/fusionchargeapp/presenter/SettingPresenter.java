@@ -6,6 +6,7 @@ import com.corelibs.api.ApiFactory;
 import com.corelibs.api.ResponseTransformer;
 import com.corelibs.base.BasePresenter;
 import com.corelibs.subscriber.ResponseSubscriber;
+import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.apis.LoginApi;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
@@ -43,7 +44,13 @@ public class SettingPresenter extends BasePresenter<SettingView> {
 
                     @Override
                     public boolean operationError(BaseData baseData, int status, String message) {
-                        view.onLogoutFail();
+                        if(status == 215) { //有余额
+                            view.onLogoutFail(getString(R.string.has_money_cannot_logout));
+                        } else if(status == 222) {//有未支付订单
+                            view.onLogoutFail(getString(R.string.has_no_pay_order_cannot_logout));
+                        } else {
+                            view.onLogoutFail(getString(R.string.logout_fail));
+                        }
                         return super.operationError(baseData, status, message);
                     }
                 });

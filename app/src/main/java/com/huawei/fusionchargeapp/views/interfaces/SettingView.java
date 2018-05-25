@@ -7,6 +7,6 @@ public interface SettingView extends BaseView{
 
     void onLogoutSuccess();
 
-    void onLogoutFail();
+    void onLogoutFail(String message);
   
 }

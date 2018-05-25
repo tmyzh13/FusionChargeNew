@@ -28,7 +28,7 @@ import butterknife.Bind;
 import butterknife.OnClick;
 
 
-public class SettingActivity extends BaseActivity<SettingView, SettingPresenter> implements SettingView, View.OnClickListener {
+public class SettingActivity extends BaseActivity<SettingView, SettingPresenter> implements SettingView {
     private static final String TAG = SettingActivity.class.getSimpleName();
     @Bind(R.id.nav)
     NavBar navBar;
@@ -46,11 +46,6 @@ public class SettingActivity extends BaseActivity<SettingView, SettingPresenter>
     public static Intent getLauncher(Context context) {
         Intent intent = new Intent(context, SettingActivity.class);
         return intent;
-    }
-
-    @Override
-    public void onClick(View view) {
-
     }
 
     @Override
@@ -162,8 +157,8 @@ public class SettingActivity extends BaseActivity<SettingView, SettingPresenter>
     }
 
     @Override
-    public void onLogoutFail() {
+    public void onLogoutFail(String message) {
         hideLoading();
-        showToast(getString(R.string.logout_fail));
+        showToast(message);
     }
 }
