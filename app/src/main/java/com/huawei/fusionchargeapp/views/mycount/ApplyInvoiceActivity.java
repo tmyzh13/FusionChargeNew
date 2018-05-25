@@ -79,6 +79,8 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
     RadioButton rb_people;
     @Bind(R.id.ll_post)
     LinearLayout ll_post;
+    @Bind(R.id.ll_go_input)
+    LinearLayout ll_go_input;
 
     private Context context=ApplyInvoiceActivity.this;
     private InvoicePayAdapter adapter;
@@ -245,6 +247,11 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
         et_invoice_receive.setEnabled(false);
         et_invoice_connect.setText(bean.invoiceInfo.phone);
         et_invoice_connect.setEnabled(false);
+        if (null != bean.invoiceInfo.kpRemark) {
+            tv_more_info.setText(bean.invoiceInfo.kpRemark);
+        }
+        ll_go_input.setEnabled(false);
+        tv_more_info.setEnabled(false);
         orderNums = bean.orderRecordNums;
     }
 

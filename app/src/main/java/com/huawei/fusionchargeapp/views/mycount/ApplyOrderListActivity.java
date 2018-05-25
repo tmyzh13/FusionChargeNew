@@ -185,6 +185,9 @@ public class ApplyOrderListActivity extends BaseActivity<InvoiceView,InvoicePres
 
         for (int i =0; i < list.size(); i++) {
             ApplyInvoiceBean tempBean = list.get(i);
+            if (null == tempBean.chargeStartTime) {
+                continue;
+            }
             if (groupList.size() == 0) {
                 groupList.add(getGroupStringFromeTime(tempBean.chargeStartTime));
                 itemList.add(new ArrayList<ApplyInvoiceBean>());
