@@ -332,7 +332,7 @@ public class ParkActivity extends BaseActivity<ParkView, ParkPresenter> implemen
         paintAddress.setFakeBoldText(true);
         if (mapInfoBean.averageScore.equals("-1.0")) {
             tv_map_info_score.setText("");
-            scoreUnit.setText("暂无评分");
+            scoreUnit.setText(getString(R.string.no_score));
         } else {
             tv_map_info_score.setText(mapInfoBean.averageScore);
             scoreUnit.setText(R.string.score);

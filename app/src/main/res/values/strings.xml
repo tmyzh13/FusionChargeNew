@@ -540,4 +540,7 @@
     <string name="invoice_status_ok">纸质发票已开票</string>
     <string name="invoice_status_doing">纸质发票未开票</string>
 
+    <string name="no_camera_pemisson">权限被禁止，无法打开相机</string>
+    <string name="confirm_clear_user">您确定要清除账户信息且退出应用？</string>
+
 </resources>

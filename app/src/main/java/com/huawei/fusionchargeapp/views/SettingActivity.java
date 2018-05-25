@@ -103,7 +103,7 @@ public class SettingActivity extends BaseActivity<SettingView, SettingPresenter>
 
     @OnClick(R.id.tv_exit)
     public void gotoExit() {
-        final CommonDialog dialog = new CommonDialog(this,"","您确定要清除账户信息且退出应用？",2);
+        final CommonDialog dialog = new CommonDialog(this,"",getString(R.string.confirm_clear_user),2);
         dialog.show();
         dialog.setPositiveListener(new View.OnClickListener() {
             @Override
