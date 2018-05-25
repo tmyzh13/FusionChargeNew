@@ -38,6 +38,8 @@ allprojects {
         maven {
             url "http://w3cloudnkg-sit1.huawei.com/ccloud/nexus/content/groups/public"
         }
+
+        maven { url "https://jitpack.io" }
     }
 }
 

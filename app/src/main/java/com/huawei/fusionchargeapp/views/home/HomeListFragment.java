@@ -24,6 +24,7 @@ import com.huawei.fusionchargeapp.model.beans.MyLocationBean;
 import com.huawei.fusionchargeapp.presenter.HomeListPresenter;
 import com.huawei.fusionchargeapp.utils.ChoiceManager;
 import com.huawei.fusionchargeapp.utils.Tools;
+import com.huawei.fusionchargeapp.views.ChargeDetails2Activity;
 import com.huawei.fusionchargeapp.views.ChargeDetailsActivity;
 import com.huawei.fusionchargeapp.views.LoginActivity;
 import com.huawei.fusionchargeapp.views.interfaces.HomeListView;
@@ -65,7 +66,7 @@ public class HomeListFragment extends BaseFragment<HomeListView, HomeListPresent
                 if (UserHelper.getSavedUser() == null || Tools.isNull(UserHelper.getSavedUser().token)) {
                     startActivity(LoginActivity.getLauncher(getContext()));
                 } else {
-                    startActivity(ChargeDetailsActivity.getLauncher(getActivity(), list_datas.get(position).id + "", list_datas.get(position).type));
+                    startActivity(ChargeDetails2Activity.getLauncher(getActivity(), list_datas.get(position).id + "", list_datas.get(position).type));
                 }
             }
         });

@@ -243,8 +243,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".views.UserInfoActivity"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".views.SettingActivity"
             android:screenOrientation="portrait" />
@@ -297,11 +297,13 @@
         <activity
             android:name=".views.mycount.CashPatternActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".views.W3AccountBindPhoneActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".views.mycount.MyTaoCanActivity"
-            android:screenOrientation="portrait"
-            />
+        <activity
+            android:name=".views.W3AccountBindPhoneActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.mycount.MyTaoCanActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".views.ChargeDetails2Activity"></activity>
     </application>
 
 </manifest>

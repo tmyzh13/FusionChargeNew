@@ -2,6 +2,7 @@ package com.huawei.fusionchargeapp.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -111,6 +112,7 @@ public class ElectricGunAdapter extends BaseAdapter {
                 bean.setLongitude(longitude);
                 bean.setRunCode(runCode);
                 PreferencesHelper.saveData(bean);
+                Log.e("zw","原版： "  + bean.toString());
                 context.startActivity(intent);
             }
         });

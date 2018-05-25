@@ -8,6 +8,7 @@ import com.huawei.fusionchargeapp.model.beans.ChargeDetailFeeBean;
 import com.huawei.fusionchargeapp.model.beans.ChargeStationDetailBean;
 import com.huawei.fusionchargeapp.views.fragments.CommentsFragment;
 import com.huawei.fusionchargeapp.views.fragments.PictureFragment;
+import com.huawei.fusionchargeapp.views.fragments.Position2Fragment;
 import com.huawei.fusionchargeapp.views.fragments.PositionFragment;
 
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.List;
 public class ChargePileTypeAdapter extends FragmentPagerAdapter {
 
     private PictureFragment pictureFragment;
-    private PositionFragment positionFragment;
+    private Position2Fragment positionFragment;
     private CommentsFragment commentsFragment;
 
     private ChargeStationDetailBean data;
@@ -43,7 +44,7 @@ public class ChargePileTypeAdapter extends FragmentPagerAdapter {
             return pictureFragment;
         } else if (position == 1) {
             if (positionFragment == null) {
-                positionFragment = new PositionFragment();
+                positionFragment = new Position2Fragment();
                 positionFragment.data = data;
                 positionFragment.feeList = feeList;
             }

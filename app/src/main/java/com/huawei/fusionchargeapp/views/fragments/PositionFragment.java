@@ -37,7 +37,7 @@ public class PositionFragment extends BaseFragment {
     protected void init(Bundle savedInstanceState) {
         chargePileAdapter = new ChargePileAdapter(getActivity(), data,feeList);
         chargePileLv.setAdapter(chargePileAdapter);
-        Log.e("zw","position fragment :" + feeList.toString());
+        Log.e("zw","position fragment :" + data.toString());
     }
 
     @Override

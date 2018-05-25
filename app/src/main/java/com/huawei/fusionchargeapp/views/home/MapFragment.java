@@ -68,6 +68,7 @@ import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.AppointmentChargeActivity;
 import com.huawei.fusionchargeapp.views.ChagerStatueActivity;
 import com.huawei.fusionchargeapp.views.ChargeCaptureActivity;
+import com.huawei.fusionchargeapp.views.ChargeDetails2Activity;
 import com.huawei.fusionchargeapp.views.ChargeDetailsActivity;
 import com.huawei.fusionchargeapp.views.GuildActivity;
 import com.huawei.fusionchargeapp.views.LoginActivity;
@@ -828,7 +829,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
         if (UserHelper.getSavedUser() == null || Tools.isNull(UserHelper.getSavedUser().token)) {
             startActivity(LoginActivity.getLauncher(getContext()));
         } else {
-            startActivity(ChargeDetailsActivity.getLauncher(getActivity(), currentMapDataBean.id + "", currentMapDataBean.type));
+            startActivity(ChargeDetails2Activity.getLauncher(getActivity(), currentMapDataBean.id + "", currentMapDataBean.type));
         }
     }
 

@@ -1,23 +1,14 @@
 package com.huawei.fusionchargeapp.model.beans;
 
+import com.chad.library.adapter.base.entity.SectionEntity;
+
 import java.util.List;
 
 /**
  * Created by zhangwei on 2018/4/27.
  */
 
-
-/**
- * Copyright 2018 bejson.com
- */
-
-/**
- * Auto-generated: 2018-04-27 22:28:26
- *
- * @author bejson.com (i@bejson.com)
- * @website http://www.bejson.com/java2pojo/
- */
-public class PileList {
+public class PileList{
 
     private String address;
     private String alterNum;
@@ -49,7 +40,6 @@ public class PileList {
     private long zoneId;
     //0 否1 是
     private int isGis;
-
 
     public void setZoneId(long zongId){
         this.zoneId=zongId;
