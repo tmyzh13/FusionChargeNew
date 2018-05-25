@@ -9,7 +9,7 @@ public class Urls {
 
 
     //        public static final String ROOT="http://114.115.169.46:8088/charger/api/v1/";//菊
-    public static final String ROOT="http://10.40.143.67:8088/charger/api/v1/";//李凯
+//    public static final String ROOT="http://10.40.143.67:8088/charger/api/v1/";//李凯
 //    public static final String ROOT="http://10.40.143.130:8088/charger/api/v1/";//胡明明
 //    public static final String ROOT="http://10.40.143.130:8088/charger/api/v1/";//菊1
 //    public static final String ROOT = "http://114.115.141.57:8080/charger/api/v1/";
@@ -22,7 +22,7 @@ public class Urls {
 //    public static final String ROOT = "http://10.40.143.72:8088/charger/api/v1/";
 //    public static final String ROOT = "http://10.40.143.72:8088/charger/api/v1/";
 //    public static final String ROOT = "http://10.186.254.65:8088/charger/api/v1/";//张楠
-//    public static final String ROOT = "http://mcloud-sit.huawei.com/mcloud/umag/FreeProxyForText/safecampuse_charging/charger/api/v1/";//华为
+    public static final String ROOT = "http://mcloud-sit.huawei.com/mcloud/umag/FreeProxyForText/safecampuse_charging/charger/api/v1/";//华为
 
      //打包一并修改地址
     public static final String IMAGE_URL="http://mcloud-sit.huawei.com/mcloud/umag/FreeProxyForText/safecampuse_charging/charger/";

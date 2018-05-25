@@ -563,4 +563,6 @@
     <string name="has_money_cannot_logout">余额未用完，无法注销！</string>
     <string name="has_no_pay_order_cannot_logout">还有未支付完成的订单，无法注销！</string>
 
+    <string name="jiaoliu">交流</string>
+    <string name="kongxian">空闲</string>
 </resources>

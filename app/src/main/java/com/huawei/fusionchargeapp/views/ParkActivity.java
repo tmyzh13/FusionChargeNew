@@ -179,8 +179,8 @@ public class ParkActivity extends BaseActivity<ParkView, ParkPresenter> implemen
                         //刷新坐标 位置不一致时才更新路线
                         double[] datas= GPSUtil.gcj02_To_Gps84(data.latitude, data.longtitude);
                         if (locationMark != null) {
-
-                            if (locationMark.getPosition().latitude != data.latitude || locationMark.getPosition().longitude != data.longtitude) {
+                            if (locationMark.getPosition().latitude != datas[0] || locationMark.getPosition().longitude !=datas[1] ) {
+                                Log.e("yzh","222222222222222");
                                 locationMark.remove();
                                 locationMark = mIMapImpl.addMarker(new MarkerOptions()
                                         .position(new LatLng(datas[0], datas[1])).title("location").icon(com.huawei.map.mapapi.model.BitmapDescriptorFactory.fromBitmap(BitmapFactory
@@ -385,7 +385,6 @@ public class ParkActivity extends BaseActivity<ParkView, ParkPresenter> implemen
     public void goGuaild() {
         if (currentMapDataBean != null) {
             boolean choiceNotAppointment = false;
-            Log.e("yzh", "guild--" + currentMapDataBean.toString());
             if (UserHelper.getSavedUser() == null || Tools.isNull(UserHelper.getSavedUser().token)) {
                 startActivity(LoginActivity.getLauncher(context));
             } else {
@@ -408,7 +407,6 @@ public class ParkActivity extends BaseActivity<ParkView, ParkPresenter> implemen
     @Override
     public void OnNaviSuccess(String s) {
         RouteBean bean=new Gson().fromJson(s, RouteBean.class);
-        Log.e("yzh","----"+bean.toString());
         if(bean.ishasRute){
             List<List<Double>> outData=bean.points16.outData;
             List<List<Double>> parkData;

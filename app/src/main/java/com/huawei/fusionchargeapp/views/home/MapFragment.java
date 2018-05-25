@@ -505,9 +505,9 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
     public void onPause() {
         super.onPause();
         map.onPause();
-        if(mlocationClient!=null){
-            mlocationClient.stopLocation();
-        }
+//        if(mlocationClient!=null){
+//            mlocationClient.stopLocation();
+//        }
     }
 
     @Override
