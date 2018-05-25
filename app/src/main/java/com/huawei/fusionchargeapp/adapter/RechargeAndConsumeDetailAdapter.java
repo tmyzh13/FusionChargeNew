@@ -30,15 +30,17 @@ public class RechargeAndConsumeDetailAdapter extends BaseExpandableListAdapter {
     private List<List<RechargeAndConsumeBean>> itemLst = new ArrayList<>();
 
     private static final int[] sort_img = {R.drawable.list_ic_zhifubao,R.drawable.list_ic_weixin};
-    private static final String[] sort_text =  {"支付宝","微信"};
+    private String[] sort_text;
     private static final String[] DEL_OR_ADD = {"-","+"};
-    private static final String[] BALANCE = {"消费","充值"};
+    private String[] BALANCE;
 
     public RechargeAndConsumeDetailAdapter(Context context, List<String> groupList, List<List<RechargeAndConsumeBean>> itemLst) {
         this.context = context;
         inflater = LayoutInflater.from(context);
         this.groupList = groupList;
         this.itemLst = itemLst;
+        sort_text =new String[] {context.getString(R.string.zhi_fu_bao),context.getString(R.string.wei_xin)};
+        BALANCE =new String[] {context.getString(R.string.my_account_consume),context.getString(R.string.my_acount_recharge)};
     }
 
     public void setDatas(List<String> groupList, List<List<RechargeAndConsumeBean>> itemLst){

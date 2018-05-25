@@ -24,13 +24,14 @@ public class AppointmentListAdapter extends BaseAdapter {
     private List<AllAppointmentResultBean> data = new ArrayList<>();
     private LayoutInflater inflater;
     private Context context;
-    private static final String[] STATE_TEXT= {"进行中","已完成","已取消","已超时"};
+    private String[] STATE_TEXT;
     private static final int[] STATE_COLOR = {Color.YELLOW,Color.GREEN,Color.BLUE,Color.RED};
 
     public AppointmentListAdapter(Context context,List<AllAppointmentResultBean> bean) {
         this.context = context;
         inflater = LayoutInflater.from(context);
         data = bean;
+        STATE_TEXT = new String[] {context.getString(R.string.doing),context.getString(R.string.has_done),context.getString(R.string.has_canceled),context.getString(R.string.had_time_out)};
     }
 
     public void setData(List<AllAppointmentResultBean> bean) {

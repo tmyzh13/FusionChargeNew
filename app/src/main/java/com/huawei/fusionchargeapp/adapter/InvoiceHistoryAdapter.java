@@ -27,12 +27,13 @@ public class InvoiceHistoryAdapter extends BaseAdapter {
     private List<InvoiceHistoryBean> data = new ArrayList<>();
     private Context context;
     private LayoutInflater inflater;
-    private static final String[] STTAUS= {"未开票","已开票"};
+    private String[] STTAUS;
 
     public InvoiceHistoryAdapter(Context context, List<InvoiceHistoryBean> data) {
         this.data = data;
         this.context = context;
         inflater = LayoutInflater.from(context);
+        STTAUS = new String[] {context.getString(R.string.has_not_invoiced),context.getString(R.string.has_invoiced)};
     }
 
     public void setData(List<InvoiceHistoryBean> list){
