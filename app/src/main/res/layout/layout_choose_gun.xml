@@ -26,7 +26,7 @@
         android:paddingRight="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="空闲"
+        android:text="@string/kongxian"
         android:textColor="@color/green"
         android:textSize="@dimen/text_normal"
         android:background="@drawable/shape_choose_gun_free"

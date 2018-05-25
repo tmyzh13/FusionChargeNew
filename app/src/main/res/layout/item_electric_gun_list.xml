@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_10"
-            android:text="交流" />
+            android:text="@string/jiaoliu" />
 
         <ImageView
             android:id="@+id/gun_status_iv"
@@ -56,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_10"
-            android:text="空闲" />
+            android:text="@string/kongxian" />
         <TextView
             style="@style/text_normal"
             android:id="@+id/tv_remindtime_hint"

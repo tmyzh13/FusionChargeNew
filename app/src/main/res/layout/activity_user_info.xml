@@ -105,7 +105,7 @@
             android:gravity="right|center_vertical"
             android:inputType="textEmailAddress"
             android:lines="1"
-            android:hint="填写邮箱"
+            android:hint="@string/edit_emial"
             android:maxLength="32"
             android:textColor="@color/setting_blue" />
     </LinearLayout>
@@ -179,7 +179,7 @@
             android:background="@color/transparent"
             android:gravity="right|center_vertical"
             android:lines="1"
-            android:hint="填写VIN码"
+            android:hint="@string/edit_vin_code"
             android:maxLength="17"
             android:inputType="number"
             android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"

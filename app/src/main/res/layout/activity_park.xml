@@ -62,7 +62,7 @@
                         android:textColor="@color/app_blue"
                         android:id="@+id/tv_map_info_score"
                         />
-                    />
+
                     <TextView
                         android:id="@+id/score_unit"
                         style="@style/text_normal"

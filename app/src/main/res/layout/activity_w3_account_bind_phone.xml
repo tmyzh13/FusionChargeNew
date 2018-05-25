@@ -21,7 +21,7 @@
         android:paddingLeft="20dp"
         android:textSize="@dimen/text_normal"
         android:textColor="@color/text_gray"
-        android:text="工号：zwx324423"/>
+        />
     
     <TextView
         android:layout_width="match_parent"
