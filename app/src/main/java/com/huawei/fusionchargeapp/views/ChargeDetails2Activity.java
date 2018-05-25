@@ -145,7 +145,7 @@ public class ChargeDetails2Activity extends BaseActivity<ChargeDetails2View, Cha
             chargePileAddressTv.setText(chargeStationDetailBean.getAddress());
             if ("-1.0".equals(chargeStationDetailBean.getAverageScore())) {
                 scoreTv.setText("");
-                scoreUnit.setText(R.string.no_scroe);
+                scoreUnit.setText(R.string.no_score);
             } else {
                 scoreTv.setText(chargeStationDetailBean.getAverageScore() + "");
                 scoreUnit.setText(R.string.score);
