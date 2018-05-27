@@ -1,11 +1,13 @@
 package com.huawei.fusionchargeapp.presenter;
 
+import android.app.Activity;
 import android.util.Log;
 
 import com.corelibs.api.ApiFactory;
 import com.corelibs.api.ResponseTransformer;
 import com.corelibs.base.BasePresenter;
 import com.corelibs.subscriber.ResponseSubscriber;
+import com.corelibs.utils.ToastMgr;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.apis.ScanApi;
@@ -85,6 +87,11 @@ public class ChargeDetails2Presenter extends BasePresenter<ChargeDetails2View>{
                         @Override
                         public void success(BaseData<PileList> baseData) {
                             PileList pileList = baseData.data;
+                            if(baseData==null||baseData.data==null){
+                                ToastMgr.show(getString(R.string.no_data));
+                                ((Activity)getContext()).finish();
+                                return;
+                            }
                             ChargeStationDetailBean chargeStationDetailBean = new ChargeStationDetailBean();
                             chargeStationDetailBean.setAddress(pileList.getAddress());
                             chargeStationDetailBean.setName(pileList.getName());

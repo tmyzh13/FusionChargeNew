@@ -68,11 +68,14 @@ public class Position2Fragment extends BaseFragment {
                 multipleBeans.add(headBean);
 
                 List<GunList> gunLists = pileLists.get(i).getGunList();
-                for (int j = 0; j < gunLists.size(); j++) {
-                    ChargeMultipleBean bodyBean = new ChargeMultipleBean(ChargeMultipleBean.CHARGE_DETAIL_BODY);
-                    bodyBean.setmGunList(gunLists.get(j));
-                    multipleBeans.add(bodyBean);
+                if(gunLists!=null){
+                    for (int j = 0; j < gunLists.size(); j++) {
+                        ChargeMultipleBean bodyBean = new ChargeMultipleBean(ChargeMultipleBean.CHARGE_DETAIL_BODY);
+                        bodyBean.setmGunList(gunLists.get(j));
+                        multipleBeans.add(bodyBean);
+                    }
                 }
+
             }
         }
 

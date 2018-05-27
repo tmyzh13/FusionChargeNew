@@ -186,13 +186,14 @@ public class ParkActivity extends BaseActivity<ParkView, ParkPresenter> implemen
                                         .position(new LatLng(datas[0], datas[1])).title("location").icon(com.huawei.map.mapapi.model.BitmapDescriptorFactory.fromBitmap(BitmapFactory
                                                 .decodeResource(getResources(), R.mipmap.location))));
                                 //删除之前的路线重新获取
+                                Log.e("yzh","wqeqwe");
                                 mIMapImpl.getInnerMap().deleteAllNavilines();
                                 PointEntity startPoint =new PointEntity();
                                 startPoint.setLat(datas[0]);
                                 startPoint.setLon(datas[1]);
                                 startPoint.setFloorid("");
                                 PointEntity endPoint=new PointEntity();
-                                double[] endDatas= GPSUtil.gcj02_To_Gps84(data.latitude, data.longtitude);
+                                double[] endDatas= GPSUtil.gcj02_To_Gps84(endlatitude, endlongitude);
                                 endPoint.setLat(endDatas[0]);
                                 endPoint.setLon(endDatas[1]);
                                 endPoint.setFloorid("");
