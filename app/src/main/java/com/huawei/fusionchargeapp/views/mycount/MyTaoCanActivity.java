@@ -47,6 +47,8 @@ public class MyTaoCanActivity extends BaseActivity<MyTaocanView,MyTaocanPresente
     TextView tv_limit_2;
     @Bind(R.id.tv_hint_3)
     TextView tv_limit_3;
+    @Bind(R.id.taocan_linear)
+    LinearLayout taocan_linear;
 
 
     private Context context=MyTaoCanActivity.this;
@@ -83,8 +85,9 @@ public class MyTaoCanActivity extends BaseActivity<MyTaocanView,MyTaocanPresente
     public void renderMyTaoCan(MyTaocanBean bean) {
         if(bean==null){
             ToastMgr.show(R.string.no_tao_can);
-            finish();
+            //taocan_linear.setVisibility(View.GONE);
         }else{
+            taocan_linear.setVisibility(View.VISIBLE);
             tv_name.setText(bean.businessName);
             if(!Tools.isNull(bean.businessStartTime)){
                 tv_buy_time.setText(bean.businessStartTime.substring(0, Tools.DATE_LENGTH_FROM_SERVER));

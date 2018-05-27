@@ -16,6 +16,8 @@
         android:gravity="center_vertical"
         android:background="@color/white"
         android:padding="@dimen/dp_20"
+        android:id="@+id/taocan_linear"
+        android:visibility="gone"
         >
         <LinearLayout
             android:layout_width="wrap_content"
