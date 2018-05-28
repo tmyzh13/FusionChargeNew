@@ -42,11 +42,11 @@
         <TextView
             style="@style/textview"
             android:layout_weight="1"
-            android:text="@string/user_info_nick_name" />
+            android:text="@string/user_info_name" />
 
         <EditText
-            android:hint="@string/user_info_write_nick"
-            android:id="@+id/et_nick"
+            android:hint="@string/write_name"
+            android:id="@+id/et_name"
             style="@style/textview"
             android:layout_height="match_parent"
             android:layout_weight="1"

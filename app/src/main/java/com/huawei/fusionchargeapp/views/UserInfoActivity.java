@@ -84,8 +84,8 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
     CircleImageView ivUserIcon;
     @Bind(R.id.layout_portrait)
     LinearLayout layoutPortrait;
-    @Bind(R.id.et_nick)
-    EditText etNick;
+    @Bind(R.id.et_name)
+    EditText etName;
     @Bind(R.id.layout_nick)
     LinearLayout layoutNick;
     @Bind(R.id.tv_sex)
@@ -213,7 +213,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
     //获取已输入的个人信息
     private ModifyUserInfoRequestBean getUserInfoRequest() {
         //姓名不能为空
-        if(Tools.isNull(etNick.getText().toString())){
+        if(Tools.isNull(etName.getText().toString())){
             showToast(getString(R.string.name_cannot_null));
             return null;
         }
@@ -240,7 +240,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
         if(!Tools.isNull(uploadImageName)) {
             bean.photoUrl = uploadImageName;
         }
-        bean.name = etNick.getText().toString();
+        bean.name = etName.getText().toString();
         name = bean.name;
         bean.sexName = tvSex.getText().toString();
         bean.email = tvEmail.getText().toString();
@@ -295,9 +295,9 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
 
         // 姓名
         if (!TextUtils.isEmpty(userBean.name)) {
-            etNick.setText(userBean.name);
+            etName.setText(userBean.name);
         }else{
-            etNick.setText(userBean.phone);
+            etName.setText(userBean.phone);
         }
         //性别 1为男，2为女，0为未知
         tvSex.setText(userBean.sexName);
