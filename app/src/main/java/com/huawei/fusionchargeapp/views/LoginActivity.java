@@ -231,14 +231,14 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence == null || charSequence.toString().isEmpty()){
-                    if (pwd_ic_del.getVisibility() != View.GONE) {
-                        pwd_ic_del.setVisibility(View.GONE);
-                        pwd_ic_see.setVisibility(View.GONE);
+                    if (pwd_ic_del.getVisibility() != View.INVISIBLE) {
+                        pwd_ic_del.setVisibility(View.INVISIBLE);
+//                        pwd_ic_see.setVisibility(View.GONE);
                     }
                 } else {
                     if (pwd_ic_del.getVisibility() != View.VISIBLE) {
                         pwd_ic_del.setVisibility(View.VISIBLE);
-                        pwd_ic_see.setVisibility(View.VISIBLE);
+//                        pwd_ic_see.setVisibility(View.VISIBLE);
                     }
                 }
             }
@@ -252,8 +252,8 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     @OnClick(R.id.pwd_ic_del)
     void resetPwdEditContent(){
         pwdEt.setText("");
-        pwd_ic_del.setVisibility(View.GONE);
-        pwd_ic_see.setVisibility(View.GONE);
+        pwd_ic_del.setVisibility(View.INVISIBLE);
+//        pwd_ic_see.setVisibility(View.GONE);
         pwdEt.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         pwd_ic_see.setImageResource(R.drawable.icon_eye_in);
     }
