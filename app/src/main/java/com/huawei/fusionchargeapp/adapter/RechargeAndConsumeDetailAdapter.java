@@ -135,7 +135,7 @@ public class RechargeAndConsumeDetailAdapter extends BaseExpandableListAdapter {
         }
 
         holder.tv_week.setText(bean.weekDay);
-        holder.tv_time.setText(bean.dealTime.substring(6,8)+"-"+bean.dealTime.substring(9,11));
+        holder.tv_time.setText(bean.dealTime.substring(5,10));
         holder.tv_money.setText(DEL_OR_ADD[bean.isAdd]+context.getString(R.string.much_money,bean.occurCost));
         holder.tv_money_subscription.setText(BALANCE[bean.isAdd]+context.getString(R.string.much_money,bean.occurCost));
         holder.tv_remain.setText(context.getString(R.string.detail_remain_money,bean.afterBalance));
