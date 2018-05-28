@@ -12,6 +12,7 @@ import com.huawei.fusionchargeapp.model.apis.PayApi;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
 import com.huawei.fusionchargeapp.model.beans.MyTaocanBean;
 import com.huawei.fusionchargeapp.model.beans.PayInfoBean;
+import com.huawei.fusionchargeapp.model.beans.PayResultBean;
 import com.huawei.fusionchargeapp.model.beans.RequestPayBean;
 import com.huawei.fusionchargeapp.model.beans.RequestPayDetailBean;
 import com.huawei.fusionchargeapp.model.beans.RequestPayTCBean;
@@ -60,11 +61,11 @@ public class PayPresenter extends BasePresenter<PayView> {
         bean.totalFee=total;
         view.showLoading();
         api.balancePay(UserHelper.getSavedUser().token,bean)
-                .compose(new ResponseTransformer<>(this.<BaseData>bindToLifeCycle()))
-                .subscribe(new ResponseSubscriber<BaseData>(view) {
+                .compose(new ResponseTransformer<>(this.<BaseData<PayResultBean>>bindToLifeCycle()))
+                .subscribe(new ResponseSubscriber<BaseData<PayResultBean>>(view) {
                     @Override
-                    public void success(BaseData baseData) {
-                        view.paySuccess();
+                    public void success(BaseData<PayResultBean> baseData) {
+                        view.paySuccess(baseData.data);
                     }
 
                     @Override
@@ -90,11 +91,11 @@ public class PayPresenter extends BasePresenter<PayView> {
         bean.packageId = id;
         view.showLoading();
         api.balancePay(UserHelper.getSavedUser().token,bean)
-                .compose(new ResponseTransformer<>(this.<BaseData>bindToLifeCycle()))
-                .subscribe(new ResponseSubscriber<BaseData>(view) {
+                .compose(new ResponseTransformer<>(this.<BaseData<PayResultBean>>bindToLifeCycle()))
+                .subscribe(new ResponseSubscriber<BaseData<PayResultBean>>(view) {
                     @Override
-                    public void success(BaseData baseData) {
-                        view.paySuccess();
+                    public void success(BaseData<PayResultBean> baseData) {
+                        view.paySuccess(baseData.data);
                     }
 
                     @Override

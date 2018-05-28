@@ -156,7 +156,13 @@ public class HomeListFragment extends BaseFragment<HomeListView, HomeListPresent
                     }
                 }
                 list_datas = temp;
-                adapter.replaceAll(temp);
+                if(temp.size()==0){
+                    lv_piles.setVisibility(View.GONE);
+                    empty_view.setVisibility(View.VISIBLE);
+                }else{
+                    adapter.replaceAll(temp);
+                }
+
             } else {
                 list_datas = list;
                 adapter.replaceAll(list);

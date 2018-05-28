@@ -4,6 +4,7 @@ import com.huawei.fusionchargeapp.constants.Urls;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
 import com.huawei.fusionchargeapp.model.beans.MyTaocanBean;
 import com.huawei.fusionchargeapp.model.beans.PayInfoBean;
+import com.huawei.fusionchargeapp.model.beans.PayResultBean;
 import com.huawei.fusionchargeapp.model.beans.RequestPayBean;
 import com.huawei.fusionchargeapp.model.beans.RequestPayDetailBean;
 import com.huawei.fusionchargeapp.model.beans.RequestPayTCBean;
@@ -29,10 +30,10 @@ public interface PayApi {
     Observable<BaseData<PayInfoBean>> getPayDetail(@Header("AccessToken") String token, @Body RequestPayDetailBean bean);
 
     @POST(Urls.BALANCE_PAY)
-    Observable<BaseData> balancePay(@Header("AccessToken") String token, @Body RequestPayBean bean);
+    Observable<BaseData<PayResultBean>> balancePay(@Header("AccessToken") String token, @Body RequestPayBean bean);
 
     @POST(Urls.BALANCE_PAY)
-    Observable<BaseData> balancePay(@Header("AccessToken") String token, @Body RequestPayTCBean bean);
+    Observable<BaseData<PayResultBean>> balancePay(@Header("AccessToken") String token, @Body RequestPayTCBean bean);
     @POST
     Observable<BaseData<MyTaocanBean>> getMyTaocan(@Header("AccessToken") String token, @Url String url);
 }
