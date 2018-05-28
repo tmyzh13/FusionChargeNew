@@ -207,7 +207,7 @@
     <string name="charging_statue_fee">充电费用</string>
     <string name="charging_statue_a">电流(A)</string>
     <string name="charging_statue_v">电压(V)</string>
-    <string name="charging_statue_kw">功率</string>
+    <string name="charging_statue_kw">功率(KW)</string>
     <string name="charging_statue_current">当前电量</string>
     <string name="charging_statue_soc">SOC</string>
     <string name="charging_statue_fail">开始充电失败</string>

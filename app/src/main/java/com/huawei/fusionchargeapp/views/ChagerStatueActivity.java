@@ -94,7 +94,7 @@ public class ChagerStatueActivity extends BaseActivity<ChargerStatueView, Charge
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        navBar.setNavTitle(getString(R.string.charging_statue));
+        navBar.setNavTitle(getString(R.string.order_charging));
         navBar.setImageBackground(R.drawable.nan_bg);
 
         handler = new Handler();
