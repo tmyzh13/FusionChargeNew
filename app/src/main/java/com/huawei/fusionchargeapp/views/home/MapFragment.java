@@ -38,7 +38,6 @@ import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
-import com.amap.api.maps.model.Text;
 import com.corelibs.base.BaseFragment;
 import com.corelibs.common.AppManager;
 import com.corelibs.subscriber.RxBusSubscriber;
@@ -50,6 +49,7 @@ import com.huawei.fusionchargeapp.MainActivity;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.constants.Constant;
 import com.huawei.fusionchargeapp.model.UserHelper;
+import com.huawei.fusionchargeapp.model.beans.AppointTimeOutBean;
 import com.huawei.fusionchargeapp.model.beans.ChargeFeeBean;
 import com.huawei.fusionchargeapp.model.beans.HomeAppointmentBean;
 import com.huawei.fusionchargeapp.model.beans.HomeChargeOrderBean;
@@ -69,7 +69,6 @@ import com.huawei.fusionchargeapp.views.AppointmentChargeActivity;
 import com.huawei.fusionchargeapp.views.ChagerStatueActivity;
 import com.huawei.fusionchargeapp.views.ChargeCaptureActivity;
 import com.huawei.fusionchargeapp.views.ChargeDetails2Activity;
-import com.huawei.fusionchargeapp.views.ChargeDetailsActivity;
 import com.huawei.fusionchargeapp.views.GuildActivity;
 import com.huawei.fusionchargeapp.views.LoginActivity;
 import com.huawei.fusionchargeapp.views.PayActivity;
@@ -240,6 +239,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                                 public void run() {
                                     //结束时间小于=当前时间
                                     if (homeAppointmentBean != null) {
+                                        ActionControl.getInstance(getContext()).setHasAppointment(false,null);
                                         if (!appointmentTimeOutDialog.isShowing()) {
                                             appointmentTimeOutDialog.show();
                                         }
@@ -748,6 +748,16 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                 tv_appointment_time.setText(Tools.formatMinute(surplusTime));
             }
 //            ll_appontment.setVisibility(View.VISIBLE);
+            //防止从首页超时到再次预约时 预约桩数据丢失
+            AppointTimeOutBean appointTimeOutBean = new AppointTimeOutBean();
+            appointTimeOutBean.setGunCode(bean.runCode);
+            appointTimeOutBean.setAddress(bean.chargingAddress);
+            appointTimeOutBean.setChargingPileName(bean.chargingPileName);
+            appointTimeOutBean.setChargingPileId(Integer.parseInt(bean.chargingPileId+""));
+            appointTimeOutBean.setLatitude(bean.latitude);
+            appointTimeOutBean.setLongitude(bean.longitude);
+            appointTimeOutBean.setRunCode(bean.runCode);
+            PreferencesHelper.saveData(appointTimeOutBean);
         } else {
             ll_appontment.setVisibility(View.GONE);
         }
@@ -852,7 +862,7 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
         }
     }
 
-    @OnClick(R.id.tv_go_charger)
+    @OnClick(R.id.rl_charger_order)
     public void goCharger() {
         startActivity(ChagerStatueActivity.getLauncher(getContext(), homeChargeOrderBean));
     }

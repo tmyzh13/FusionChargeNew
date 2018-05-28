@@ -29,6 +29,7 @@ import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.beans.HomeRefreshBean;
 import com.huawei.fusionchargeapp.model.beans.MyTaocanBean;
 import com.huawei.fusionchargeapp.model.beans.PayInfoBean;
+import com.huawei.fusionchargeapp.model.beans.PayResultBean;
 import com.huawei.fusionchargeapp.model.beans.PayStyleBean;
 import com.huawei.fusionchargeapp.model.beans.TaocanBean;
 import com.huawei.fusionchargeapp.model.beans.UserBean;
@@ -198,7 +199,9 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
             presenter.payAction(orderNum,payInfoBean.consumeTotalMoney,3);
 
         }else if(type.equals("1")){
+
         }else if(type.equals("2")){
+            presenter.payAction(orderNum,payInfoBean.consumeTotalMoney,1);
         } else if (type.equals("5")) {
 
             presenter.payAction(orderNum,payInfoBean.consumeTotalMoney,5,id);
@@ -215,30 +218,23 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
 //    }
 
     // 商户PID
-    public static final String APPID = "2017102409494083";
+    public static final String APPID = "2018051760088828";
     // 商户收款账号
-//    public static final String SELLER = "296746476@qq.com";
+    public static final String SELLER = "2088131035173156";
     public static final String RSA_PRIVATE="";
-    public  static final String RSA2_PRIVATE ="MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCY5RoblyfsZsIe9vf" +
-            "oHvCSAn3K3F9EbWtQVu1T2ZLXVfnLmMlaqzOCxYEDEQOwVv5dZOOxqxmG/G2zYUXM9ZKj/95kYUzsJHGYoakWdHYaW+u4FYoV3Fs0A6QAkXO3TwG7ToEgsKj/QvqabokD6Ct8zJn2EaGKV72G" +
-            "cVZBigTGVXjVuy54FhmZla0LTHKGBAGuBOaMpsm7r2NAWjwmq7iq3iDOc5pPZvqYHmtYJ0AXe1" +
-            "ASRrzkxNV861WPSkVuVM+3cYtAcAzlUUs9GV8L/SFMZLvFZd/iscjz6CFh06YGdxsH+S3OdWGyH3UCN3WvR3j" +
-            "LAX0ciIrLEu3HHn/khIJdAgMBAAECggEAVDQQfdNwZExvalg/TbIEcZU3rApT2T6dlGBbUguISFmMOamKcwnIU6Ps" +
-            "GkE7k9lFOzA+CfIeG+5XiCvxIiC4wuM+mm/PylmDyjh2A+zdwkSPfBE4vDNgczPyFXIFlZXIcVyZ1uQUHojHtVdc1C8A" +
-            "DDouLIunOKZ7tVgj1fJqEMPRcTgtdzGnLM4uozNr5DN2OWHicAo7diXA1hrcu4rsuiDix5wziw6SmivbvQdmxZWkHV" +
-            "iEd+m3P/iCTZYBn5WcQmxAdECTM3IVr4xjHwGALEkKbBwFZvKBojKZcNoUYDl/myUdYTSSgyFweLn2UJR6jiA8KJGsl3ir" +
-            "qssTlwGPQQKBgQDx8xiSSk3bMkAzdAhOUQBZlpeMxPDGpjDs+rMD50CW5fMKGLMHCIGq8Pm/KK6m11cm0VnI3sq3wOg5q7" +
-            "+pObfG8nTZy0Rijfxtef+tHdUUKGIOlM9oWYXuR50hF2FweUL2wUmAW5HUeS1jGQW2wuI1qM0Q2sJfh0SFwu938v0DMQK" +
-            "BgQChxhbkN7fmPK6y+AS7M3cuUQi0j64oIk1Swm6Bxpo0b+K4SYmnngIwNI5VoghmNC/dyyU262KFVXsCtXF2+ncPgeSM" +
-            "2vdPcJgP+XzDKblwIt/ElKvDUL3iLBUDbgF0Gcib8OpGQOgFqPvN2Ouefcj1H3J5xSQMSiU2xmEEriHu7QKBgCPhcDhpqogiOKEoyP" +
-            "6MRqgCjDEFF8vt432RZDDk/5AhQ9ywcwRM/6XRHMh7iQMXFkacb1s5pwh/JDFBRigbdiSb2jZeTaLr+Y5mtEMBFJNrtbcB3IxWEmWW2ze" +
-            "IFxwt739WhMbzTXocCl4S3OUQm6lnghnIx2CRV9kaYpcAQwNRAoGAF0b/iDsUNQbKRGo3lBAlt/5k+EYsUw4MfjoH2JiRG7Z1svqx2fJ8ch" +
-            "8908iK2NntgUZ3xl08Qd844fzlpK8JbqvMDRB8wWt8FeBaOWLJkf8Sn6Cczm/RwreBFos/nksPeJDDxPQV7qqQAOCTlqyWu96YhDj/pN0OWc" +
-            "FVuGyt6UkCgYBLM/9Bii8JQxMvTBStsTlL0/9a/5UpwP9NaVWBwEazXbe1C0zz8QIFQ4Z2pBhL+IHshJtaErJTYzVE0/bq07UvOZe/xOzZk" +
-            "FddN4BcQvlLop99DzQtH0RBlihzcLCnPIjfc6sdkXoGdFMPZk+wlS4XrDkE1xkOnlcIy8N7qpGZwg==";
+    public  static final String RSA2_PRIVATE ="MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBANBuGkjv4I+nCj6VKP7RAt" +
+            "AmnvdeWI6SClAF0nFlYy3U2Xx+iyGmfBnURckhXjvABCwt9zr4tx76eJM2FLNTHRXvRtgzNLH9vrEdl9+kOk32+8ft0yCmcuQy7GVNHiss4" +
+            "BPcHoC24r5AdHIuVHo9LtUaEoPRury5Zs98LkTSnCDdAgMBAAECgYAr7ulPcnCNFxKLunkXrQrAwUNEtPhJpPLTh0aibFKJeJIXMb017JfAAg" +
+            "RrrsLkKUc34MB6B67hsr3zmbSnT9+TPHwk8zvA8aQ6Vp1xQseRcMT" +
+            "wPpYQrPRS7yTa6Scrh87mBP/nO3ofI5b0l30/c8IaEdADyK2+muS7gcP3fKVagQJBAPVJUujwi2E267tCOxFkWkfoY9ipWvrhaUCmig" +
+            "15UeqebsI+l9bEu8IiuFT3BHEtiU2x5nViR5OpDa1BuNw0X1ECQQDZiKs3y52r9toM1RIX17CXkft10ehOVYzSLfMBonbDFRjtb8AK5" +
+            "p/7qtx1XqpyK6nLOhNlb1bavH1OGY5cPb3NAkEAnP3zPPhInU4jjtUTLUyHpCKPVWr/ujdvwFtXXMxbq8j/pv+c+28rpVPHm0oG49F7" +
+            "YekNUfA3U8EN6eh4wygaIQJBAK9EOUd8K6549phuN+Sz6NlGSkdUd4pdzVcupGNFxdBKOEpdxmpCBNZdhMCgJE5WtbhDM4t/mIgmZAM" +
+            "//f591GUCQE0l5ZfCoplOqCmARjABKTPLmPH/3PpDwkoKjukOPuJWuJYTj9ZiHzzut8fqwbsGtm3tnxJGgZHGx/VgSyoNDms=";
 
     private static final int SDK_PAY_FLAG = 1;
     private static final int SDK_AUTH_FLAG = 2;
+    private String orderInfo;
     private void payForAli(){
         /**
          * 如果APPID是空值或私钥两个全是空，则弹出警告对话框告诉开发者“需要配置APPID|RSA_PRIVATE”
@@ -263,8 +259,8 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
          */
         boolean rsa2 = (RSA2_PRIVATE.length() > 0);//rsa2私钥已经被赋值
         //在这里，传入APPID和私钥，得到请求map，即包含支付订单信息的map
-        String url = "http://m.zyh198.com/wy-app/"+"zhifubao/returnNativeServer";
-        Map<String, String> params = OrderInfoUtil2_0.buildOrderParamMap(APPID,"", rsa2,"","","",url);
+        String url = "http://114.115.144.154:8088/charger/phone/aliNotify";
+        Map<String, String> params = OrderInfoUtil2_0.buildOrderParamMap(APPID,SELLER, rsa2,"0.01","充电平台支付",orderNum,url);
         //将map解析成一个String类型的支付订单
         String orderParam = OrderInfoUtil2_0.buildOrderParam(params);
         //是rsa2类型的私钥吗？如果rsa2私钥已经被赋值，那么privateKey就被设置成rsa2，否则就被设置成rsa。这就是支付宝说的“如果你有俩私钥，优先使用RSa2私钥，靠！”
@@ -272,7 +268,12 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
         //对，privateKey就是商户私钥！通过此方法对商户的私钥进行“签名”处理，处理后就会生成（返回）一个sign=GKHJL%……&*的一大串字串
         String sign = OrderInfoUtil2_0.getSign(params, privateKey, rsa2);
         //最终，结合orderparam参数与sign签名字串，搞成orderInfo字串；
-        final String orderInfo = orderParam + "&" + sign;
+        orderInfo = orderParam + "&" + sign;
+        if(Tools.isNull(payResultBean.orderInfo)){
+            orderInfo = orderParam + "&" + sign;
+        }else{
+            orderInfo=payResultBean.orderInfo;
+        }
         //新开一个线程，将orderInfo字串传入到PayTask任务中去
         Runnable payRunnable = new Runnable() {
 
@@ -366,17 +367,25 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
         tv_total_fee.setText("￥"+bean.consumeTotalMoney);
     }
 
+    private PayResultBean payResultBean;
+
     @Override
-    public void paySuccess() {
-        while(!AppManager.getAppManager().currentActivity().getClass().equals( MainActivity.class)){
-            AppManager.getAppManager().finishActivity();
+    public void paySuccess(PayResultBean payResultBean) {
+        this.payResultBean=payResultBean;
+        if(payResultBean.payType==3||payResultBean.payType==5){
+            while(!AppManager.getAppManager().currentActivity().getClass().equals( MainActivity.class)){
+                AppManager.getAppManager().finishActivity();
+            }
+            //给首页发送一个消息去掉未支付提示栏
+            HomeRefreshBean bean =new HomeRefreshBean();
+            bean.type=0;
+            RxBus.getDefault().send(bean, Constant.HOME_STATUE_REFRESH);
+            startActivity(PayCompleteActivity.getLauncher(context,orderNum));
+            finish();
+        }else if(payResultBean.payType==1){
+            payForAli();
         }
-        //给首页发送一个消息去掉未支付提示栏
-        HomeRefreshBean bean =new HomeRefreshBean();
-        bean.type=0;
-        RxBus.getDefault().send(bean, Constant.HOME_STATUE_REFRESH);
-        startActivity(PayCompleteActivity.getLauncher(context,orderNum));
-        finish();
+
     }
 
     @Override
