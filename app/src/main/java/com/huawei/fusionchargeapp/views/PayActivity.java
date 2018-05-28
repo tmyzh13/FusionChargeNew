@@ -311,18 +311,12 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
                     // 判断resultStatus 为9000则代表支付成功
                     if (TextUtils.equals(resultStatus, "9000")) {
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
-//                        Toast.makeText(PsPayActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
-                        ToastMgr.show("支付成功");
-//                        presenter.savealiPayData(peisongOrderBean);
-//                        startActivity(PaySuccessActivity.getLauncher(context,"1"));
-
+                        ToastMgr.show(getString(R.string.pay_success));
+                        finish();
                     } else {
                         Log.e("TAG","resultInfo:"+resultInfo);
                         // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
-                        ToastMgr.show("支付失败");
-//                        startActivity(PaySuccessActivity.getLauncher(context,"2"));
-//                        startActivity(PayResultActivity.getLaunchIntent(PsPayActivity.this,0));
-//                        finish();
+                        ToastMgr.show(getString(R.string.pay_error));
                     }
 
 
@@ -339,13 +333,13 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
                         // 获取alipay_open_id，调支付时作为参数extern_token 的value
                         // 传入，则支付账户为该授权账户
                         Toast.makeText(context,
-                                "授权成功\n" + String.format("authCode:%s", authResult.getAuthCode()), Toast.LENGTH_SHORT)
+                                getString(R.string.auth_success)+"\n" + String.format("authCode:%s", authResult.getAuthCode()), Toast.LENGTH_SHORT)
                                 .show();
 
                     } else {
                         // 其他状态值则为授权失败
                         Toast.makeText(context,
-                                "授权失败" + String.format("authCode:%s", authResult.getAuthCode()), Toast.LENGTH_SHORT).show();
+                                getString(R.string.auth_failed) + String.format("authCode:%s", authResult.getAuthCode()), Toast.LENGTH_SHORT).show();
 
                     }
                     break;
@@ -372,7 +366,7 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
     @Override
     public void paySuccess(PayResultBean payResultBean) {
         this.payResultBean=payResultBean;
-        if(payResultBean.payType==3||payResultBean.payType==5){
+        if(payResultBean.type==3||payResultBean.type==5){
             while(!AppManager.getAppManager().currentActivity().getClass().equals( MainActivity.class)){
                 AppManager.getAppManager().finishActivity();
             }
@@ -382,7 +376,7 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
             RxBus.getDefault().send(bean, Constant.HOME_STATUE_REFRESH);
             startActivity(PayCompleteActivity.getLauncher(context,orderNum));
             finish();
-        }else if(payResultBean.payType==1){
+        }else if(payResultBean.type==1){
             payForAli();
         }
 

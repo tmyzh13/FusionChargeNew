@@ -47,6 +47,18 @@ public class ChargeStatuePresenter extends BasePresenter<ChargerStatueView> {
                         }
 
                     }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        view.chargerStatueFail();
+                    }
+
+//                    @Override
+//                    public boolean operationError(BaseData<ChargerStatueBean> chargerStatueBeanBaseData, int status, String message) {
+//                        view.chargerStatueFail();
+//                        return super.operationError(chargerStatueBeanBaseData, status, message);
+//                    }
                 });
     }
 

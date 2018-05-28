@@ -172,6 +172,8 @@ public class ResponseHandler<T> {
                         handleOperationError(context.getString(R.string.code_210));
                     }else if(data.status()==214){
                         handleOperationError(context.getString(R.string.code_214));
+                    }else if(data.status()==215){
+                        handleOperationError(context.getString(R.string.code_215));
                     }else if(data.status()==220){
                         handleOperationError(context.getString(R.string.code_220));
                     }else if(data.status()==221){

@@ -450,6 +450,13 @@ public class ChagerStatueActivity extends BaseActivity<ChargerStatueView, Charge
     }
 
     @Override
+    public void chargerStatueFail() {
+        //网络异常的时候也执行5秒一次的请求
+        handler.removeCallbacks(runnable);
+        handler.postDelayed(runnable, 5000);
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         stopTimer();

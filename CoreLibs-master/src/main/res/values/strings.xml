@@ -28,6 +28,7 @@
     <string name="code_208">手机号已经被第三方登录绑定</string>
     <string name="code_210">手机号码未注册</string>
     <string name="code_214">余额不足</string>
+    <string name="code_215">余额还有剩余</string>
     <string name="code_220">有未支付异常订单</string>
     <string name="code_221">有进行中的订单</string>
     <string name="code_222">车辆被其他用户占用</string>

@@ -238,6 +238,8 @@
     <string name="pay_validate_time">有效期</string>
     <string name="pay_limite">限制电量</string>
     <string name="pay_unlimite">无限电量</string>
+    <string name="auth_success">授权成功</string>
+    <string name="auth_failed">授权失败</string>
 
     <!--支付完成-->
     <string name="pay_complete">支付完成</string>

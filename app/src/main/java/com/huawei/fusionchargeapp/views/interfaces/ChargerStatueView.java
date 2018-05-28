@@ -12,4 +12,5 @@ public interface ChargerStatueView extends BaseView{
     void renderChargerStatueData(ChargerStatueBean bean);
     void endChargeSuccess();
     void endChargeFail();
+    void chargerStatueFail();
 }

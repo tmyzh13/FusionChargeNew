@@ -121,6 +121,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
                     loginTv.setText(getText(R.string.login));
                     cb_appointment.setVisibility(View.GONE);
                     rl_login.setVisibility(View.GONE);
+                    pwdEt.setText("");
                     isRegister = false;
                     break;
                 case 2://员工账号登录
@@ -150,6 +151,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
                     cb_appointment.setVisibility(View.VISIBLE);
                     rl_login.setVisibility(View.VISIBLE);
                     isRegister = true;
+                    pwdEt.setText("");
                     break;
             }
         }
