@@ -23,6 +23,7 @@ import com.huawei.fusionchargeapp.model.beans.CommentsBean;
 import com.huawei.fusionchargeapp.model.beans.PayInfoBean;
 import com.huawei.fusionchargeapp.model.beans.PublishCommentsBean;
 import com.huawei.fusionchargeapp.presenter.CommentPresenter;
+import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.interfaces.CommentView;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.weights.NavBar;
@@ -130,6 +131,14 @@ public class PublishCommentActivity extends BaseActivity<CommentView,CommentPres
     @OnClick(R.id.publish_comment)
     public void publish() {
         //get data
+        if (Tools.isNull(edit.getText().toString())) {
+            showToast(R.string.no_comment_content);
+            return;
+        }
+        if (favor.getRating() < 0.5) {
+            showToast(R.string.no_comment_score);
+            return;
+        }
         bean.setEvaluateScore(favor.getRating());
         bean.setEvaluateContent(edit.getText().toString());
         bean.setEvaluateTypeId(getSortType());

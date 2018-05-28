@@ -565,4 +565,6 @@
 
     <string name="jiaoliu">交流</string>
     <string name="kongxian">空闲</string>
+    <string name="no_comment_content">请填写评价内容</string>
+    <string name="no_comment_score">请进行评分</string>
 </resources>

@@ -191,6 +191,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:maxLength="255"
         android:textColorHint="@color/text_gray"
         android:textSize="15dp"
         android:visibility="gone"/>
