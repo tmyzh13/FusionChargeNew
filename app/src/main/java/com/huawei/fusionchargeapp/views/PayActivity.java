@@ -195,20 +195,10 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
             return;
         }
         if(type.equals("0")){
-//            commonDialog.show();
-//            commonDialog.setDialogBackground();
             presenter.payAction(orderNum,payInfoBean.consumeTotalMoney,3);
 
         }else if(type.equals("1")){
-//            dialog.show();
-//            dialog.setTryAgainListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    dialog.dismiss();
-//                }
-//            });
         }else if(type.equals("2")){
-//            startActivity(PayCompleteActivity.getLauncher(context));
         } else if (type.equals("5")) {
 
             presenter.payAction(orderNum,payInfoBean.consumeTotalMoney,5,id);
