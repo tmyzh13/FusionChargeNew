@@ -369,7 +369,7 @@
   <!--  <string name="gun_status_using">使用</string>
     <string name="gun_status_appoint">预约</string>
     <string name="gun_status_stop_service">停止</string>-->
-    <string name="gun_not_using">插抢未使用</string>
+    <string name="gun_not_using">插枪未使用</string>
     <string name="gun_status_using">使用中</string>
     <string name="gun_status_appoint">预约中</string>
     <string name="gun_status_stop_service">停止服务</string>

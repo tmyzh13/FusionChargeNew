@@ -2,6 +2,7 @@ package com.huawei.fusionchargeapp.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -27,10 +28,12 @@ import java.util.List;
 public class ChargePile2Adapter extends BaseMultiItemQuickAdapter<ChargeMultipleBean,BaseViewHolder>{
 
     private Context mContext;
+    private List<ChargeMultipleBean> mData;
 
     public ChargePile2Adapter(Context context,List<ChargeMultipleBean> data) {
         super(data);
         this.mContext = context;
+        this.mData = data;
         addItemType(ChargeMultipleBean.CHARGE_DETAIL_HEAD,R.layout.item_charge_detail_header);
         addItemType(ChargeMultipleBean.CHARGE_DETAIL_BODY,R.layout.item_charge_detail_body);
     }
@@ -78,6 +81,15 @@ public class ChargePile2Adapter extends BaseMultiItemQuickAdapter<ChargeMultiple
             case ChargeMultipleBean.CHARGE_DETAIL_BODY:
                 GunList gunList = item.getmGunList();
 
+                int position = mData.indexOf(item);
+                PileList parentPileList = null;
+                for (int i = position; i >= 0; i--) {
+                    if(mData.get(i).getmPileList() != null) {
+                        parentPileList = mData.get(i).getmPileList();
+                        break;
+                    }
+                }
+
                 //type=1  交流
                 if (gunList.getGunType() == 1) {
                     helper.setImageResource(R.id.gun_type_iv,R.drawable.dots_green);
@@ -99,7 +111,11 @@ public class ChargePile2Adapter extends BaseMultiItemQuickAdapter<ChargeMultiple
                         helper.setGone(R.id.tv_remindtime_hint,true);
                         helper.setText(R.id.tv_remindtime_hint,mContext.getString(R.string.tv_remindtime_hint_1)
                                 + gunList.getRemainingTime()+mContext.getString(R.string.tv_remindtime_hint_2));
-                    }else{
+                    } else if(parentPileList != null && parentPileList.getRunStatus() != 1) {
+                        helper.setGone(R.id.tv_remindtime_hint,false);
+                        helper.setTextColor(R.id.gun_appointment_tv,mContext.getResources().getColor(R.color.text_gray));
+                        helper.setBackgroundRes(R.id.gun_appointment_tv,R.drawable.appoint_gray_bg_shape);
+                    } else{
                         helper.setGone(R.id.tv_remindtime_hint,false);
                         helper.addOnClickListener(R.id.gun_appointment_tv);
                         helper.setTextColor(R.id.gun_appointment_tv,mContext.getResources().getColor(R.color.app_blue));
