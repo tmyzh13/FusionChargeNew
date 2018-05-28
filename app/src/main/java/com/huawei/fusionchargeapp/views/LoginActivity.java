@@ -511,4 +511,9 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
         }
 
     }
+
+    @OnClick(R.id.iv_finish)
+    public void actionFinish(){
+        finish();
+    }
 }
