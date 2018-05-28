@@ -201,7 +201,7 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
         } else{
             total=intent.getDoubleExtra("selected_totaol_money",0);
             orderNums=intent.getStringArrayListExtra("selected_order_num");
-            tv_invoice_money.setText(total+"");
+            tv_invoice_money.setText(String.format("%1$.2f",total));
             if(total<200){
                 ll_post.setVisibility(View.VISIBLE);
             }
