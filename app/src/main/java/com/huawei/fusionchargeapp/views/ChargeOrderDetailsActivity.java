@@ -300,7 +300,13 @@ public class ChargeOrderDetailsActivity extends BaseActivity<ChargeOrderDetailVi
                         getData();
                     }
                 } else {
-                    ToastMgr.show(getString(R.string.please_input_charge_count));
+                    if(chooseStyle == WITH_POWER) {
+                        ToastMgr.show(getString(R.string.please_input_charge_count));
+                    } else if(chooseStyle == WITH_MONEY) {
+                        showToast(getString(R.string.please_input_charge_money));
+                    } else if(chooseStyle == WITH_TIME) {
+                        showToast(getString(R.string.please_input_charge_time));
+                    }
                 }
 
                 break;
