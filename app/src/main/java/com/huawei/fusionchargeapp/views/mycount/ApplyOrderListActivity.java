@@ -136,8 +136,13 @@ public class ApplyOrderListActivity extends BaseActivity<InvoiceView,InvoicePres
             return;
         }
         showLoading();
-        presenter.getInvoiceConsume(page);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.getInvoiceConsume(page);
     }
 
     @Override
