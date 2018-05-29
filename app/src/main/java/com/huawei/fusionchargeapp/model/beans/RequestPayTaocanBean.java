@@ -7,6 +7,6 @@ package com.huawei.fusionchargeapp.model.beans;
 public class RequestPayTaocanBean {
 
     public int payType;
-    public int businessPackageId;
+    public int packageId;
     public double totalFee;
 }
