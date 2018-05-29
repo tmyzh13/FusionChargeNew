@@ -164,7 +164,7 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
         if (tcBean != null) {
             id = tcBean.businessPackageId;
             PayStyleBean bean =new PayStyleBean();
-            bean.type="4";
+            bean.type="5";
             bean.imgRes=R.drawable.list_01;
             bean.name=tcBean.businessName;
             if (tcBean.limitType == 0) {
@@ -203,9 +203,9 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
             presenter.payAction(orderNum,payInfoBean.consumeTotalMoney,2);
         }else if(type.equals("2")){
             presenter.payAction(orderNum,payInfoBean.consumeTotalMoney,1);
-        } else if (type.equals("4")) {
+        } else if (type.equals("5")) {
 
-            presenter.payAction(orderNum,payInfoBean.consumeTotalMoney,4,id);
+            presenter.payAction(orderNum,payInfoBean.consumeTotalMoney,5,id);
         }
     }
 
