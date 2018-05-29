@@ -278,9 +278,9 @@
     <string name="charge_service_cost">服务费：</string>
     <string name="choose_charge_gun">选择充电枪</string>
     <string name="choose_charge_style">选择充电方式</string>
-    <string name="with_power">按电量</string>
-    <string name="with_money">按金额</string>
-    <string name="with_time">按时间</string>
+    <string name="with_power">按电量(度)</string>
+    <string name="with_money">按金额(元)</string>
+    <string name="with_time">按时间(分钟)</string>
     <string name="charge_enouth">充满</string>
     <string name="please_enter_charge_count">请输入充电度数</string>
     <string name="start_chareg">开始充电</string>
@@ -528,7 +528,7 @@
     <string name="item_invoice_hitory_sort">纸质发票 充电发票</string>
     <string name="least_charge_power">最少充电量为1度！</string>
     <string name="lease_charge_money">最少充电金额为1元！</string>
-    <string name="lease_charge_time">最少充电时间为10分钟！</string>
+    <string name="lease_charge_time">最少充电时间为1分钟！</string>
 
     <string name="invoice_company">企业发票</string>
     <string name="invoice_people">个人发票</string>
