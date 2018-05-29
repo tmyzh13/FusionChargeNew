@@ -57,7 +57,7 @@ public class ChargePile2Adapter extends BaseMultiItemQuickAdapter<ChargeMultiple
                 List<ChargeDetailFeeListBean> feeListBean = feeBean.getFeeList();
                 if( feeListBean != null) {
                     double max = 0;
-                    double min = 0;
+                    double min = feeListBean.get(0).getMultiFee();
                     for (int i = 0; i < feeListBean.size(); i++) {
                         double temp = feeListBean.get(i).getMultiFee();
                         if(temp < min) {
