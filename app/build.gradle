@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        huawei {
+            keyAlias 'huaweifusioncharge'
+            keyPassword '{NetEco2018}'
+            storeFile file('C:/Users/issuser/Desktop/包/huawei.keystore')
+            storePassword '{NetEco2018}'
+        }
+    }
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.huawei.fusionchargeapp"
@@ -9,7 +17,6 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
         javaCompileOptions {
             annotationProcessorOptions {
                 includeCompileClasspath = true
@@ -19,11 +26,14 @@ android {
         ndk {
             abiFilters 'armeabi'
         }
+        signingConfig signingConfigs.huawei
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
         }
     }
     sourceSets {
@@ -37,6 +47,8 @@ android {
         }
     }
     buildToolsVersion '26.0.2'
+    productFlavors {
+    }
 }
 
 /*repositories {

@@ -294,8 +294,12 @@ public class ChagerStatueActivity extends BaseActivity<ChargerStatueView, Charge
                 tv_charged_money.setText(bean.money + getString(R.string.yuan));
                 enableEndButton();
             }
+            if(bean.soc==0){
+                tv_current_charge.setText("--");
+            }else{
+                tv_current_charge.setText(bean.soc + "%");
+            }
 
-            tv_current_charge.setText(bean.soc + "%");
             //kwh 当前电量
             tv_charged_enegy.setText(bean.kwh + getString(R.string.du));
             //05:04:25

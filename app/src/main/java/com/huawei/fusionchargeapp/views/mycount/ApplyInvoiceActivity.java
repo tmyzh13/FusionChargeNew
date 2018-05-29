@@ -16,6 +16,7 @@ import com.corelibs.base.BaseActivity;
 import com.corelibs.base.BasePresenter;
 import com.corelibs.utils.ToastMgr;
 import com.corelibs.views.NoScrollingListView;
+import com.corelibs.views.navigation.AndroidBug5497Workaround;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.adapters.InvoicePayAdapter;
 import com.huawei.fusionchargeapp.model.UserHelper;
@@ -112,7 +113,7 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
     protected void init(Bundle savedInstanceState) {
         navBar.setNavTitle(getString(R.string.apply_invoice));
         navBar.setImageBackground(R.drawable.nan_bg);
-
+        AndroidBug5497Workaround.assistActivity(this);
         adapter=new InvoicePayAdapter(context);
 
         PayStyleBean bean =new PayStyleBean();

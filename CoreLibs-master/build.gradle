@@ -1,9 +1,16 @@
 apply plugin: 'com.android.library'
 
 android {
+    signingConfigs {
+        huawei {
+            keyAlias 'huaweifusioncharge'
+            keyPassword '{NetEco2018}'
+            storeFile file('C:/Users/issuser/Desktop/包/huawei.keystore')
+            storePassword '{NetEco2018}'
+        }
+    }
     compileSdkVersion 26
     buildToolsVersion '26.0.2'
-
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 26
@@ -26,7 +33,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:23.2.0'
     compile 'com.android.support:support-v4:23.0.2'
     compile 'com.github.bumptech.glide:glide:3.7.0'

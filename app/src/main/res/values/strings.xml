@@ -232,6 +232,7 @@
     <string name="pay_alipay_hint">推荐有支付宝账号的用户使用</string>
     <string name="pay_success">支付成功</string>
     <string name="pay_error">不好！您的订单支付出现异常啦</string>
+    <string name="pay_cancel">支付取消</string>
     <string name="pay_pay_again">请重新支付</string>
     <string name="pay_try_again">再试试</string>
     <string name="pay_tao_can_fee">套餐费用</string>
@@ -361,7 +362,7 @@
     <string name="charger_info_fee_unit">¥</string>
     <string name="has_pay">已支付</string>
     <string name="no_pay">未支付</string>
-    <string name="order_charging">充电中</string>
+    <string name="order_charging">进行中</string>
     <string name="order_charge_end">充电结束</string>
     <string name="order_charge_start_failed">充电启动失败</string>
     <string name="order_charge_stop_failed">充电停止失败</string>

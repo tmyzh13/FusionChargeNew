@@ -13,7 +13,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <!-- 在SDCard中创建与删除文件权限 -->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <!-- 往SDCard写入数据权限 -->
@@ -140,6 +140,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="wxf06441532c65129c" />
+            </intent-filter>
+
+
         </activity>
         <activity
             android:name=".MainActivity"
@@ -149,7 +156,7 @@
             android:name=".views.LoginActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".views.ChagerStatueActivity"
             android:screenOrientation="portrait" />
@@ -210,9 +217,15 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
 
-                <data android:scheme="wx5e9afde80150f0e0" />
+                <data android:scheme="wxf06441532c65129c" />
             </intent-filter>
         </activity>
+        <receiver android:name=".wechatpay.AppRegister">
+            <intent-filter>
+                <action android:name="com.tencent.mm.plugin.openapi.Intent.ACTION_REFRESH_WXAPP" />
+            </intent-filter>
+        </receiver>
+
         <!-- 高德地图 -->
         <!-- 设置key -->
         <meta-data
@@ -234,7 +247,7 @@
         <activity
             android:name=".views.PublishCommentActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible|adjustResize" />
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
             android:name=".views.SearchStationTitleActivity"
             android:screenOrientation="portrait"
@@ -268,7 +281,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".views.mycount.ApplyInvoiceActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
             android:name=".views.mycount.InvoiceHistoryActivity"
             android:screenOrientation="portrait" />

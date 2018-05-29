@@ -141,6 +141,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
     @Override
     protected void init(Bundle savedInstanceState){
         navBar.setNavTitle(getResources().getString(R.string.user_info_title));
+        AndroidBug5497Workaround.assistActivity(this);
         if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.JELLY_BEAN)
             navBar.setBackground(getResources().getDrawable(R.drawable.nan_bg));
         else

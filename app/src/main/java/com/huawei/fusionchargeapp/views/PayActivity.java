@@ -313,6 +313,15 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
                     if (TextUtils.equals(resultStatus, "9000")) {
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
                         ToastMgr.show(getString(R.string.pay_success));
+
+                        while(!AppManager.getAppManager().currentActivity().getClass().equals( MainActivity.class)){
+                            AppManager.getAppManager().finishActivity();
+                        }
+                        //给首页发送一个消息去掉未支付提示栏
+                        HomeRefreshBean bean =new HomeRefreshBean();
+                        bean.type=0;
+                        RxBus.getDefault().send(bean, Constant.HOME_STATUE_REFRESH);
+                        startActivity(PayCompleteActivity.getLauncher(context,orderNum));
                         finish();
                     } else {
                         Log.e("TAG","resultInfo:"+resultInfo);
@@ -367,7 +376,7 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
     @Override
     public void paySuccess(PayResultBean payResultBean) {
         this.payResultBean=payResultBean;
-        if(payResultBean.type==3||payResultBean.type==5){
+        if(payResultBean.payType==3||payResultBean.payType==5){
             while(!AppManager.getAppManager().currentActivity().getClass().equals( MainActivity.class)){
                 AppManager.getAppManager().finishActivity();
             }
@@ -377,10 +386,10 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
             RxBus.getDefault().send(bean, Constant.HOME_STATUE_REFRESH);
             startActivity(PayCompleteActivity.getLauncher(context,orderNum));
             finish();
-        }else if(payResultBean.type==1){
+        }else if(payResultBean.payType==1){
             //支付宝支付
             payForAli();
-        }else if(payResultBean.type==2){
+        }else if(payResultBean.payType==2){
             //微信支付
             PayWithWechat payWithWechat=new PayWithWechat(context,payResultBean);
         }

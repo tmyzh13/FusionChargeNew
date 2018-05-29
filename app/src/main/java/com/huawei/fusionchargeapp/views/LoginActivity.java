@@ -28,6 +28,7 @@ import com.corelibs.base.BaseActivity;
 import com.corelibs.utils.PreferencesHelper;
 import com.corelibs.utils.ToastMgr;
 import com.corelibs.utils.rxbus.RxBus;
+import com.corelibs.views.navigation.AndroidBug5497Workaround;
 import com.huawei.fusionchargeapp.MainActivity;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.constants.Constant;
@@ -193,6 +194,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     }
 
     private void initView() {
+        AndroidBug5497Workaround.assistActivity(this);
         typeCodeLl.setVisibility(View.GONE);
         phoneIv.setOnClickListener(this);
         forgetPwdTv.setOnClickListener(this);

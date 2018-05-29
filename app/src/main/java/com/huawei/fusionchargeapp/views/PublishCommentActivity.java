@@ -15,6 +15,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.corelibs.base.BaseActivity;
+import com.corelibs.views.navigation.AndroidBug5497Workaround;
 import com.huawei.fusionchargeapp.MainActivity;
 import com.huawei.fusionchargeapp.adapter.CommentSortAdapter;
 import com.huawei.fusionchargeapp.model.UserHelper;
@@ -102,6 +103,7 @@ public class PublishCommentActivity extends BaseActivity<CommentView,CommentPres
     protected void init(Bundle savedInstanceState) {
         navBar.setNavTitle(getString(R.string.activity_publish));
         navBar.setImageBackground(R.drawable.nan_bg);
+        AndroidBug5497Workaround.assistActivity(this);
         sort = 0;
         presenter.queryCommentSortType();
         presenter.getPayDetailInfo(orderRecordNum);
