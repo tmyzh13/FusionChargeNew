@@ -287,6 +287,7 @@ public class MapPresenter extends BasePresenter<MapHomeView> {
         ReportUserLocation reportUserLocation=new ReportUserLocation();
         reportUserLocation.latitude=latitude;
         reportUserLocation.longitude=longitude;
+        reportUserLocation.appUserId=UserHelper.getSavedUser().appUserId;
         api.reportUserLocation(reportUserLocation)
                 .compose(new ResponseTransformer<>(this.<BaseData>bindToLifeCycle()))
                 .subscribe(new ResponseSubscriber<BaseData>() {

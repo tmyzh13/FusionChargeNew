@@ -39,6 +39,7 @@ import com.huawei.fusionchargeapp.utils.alipay.AuthResult;
 import com.huawei.fusionchargeapp.utils.alipay.OrderInfoUtil2_0;
 import com.huawei.fusionchargeapp.utils.alipay.PayResult;
 import com.huawei.fusionchargeapp.views.interfaces.PayView;
+import com.huawei.fusionchargeapp.wechatpay.PayWithWechat;
 import com.huawei.fusionchargeapp.weights.CommonDialog;
 import com.huawei.fusionchargeapp.weights.NavBar;
 import com.huawei.fusionchargeapp.weights.PayFailDialog;
@@ -199,7 +200,7 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
             presenter.payAction(orderNum,payInfoBean.consumeTotalMoney,3);
 
         }else if(type.equals("1")){
-
+            presenter.payAction(orderNum,payInfoBean.consumeTotalMoney,2);
         }else if(type.equals("2")){
             presenter.payAction(orderNum,payInfoBean.consumeTotalMoney,1);
         } else if (type.equals("5")) {
@@ -377,7 +378,11 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
             startActivity(PayCompleteActivity.getLauncher(context,orderNum));
             finish();
         }else if(payResultBean.type==1){
+            //支付宝支付
             payForAli();
+        }else if(payResultBean.type==2){
+            //微信支付
+            PayWithWechat payWithWechat=new PayWithWechat(context,payResultBean);
         }
 
     }

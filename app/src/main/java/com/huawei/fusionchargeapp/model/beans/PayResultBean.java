@@ -13,4 +13,10 @@ public class PayResultBean {
 //    isNeedPay:是否需要支付（0：不需要，1：需要）/**/
     public int isNeedPay;
 
+    public String prepayid;
+    public String packagename;
+    public String noncestr;
+    public String timestamp;
+    public String sign;
+    public String appid;
 }

@@ -8,5 +8,5 @@ public class ReportUserLocation {
 
     public double longitude;
     public double latitude;
-
+    public long appUserId;
 }
