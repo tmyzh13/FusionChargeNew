@@ -184,6 +184,7 @@
         android:background="@null"
         android:textColorHint="@color/text_gray"
         android:inputType="textMultiLine"
+        android:maxLength="255"
         android:textSize="15dp" />
     <TextView
         android:id="@+id/comment_detail_show"
@@ -191,7 +192,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:maxLength="255"
         android:textColorHint="@color/text_gray"
         android:textSize="15dp"
         android:visibility="gone"/>

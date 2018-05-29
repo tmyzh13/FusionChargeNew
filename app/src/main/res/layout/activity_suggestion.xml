@@ -23,7 +23,7 @@
             android:padding="@dimen/dp_8"
             android:inputType="textMultiLine"
             android:textSize="15sp"
-            android:maxLength="256"
+            android:maxLength="255"
             android:hint="@string/suggestion_yours" />
     </FrameLayout>
 
