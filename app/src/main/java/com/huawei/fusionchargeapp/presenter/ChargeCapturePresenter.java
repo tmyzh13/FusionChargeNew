@@ -60,7 +60,7 @@ public class ChargeCapturePresenter extends BasePresenter<ChargeCaptureView>{
                                @Override
                                public boolean operationError(BaseData<ScanChargeInfo> scanChargeInfoBaseData, int status, String message) {
                                    if(!TextUtils.isEmpty(message)) {
-                                       view.onOperationError(message);
+                                       view.onOperationError(getString(com.corelibs.R.string.code_862));
                                    }
                                    return super.operationError(scanChargeInfoBaseData, status, message);
                                }
