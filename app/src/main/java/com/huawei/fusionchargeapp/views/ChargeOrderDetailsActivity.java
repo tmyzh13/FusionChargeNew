@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.corelibs.base.BaseActivity;
 import com.corelibs.utils.ToastMgr;
+import com.corelibs.views.navigation.AndroidBug5497Workaround;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.huawei.fusionchargeapp.R;
@@ -127,6 +128,8 @@ public class ChargeOrderDetailsActivity extends BaseActivity<ChargeOrderDetailVi
             navBar.setColor(getResources().getColor(R.color.app_blue));
         }
         navBar.setNavTitle(this.getString(R.string.charge_detail));
+
+        AndroidBug5497Workaround.assistActivity(this);
 
         initData();
         initView();
@@ -289,7 +292,7 @@ public class ChargeOrderDetailsActivity extends BaseActivity<ChargeOrderDetailVi
                     } else if(chooseStyle == WITH_MONEY && chargePowerCount < 1) {
                         showToast(getString(R.string.lease_charge_money));
                         return;
-                    } else if(chooseStyle == WITH_TIME && chargePowerCount < 10) {
+                    } else if(chooseStyle == WITH_TIME && chargePowerCount < 1) {
                         showToast(getString(R.string.lease_charge_time));
                         return;
                     }

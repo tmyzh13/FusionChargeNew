@@ -224,7 +224,7 @@
         <activity
             android:name=".views.ChargeOrderDetailsActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".views.ChargeCaptureActivity"
             android:screenOrientation="portrait" />
