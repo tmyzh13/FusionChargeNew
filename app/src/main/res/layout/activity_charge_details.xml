@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
     tools:context="com.huawei.fusionchargeapp.views.ChargeDetailsActivity">
 
     <com.huawei.fusionchargeapp.weights.NavBar
@@ -16,7 +15,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/activity_horizontal_margin">
+        android:background="@color/white"
+        android:padding="@dimen/activity_horizontal_margin">
 
         <TextView
             android:id="@+id/charge_pile_name_tv"
@@ -64,12 +64,13 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10"
         android:orientation="horizontal"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin">
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin">
 
         <TextView
             android:id="@+id/charge_pile_address_tv"
@@ -107,10 +108,11 @@
         android:background="@color/line1" />
 
     <LinearLayout
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_48"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
         android:orientation="horizontal">
 
         <TextView
@@ -141,13 +143,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/line">
+        android:orientation="vertical"
+        >
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/line"/>
         <com.huawei.fusionchargeapp.weights.MyViewPager
             android:id="@+id/my_view_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/dp_10"
-            android:background="@color/line" />
+             />
     </LinearLayout>
 </LinearLayout>

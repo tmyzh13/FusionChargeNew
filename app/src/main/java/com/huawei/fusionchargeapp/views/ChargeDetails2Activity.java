@@ -21,6 +21,7 @@ import com.huawei.fusionchargeapp.model.beans.ChargeStationDetailBean;
 import com.huawei.fusionchargeapp.model.beans.MyLocationBean;
 import com.huawei.fusionchargeapp.model.beans.UserBean;
 import com.huawei.fusionchargeapp.presenter.ChargeDetails2Presenter;
+import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.interfaces.ChargeDetails2View;
 import com.huawei.fusionchargeapp.weights.MyViewPager;
 import com.huawei.fusionchargeapp.weights.NavBar;
@@ -64,9 +65,6 @@ public class ChargeDetails2Activity extends BaseActivity<ChargeDetails2View, Cha
     @Bind(R.id.my_view_pager)
     MyViewPager myViewPager;
 
-
-    private double userLatitude;
-    private double userLongitude;
     private String id;
     private String type;
 
@@ -92,11 +90,7 @@ public class ChargeDetails2Activity extends BaseActivity<ChargeDetails2View, Cha
             navBar.setColor(getResources().getColor(R.color.app_blue));
         }
 
-        MyLocationBean bean = PreferencesHelper.getData(MyLocationBean.class);
-        if (bean != null) {
-            userLatitude = bean.latitude;
-            userLongitude = bean.longtitude;
-        }
+
         id = getIntent().getStringExtra("id");
         type = getIntent().getStringExtra("type");
 
@@ -151,16 +145,16 @@ public class ChargeDetails2Activity extends BaseActivity<ChargeDetails2View, Cha
                 scoreUnit.setText(R.string.score);
             }
 //        计算距离
-            LatLng positionLatlng = new LatLng(userLatitude, userLongitude);
-            LatLng userLatlng = new LatLng(chargeStationDetailBean.getLatitude(), chargeStationDetailBean.getLongitude());
-            float distance = AMapUtils.calculateLineDistance(positionLatlng, userLatlng);
-            if (distance > 1000) {
+            MyLocationBean bean = PreferencesHelper.getData(MyLocationBean.class);
+            double distance = Tools.GetDistance(bean.latitude, bean.longtitude, chargeStationDetailBean.getLatitude(), chargeStationDetailBean.getLongitude());
+            distanceTv.setText(distance + "KM");
+            /*if (distance > 1000) {
                 DecimalFormat df = new DecimalFormat("#.0");
                 String km = df.format(distance / 1000);
                 distanceTv.setText(km + "KM");
             } else {
                 distanceTv.setText(distance + "M");
-            }
+            }*/
 
             ChargePileTypeAdapter mAdapter = new ChargePileTypeAdapter(getSupportFragmentManager(), chargeStationDetailBean, feeList);
             myViewPager.setAdapter(mAdapter);

@@ -8,194 +8,208 @@
         android:id="@+id/nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <LinearLayout
-        android:id="@+id/layout_portrait"
-        style="@style/item_layout_simple"
-        android:layout_height="70dp"
-        android:background="@drawable/list_selector"
-        >
 
-        <TextView
-            style="@style/textview"
-            android:layout_weight="1"
-            android:text="@string/portrait" />
-
-        <com.corelibs.views.roundedimageview.CircleImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:id="@+id/iv_user_icon"
-            android:src="@mipmap/default_head"
-            />
-    </LinearLayout>
-
-
-    <ImageView style="@style/view_line"
-        android:layout_height="@dimen/dp_13"/>
-
-    <LinearLayout
-        android:id="@+id/layout_nick"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        style="@style/item_layout_simple"
-        android:background="@drawable/list_selector">
-
-        <TextView
-            style="@style/textview"
-            android:layout_weight="1"
-            android:text="@string/user_info_name" />
-
-        <EditText
-            android:hint="@string/write_name"
-            android:id="@+id/et_name"
-            style="@style/textview"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:maxLength="12"
-            android:background="@color/transparent"
-            android:gravity="right|center_vertical"
-            android:lines="1"
-            android:textColor="@color/setting_blue" />
-    </LinearLayout>
-
-    <ImageView style="@style/view_line"
-        />
-    <LinearLayout
-        android:id="@+id/layout_sex"
-        style="@style/item_layout_simple"
-        android:background="@drawable/list_selector">
-
-        <TextView
-            style="@style/textview"
-            android:layout_weight="1"
-            android:text="@string/sex" />
-
-
-        <TextView
-            android:id="@+id/tv_sex"
-            style="@style/textview"
-            android:background="@color/transparent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:maxLines="1"
-            android:gravity="right|center_vertical"
-            android:textColor="@color/setting_blue" />
-    </LinearLayout>
-
-    <ImageView style="@style/view_line"
-        />
-    <LinearLayout
-        android:id="@+id/layout_email"
-        style="@style/item_layout_simple"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:background="@drawable/list_selector">
-
-        <TextView
-            style="@style/textview"
-            android:layout_weight="1"
-            android:text="@string/email" />
-
-
-        <EditText
-            android:id="@+id/tv_email"
-            style="@style/textview"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            android:gravity="right|center_vertical"
-            android:inputType="textEmailAddress"
-            android:lines="1"
-            android:hint="@string/write_email_hint"
-            android:maxLength="32"
-            android:textColor="@color/setting_blue" />
-    </LinearLayout>
-    <ImageView style="@style/view_line"
-        />
-    <LinearLayout
-        android:id="@+id/layout_birthday"
-        style="@style/item_layout_simple"
-        android:background="@drawable/list_selector">
-
-        <TextView
-            style="@style/textview"
-            android:layout_weight="1"
-            android:text="@string/birthday" />
-
-        <TextView
-            android:hint="@string/write_birthday"
-            android:id="@+id/tv_birthday"
-            style="@style/textview"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            android:layout_height="match_parent"
-            android:gravity="right|center_vertical"
-            android:textColor="@color/setting_blue" />
-    </LinearLayout>
-    <ImageView style="@style/view_line"
-        />
-    <LinearLayout
-        android:id="@+id/layout_address"
-        style="@style/item_layout_simple"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:background="@drawable/list_selector">
-
-        <TextView
-            style="@style/textview"
-            android:layout_weight="1"
-            android:text="@string/address" />
-
-        <EditText
-            android:hint="@string/write_address"
-            android:id="@+id/tv_address"
-            style="@style/textview"
-            android:layout_weight="1"
-            android:lines="1"
-            android:maxLength="40"
-            android:layout_height="match_parent"
-            android:background="@color/transparent"
-            android:gravity="right|center_vertical"
-            android:textColor="@color/setting_blue" />
-    </LinearLayout>
-    <ImageView style="@style/view_line"
-        />
-    <LinearLayout
-        android:id="@+id/layout_car_vin"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        style="@style/item_layout_simple"
-        android:background="@drawable/list_selector">
-
-        <TextView
-            style="@style/textview"
-            android:layout_weight="1"
-            android:text="@string/car_vin" />
-
-        <EditText
-            android:id="@+id/tv_car_vin"
-            style="@style/textview"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            android:gravity="right|center_vertical"
-            android:lines="1"
-            android:hint="@string/write_vin_code"
-            android:maxLength="17"
-            android:inputType="number"
-            android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            android:textColor="@color/setting_blue" />
-    </LinearLayout>
-    <TextView
-        android:id="@+id/commit_userinfo"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_48"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/dp_30"
-        android:background="@drawable/blue_shape_bg"
-        android:gravity="center"
-        android:text="@string/action_submit"
-        android:visibility="visible"
-        android:textColor="@color/text_white"
-        android:textSize="@dimen/text_title" />
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/layout_portrait"
+                style="@style/item_layout_simple"
+                android:layout_height="70dp"
+                android:background="@drawable/list_selector"
+                >
+
+                <TextView
+                    style="@style/textview"
+                    android:layout_weight="1"
+                    android:text="@string/portrait" />
+
+                <com.corelibs.views.roundedimageview.CircleImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/iv_user_icon"
+                    android:src="@mipmap/default_head"
+                    />
+            </LinearLayout>
+
+
+            <ImageView style="@style/view_line"
+                android:layout_height="@dimen/dp_13"/>
+
+            <LinearLayout
+                android:id="@+id/layout_nick"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                style="@style/item_layout_simple"
+                android:background="@drawable/list_selector">
+
+                <TextView
+                    style="@style/textview"
+                    android:layout_weight="1"
+                    android:text="@string/user_info_name" />
+
+                <EditText
+                    android:hint="@string/write_name"
+                    android:id="@+id/et_name"
+                    style="@style/textview"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:maxLength="12"
+                    android:background="@color/transparent"
+                    android:gravity="right|center_vertical"
+                    android:lines="1"
+                    android:textColor="@color/setting_blue" />
+            </LinearLayout>
+
+            <ImageView style="@style/view_line"
+                />
+            <LinearLayout
+                android:id="@+id/layout_sex"
+                style="@style/item_layout_simple"
+                android:background="@drawable/list_selector">
+
+                <TextView
+                    style="@style/textview"
+                    android:layout_weight="1"
+                    android:text="@string/sex" />
+
+
+                <TextView
+                    android:id="@+id/tv_sex"
+                    style="@style/textview"
+                    android:background="@color/transparent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:gravity="right|center_vertical"
+                    android:textColor="@color/setting_blue" />
+            </LinearLayout>
+
+            <ImageView style="@style/view_line"
+                />
+            <LinearLayout
+                android:id="@+id/layout_email"
+                style="@style/item_layout_simple"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:background="@drawable/list_selector">
+
+                <TextView
+                    style="@style/textview"
+                    android:layout_weight="1"
+                    android:text="@string/email" />
+
+
+                <EditText
+                    android:id="@+id/tv_email"
+                    style="@style/textview"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/transparent"
+                    android:gravity="right|center_vertical"
+                    android:inputType="textEmailAddress"
+                    android:lines="1"
+                    android:hint="@string/write_email_hint"
+                    android:maxLength="32"
+                    android:textColor="@color/setting_blue" />
+            </LinearLayout>
+            <ImageView style="@style/view_line"
+                />
+            <LinearLayout
+                android:id="@+id/layout_birthday"
+                style="@style/item_layout_simple"
+                android:background="@drawable/list_selector">
+
+                <TextView
+                    style="@style/textview"
+                    android:layout_weight="1"
+                    android:text="@string/birthday" />
+
+                <TextView
+                    android:hint="@string/write_birthday"
+                    android:id="@+id/tv_birthday"
+                    style="@style/textview"
+                    android:layout_weight="1"
+                    android:background="@color/transparent"
+                    android:layout_height="match_parent"
+                    android:gravity="right|center_vertical"
+                    android:textColor="@color/setting_blue" />
+            </LinearLayout>
+            <ImageView style="@style/view_line"
+                />
+            <LinearLayout
+                android:id="@+id/layout_address"
+                style="@style/item_layout_simple"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:background="@drawable/list_selector">
+
+                <TextView
+                    style="@style/textview"
+                    android:layout_weight="1"
+                    android:text="@string/address" />
+
+                <EditText
+                    android:hint="@string/write_address"
+                    android:id="@+id/tv_address"
+                    style="@style/textview"
+                    android:layout_weight="1"
+                    android:lines="1"
+                    android:maxLength="40"
+                    android:layout_height="match_parent"
+                    android:background="@color/transparent"
+                    android:gravity="right|center_vertical"
+                    android:textColor="@color/setting_blue" />
+            </LinearLayout>
+            <ImageView style="@style/view_line"
+                />
+            <LinearLayout
+                android:id="@+id/layout_car_vin"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                style="@style/item_layout_simple"
+                android:background="@drawable/list_selector">
+
+                <TextView
+                    style="@style/textview"
+                    android:layout_weight="1"
+                    android:text="@string/car_vin" />
+
+                <EditText
+                    android:id="@+id/tv_car_vin"
+                    style="@style/textview"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/transparent"
+                    android:gravity="right|center_vertical"
+                    android:lines="1"
+                    android:hint="@string/write_vin_code"
+                    android:maxLength="17"
+                    android:inputType="number"
+                    android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:textColor="@color/setting_blue" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/commit_userinfo"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_48"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/dp_30"
+                android:background="@drawable/blue_shape_bg"
+                android:gravity="center"
+                android:text="@string/action_submit"
+                android:visibility="visible"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/text_title" />
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

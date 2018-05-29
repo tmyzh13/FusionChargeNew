@@ -39,6 +39,7 @@ import com.corelibs.api.ApiFactory;
 import com.corelibs.base.BaseActivity;
 import com.corelibs.utils.PreferencesHelper;
 import com.corelibs.utils.rxbus.RxBus;
+import com.corelibs.views.navigation.AndroidBug5497Workaround;
 import com.corelibs.views.roundedimageview.CircleImageView;
 import com.huawei.fusionchargeapp.MainActivity;
 import com.huawei.fusionchargeapp.R;
@@ -145,6 +146,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
         else
             navBar.setColor(getResources().getColor(R.color.app_blue));
 
+        AndroidBug5497Workaround.assistActivity(this);
 /*
         tvEmail.addTextChangedListener(new TextWatcher() {
             @Override
