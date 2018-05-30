@@ -147,7 +147,6 @@ public class Urls {
     public static final String GET_MY_BALANCE = "balance";
     //获取用户积分
     public static final String GET_USER_SCORE = "user/getUserScore";
-
     public static final String UN_PAY_INVOICE = "invoice/unPayInvoice/";
 
     public static final String REPAY_INVOICE = "orderPay/rePayInvoiceOrder";
