@@ -214,7 +214,7 @@
     <string name="charging_statue_please_check">请检查桩与车的连接状态....</string>
     <string name="charging_statue_ending">正在结束充电，请耐心等待....</string>
     <string name="charging_statue_end_go_to_pay">您的充电已结束，请前往支付</string>
-    <string name="charging_statue_time">充电时长（分）</string>
+    <string name="charging_statue_time">充电时长</string>
 
     <!--支付-->
     <string name="pay">支付</string>
@@ -508,6 +508,7 @@
 
     <!--我的套餐-->
     <string name="my_tao_can">我的套餐</string>
+    <string name="my_tao_can_time">活动日期:</string>
     <string name="my_tao_can_limit">限制</string>
     <string name="my_tao_can_surplus">剩余套餐:</string>
     <string name="my_tao_can_end_time">到期时间:</string>

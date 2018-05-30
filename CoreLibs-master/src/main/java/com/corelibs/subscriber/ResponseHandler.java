@@ -194,6 +194,8 @@ public class ResponseHandler<T> {
                         handleOperationError(context.getString(R.string.code_296));
                     }else if(data.status()==297){
                         handleOperationError(context.getString(R.string.code_297));
+                    }else if(data.status()==298){
+                        handleOperationError(context.getString(R.string.code_298));
                     }else if(data.status()==294){
                         handleOperationError(context.getString(R.string.code_294));
                     }else if(data.status()==860){
