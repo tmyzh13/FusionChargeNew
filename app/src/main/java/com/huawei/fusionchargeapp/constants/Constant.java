@@ -51,4 +51,5 @@ public class Constant {
 
     //更改头像后刷新头像信息
     public static final String REFRESH_MAIN_HEAD_PHOTO = "refresh_main_head_photo";
+    public static final String REFRESH_APPLY_ORDER_LIST_ACTIVITY = "refresh_apply_order_list_activity";
 }

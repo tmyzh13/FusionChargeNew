@@ -13,15 +13,19 @@ import android.widget.TextView;
 
 import com.corelibs.base.BaseActivity;
 import com.corelibs.base.BasePresenter;
+import com.corelibs.subscriber.RxBusSubscriber;
+import com.corelibs.utils.rxbus.RxBus;
 import com.corelibs.views.cube.ptr.PtrFrameLayout;
 import com.corelibs.views.ptr.layout.PtrAutoLoadMoreLayout;
 import com.corelibs.views.ptr.loadmore.widget.AutoLoadMoreExpandableListView;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.adapter.ApplyInvoiceAdapter;
+import com.huawei.fusionchargeapp.constants.Constant;
 import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.beans.ApplyInvoiceBean;
 import com.huawei.fusionchargeapp.model.beans.UserBean;
 import com.huawei.fusionchargeapp.presenter.InvoicePresenter;
+import com.huawei.fusionchargeapp.utils.ChoiceManager;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.LoginActivity;
 import com.huawei.fusionchargeapp.views.interfaces.InvoiceView;
@@ -136,14 +140,27 @@ public class ApplyOrderListActivity extends BaseActivity<InvoiceView,InvoicePres
             return;
         }
         showLoading();
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         presenter.getInvoiceConsume(page);
+        RxBus.getDefault().toObservable(Object.class, Constant.REFRESH_APPLY_ORDER_LIST_ACTIVITY)
+                .compose(this.<Object>bindToLifecycle())
+                .subscribe(new RxBusSubscriber<Object>() {
+
+                    @Override
+                    public void receive(Object data) {
+                        page = FIRST_PAGE;
+                        groupList.clear();
+                        itemList.clear();
+                        totalMoney = 0;
+                        totalNum = 0;
+
+                        showLoading();
+                        ptrLayout.enableLoading();
+                        presenter.getInvoiceConsume(page);
+                    }
+                });
+
     }
+
 
     @Override
     public void getInvoiceConsume(List<ApplyInvoiceBean> bean) {
