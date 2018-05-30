@@ -20,10 +20,12 @@ import com.alipay.sdk.app.PayTask;
 import com.corelibs.base.BaseActivity;
 import com.corelibs.base.BasePresenter;
 import com.corelibs.utils.ToastMgr;
+import com.corelibs.utils.rxbus.RxBus;
 import com.corelibs.views.NoScrollingListView;
 import com.corelibs.views.navigation.AndroidBug5497Workaround;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.adapters.InvoicePayAdapter;
+import com.huawei.fusionchargeapp.constants.Constant;
 import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.apis.ApplyInvoiceApi;
 import com.huawei.fusionchargeapp.model.beans.ApplyInvoiceResultBean;
@@ -387,6 +389,7 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
                     if (TextUtils.equals(resultStatus, "9000")) {
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
                         ToastMgr.show(getString(R.string.pay_success));
+                        RxBus.getDefault().send(new Object(), Constant.REFRESH_APPLY_ORDER_LIST_ACTIVITY);
                         finish();
                     } else {
                         Log.e("TAG","resultInfo:"+resultInfo);
