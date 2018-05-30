@@ -70,7 +70,7 @@ public class PayPresenter extends BasePresenter<PayView> {
                         if(baseData.data!=null){
                             view.paySuccess(baseData.data);
                         }else{
-                            ToastMgr.show(getString(R.string.pay_error));
+                            ToastMgr.show(getString(R.string.pay_fail));
                         }
 
                     }
@@ -105,7 +105,7 @@ public class PayPresenter extends BasePresenter<PayView> {
                         if(baseData.data!=null){
                             view.paySuccess(baseData.data);
                         }else{
-                            ToastMgr.show(getString(R.string.pay_error));
+                            ToastMgr.show(getString(R.string.pay_fail));
                         }
                     }
 

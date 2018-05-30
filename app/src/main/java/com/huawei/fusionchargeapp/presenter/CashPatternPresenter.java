@@ -45,7 +45,7 @@ public class CashPatternPresenter extends BasePresenter<CashPatternView> {
                         if(payResultBeanBaseData.data!=null){
                             view.paySuccess(payResultBeanBaseData.data);
                         }else{
-                            ToastMgr.show(getString(R.string.pay_error));
+                            ToastMgr.show(getString(R.string.pay_fail));
                         }
                     }
                 });

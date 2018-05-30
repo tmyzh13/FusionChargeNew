@@ -233,6 +233,7 @@
     <string name="pay_success">支付成功</string>
     <string name="pay_error">不好！您的订单支付出现异常啦</string>
     <string name="pay_cancel">支付取消</string>
+    <string name="pay_fail">支付失败</string>
     <string name="pay_pay_again">请重新支付</string>
     <string name="pay_try_again">再试试</string>
     <string name="pay_tao_can_fee">套餐费用</string>

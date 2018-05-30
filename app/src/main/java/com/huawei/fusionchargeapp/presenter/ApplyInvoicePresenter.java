@@ -4,6 +4,8 @@ import com.corelibs.api.ApiFactory;
 import com.corelibs.api.ResponseTransformer;
 import com.corelibs.base.BasePresenter;
 import com.corelibs.subscriber.ResponseSubscriber;
+import com.corelibs.utils.ToastMgr;
+import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.constants.Urls;
 import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.apis.ApplyInvoiceApi;
@@ -60,7 +62,12 @@ public class ApplyInvoicePresenter  extends BasePresenter<ApplyInvoiceView> {
                 .subscribe(new ResponseSubscriber<BaseData<ApplyInvoiceResultBean>>(view) {
                     @Override
                     public void success(BaseData<ApplyInvoiceResultBean> baseData) {
-                        view.applySuccess(baseData.data);
+                        if(baseData.data!=null){
+                            view.applySuccess(baseData.data);
+                        }else{
+                            ToastMgr.show(getString(R.string.pay_fail));
+                        }
+
                     }
                 });
     }
@@ -85,7 +92,11 @@ public class ApplyInvoicePresenter  extends BasePresenter<ApplyInvoiceView> {
                 .subscribe(new ResponseSubscriber<BaseData<ApplyInvoiceResultBean>>(view) {
                     @Override
                     public void success(BaseData<ApplyInvoiceResultBean> baseData) {
-                        view.repayInvoiceSucess(baseData.data);
+                        if(baseData.data!=null){
+                            view.applySuccess(baseData.data);
+                        }else{
+                            ToastMgr.show(getString(R.string.pay_fail));
+                        }
                     }
                 });
     }

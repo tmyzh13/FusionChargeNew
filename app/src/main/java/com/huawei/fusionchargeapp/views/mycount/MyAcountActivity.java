@@ -53,6 +53,12 @@ public class MyAcountActivity extends BaseActivity<MyAcountView,MyAcountPresente
     protected void init(Bundle savedInstanceState) {
         nav.setNavTitle(getString(R.string.my_acount));
         nav.setImageBackground(R.drawable.nan_bg);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         presenter.getMyBalance();
     }
 

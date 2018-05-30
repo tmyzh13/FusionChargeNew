@@ -61,7 +61,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
             if (resp.errCode == -1) {
                 // 进入支付失败页面
 
-                ToastMgr.show(getString(R.string.pay_error)+resp.errStr);
+                ToastMgr.show(getString(R.string.pay_fail));
 
                 finish();
             } else if (resp.errCode == -2) {

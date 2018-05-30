@@ -48,7 +48,7 @@ public class TaocanPayPresenter extends BasePresenter<TaoCanPayView> {
                         if(baseData.data!=null){
                             view.paySuccess(baseData.data);
                         }else{
-                            ToastMgr.show(getString(R.string.pay_error));
+                            ToastMgr.show(getString(R.string.pay_fail));
                         }
 
                     }

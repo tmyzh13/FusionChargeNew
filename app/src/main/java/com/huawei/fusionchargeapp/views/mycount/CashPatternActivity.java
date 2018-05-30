@@ -167,7 +167,7 @@ public class CashPatternActivity extends BaseActivity<CashPatternView,CashPatter
                     } else {
                         Log.e("TAG","resultInfo:"+resultInfo);
                         // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
-                        ToastMgr.show(getString(R.string.pay_error));
+                        ToastMgr.show(getString(R.string.pay_fail));
                     }
 
 
