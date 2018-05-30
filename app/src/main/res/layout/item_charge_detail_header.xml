@@ -78,7 +78,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_5"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -91,6 +92,12 @@
                     android:layout_height="wrap_content"
                     android:text="--"
                     android:layout_marginLeft="@dimen/dp_5" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/pop_ic_ask"
+                    android:id="@+id/iv_fee"
+                    android:padding="2dp"/>
             </LinearLayout>
 
             <!--服务费-->

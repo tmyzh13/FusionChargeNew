@@ -19,11 +19,14 @@ import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.adapter.ChargePile2Adapter;
 import com.huawei.fusionchargeapp.model.beans.AppointTimeOutBean;
 import com.huawei.fusionchargeapp.model.beans.ChargeDetailFeeBean;
+import com.huawei.fusionchargeapp.model.beans.ChargeDetailFeeListBean;
+import com.huawei.fusionchargeapp.model.beans.ChargeFeeBean;
 import com.huawei.fusionchargeapp.model.beans.ChargeMultipleBean;
 import com.huawei.fusionchargeapp.model.beans.ChargeStationDetailBean;
 import com.huawei.fusionchargeapp.model.beans.GunList;
 import com.huawei.fusionchargeapp.model.beans.PileList;
 import com.huawei.fusionchargeapp.views.AppointmentChargeActivity;
+import com.huawei.fusionchargeapp.weights.ChargeFeeDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +42,7 @@ public class Position2Fragment extends BaseFragment {
 
     public ChargeStationDetailBean data;
     public List<ChargeDetailFeeBean> feeList;
-
+    private ChargeFeeDialog chargeFeeDialog;
     @Bind(R.id.rv)
     RecyclerView rv;
     private List<ChargeMultipleBean> multipleBeans;
@@ -58,6 +61,7 @@ public class Position2Fragment extends BaseFragment {
     protected void init(Bundle savedInstanceState) {
         Log.e("zw","position2 fragment :" + data.toString() + " ///  " + data.getAddress());
         multipleBeans = new ArrayList<>();
+        chargeFeeDialog=new ChargeFeeDialog(getContext());
 
         List<PileList> pileLists = data.getPileList();
         if(data != null) {
@@ -113,6 +117,32 @@ public class Position2Fragment extends BaseFragment {
                     PreferencesHelper.saveData(bean);
                     Log.e("zw","xinban : " + bean.toString());
                     getActivity().startActivity(intent);
+                }else if(view.getId()==R.id.iv_fee){
+                    //点击费率按钮
+                    if(!chargeFeeDialog.isShowing()){
+                        chargeFeeDialog.show();
+                    }
+                    GunList gunList = multipleBeans.get(position).getmGunList();
+                    ChargeDetailFeeBean feeBean = null;
+
+                    for (int i = position; i >= 0; i--) {
+                        if(multipleBeans.get(i).getmPileList() != null) {
+                            feeBean = multipleBeans.get(i).getmFeeBean();
+                            break;
+                        }
+                    }
+                   List<ChargeDetailFeeListBean>list =feeBean.getFeeList();
+                    List<ChargeFeeBean> chargeFeeBeanList=new ArrayList<>();
+                    if(list!=null&&list.size()!=0){
+                        for(int i=0;i<list.size();i++){
+                            ChargeFeeBean chargeFeeBean=new ChargeFeeBean();
+                            chargeFeeBean.startTime=list.get(i).getStartTime();
+                            chargeFeeBean.endTime=list.get(i).getEndTime();
+                            chargeFeeBean.multiFee=list.get(i).getMultiFee();
+                            chargeFeeBeanList.add(chargeFeeBean);
+                        }
+                    }
+                    chargeFeeDialog.setFeeDatas(chargeFeeBeanList);
                 }
             }
         });

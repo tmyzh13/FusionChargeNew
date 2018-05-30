@@ -55,7 +55,7 @@ public class ChargePile2Adapter extends BaseMultiItemQuickAdapter<ChargeMultiple
                 //获取充电价格和服务费
                 helper.setText(R.id.service_fee,feeBean.getServiceFee() + mContext.getString(R.string.yuan_du));
                 List<ChargeDetailFeeListBean> feeListBean = feeBean.getFeeList();
-                if( feeListBean != null) {
+                if( feeListBean != null&&feeListBean.size()!=0) {
                     double max = 0;
                     double min = feeListBean.get(0).getMultiFee();
                     for (int i = 0; i < feeListBean.size(); i++) {
@@ -76,7 +76,7 @@ public class ChargePile2Adapter extends BaseMultiItemQuickAdapter<ChargeMultiple
                 helper.setText(R.id.max_voltage_tv,pileList.getMaxVoltage() + "V");
                 helper.setText(R.id.pile_status_tv,pileList.getRunStatus() == 1 ?
                         mContext.getString(R.string.statue_offline) : mContext.getString(R.string.statue_online));
-
+                helper.addOnClickListener(R.id.iv_fee);
                 break;
             case ChargeMultipleBean.CHARGE_DETAIL_BODY:
                 GunList gunList = item.getmGunList();
