@@ -337,6 +337,7 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
 //        } else {
 //            //根据支付类型调用相应接口
 //        }
+        RxBus.getDefault().send(new Object(), Constant.REFRESH_APPLY_ORDER_LIST_ACTIVITY);
         if(bean.payType==1){
             //支付宝
             payForAli(bean.orderInfo);
@@ -389,7 +390,6 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
                     if (TextUtils.equals(resultStatus, "9000")) {
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
                         ToastMgr.show(getString(R.string.pay_success));
-                        RxBus.getDefault().send(new Object(), Constant.REFRESH_APPLY_ORDER_LIST_ACTIVITY);
                         finish();
                     } else {
                         Log.e("TAG","resultInfo:"+resultInfo);
