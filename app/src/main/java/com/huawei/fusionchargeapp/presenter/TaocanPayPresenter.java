@@ -4,9 +4,12 @@ import com.corelibs.api.ApiFactory;
 import com.corelibs.api.ResponseTransformer;
 import com.corelibs.base.BasePresenter;
 import com.corelibs.subscriber.ResponseSubscriber;
+import com.corelibs.utils.ToastMgr;
+import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.apis.TaocanPayapi;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
+import com.huawei.fusionchargeapp.model.beans.PayResultBean;
 import com.huawei.fusionchargeapp.model.beans.RequestPayTaocanBean;
 import com.huawei.fusionchargeapp.views.interfaces.TaoCanPayView;
 import com.huawei.hae.mcloud.bundle.base.login.model.User;
@@ -38,11 +41,16 @@ public class TaocanPayPresenter extends BasePresenter<TaoCanPayView> {
 //        bean.appUserId= UserHelper.getSavedUser().appUserId;
         bean.payType = type;
         api.payTaocan(UserHelper.getSavedUser().token,bean)
-                .compose(new ResponseTransformer<>(this.<BaseData>bindUntilEvent(ActivityEvent.DESTROY)))
-                .subscribe(new ResponseSubscriber<BaseData>(view) {
+                .compose(new ResponseTransformer<>(this.<BaseData<PayResultBean>>bindUntilEvent(ActivityEvent.DESTROY)))
+                .subscribe(new ResponseSubscriber<BaseData<PayResultBean>>(view) {
                     @Override
-                    public void success(BaseData baseData) {
-                        view.paySuccess();
+                    public void success(BaseData<PayResultBean> baseData) {
+                        if(baseData.data!=null){
+                            view.paySuccess(baseData.data);
+                        }else{
+                            ToastMgr.show(getString(R.string.pay_error));
+                        }
+
                     }
                 });
     }

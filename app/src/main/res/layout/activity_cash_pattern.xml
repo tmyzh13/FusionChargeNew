@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/cash_input_with_pattern"
             android:textSize="@dimen/text_title"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:background="@null"/>
 
     </LinearLayout>

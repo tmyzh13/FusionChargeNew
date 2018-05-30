@@ -49,6 +49,10 @@ public class CashPatternAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    public int getCurrentSelect(){
+        return selectPos;
+    }
+
     @Override
     public int getCount() {
         return sort_img == null ? 0 : sort_img.size();

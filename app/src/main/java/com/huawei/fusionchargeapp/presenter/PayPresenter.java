@@ -6,6 +6,8 @@ import com.corelibs.api.ApiFactory;
 import com.corelibs.api.ResponseTransformer;
 import com.corelibs.base.BasePresenter;
 import com.corelibs.subscriber.ResponseSubscriber;
+import com.corelibs.utils.ToastMgr;
+import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.constants.Urls;
 import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.apis.PayApi;
@@ -65,7 +67,12 @@ public class PayPresenter extends BasePresenter<PayView> {
                 .subscribe(new ResponseSubscriber<BaseData<PayResultBean>>(view) {
                     @Override
                     public void success(BaseData<PayResultBean> baseData) {
-                        view.paySuccess(baseData.data);
+                        if(baseData.data!=null){
+                            view.paySuccess(baseData.data);
+                        }else{
+                            ToastMgr.show(getString(R.string.pay_error));
+                        }
+
                     }
 
                     @Override
@@ -95,7 +102,11 @@ public class PayPresenter extends BasePresenter<PayView> {
                 .subscribe(new ResponseSubscriber<BaseData<PayResultBean>>(view) {
                     @Override
                     public void success(BaseData<PayResultBean> baseData) {
-                        view.paySuccess(baseData.data);
+                        if(baseData.data!=null){
+                            view.paySuccess(baseData.data);
+                        }else{
+                            ToastMgr.show(getString(R.string.pay_error));
+                        }
                     }
 
                     @Override

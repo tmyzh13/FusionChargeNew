@@ -4,11 +4,10 @@ import com.corelibs.base.BaseView;
 import com.huawei.fusionchargeapp.model.beans.PayResultBean;
 
 /**
- * Created by issuser on 2018/5/17.
+ * Created by issuser on 2018/5/30.
  */
 
-public interface TaoCanPayView extends BaseView {
+public interface CashPatternView extends BaseView {
 
-
-      void paySuccess(PayResultBean bean);
+    void paySuccess(PayResultBean bean);
 }
