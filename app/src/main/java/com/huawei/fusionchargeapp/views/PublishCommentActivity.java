@@ -15,6 +15,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.corelibs.base.BaseActivity;
+import com.corelibs.views.NoScrollingGridView;
 import com.corelibs.views.navigation.AndroidBug5497Workaround;
 import com.huawei.fusionchargeapp.MainActivity;
 import com.huawei.fusionchargeapp.adapter.CommentSortAdapter;
@@ -67,7 +68,7 @@ public class PublishCommentActivity extends BaseActivity<CommentView,CommentPres
     Button publish;
 
     @Bind(R.id.flow_layout)
-    GridView flowGrid;
+    NoScrollingGridView flowGrid;
     @Bind(R.id.nav)
     NavBar navBar;
     @Bind(R.id.iv_back)

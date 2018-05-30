@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/publish_bg_color"
     android:orientation="vertical">
     <com.huawei.fusionchargeapp.weights.NavBar
         android:id="@+id/nav"
@@ -10,6 +11,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/text_white"
         android:scrollbars="none">
         <LinearLayout
             android:layout_width="match_parent"
@@ -165,7 +167,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:orientation="horizontal">
-                <GridView
+                <com.corelibs.views.NoScrollingGridView
                     android:id="@+id/flow_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
