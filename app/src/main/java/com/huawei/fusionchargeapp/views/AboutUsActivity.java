@@ -25,7 +25,7 @@ public class AboutUsActivity extends BaseActivity{
 
     @Override
     public void goLogin() {
-        startActivity(LoginActivity.getLauncher(this));
+
     }
 
     @Override
