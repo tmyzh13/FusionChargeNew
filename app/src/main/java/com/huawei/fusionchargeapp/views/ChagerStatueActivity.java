@@ -249,7 +249,10 @@ public class ChagerStatueActivity extends BaseActivity<ChargerStatueView, Charge
         chargerStatueBean = bean;
         if(bean.isOff==2){
             //在线状态
-
+            //如果是离线又上线了 去掉离线提示
+            if(commonOfflineDialog.isShowing()){
+                commonOfflineDialog.dismiss();
+            }
             if (bean.isStart == 0) {
                 //检测失败
                 final CheckChargeFailDialog dialog = new CheckChargeFailDialog(context);
