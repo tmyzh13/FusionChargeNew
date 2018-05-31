@@ -96,7 +96,7 @@ public class Urls {
 
 
     //上传用户信息
-    public static final String REPORT_LOCATION = "user/selectUserInfoByRegion";
+    public static final String REPORT_LOCATION = "user/uploadUserRegion";
 
     //用户提意见
     public static final String PUBLISH_SUGGESTION = "appUserRecord/addFeedbackRecord";
