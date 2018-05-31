@@ -120,7 +120,7 @@
         <!-- 环境:sit/uat/pro -->
         <meta-data
             android:name="env"
-            android:value="uat" />
+            android:value="pro" />
 
         <!-- 是否为login登录 -->
         <meta-data
