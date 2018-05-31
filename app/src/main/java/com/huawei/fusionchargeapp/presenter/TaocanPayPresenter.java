@@ -40,6 +40,7 @@ public class TaocanPayPresenter extends BasePresenter<TaoCanPayView> {
         bean.totalFee=totalFee;
 //        bean.appUserId= UserHelper.getSavedUser().appUserId;
         bean.payType = type;
+        view.showLoading();
         api.payTaocan(UserHelper.getSavedUser().token,bean)
                 .compose(new ResponseTransformer<>(this.<BaseData<PayResultBean>>bindUntilEvent(ActivityEvent.DESTROY)))
                 .subscribe(new ResponseSubscriber<BaseData<PayResultBean>>(view) {
