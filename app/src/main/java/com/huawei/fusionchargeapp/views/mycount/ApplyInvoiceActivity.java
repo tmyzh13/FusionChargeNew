@@ -298,12 +298,6 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
 
         postage = total < 200 ? list.get(adapter.getCurrentPosition()).needMoney: 0;
         int payType = total < 200 ? Integer.parseInt(list.get(adapter.getCurrentPosition()).type) : 3;
-//        if(ll_post.getVisibility()==View.VISIBLE){
-//            //支付邮费费用的 逻辑
-//            if(adapter.getCurrentPosition()==2){
-//                //支付邮费
-//            }
-//        }
         if (is_order_no_pay_but_had_invoiced) {
             RepayInvoiceBean bean = new RepayInvoiceBean();
             bean.orderRecordNum = orderId;

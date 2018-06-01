@@ -7,4 +7,7 @@ package com.huawei.fusionchargeapp.model.beans;
 public class MyLocationBean {
     public double latitude;
     public double longtitude;
+    public String province;
+    public String city;
+    public String county;
 }

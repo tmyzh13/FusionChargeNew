@@ -288,6 +288,13 @@ public class MapPresenter extends BasePresenter<MapHomeView> {
         reportUserLocation.latitude=latitude;
         reportUserLocation.longitude=longitude;
         reportUserLocation.appUserId=UserHelper.getSavedUser().appUserId;
+        MyLocationBean bean=PreferencesHelper.getData(MyLocationBean.class);
+        if(bean!=null){
+            reportUserLocation.province=bean.province;
+            reportUserLocation.county=bean.county;
+            reportUserLocation.city=bean.city;
+        }
+
         api.reportUserLocation(UserHelper.getSavedUser().token,reportUserLocation)
                 .compose(new ResponseTransformer<>(this.<BaseData>bindToLifeCycle()))
                 .subscribe(new ResponseSubscriber<BaseData>() {

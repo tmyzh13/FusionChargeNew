@@ -1,18 +1,13 @@
 package com.huawei.fusionchargeapp.views;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.IBinder;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.corelibs.base.BaseActivity;
 import com.corelibs.common.AppManager;
@@ -29,7 +24,6 @@ import com.huawei.fusionchargeapp.model.beans.HomeChargeOrderBean;
 import com.huawei.fusionchargeapp.model.beans.PayInfoBean;
 import com.huawei.fusionchargeapp.model.beans.UserBean;
 import com.huawei.fusionchargeapp.presenter.ChargeStatuePresenter;
-import com.huawei.fusionchargeapp.utils.TimeServiceManager;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.interfaces.ChargerStatueView;
 import com.huawei.fusionchargeapp.weights.CheckChargeFailDialog;
@@ -74,7 +68,6 @@ public class ChagerStatueActivity extends BaseActivity<ChargerStatueView, Charge
     private CheckStatueLoadingView checkStatueLoadingView;
     private CheckStatueLoadingView checkEndStatueLoadingView;
     private CheckChargeFailDialog dialog;
-    private TimerService timerService;
     private HomeChargeOrderBean homeChargeOrderBean;
     private Timer timer;
     private Handler handler;
@@ -192,12 +185,7 @@ public class ChagerStatueActivity extends BaseActivity<ChargerStatueView, Charge
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-//        Intent intent = new Intent(this, TimerService.class);
-//        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-    }
+
 
     @Override
     protected ChargeStatuePresenter createPresenter() {
@@ -223,22 +211,6 @@ public class ChagerStatueActivity extends BaseActivity<ChargerStatueView, Charge
         });
     }
 
-    private ServiceConnection mConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-//            TimerService.ServiceBinder binder = (TimerService.ServiceBinder) service;
-//            Log.e("yzh", "11111111111");
-//            timerService = binder.getService();
-
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-//            Log.e("yzh", "22222222222222");
-//            timerService.cancelTimerHour();
-//            timerService = null;
-        }
-    };
 
     private ChargerStatueBean chargerStatueBean;
     private boolean isFirst=true;
@@ -284,15 +256,6 @@ public class ChagerStatueActivity extends BaseActivity<ChargerStatueView, Charge
 
                 //检测中的定时结束
                 handler.postDelayed(runnable, 5000);
-//            timer.cancel();
-//            timer = new Timer();
-//            //开始5s刷新一个数据的定时
-//            timer.schedule(new TimerTask() {
-//                @Override
-//                public void run() {
-//                    presenter.getChargeStatue(homeChargeOrderBean.virtualId, homeChargeOrderBean.chargeGunNum);
-//                }
-//            }, 1000, 5000);
 
                 //成功
                 tv_address_name.setText(bean.chargingPileName);
@@ -337,15 +300,12 @@ public class ChagerStatueActivity extends BaseActivity<ChargerStatueView, Charge
 //            }
                 progressView.startAnimation(0, 100, 1000);
                 if (bean.isStop == 1) {
-                    Log.e("yzh","isStop");
-//                timerService.cancelTimerHour();
                     if(checkEndStatueLoadingView.isShowing()){
                         checkEndStatueLoadingView.dismiss();
                     }
                     stopTimer();
                     progressView.stopAnimator();
                     RxBus.getDefault().send(new Object(), Constant.REFRESH_HOME_STATUE);
-//                TimeServiceManager.getInstance().getTimerService().cancelTimerHour();
                     handler.removeCallbacks(runnable);
 //                checkStatueLoadingView.dismiss();
                     //弹框提示充电结束去支付
@@ -395,12 +355,6 @@ public class ChagerStatueActivity extends BaseActivity<ChargerStatueView, Charge
             } else if (bean.isStart == 2) {
                 //检测中
                 checkStatueLoadingView.show();
-//            timer.schedule(new TimerTask() {
-//                @Override
-//                public void run() {
-//                    presenter.getChargeStatue(homeChargeOrderBean.virtualId, homeChargeOrderBean.chargeGunNum);
-//                }
-//            }, 1000, 3000);
                 handler.postDelayed(runnable, 3000);
             }
         }else if(bean.isOff==1){
@@ -432,33 +386,6 @@ public class ChagerStatueActivity extends BaseActivity<ChargerStatueView, Charge
 
         handler.removeCallbacks(runnable);
         handler.postDelayed(runnable, 5000);
-//        timerService.cancelTimerHour();
-//        TimeServiceManager.getInstance().getTimerService().cancelTimerHour();
-//        //刷新首页的界面
-//        RxBus.getDefault().send(new Object(),Constant.REFRESH_HOME_STATUE);
-//        commonDialog.setMsg(getString(R.string.charging_statue_end_go_to_pay));
-//        commonDialog.show();
-//        commonDialog.setPositiveListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                                orderNum 是在传参里面有
-////                                presenter.endCharging();
-//            startActivity(PayActivity.getLauncher(context,chargerStatueBean.orderRecordNum));
-//            commonDialog.dismiss();
-//            finish();
-//            }
-//        });
-//        commonDialog.setNagitiveListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                commonDialog.dismiss();
-//                checkStatueLoadingView.dismiss();
-//                while (!AppManager.getAppManager().currentActivity().getClass().equals(MainActivity.class)) {
-//                    AppManager.getAppManager().finishActivity();
-//                }
-//            }
-//        });
-
     }
 
     @Override

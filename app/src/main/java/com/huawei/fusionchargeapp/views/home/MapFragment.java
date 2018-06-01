@@ -561,6 +561,11 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                 MyLocationBean bean = new MyLocationBean();
                 bean.latitude = aMapLocation.getLatitude();
                 bean.longtitude = aMapLocation.getLongitude();
+                bean.province=aMapLocation.getProvince();
+                bean.city=aMapLocation.getCity();
+                //设置区
+                bean.county=aMapLocation.getDistrict();
+
                 //todo
 //                bean.latitude = 22.6552090201;
 //                bean.longtitude = 114.0643603795;
