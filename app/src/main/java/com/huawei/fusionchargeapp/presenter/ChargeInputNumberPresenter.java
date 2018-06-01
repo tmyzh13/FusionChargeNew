@@ -43,11 +43,11 @@ public class ChargeInputNumberPresenter extends BasePresenter<ChargeInputNumberV
     }
 
 
-    public void getData(long number){
+    public void getData(String number){
 
         RequestScanBean bean = new RequestScanBean();
         bean.setAppUserId(UserHelper.getSavedUser().appUserId + "");
-        bean.setQrCode(number + "");
+        bean.setQrCode(number);
 
         //正确
         api.getScanChargeInfo(UserHelper.getSavedUser().token,bean)

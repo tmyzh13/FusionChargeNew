@@ -68,16 +68,9 @@ public class ChargeInputNumberActivity extends BaseActivity<ChargeInputNumberVie
     @OnClick(R.id.sure)
     public void onViewClicked() {
         String str = etInputNumber.getText().toString();
-        long number = 0;
-        try {
-            number = Long.parseLong(str);
-        } catch (Exception e){
-            showToast(getString(R.string.hint_right_code));
-            return;
-        }
 
         showLoading();
-        presenter.getData(number);
+        presenter.getData(str);
 
 //        testt();
     }
