@@ -203,6 +203,7 @@
     <string name="charging_statue">充电状态</string>
     <string name="charging_statue_checking">正在检测安全性....</string>
     <string name="charging_statue_hint">您确定要结束充电去支付？</string>
+    <string name="charging_statue_device_offline">充电设备离线</string>
     <string name="charging_statue_electronic">已充电量</string>
     <string name="charging_statue_fee">充电费用</string>
     <string name="charging_statue_a">电流(A)</string>

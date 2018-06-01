@@ -64,7 +64,7 @@ public interface MapApi {
     Observable<BaseData<HomeAppointmentBean>> getUserAppointmentRecord(@Header("AccessToken") String token,@Body RequestHomeAppointment bean);
 
     @POST(Urls.REPORT_LOCATION)
-    Observable<BaseData> reportUserLocation(@Body ReportUserLocation bean);
+    Observable<BaseData> reportUserLocation(@Header("AccessToken") String token,@Body ReportUserLocation bean);
 
     @GET(Urls.GET_USER_SCORE)
     Observable<BaseData<ScoreBean>> getUserScore(@Header("AccessToken") String token);

@@ -30,4 +30,6 @@ public class ChargerStatueBean {
 //    是否充电结束  1是  0否（默认0）
     public int isStop;
     public String orderRecordNum;
+    //-1初始状态 1 离线2 在线
+    public int isOff;
 }
