@@ -30,6 +30,7 @@ import com.huawei.fusionchargeapp.utils.alipay.PayResult;
 import com.huawei.fusionchargeapp.views.LoginActivity;
 import com.huawei.fusionchargeapp.views.TaoCanPayActivity;
 import com.huawei.fusionchargeapp.views.interfaces.CashPatternView;
+import com.huawei.fusionchargeapp.wechatpay.PayWithWechat;
 import com.huawei.fusionchargeapp.weights.NavBar;
 
 import java.util.Map;
@@ -118,6 +119,7 @@ public class CashPatternActivity extends BaseActivity<CashPatternView,CashPatter
             payForAli(bean.orderInfo);
         }else{
             //微信
+            PayWithWechat payWithWechat=new PayWithWechat(context,bean);
         }
     }
 

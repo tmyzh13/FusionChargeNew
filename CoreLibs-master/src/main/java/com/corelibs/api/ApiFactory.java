@@ -1,6 +1,7 @@
 package com.corelibs.api;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.corelibs.common.Configuration;
 import com.google.gson.FieldNamingPolicy;
@@ -25,9 +26,17 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.security.cert.CertificateException;
 import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.HashMap;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -211,6 +220,48 @@ public class ApiFactory {
                 .addConverterFactory(GsonConverterFactory.create(gsonBuilder.create()));
 
         OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
+
+        //---信任证书
+        try {
+            Log.e("yzh","1111111111111");
+            // Create a trust manager that does not validate certificate chains
+            final TrustManager[] trustAllCerts = new TrustManager[] {
+                    new X509TrustManager() {
+                        @Override
+                        public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+                        }
+
+                        @Override
+                        public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+                        }
+
+                        @Override
+                        public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                            return new java.security.cert.X509Certificate[]{};
+                        }
+                    }
+            };
+
+            // Install the all-trusting trust manager
+            final SSLContext sslContext = SSLContext.getInstance("SSL");
+            sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
+            // Create an ssl socket factory with our all-trusting manager
+            final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
+
+
+            clientBuilder.sslSocketFactory(sslSocketFactory);
+            clientBuilder.hostnameVerifier(new HostnameVerifier() {
+                @Override
+                public boolean verify(String hostname, SSLSession session) {
+                    return true;
+                }
+            });
+
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        //---
 
         if (Configuration.isShowNetworkParams()) {
             clientBuilder.addInterceptor(new HttpLoggingInterceptor());
