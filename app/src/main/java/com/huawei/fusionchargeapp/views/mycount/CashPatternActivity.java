@@ -17,13 +17,17 @@ import com.alipay.sdk.app.PayTask;
 import com.corelibs.base.BaseActivity;
 import com.corelibs.base.BasePresenter;
 import com.corelibs.common.AppManager;
+import com.corelibs.subscriber.RxBusSubscriber;
 import com.corelibs.utils.PreferencesHelper;
 import com.corelibs.utils.ToastMgr;
+import com.corelibs.utils.rxbus.RxBus;
 import com.huawei.fusionchargeapp.MainActivity;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.adapter.CashPatternAdapter;
+import com.huawei.fusionchargeapp.constants.Constant;
 import com.huawei.fusionchargeapp.model.beans.PayResultBean;
 import com.huawei.fusionchargeapp.presenter.CashPatternPresenter;
+import com.huawei.fusionchargeapp.utils.ChoiceManager;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.utils.alipay.AuthResult;
 import com.huawei.fusionchargeapp.utils.alipay.PayResult;
@@ -87,6 +91,16 @@ public class CashPatternActivity extends BaseActivity<CashPatternView,CashPatter
 
         adapter = new CashPatternAdapter(this);
         listView.setAdapter(adapter);
+
+        RxBus.getDefault().toObservable(Object.class, Constant.PAY_SUCCESS_FINISH)
+                .compose(this.<Object>bindToLifecycle())
+                .subscribe(new RxBusSubscriber<Object>() {
+
+                    @Override
+                    public void receive(Object data) {
+                        finish();
+                    }
+                });
     }
 
     private int payType=1;

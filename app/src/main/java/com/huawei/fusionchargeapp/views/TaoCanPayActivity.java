@@ -20,6 +20,7 @@ import com.alipay.sdk.app.PayTask;
 import com.corelibs.base.BaseActivity;
 import com.corelibs.base.BasePresenter;
 import com.corelibs.common.AppManager;
+import com.corelibs.subscriber.RxBusSubscriber;
 import com.corelibs.utils.ToastMgr;
 import com.corelibs.utils.rxbus.RxBus;
 import com.corelibs.views.NoScrollingListView;
@@ -41,6 +42,7 @@ import com.huawei.fusionchargeapp.utils.alipay.OrderInfoUtil2_0;
 import com.huawei.fusionchargeapp.utils.alipay.PayResult;
 import com.huawei.fusionchargeapp.views.interfaces.PayView;
 import com.huawei.fusionchargeapp.views.interfaces.TaoCanPayView;
+import com.huawei.fusionchargeapp.wechatpay.PayWithWechat;
 import com.huawei.fusionchargeapp.weights.NavBar;
 
 import java.util.ArrayList;
@@ -160,6 +162,18 @@ public class TaoCanPayActivity extends BaseActivity<TaoCanPayView,TaocanPayPrese
                 adapter.setCurrentPosition(position);
             }
         });
+        RxBus.getDefault().toObservable(Object.class, Constant.PAY_SUCCESS_FINISH)
+                .compose(this.<Object>bindToLifecycle())
+                .subscribe(new RxBusSubscriber<Object>() {
+
+                    @Override
+                    public void receive(Object data) {
+                        while(!AppManager.getAppManager().currentActivity().getClass().equals( MainActivity.class)){
+                            AppManager.getAppManager().finishActivity();
+                        }
+                        finish();
+                    }
+                });
     }
 
     @Override
@@ -178,6 +192,7 @@ public class TaoCanPayActivity extends BaseActivity<TaoCanPayView,TaocanPayPrese
             payForAli();
         }else if(bean.payType==2){
             //微信
+            PayWithWechat payWithWechat=new PayWithWechat(context,bean);
         }
 
 

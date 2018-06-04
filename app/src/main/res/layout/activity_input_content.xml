@@ -24,6 +24,7 @@
             android:padding="@dimen/dp_8"
             android:inputType="textMultiLine"
             android:textSize="15sp"
+            android:maxLength="200"
              />
     </FrameLayout>
 

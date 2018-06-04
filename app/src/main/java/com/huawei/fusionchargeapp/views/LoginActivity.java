@@ -87,7 +87,8 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     ImageView pwd_ic_del;
     @Bind(R.id.pwd_ic_see)
     ImageView pwd_ic_see;
-
+    @Bind(R.id.tv_appointment)
+    TextView tv_appointment;
 
     private Context context = LoginActivity.this;
     private String phoneNumber;
@@ -121,6 +122,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
                     forgetPwdandRegisterRl.setVisibility(View.VISIBLE);
                     loginTv.setText(getText(R.string.login));
                     cb_appointment.setVisibility(View.GONE);
+                    tv_appointment.setVisibility(View.GONE);
                     rl_login.setVisibility(View.GONE);
                     pwdEt.setText("");
                     isRegister = false;
@@ -150,6 +152,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
                     forgetPwdandRegisterRl.setVisibility(View.GONE);
                     loginTv.setText(getText(R.string.regist));
                     cb_appointment.setVisibility(View.VISIBLE);
+                    tv_appointment.setVisibility(View.VISIBLE);
                     rl_login.setVisibility(View.VISIBLE);
                     isRegister = true;
                     pwdEt.setText("");
@@ -519,5 +522,10 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     @OnClick(R.id.iv_finish)
     public void actionFinish(){
         finish();
+    }
+
+    @OnClick(R.id.tv_appointment)
+    public void goAppointment(){
+        startActivity(WebActivity.getLauncher(context,0));
     }
 }

@@ -120,7 +120,7 @@
         <!-- 环境:sit/uat/pro -->
         <meta-data
             android:name="env"
-            android:value="pro" />
+            android:value="uat" />
 
         <!-- 是否为login登录 -->
         <meta-data
@@ -320,6 +320,7 @@
             android:name=".views.mycount.MyTaoCanActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".views.ChargeDetails2Activity"></activity>
+        <activity android:name=".views.WebActivity" />
     </application>
 
 </manifest>

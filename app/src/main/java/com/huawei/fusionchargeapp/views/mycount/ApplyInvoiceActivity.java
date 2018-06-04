@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.alipay.sdk.app.PayTask;
 import com.corelibs.base.BaseActivity;
 import com.corelibs.base.BasePresenter;
+import com.corelibs.subscriber.RxBusSubscriber;
 import com.corelibs.utils.ToastMgr;
 import com.corelibs.utils.rxbus.RxBus;
 import com.corelibs.views.NoScrollingListView;
@@ -31,6 +32,7 @@ import com.huawei.fusionchargeapp.model.apis.ApplyInvoiceApi;
 import com.huawei.fusionchargeapp.model.beans.ApplyInvoiceResultBean;
 import com.huawei.fusionchargeapp.model.beans.AppointResponseBean;
 import com.huawei.fusionchargeapp.model.beans.BaseData;
+import com.huawei.fusionchargeapp.model.beans.PayResultBean;
 import com.huawei.fusionchargeapp.model.beans.PayStyleBean;
 import com.huawei.fusionchargeapp.model.beans.RepayInvoiceBean;
 import com.huawei.fusionchargeapp.model.beans.RequestApplyInvoiceBean;
@@ -42,6 +44,7 @@ import com.huawei.fusionchargeapp.utils.alipay.PayResult;
 import com.huawei.fusionchargeapp.views.LoginActivity;
 import com.huawei.fusionchargeapp.views.interfaces.ApplyInvoiceView;
 import com.huawei.fusionchargeapp.views.interfaces.AppointView;
+import com.huawei.fusionchargeapp.wechatpay.PayWithWechat;
 import com.huawei.fusionchargeapp.weights.NavBar;
 import com.jakewharton.rxbinding.widget.RxTextView;
 
@@ -92,6 +95,8 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
     LinearLayout ll_post;
     @Bind(R.id.ll_go_input)
     LinearLayout ll_go_input;
+    @Bind(R.id.et_invoice_content)
+    EditText et_invoice_content;
 
     private Context context=ApplyInvoiceActivity.this;
     private InvoicePayAdapter adapter;
@@ -217,7 +222,15 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
                 ll_post.setVisibility(View.VISIBLE);
             }
         }
+        RxBus.getDefault().toObservable(Object.class, Constant.PAY_SUCCESS_FINISH)
+                .compose(this.<Object>bindToLifecycle())
+                .subscribe(new RxBusSubscriber<Object>() {
 
+                    @Override
+                    public void receive(Object data) {
+                        finish();
+                    }
+                });
     }
 
     @Override
@@ -250,6 +263,8 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
         et_invoice_title.setEnabled(false);
         et_invoice_tax.setText(bean.invoiceInfo.code);
         et_invoice_tax.setEnabled(false);
+        et_invoice_content.setText(bean.invoiceInfo.content);
+        et_invoice_content.setEnabled(false);
         et_invoice_address.setText(bean.invoiceInfo.recAddr);
         et_invoice_address.setEnabled(false);
         et_invoice_email.setText(bean.invoiceInfo.email);
@@ -306,7 +321,7 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
             presenter.repayInvoice(bean);
         } else {
             presenter.applyInvoice(orderNums,payType,postage,type,et_invoice_title.getText().toString(),
-                    et_invoice_tax.getText().toString().trim(),et_invoice_connect.getText().toString().trim(),
+                    et_invoice_tax.getText().toString().trim(),et_invoice_content.getText().toString().trim(),
                     total,moreContent,et_invoice_receive.getText().toString().trim(),et_invoice_connect.getText().toString().trim(),
                     et_invoice_address.getText().toString().trim(),et_invoice_email.getText().toString().trim());
         }
@@ -337,6 +352,16 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
             payForAli(bean.orderInfo);
         }else if(bean.payType==2){
             //微信
+            PayResultBean payResultBean=new PayResultBean();
+            payResultBean.partnerid=bean.partnerid;
+            payResultBean.isNeedPay=bean.isNeedPay;
+            payResultBean.prepayid=bean.prepayid;
+            payResultBean.packagename=bean.packagename;
+            payResultBean.noncestr=bean.noncestr;
+            payResultBean.timestamp=bean.timestamp;
+            payResultBean.sign=bean.sign;
+            payResultBean.appid=bean.appid;
+            PayWithWechat payWithWechat=new PayWithWechat(context,payResultBean);
         }else if(bean.payType==3||bean.payType==6){
             finish();
         }

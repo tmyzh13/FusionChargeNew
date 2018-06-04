@@ -161,4 +161,9 @@ public class SettingActivity extends BaseActivity<SettingView, SettingPresenter>
         hideLoading();
         showToast(message);
     }
+
+//    @OnClick(R.id.tv_clause)
+//    public void goResgitment(){
+//        startActivity(WebActivity.getLauncher(SettingActivity.this,0));
+//    }
 }

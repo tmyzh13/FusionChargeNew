@@ -286,6 +286,12 @@
                     android:visibility="gone"
                     android:id="@+id/cb_appointment"
                     />
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/tv_appointment"
+                   style="@style/text_normal"
+                    android:textColor="@color/app_blue"
+                    android:text="@string/regist_appointment_1"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

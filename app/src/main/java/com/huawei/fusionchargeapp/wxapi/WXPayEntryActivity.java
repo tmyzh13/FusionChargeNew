@@ -8,7 +8,9 @@ import android.util.Log;
 
 
 import com.corelibs.utils.ToastMgr;
+import com.corelibs.utils.rxbus.RxBus;
 import com.huawei.fusionchargeapp.R;
+import com.huawei.fusionchargeapp.constants.Constant;
 import com.huawei.fusionchargeapp.wechatpay.Constants;
 import com.tencent.mm.sdk.constants.ConstantsAPI;
 import com.tencent.mm.sdk.modelbase.BaseReq;
@@ -85,6 +87,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 //					finish();
 //				}
 //				RxBus.getDefault().send(new PaySuccessBean(), Constant.PAY_SUCCESS);
+                RxBus.getDefault().send(new Object(), Constant.PAY_SUCCESS_FINISH);
                 finish();
 
             }

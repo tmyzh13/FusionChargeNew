@@ -83,7 +83,7 @@
                     <EditText
                         android:id="@+id/et_invoice_title"
                         style="@style/edit_apply_invoice"
-
+                        android:maxLength="80"
                         android:hint="@string/apply_invoice_title_hint" />
                 </LinearLayout>
 
@@ -99,7 +99,8 @@
                     <EditText
                         android:id="@+id/et_invoice_tax"
                         style="@style/edit_apply_invoice"
-                        android:hint="@string/apply_invoice_tax_hint" />
+                        android:hint="@string/apply_invoice_tax_hint"
+                        android:maxLength="30"/>
                 </LinearLayout>
 
                 <View style="@style/view_line" />
@@ -111,10 +112,11 @@
                         android:layout_width="80dp"
                         android:text="@string/apply_invoice_content" />
 
-                    <TextView
-                        style="@style/text_normal"
-                        android:text="@string/apply_invoice_content_"
-                        android:textColor="@color/text_color_shallow" />
+                    <EditText
+                        android:id="@+id/et_invoice_content"
+                        style="@style/edit_apply_invoice"
+                        android:hint="@string/apply_invoice_content_hint"
+                        android:maxLength="80"/>
                 </LinearLayout>
 
                 <View style="@style/view_line" />
@@ -193,6 +195,7 @@
                         android:id="@+id/et_invoice_receive"
                        style="@style/edit_apply_invoice"
                         android:hint="@string/apply_invoice_receive_hint"
+                        android:maxLength="12"
                         />
                 </LinearLayout>
                 <View
@@ -225,6 +228,7 @@
                         android:id="@+id/et_invoice_address"
                         style="@style/edit_apply_invoice"
                         android:hint="@string/apply_invoice_detail_address_hint"
+                        android:maxLength="80"
                         />
                 </LinearLayout>
                 <View
@@ -241,6 +245,7 @@
                         android:hint="@string/apply_invoice_email_hint"
                         android:id="@+id/et_invoice_email"
                         android:inputType="textEmailAddress"
+                        android:maxLength="50"
                         />
                 </LinearLayout>
             </LinearLayout>

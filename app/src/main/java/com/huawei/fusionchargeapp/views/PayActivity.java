@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.alipay.sdk.app.PayTask;
 import com.corelibs.base.BaseActivity;
 import com.corelibs.common.AppManager;
+import com.corelibs.subscriber.RxBusSubscriber;
 import com.corelibs.utils.ToastMgr;
 import com.corelibs.utils.rxbus.RxBus;
 import com.corelibs.views.NoScrollingListView;
@@ -156,7 +157,23 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
             tv_charge_service_fee.setText(payInfoBean.serviceCharge+getString(R.string.yuan));
             tv_total_fee.setText("￥"+payInfoBean.consumeTotalMoney);
         }
+        RxBus.getDefault().toObservable(Object.class, Constant.PAY_SUCCESS_FINISH)
+                .compose(this.<Object>bindToLifecycle())
+                .subscribe(new RxBusSubscriber<Object>() {
 
+                    @Override
+                    public void receive(Object data) {
+                        while(!AppManager.getAppManager().currentActivity().getClass().equals( MainActivity.class)){
+                            AppManager.getAppManager().finishActivity();
+                        }
+                        //给首页发送一个消息去掉未支付提示栏
+                        HomeRefreshBean bean =new HomeRefreshBean();
+                        bean.type=0;
+                        RxBus.getDefault().send(bean, Constant.HOME_STATUE_REFRESH);
+                        startActivity(PayCompleteActivity.getLauncher(context,orderNum));
+                        finish();
+                    }
+                });
     }
 
     @Override

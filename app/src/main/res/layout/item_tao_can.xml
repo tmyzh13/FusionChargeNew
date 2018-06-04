@@ -15,7 +15,7 @@
         >
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="85dp"
             android:orientation="vertical"
             android:gravity="center"
             android:background="@mipmap/list_can_bg"

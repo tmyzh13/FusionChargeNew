@@ -84,7 +84,8 @@
     <!--注册-->
     <string name="regist">注册</string>
     <string name="regist_password_hint">6-12位，必须是字母+数字+特殊符号等</string>
-    <string name="regist_appointment">我已阅读，并同意《用户注册协议》</string>
+    <string name="regist_appointment">我已阅读，并同意</string>
+    <string name="regist_appointment_1">《用户注册协议》</string>
     <!--重置密码-->
     <string name="reset_password">重置密码</string>
     <string name="reset_password_hint">验证码已经发送到您的手机</string>
@@ -440,11 +441,12 @@
     <string name="apply_invoice_title_hint">填写发票抬头</string>
     <string name="apply_invoice_tax">税号</string>
     <string name="apply_invoice_tax_hint">请填写税号</string>
+    <string name="apply_invoice_content_hint">请输入发票内容</string>
     <string name="apply_invoice_content">发票内容</string>
     <string name="apply_invoice_content_">*运输服务*客运服务费</string>
     <string name="apply_invoice_money">发票金额</string>
     <string name="apply_invoice_more_info">更多信息</string>
-    <string name="apply_invoice_more_info_hint">填写备注、地址等（非必填）</string>
+    <string name="apply_invoice_more_info_hint">填写备注（非必填）</string>
     <string name="apply_invoice_receive_method">接受方式</string>
     <string name="apply_invoice_receive">收件人</string>
     <string name="apply_invoice_receive_hint">填写收件人</string>
@@ -575,4 +577,6 @@
     <string name="no_comment_content">请填写评价内容</string>
     <string name="no_comment_score">请进行评分</string>
     <string name="much_money">%1$s元</string>
+
+    <string name="copy_right">注册协议</string>
 </resources>
