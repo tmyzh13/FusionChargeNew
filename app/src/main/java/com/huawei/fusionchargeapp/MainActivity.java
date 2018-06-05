@@ -166,7 +166,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void init(Bundle savedInstanceState) {
 
-
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         ViewGroup.LayoutParams lp = view_main_statue.getLayoutParams();
         lp.height = Tools.getStatueHeight(context);
@@ -211,11 +210,11 @@ public class MainActivity extends BaseActivity {
                     cb_charge_alternating.setChecked(true);
                     cb_charge_direct.setChecked(true);
                 } else if (ChoiceManager.getInstance().getType() == 2) {
-                    cb_charge_alternating.setChecked(true);
-                    cb_charge_direct.setChecked(false);
-                } else if (ChoiceManager.getInstance().getType() == 1) {
                     cb_charge_alternating.setChecked(false);
                     cb_charge_direct.setChecked(true);
+                } else if (ChoiceManager.getInstance().getType() == 1) {
+                    cb_charge_alternating.setChecked(true);
+                    cb_charge_direct.setChecked(false);
                 } else if (ChoiceManager.getInstance().getType() == 0) {
                     cb_charge_alternating.setChecked(false);
                     cb_charge_direct.setChecked(false);
