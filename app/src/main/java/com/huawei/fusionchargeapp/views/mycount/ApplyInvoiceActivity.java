@@ -58,6 +58,7 @@ import butterknife.OnClick;
 import rx.Observable;
 import rx.Observer;
 import rx.functions.Func6;
+import rx.functions.Func7;
 
 /**
  * Created by john on 2018/5/7.
@@ -169,20 +170,22 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
         //rxjava联合判断
         Observable<CharSequence> invoiceTitle= RxTextView.textChanges(et_invoice_title).skip(1);
         Observable<CharSequence> invoiceTax= RxTextView.textChanges(et_invoice_tax).skip(1);
+        Observable<CharSequence> invoiceContent=RxTextView.textChanges(et_invoice_content).skip(1);
         Observable<CharSequence> invoiceReceive= RxTextView.textChanges(et_invoice_receive).skip(1);
         Observable<CharSequence> invoiceConnect= RxTextView.textChanges(et_invoice_connect).skip(1);
         Observable<CharSequence> invoiceAddress= RxTextView.textChanges(et_invoice_address).skip(1);
         Observable<CharSequence> invoiceEmail= RxTextView.textChanges(et_invoice_email).skip(1);
-        Observable.combineLatest(invoiceTitle, invoiceTax, invoiceReceive,invoiceConnect ,invoiceAddress,invoiceEmail,new Func6<CharSequence, CharSequence, CharSequence, CharSequence, CharSequence, CharSequence, Boolean>() {
+        Observable.combineLatest(invoiceTitle, invoiceTax,invoiceContent, invoiceReceive,invoiceConnect ,invoiceAddress,invoiceEmail,new Func7<CharSequence, CharSequence, CharSequence, CharSequence, CharSequence, CharSequence, CharSequence, Boolean>() {
             @Override
-            public Boolean call(CharSequence charSequence, CharSequence charSequence2, CharSequence charSequence3, CharSequence charSequence4, CharSequence charSequence5, CharSequence charSequence6) {
+            public Boolean call(CharSequence charSequence, CharSequence charSequence2, CharSequence charSequence3, CharSequence charSequence4, CharSequence charSequence5, CharSequence charSequence6,CharSequence charSequence7) {
                 boolean isTitleValid= !TextUtils.isEmpty(et_invoice_title.getText().toString());
                 boolean isTaxValid=!TextUtils.isEmpty(et_invoice_tax.getText().toString());
+                boolean isContentValid=!TextUtils.isEmpty(et_invoice_content.getText().toString());
                 boolean isReceiveValid=!TextUtils.isEmpty(et_invoice_receive.getText().toString());
                 boolean isConnectValid= !TextUtils.isEmpty(et_invoice_connect.getText().toString());
                 boolean isAddressValid=!TextUtils.isEmpty(et_invoice_address.getText().toString());
                 boolean isEmailValid=!TextUtils.isEmpty(et_invoice_email.getText().toString());
-                return isTitleValid&isTaxValid&isReceiveValid&isConnectValid&isAddressValid&isEmailValid;
+                return isTitleValid&isTaxValid&isContentValid&isReceiveValid&isConnectValid&isAddressValid&isEmailValid;
             }
         }).subscribe(new Observer<Boolean>() {
             @Override

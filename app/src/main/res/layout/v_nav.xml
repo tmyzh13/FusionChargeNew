@@ -25,6 +25,15 @@
         android:src="@mipmap/nav_ic_back"
          />
 
+    <ImageView
+        android:id="@+id/iv_finish"
+        android:layout_width="@dimen/nav_height"
+        android:layout_height="match_parent"
+        android:scaleType="center"
+        android:src="@mipmap/home_ic_dl"
+        android:visibility="gone"
+        />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

@@ -10,6 +10,7 @@
     <style name="AppBaseCompactTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:scrollbarThumbVertical">@drawable/scrollbar_bg</item>
         <item name="android:scrollbarThumbHorizontal">@drawable/scrollbar_bg</item>
+        <item name="android:windowTranslucentNavigation">false</item>
         <item name="android:scrollbarSize">3dp</item>
     </style>
 

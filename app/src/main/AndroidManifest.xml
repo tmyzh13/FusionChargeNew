@@ -132,6 +132,9 @@
 
         <!-- =========================单点登录  end================= -->
 
+        <meta-data android:name="android.max_aspect"
+            android:value="ratio_float"/>
+
         <activity
             android:name=".views.WelcomeActivity"
             android:screenOrientation="portrait">

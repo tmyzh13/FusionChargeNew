@@ -38,6 +38,7 @@ import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.interfaces.ForgetPwdActivity;
 import com.huawei.fusionchargeapp.views.interfaces.LoginView;
 import com.huawei.fusionchargeapp.weights.CommonDialog;
+import com.huawei.fusionchargeapp.weights.NavBar;
 
 import java.lang.ref.WeakReference;
 
@@ -89,6 +90,8 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     ImageView pwd_ic_see;
     @Bind(R.id.tv_appointment)
     TextView tv_appointment;
+    @Bind(R.id.nav)
+    NavBar navBar;
 
     private Context context = LoginActivity.this;
     private String phoneNumber;
@@ -199,6 +202,9 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
 
     private void initView() {
         AndroidBug5497Workaround.assistActivity(this);
+        navBar.hideBack();
+        navBar.showCancle();
+        navBar.setColorRes(R.color.black_bg);
         typeCodeLl.setVisibility(View.GONE);
         phoneIv.setOnClickListener(this);
         forgetPwdTv.setOnClickListener(this);

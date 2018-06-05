@@ -29,7 +29,8 @@ public class NavBar extends TranslucentNavBar {
     ImageView iv_add;
     @Bind(R.id.tv_appointment)
     TextView tv_appointment;
-
+    @Bind(R.id.iv_finish)
+    ImageView iv_finish;
 
     public NavBar(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -72,6 +73,11 @@ public class NavBar extends TranslucentNavBar {
             ((Activity) getContext()).finish();
         }
     };
+
+    public void showCancle(){
+        iv_finish.setVisibility(VISIBLE);
+        iv_finish.setOnClickListener(defaultBackListener);
+    }
 
     public void setTitleColor(int color){
         tv_title.setTextColor(color);
