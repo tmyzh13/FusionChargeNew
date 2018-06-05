@@ -146,8 +146,12 @@ public class ChargeDetails2Activity extends BaseActivity<ChargeDetails2View, Cha
             }
 //        计算距离
             MyLocationBean bean = PreferencesHelper.getData(MyLocationBean.class);
-            double distance = Tools.GetDistance(bean.latitude, bean.longtitude, chargeStationDetailBean.getLatitude(), chargeStationDetailBean.getLongitude());
-            distanceTv.setText(distance + "KM");
+            if(bean == null) {
+                distanceTv.setText( "-- KM");
+            } else {
+                double distance = Tools.GetDistance(bean.latitude, bean.longtitude, chargeStationDetailBean.getLatitude(), chargeStationDetailBean.getLongitude());
+                distanceTv.setText(distance + "KM");
+            }
             /*if (distance > 1000) {
                 DecimalFormat df = new DecimalFormat("#.0");
                 String km = df.format(distance / 1000);

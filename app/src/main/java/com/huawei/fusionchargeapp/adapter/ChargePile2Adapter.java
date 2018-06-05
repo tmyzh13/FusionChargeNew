@@ -71,7 +71,7 @@ public class ChargePile2Adapter extends BaseMultiItemQuickAdapter<ChargeMultiple
                 }
 
                 helper.setText(R.id.pile_num_tv,pileList.getRunCode());
-                helper.setText(R.id.max_power_tv,pileList.getMaxPower() + "KM");
+                helper.setText(R.id.max_power_tv,pileList.getMaxPower() + "KW");
                 helper.setText(R.id.max_electronic_tv,pileList.getMaxCurrent() + "A");
                 helper.setText(R.id.max_voltage_tv,pileList.getMaxVoltage() + "V");
                 helper.setText(R.id.pile_status_tv,pileList.getRunStatus() == 1 ?
