@@ -31,7 +31,8 @@ public class SuggestionActivity extends BaseActivity<SuggestionView,SuggestionPr
     @Override
     public void CommitSucess() {
         showToast(getString(R.string.user_info_modify_success));
-        startActivity(SettingActivity.getLauncher(this));
+//        startActivity(SettingActivity.getLauncher(this));
+        finish();
     }
 
     @Override
