@@ -203,7 +203,7 @@ public class ApplyInvoiceAdapter extends BaseExpandableListAdapter {
 
         holder.view.setVisibility(i1==0 ? View.GONE :View.VISIBLE);
         holder.pileAdress.setText(itemLst.get(i).get(i1).address);
-        holder.pileNum.setText(itemLst.get(i).get(i1).orderNum+"");
+        holder.pileNum.setText(itemLst.get(i).get(i1).runCode);
         holder.creatTime.setText(itemLst.get(i).get(i1).chargeStartTime);
         holder.money.setText(itemLst.get(i).get(i1).consumeTotalMoney+context.getString(R.string.yuan));
         holder.select.setOnCheckedChangeListener(new OnViewClickListener(i,i1,listener));
