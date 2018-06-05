@@ -102,7 +102,8 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
 
     private boolean isRegister = false;
     private MyCountDownTimer timer;
-
+ 
+    
     public static Intent getLauncher(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
         return intent;
