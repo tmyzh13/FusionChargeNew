@@ -1,6 +1,5 @@
 package com.huawei.fusionchargeapp.views;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -28,11 +27,11 @@ import com.corelibs.base.BaseActivity;
 import com.corelibs.utils.PreferencesHelper;
 import com.corelibs.utils.ToastMgr;
 import com.corelibs.utils.rxbus.RxBus;
-import com.corelibs.views.navigation.AndroidBug5497Workaround;
 import com.huawei.fusionchargeapp.MainActivity;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.constants.Constant;
 import com.huawei.fusionchargeapp.presenter.LoginPresenter;
+import com.huawei.fusionchargeapp.utils.AndroidBug5497Workaround;
 import com.huawei.fusionchargeapp.utils.ChoiceManager;
 import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.views.interfaces.ForgetPwdActivity;
@@ -201,10 +200,12 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     }
 
     private void initView() {
+
         AndroidBug5497Workaround.assistActivity(this);
         navBar.hideBack();
         navBar.showCancle();
         navBar.setColorRes(R.color.black_bg);
+
         typeCodeLl.setVisibility(View.GONE);
         phoneIv.setOnClickListener(this);
         forgetPwdTv.setOnClickListener(this);
@@ -389,9 +390,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
                     if (type == 1) {
 //                        if(getUserInput()){
                             //手机号密码登录
-                        Log.e("yzh","phone--"+phoneNumberEt.getText().toString().trim());
                         if (TextUtils.isEmpty(phoneNumberEt.getText().toString().trim()) || !Tools.isChinaPhoneLegal(phoneNumberEt.getText().toString().trim())) {
-                            Log.e("yzh",Tools.isChinaPhoneLegal(phoneNumber)+"--phone--"+phoneNumber);
                             showHintDialog(getString(R.string.hint),getString(R.string.input_correct_phone));
 
                         } else if (TextUtils.isEmpty(pwdEt.getText().toString().trim())) {
