@@ -90,7 +90,7 @@ public class InvoiceHistoryAdapter extends BaseAdapter {
     }
 
     private SpannableString getSpanString(String str){
-        SpannableString sp = new SpannableString(str);
+        SpannableString sp = new SpannableString(str+context.getString(R.string.yuan));
         sp.setSpan(new StyleSpan(android.graphics.Typeface.BOLD),0,str.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         sp.setSpan(new AbsoluteSizeSpan(context.getResources().getDimensionPixelSize(R.dimen.text_extra)),0,str.length(),Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         return sp;
