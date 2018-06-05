@@ -114,9 +114,9 @@ public class OrderListAdapter extends BaseAdapter {
             }
         });
         holder.oder_status_tv.setText(bean.getChargTime()+"");
-        holder.oder_charge_fee_tv.setText(bean.getEneryCharge() + "");
-        holder.oder_service_fee_tv.setText(bean.getServiceCharge() + "");
-        holder.oder_total_fee_tv.setText(String.format("%.2f",bean.getServiceCharge() + bean.getEneryCharge()));
+        holder.oder_charge_fee_tv.setText(context.getString(R.string.much_money_double,bean.getEneryCharge()));
+        holder.oder_service_fee_tv.setText(context.getString(R.string.much_money_double,bean.getServiceCharge()));
+        holder.oder_total_fee_tv.setText(context.getString(R.string.much_money_double,bean.getServiceCharge() + bean.getEneryCharge()));
 
         return convertView;
     }

@@ -577,6 +577,7 @@
     <string name="no_comment_content">请填写评价内容</string>
     <string name="no_comment_score">请进行评分</string>
     <string name="much_money">%1$s元</string>
+    <string name="much_money_double">%1$.2f元</string>
 
     <string name="copy_right">注册协议</string>
 </resources>
