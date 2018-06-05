@@ -28,7 +28,8 @@ public class Urls {
      //打包一并修改地址
     public static final String IMAGE_URL="http://mcloud-sit.huawei.com/mcloud/umag/FreeProxyForText/safecampuse_charging/charger/";
 
-
+   
+    
     //登录
     public static final String LOGIN = "user/login";
     //注册
