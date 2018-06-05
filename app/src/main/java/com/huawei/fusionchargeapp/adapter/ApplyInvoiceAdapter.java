@@ -119,18 +119,24 @@ public class ApplyInvoiceAdapter extends BaseExpandableListAdapter {
 
     private void changeStateList(int group,int item,boolean state){
         stateList.get(group).set(item,state);
+        computeSelectedNumAndMoney();
     }
 
     public void setDatas(List<String> groupList, List<List<ApplyInvoiceBean>> itemLst){
         this.groupList = groupList;
         this.itemLst = itemLst;
+        if (stateList.size() == 0) {
+            resetStateList(false);
+        }
         notifyDataSetChanged();
     }
 
+    public void resetSelectedStatus() {
+        stateList = new ArrayList<>();
+    }
+
     public void setSelectedStatus(boolean isFirst){
-        if (stateList.size() == 0) {
-            resetStateList(false);
-        } else {
+        if (stateList.size() != 0) {
             refreshStateList(!isFirst);
         }
     }
@@ -235,10 +241,10 @@ public class ApplyInvoiceAdapter extends BaseExpandableListAdapter {
 
         @Override
         public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+            changeStateList(group,item,b);
             if (listener != null){
                 listener.afterClick(group,item,b);
             }
-            changeStateList(group,item,b);
         }
     }
 

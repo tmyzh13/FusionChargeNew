@@ -152,6 +152,7 @@ public class ApplyOrderListActivity extends BaseActivity<InvoiceView,InvoicePres
                         itemList.clear();
                         totalMoney = 0;
                         totalNum = 0;
+                        adpter.resetSelectedStatus();
 
                         showLoading();
                         ptrLayout.enableLoading();
@@ -231,8 +232,6 @@ public class ApplyOrderListActivity extends BaseActivity<InvoiceView,InvoicePres
             }
         }
         adpter.setSelectedStatus(page == FIRST_PAGE);
-        nowNum = adpter.getSelectedNum();
-        nowMoney = adpter.getSelectedMoney();
         adpter.setDatas(groupList,itemList);
         setExpandableListViewShowProperty();
     }
@@ -256,32 +255,8 @@ public class ApplyOrderListActivity extends BaseActivity<InvoiceView,InvoicePres
     @Override
     public void afterClick(int indexOfGroup, int indexOfItem,boolean status) {
         //当点击item时，记录个数和金额进行相应的变化
-        if (!status) {
-            if (nowNum <= 0){
-                return;
-            }
-            nowNum --;
-            nowMoney -= itemList.get(indexOfGroup).get(indexOfItem).consumeTotalMoney;
-        } else {
-            if (nowNum >= totalNum){
-                return;
-            }
-            nowNum ++;
-            nowMoney += itemList.get(indexOfGroup).get(indexOfItem).consumeTotalMoney;
-        }
-        boolean isChange = false;
-        if (nowNum == totalNum) {
-            select_all.setOnCheckedChangeListener(null);
-            select_all.setChecked(true);
-            isChange = true;
-        } else if (select_all.isChecked()){
-            select_all.setOnCheckedChangeListener(null);
-            select_all.setChecked(false);
-            isChange = true;
-        }
-        if (isChange){
-            select_all.setOnCheckedChangeListener(allSelectListener);
-        }
+        nowNum = adpter.getSelectedNum();
+        nowMoney = adpter.getSelectedMoney();
         apply_total.setText(getString(R.string.invoice_apply_total,nowNum,nowMoney));
     }
 
