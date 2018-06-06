@@ -132,8 +132,6 @@ public class MainActivity extends BaseActivity {
     public static final int W3_REGISTER_REQUEST_CODE = 0x00123;
 
 
-
-
     private String w3Account;
     private String w3Phone;
     private boolean notNeedRegister = false;
