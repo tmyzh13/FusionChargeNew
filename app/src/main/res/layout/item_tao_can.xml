@@ -19,8 +19,7 @@
             android:orientation="vertical"
             android:gravity="center"
             android:background="@mipmap/list_can_bg"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
+
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             >

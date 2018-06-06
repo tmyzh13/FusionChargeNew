@@ -333,8 +333,12 @@ public class MainActivity extends BaseActivity {
                         }
                     }
                 };
-
-                Glide.with(context).load(UserHelper.getSavedUser().photoUrl).into(target);
+                if(!Tools.isNull(UserHelper.getSavedUser().photoUrl)){
+                    if(UserHelper.getSavedUser().photoUrl.contains("http")){
+                        //
+                        Glide.with(this).load(Urls.IMAGE_URL+UserHelper.getSavedUser().photoUrl.split("charger/")[1]).into(target);
+                    }
+                }
             }
 
             if(Tools.isNull(UserHelper.getSavedUser().name)){

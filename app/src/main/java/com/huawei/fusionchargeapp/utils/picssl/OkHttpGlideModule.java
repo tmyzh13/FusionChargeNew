@@ -67,7 +67,6 @@ public class OkHttpGlideModule implements GlideModule {
     @Override
     public void registerComponents(Context context, Glide glide)
     {
-        OkHttpClient.Builder clientBuilder=new OkHttpClient.Builder();
 
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .sslSocketFactory(overlockCard().getSocketFactory())

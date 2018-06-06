@@ -44,6 +44,7 @@ import com.corelibs.views.roundedimageview.CircleImageView;
 import com.huawei.fusionchargeapp.MainActivity;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.constants.Constant;
+import com.huawei.fusionchargeapp.constants.Urls;
 import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.apis.UploadImagesApi;
 import com.huawei.fusionchargeapp.model.beans.ModifyUserInfoRequestBean;
@@ -281,7 +282,11 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
         };
         if (!TextUtils.isEmpty(userInfoBean.photoUrl)) {
             Log.e("yzh","---"+userInfoBean.photoUrl);
-            Glide.with(this).load(userInfoBean.photoUrl).into(target);
+            if(userInfoBean.photoUrl.contains("http")){
+                //
+                Glide.with(this).load(Urls.IMAGE_URL+userInfoBean.photoUrl.split("charger/")[1]).into(target);
+            }
+
         }
 
         //保存用户信息
