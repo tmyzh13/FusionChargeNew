@@ -45,7 +45,7 @@
     <string name="code_860">删除固件错误</string>
     <string name="code_861">枪正在充电，请勿重复下发指令</string>
     <string name="code_862">该桩未上线或该桩不存在，暂不能使用</string>
-    <string name="code_870">预约违约次数过多，赞不支持预约</string>
+    <string name="code_870">预约违约次数过多，暂不支持预约</string>
     <string name="code_871">指令下发成功，但桩返回被拒绝</string>
     <string name="code_872">未查询到充电桩</string>
     <string name="code_873">枪尚未检测到连接，可能枪未插好</string>
