@@ -46,6 +46,7 @@ public class InvoiceHistoryActivity extends BaseActivity<InvoiceHistoryView,Invo
     private static final int FIRST_PAGE = 1;
     private int page = FIRST_PAGE;
     public static final String ORDER_ID = "order_id";
+    public static final String ORDER_NUMBER = "order_number";
     public static final String INVOICE_STATE = "invoice_status";
     public static final String UNPAY_INVOICE = "order_no_pay_but_had_invoiced";
     public static final int DEFAULT_ID = 29;
@@ -81,6 +82,7 @@ public class InvoiceHistoryActivity extends BaseActivity<InvoiceHistoryView,Invo
                     //进入详细界面
                     Intent intent = new Intent(InvoiceHistoryActivity.this,InvoiceHistoryItemActivity.class);
                     intent.putExtra(ORDER_ID,adapter.getClickOrderId(i));
+                    intent.putExtra(ORDER_NUMBER,adapter.getClickOrderNumber(i));
                     intent.putExtra(INVOICE_STATE,adapter.getClickOrderStatus(i));
                     startActivity(intent);
                 }

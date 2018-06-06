@@ -63,7 +63,7 @@ public class InvoiceHistoryPresenter extends BasePresenter<InvoiceHistoryView> {
     }
 
 
-    public void getInvoiceHistoryItem(int id){
+    public void getInvoiceHistoryItem(String id){
         String url = Urls.INVOICE_HISTORY_ITEM + id;
         api.getInvoiceHistoryItem(UserHelper.getSavedUser().token,url)
                 .compose(new ResponseTransformer<>(this.<BaseData<InvoiceHistoryItemBean>>bindUntilEvent(ActivityEvent.DESTROY)))
