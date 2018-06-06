@@ -46,11 +46,13 @@ public class SettingPresenter extends BasePresenter<SettingView> {
                     public boolean operationError(BaseData baseData, int status, String message) {
                         if(status == 215) { //有余额
                             view.onLogoutFail(getString(R.string.has_money_cannot_logout));
+                            return true;
                         } else if(status == 222) {//有未支付订单
                             view.onLogoutFail(getString(R.string.has_no_pay_order_cannot_logout));
-                        } else {
+                            return true;
+                        } /*else {
                             view.onLogoutFail(getString(R.string.logout_fail));
-                        }
+                        }*/
                         return super.operationError(baseData, status, message);
                     }
                 });
