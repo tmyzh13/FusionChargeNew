@@ -6,20 +6,20 @@ package com.huawei.fusionchargeapp.model.beans;
 
 public class RequestLogoutBean {
 
-    private String appUserId;
+    private String phone;
 
     public String getAppUserId() {
-        return appUserId;
+        return phone;
     }
 
     public void setAppUserId(String appUserId) {
-        this.appUserId = appUserId;
+        this.phone = appUserId;
     }
 
     @Override
     public String toString() {
         return "RequestLogoutBean{" +
-                "appUserId='" + appUserId + '\'' +
+                "appUserId='" + phone + '\'' +
                 '}';
     }
 }

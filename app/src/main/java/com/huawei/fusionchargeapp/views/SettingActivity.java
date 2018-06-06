@@ -85,7 +85,7 @@ public class SettingActivity extends BaseActivity<SettingView, SettingPresenter>
             public void onClick(View view) {
                 dialog.dismiss();
                 showLoading();
-                presenter.logout(UserHelper.getSavedUser().appUserId + "");
+                presenter.logout(UserHelper.getSavedUser().phone);
             }
         });
         dialog.setNagitiveListener(new View.OnClickListener() {
