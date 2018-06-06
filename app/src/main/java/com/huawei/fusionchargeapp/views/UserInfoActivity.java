@@ -282,10 +282,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
         };
         if (!TextUtils.isEmpty(userInfoBean.photoUrl)) {
             Log.e("yzh","---"+userInfoBean.photoUrl);
-            if(userInfoBean.photoUrl.contains("http")){
-                //
-                Glide.with(this).load(Urls.IMAGE_URL+userInfoBean.photoUrl.split("charger/")[1]).into(target);
-            }
+            Glide.with(this).load(userInfoBean.photoUrl).into(target);
 
         }
 
