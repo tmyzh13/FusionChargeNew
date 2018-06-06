@@ -272,6 +272,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
             public void onLoadFailed(Exception e, Drawable errorDrawable) {
                 super.onLoadFailed(e, errorDrawable);
                 String path = PreferencesHelper.getData(Tools.USER_PHOTO_PATH);
+                Log.e("yzh","1111111111111"+e.getMessage());
                 if (!TextUtils.isEmpty(path)) {
                     Glide.with(UserInfoActivity.this).load(path)
                             .error(R.mipmap.ic_launcher_round).into(ivUserIcon);
@@ -279,6 +280,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
             }
         };
         if (!TextUtils.isEmpty(userInfoBean.photoUrl)) {
+            Log.e("yzh","---"+userInfoBean.photoUrl);
             Glide.with(this).load(userInfoBean.photoUrl).into(target);
         }
 

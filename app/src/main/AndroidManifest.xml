@@ -134,7 +134,9 @@
 
         <meta-data android:name="android.max_aspect"
             android:value="ratio_float"/>
-
+        <meta-data
+            android:name="com.huawei.fusionchargeapp.utils.picssl.OkHttpGlideModule"
+            android:value="GlideModule"/>
         <activity
             android:name=".views.WelcomeActivity"
             android:screenOrientation="portrait">
