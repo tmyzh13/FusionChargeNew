@@ -57,11 +57,12 @@ public class PictureFragment extends BaseFragment {
         String[] imgUrls = data.getPhotoUrl().split(",");
 
 
-        Log.e("zw","url : " + IMG_URL + ","+imgUrls[0]+",photoUrl="+data.getPhotoUrl()+"v");
+//        Log.e("zw","url : " + IMG_URL + ","+imgUrls[0]+",photoUrl="+data.getPhotoUrl()+"v");
 //        String u = "http://10.40.143.10:8088/charger/pileImg\\e9996613e3034f208e5a7779da37d1a2.jpg";
         for (int i = 0; i < imgUrls.length; i++) {
             String url = IMG_URL + imgUrls[i];
             url = url.replaceAll("\\\\","/");
+            Log.e("liutao",url);
             Glide.with(this).load(url).placeholder(R.mipmap.home_bg).into(iv_bg);
             if(i == 1) {
                 iv_bg2.setVisibility(View.VISIBLE);
