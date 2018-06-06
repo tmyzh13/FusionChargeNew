@@ -74,6 +74,7 @@ public class InvoiceHistoryItemActivity extends BaseActivity<InvoiceHistoryView,
     }
 
     private void initAllTextView(InvoiceHistoryItemBean bean){
+        
         consume_detail.setText(getString(R.string.invoice_and_consume_num,1,bean.count));
         invoice_create_time.setText(bean.detail.createTime);
         rec_adress.setText(bean.detail.recAddr);
