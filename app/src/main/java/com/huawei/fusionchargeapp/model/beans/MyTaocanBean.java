@@ -23,6 +23,7 @@ public class MyTaocanBean {
     public int limitType;
     public int packageType;
     public int limitCondition;
-
+    public String startTime;
+    public String endTime;
     public long businessPackageId;
 }

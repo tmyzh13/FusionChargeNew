@@ -89,11 +89,11 @@ public class MyTaoCanActivity extends BaseActivity<MyTaocanView,MyTaocanPresente
         }else{
             taocan_linear.setVisibility(View.VISIBLE);
             tv_name.setText(bean.businessName);
-            if(!Tools.isNull(bean.businessStartTime)){
-                tv_buy_time.setText(bean.businessStartTime.substring(0, Tools.DATE_LENGTH_FROM_SERVER));
+            if(!Tools.isNull(bean.startTime)){
+                tv_buy_time.setText(bean.startTime.replace("-","/"));
             }
-           if(!Tools.isNull(bean.businessEndTime)){
-                tv_end_time.setText(bean.businessEndTime.substring(0,Tools.DATE_LENGTH_FROM_SERVER));
+           if(!Tools.isNull(bean.endTime)){
+                tv_end_time.setText(bean.endTime.replace("-","/").substring(0,Tools.DATE_LENGTH_FROM_SERVER));
            }
             if(bean.packageType==0){
                 if(bean.limitType==0){

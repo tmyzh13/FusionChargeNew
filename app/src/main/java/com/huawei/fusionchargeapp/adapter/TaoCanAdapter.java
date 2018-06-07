@@ -39,7 +39,9 @@ public class TaoCanAdapter extends QuickAdapter<TaocanBean> {
         TextView tv_limit_1=helper.getView(R.id.tv_limit_1);
         TextView tv_limit_2=helper.getView(R.id.tv_limit_2);
         TextView tv_limit_3=helper.getView(R.id.tv_limit_3);
-        tv_time.setText(context.getString(R.string.my_tao_can_time)+item.startTime.substring(0,Tools.BIRTHDAY_LENGTH)+"-"+item.endTime.substring(0,Tools.BIRTHDAY_LENGTH));
+        if(!Tools.isNull(item.startTime)&&!Tools.isNull(item.endTime)){
+            tv_time.setText(context.getString(R.string.my_tao_can_time)+item.startTime.substring(0,Tools.BIRTHDAY_LENGTH).replace("-",".")+"-"+item.endTime.substring(0,Tools.BIRTHDAY_LENGTH).replace("-","."));
+        }
         if(item.packageType==0){
             tv_limit_1.setVisibility(View.VISIBLE);
             if(item.limitType==0){
