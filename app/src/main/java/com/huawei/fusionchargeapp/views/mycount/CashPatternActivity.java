@@ -106,7 +106,7 @@ public class CashPatternActivity extends BaseActivity<CashPatternView,CashPatter
     private int payType=1;
     @OnClick(R.id.submit)
     void submit(){
-        if(Tools.isNull(cashNum.getText().toString())){
+        if(Tools.isNull(cashNum.getText().toString()) || Double.parseDouble(cashNum.getText().toString())< 0.01){
             ToastMgr.show(getString(R.string.cash_input_with_pattern, isRechargeType ? recharge : recover));
             return;
         }
