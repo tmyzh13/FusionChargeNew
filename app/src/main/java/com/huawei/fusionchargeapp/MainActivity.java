@@ -388,7 +388,7 @@ public class MainActivity extends BaseActivity {
         } else {
             ft.show(mapFragment);
         }
-        ft.commit();
+        ft.commitAllowingStateLoss();
 
     }
 
@@ -418,7 +418,7 @@ public class MainActivity extends BaseActivity {
         } else {
             ft.show(homeListFragment);
         }
-        ft.commit();
+        ft.commitAllowingStateLoss();
     }
 
     @OnClick(R.id.tv_confirm)

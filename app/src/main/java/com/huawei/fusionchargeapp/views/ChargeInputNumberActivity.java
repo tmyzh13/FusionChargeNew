@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.corelibs.api.ApiFactory;
 import com.corelibs.api.ResponseTransformer;
@@ -68,7 +69,10 @@ public class ChargeInputNumberActivity extends BaseActivity<ChargeInputNumberVie
     @OnClick(R.id.sure)
     public void onViewClicked() {
         String str = etInputNumber.getText().toString();
-
+        if(Tools.isNull(str)){
+            ToastMgr.show(getString(R.string.pls_input_device_code));
+            return;
+        }
         showLoading();
         presenter.getData(str);
 

@@ -580,4 +580,5 @@
     <string name="much_money_double">%1$.2f元</string>
 
     <string name="copy_right">注册协议</string>
+    <string name="pls_input_device_code">请输入二维码编号</string>
 </resources>

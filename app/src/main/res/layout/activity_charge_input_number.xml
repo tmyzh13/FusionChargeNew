@@ -30,7 +30,8 @@
             android:maxLines="1"
             android:background="@drawable/shape_charge_input_number"
             android:hint="@string/please_input_erweima_number"
-            android:digits="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"/>
+            android:maxLength="255"
+            />
 
         <TextView
             android:id="@+id/sure"
