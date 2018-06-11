@@ -63,15 +63,20 @@ public class PictureFragment extends BaseFragment {
             String url = IMG_URL + imgUrls[i];
             url = url.replaceAll("\\\\","/");
             Log.e("liutao",url);
-            Glide.with(this).load(url).placeholder(R.mipmap.home_bg).into(iv_bg);
+            if(i==0){
+                Glide.with(this).load(url).placeholder(R.mipmap.home_bg).into(iv_bg);
+            }
             if(i == 1) {
                 iv_bg2.setVisibility(View.VISIBLE);
+                Glide.with(this).load(url).placeholder(R.mipmap.home_bg).into(iv_bg2);
             }
             if(i == 2) {
                 iv_bg3.setVisibility(View.VISIBLE);
+                Glide.with(this).load(url).placeholder(R.mipmap.home_bg).into(iv_bg3);
             }
-            if(i == 4) {
+            if(i == 3) {
                 iv_bg4.setVisibility(View.VISIBLE);
+                Glide.with(this).load(url).placeholder(R.mipmap.home_bg).into(iv_bg4);
             }
         }
 

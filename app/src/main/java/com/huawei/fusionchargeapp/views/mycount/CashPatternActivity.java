@@ -116,7 +116,7 @@ public class CashPatternActivity extends BaseActivity<CashPatternView,CashPatter
         }else if(adapter.getCurrentSelect()==1){
             payType=2;
         }
-        if(true){
+        if(isRechargeType){
             presenter.payBalance(Double.parseDouble(cashNum.getText().toString().trim()),payType);
         }
     }
