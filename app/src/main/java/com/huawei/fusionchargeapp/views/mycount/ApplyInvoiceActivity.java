@@ -141,7 +141,7 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
         PayStyleBean bean1=new PayStyleBean();
         bean1.imgRes=R.mipmap.list_ic_weixin;
         bean1.name=getString(R.string.pay_wechat);
-        bean1.hint=getString(R.string.apply_invoice_wechat_postage);
+        bean1.hint=getString(R.string.apply_invoice_ali_postage);
         bean1.type="2";
         PayStyleBean bean2=new PayStyleBean();
         bean2.imgRes=R.mipmap.account_02;
