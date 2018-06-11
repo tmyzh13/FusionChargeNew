@@ -575,6 +575,7 @@ public class UserInfoActivity extends BaseActivity<UserInfoView, UserInfoPresent
                 .setNegativeButton(R.string.action_confirm, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        start_time.clearFocus();
                         tvBirthday.setText(getDateFromYMD(start_time.getYear(),start_time.getMonth(),start_time.getDayOfMonth()));
                     }
                 }).create();

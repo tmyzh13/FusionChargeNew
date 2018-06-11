@@ -207,6 +207,8 @@ public class MyAppointDetailActivity extends BaseActivity<AllAppointmentView,All
                 .setPositiveButton(getString(R.string.action_confirm), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        start_time.clearFocus();
+                        end_time.clearFocus();
                         page = PAGE_FIRST_NUM;
                         presenter.getAppointmentInfoWithTimeCondition(page,PAGE_LIMIT_NUM,startTime,endTime);
                     }
