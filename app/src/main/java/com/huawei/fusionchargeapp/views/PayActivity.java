@@ -405,10 +405,22 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
             finish();
         }else if(payResultBean.payType==1){
             //支付宝支付
-            payForAli();
+            if(payResultBean.isNeedPay==0){
+                startActivity(PayCompleteActivity.getLauncher(context,orderNum));
+                finish();
+            }else{
+                payForAli();
+            }
+
         }else if(payResultBean.payType==2){
             //微信支付
-            PayWithWechat payWithWechat=new PayWithWechat(context,payResultBean);
+            if(payResultBean.isNeedPay==0){
+                startActivity(PayCompleteActivity.getLauncher(context,orderNum));
+                finish();
+            }else{
+                PayWithWechat payWithWechat=new PayWithWechat(context,payResultBean);
+            }
+
         }
 
     }

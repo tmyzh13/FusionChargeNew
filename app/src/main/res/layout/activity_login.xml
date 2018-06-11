@@ -292,7 +292,7 @@
                     />
                 <TextView
                     android:visibility="gone"
-                    android:id="@+id/tv_appointment"
+                    android:id="@+id/tv_appointment_"
                    style="@style/text_normal"
                     android:textColor="@color/app_blue"
                     android:text="@string/regist_appointment_1"/>

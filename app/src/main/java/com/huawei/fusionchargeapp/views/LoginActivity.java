@@ -87,7 +87,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     ImageView pwd_ic_del;
     @Bind(R.id.pwd_ic_see)
     ImageView pwd_ic_see;
-    @Bind(R.id.tv_appointment)
+    @Bind(R.id.tv_appointment_)
     TextView tv_appointment;
     @Bind(R.id.nav)
     NavBar navBar;
@@ -530,7 +530,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
         finish();
     }
 
-    @OnClick(R.id.tv_appointment)
+    @OnClick(R.id.tv_appointment_)
     public void goAppointment(){
         startActivity(WebActivity.getLauncher(context,0));
     }
