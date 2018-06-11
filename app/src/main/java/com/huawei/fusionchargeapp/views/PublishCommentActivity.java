@@ -142,6 +142,10 @@ public class PublishCommentActivity extends BaseActivity<CommentView,CommentPres
             showToast(R.string.no_comment_score);
             return;
         }
+        if (sort == 0) {
+            showToast(R.string.no_comment_sort);
+            return;
+        }
         bean.setEvaluateScore(favor.getRating());
         bean.setEvaluateContent(edit.getText().toString());
         bean.setEvaluateTypeId(getSortType());
