@@ -83,7 +83,7 @@ public class InvoiceHistoryItemActivity extends BaseActivity<InvoiceHistoryView,
         invoice_head.setText(bean.detail.title);
         tax_num.setText(bean.detail.code);
         invoice_content.setText(bean.detail.content);
-        money.setText(bean.detail.amount+"");
+        money.setText(getString(R.string.much_money_double,bean.detail.amount));
         invoice_time.setText(bean.detail.createTime);
         if (Tools.isNull(bean.startEndTime)) {
             consume_time.setText(bean.detail.earlyTime+" ~ "+bean.detail.endTime);
