@@ -34,6 +34,7 @@ import com.corelibs.subscriber.ResponseSubscriber;
 import com.corelibs.subscriber.RxBusSubscriber;
 import com.corelibs.utils.IMEUtil;
 import com.corelibs.utils.PreferencesHelper;
+import com.corelibs.utils.ToastMgr;
 import com.corelibs.utils.rxbus.RxBus;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -423,6 +424,12 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.tv_confirm)
     public void choiceCondition() {
+        if(!Tools.isNull(et_distance.getText().toString())){
+            if((et_distance.getText().toString().charAt(0)+"").equals("0")){
+                ToastMgr.show(getString(R.string.home_distance_hint));
+                return;
+            }
+        }
         if (TextUtils.isEmpty(et_distance.getText().toString().trim())) {
             ChoiceManager.getInstance().setDistance(Constant.DEFAULT_DISTANCE);
         } else {
