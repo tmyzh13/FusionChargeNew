@@ -47,6 +47,15 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     protected void init(Bundle savedInstanceState) {
         Intent fromIntent = getIntent();
+        if (!isTaskRoot()) {
+            if (fromIntent != null) {
+                String action = fromIntent.getAction();
+                if (fromIntent.hasCategory(Intent.CATEGORY_LAUNCHER) && Intent.ACTION_MAIN.equals(action)) {
+                    finish();
+                    return;
+                }
+            }
+        }
         if(fromIntent != null) {
             fromAppStr = fromIntent.getStringExtra(FROM_APP);
             if(!TextUtils.isEmpty(fromAppStr)){
