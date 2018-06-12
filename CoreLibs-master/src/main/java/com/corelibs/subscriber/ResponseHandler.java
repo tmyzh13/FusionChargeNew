@@ -1,6 +1,8 @@
 package com.corelibs.subscriber;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 
 import com.corelibs.R;
@@ -274,7 +276,9 @@ public class ResponseHandler<T> {
     public void handleException(Throwable e) {
         Context context = AppManager.getAppManager().getAppContext();
         if (view != null) {
-            if (e instanceof ConnectException) {
+            if (!isNetworkConnected(context)) {
+                view.showToastMessage(context.getString(R.string.network_error_phone));
+            }else if (e instanceof ConnectException) {
                 view.showToastMessage(context.getString(R.string.network_error));
             } else if (e instanceof HttpException) {
                 view.showToastMessage(context.getString(R.string.network_server_error));
@@ -284,6 +288,17 @@ public class ResponseHandler<T> {
                 view.showToastMessage(view.getViewContext().getString(R.string.network_other));
             }
         }
+    }
+
+    private  boolean isNetworkConnected(Context context) {
+        if (context != null) {
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
+            if (mNetworkInfo != null) {
+                return mNetworkInfo.isAvailable();
+            }
+        }
+        return false;
     }
 
     public void handleOperationError(String message) {
