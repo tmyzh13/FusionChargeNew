@@ -1,10 +1,13 @@
 package com.huawei.fusionchargeapp.model.beans;
 
+import android.support.annotation.NonNull;
+import android.util.Log;
+
 /**
  * Created by issuser on 2018/4/23.
  */
 
-public class MapDataBean {
+public class MapDataBean implements Comparable<MapDataBean> {
 
     public String address;
     public long id;
@@ -38,5 +41,14 @@ public class MapDataBean {
                 ", freeNum=" + freeNum +
                 ", busyNum=" + busyNum +
                 '}';
+    }
+
+    @Override
+    public int compareTo(@NonNull MapDataBean o) {
+       if(this.distance>o.distance){
+           return 1;
+       }else{
+           return  -1;
+       }
     }
 }

@@ -386,12 +386,12 @@ public class ParkActivity extends BaseActivity<ParkView, ParkPresenter> implemen
     public void goGuaild() {
         if (currentMapDataBean != null) {
             boolean choiceNotAppointment = false;
-            if (UserHelper.getSavedUser() == null || Tools.isNull(UserHelper.getSavedUser().token)) {
-                startActivity(LoginActivity.getLauncher(context));
-            } else {
+//            if (UserHelper.getSavedUser() == null || Tools.isNull(UserHelper.getSavedUser().token)) {
+//                startActivity(LoginActivity.getLauncher(context));
+//            } else {
                 startActivity(GuildActivity.getLauncher(context, currentMapDataBean.latitude, currentMapDataBean.longitude, null, choiceNotAppointment, currentMapDataBean.id, currentMapDataBean.type));
                 finish();
-            }
+//            }
         }
     }
 

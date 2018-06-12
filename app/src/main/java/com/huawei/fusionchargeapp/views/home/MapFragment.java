@@ -822,11 +822,11 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
             } else {
                 choiceNotAppointment = false;
             }
-            if (UserHelper.getSavedUser() == null || Tools.isNull(UserHelper.getSavedUser().token)) {
-                startActivity(LoginActivity.getLauncher(getContext()));
-            } else {
+//            if (UserHelper.getSavedUser() == null || Tools.isNull(UserHelper.getSavedUser().token)) {
+//                startActivity(LoginActivity.getLauncher(getContext()));
+//            } else {
                 startActivity(GuildActivity.getLauncher(getContext(), currentMapDataBean.latitude, currentMapDataBean.longitude, null, choiceNotAppointment, currentMapDataBean.id, currentMapDataBean.type));
-            }
+//            }
         }
     }
 

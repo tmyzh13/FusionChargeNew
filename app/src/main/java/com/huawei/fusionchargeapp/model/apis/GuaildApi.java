@@ -22,9 +22,9 @@ public interface GuaildApi {
 
     //充电站详情_STATION
     @POST(Urls.CHARGE_PILE_DETAIL)
-    Observable<BaseData<ChargeStationDetailBean>> getChargeStationDetail(@Header("AccessToken") String token, @Body RequestChargePileDetailBean bean);
+    Observable<BaseData<ChargeStationDetailBean>> getChargeStationDetail( @Body RequestChargePileDetailBean bean);
 
     //充电站详情_PILE
     @POST(Urls.CHARGE_PILE_DETAIL)
-    Observable<BaseData<PileList>> getChargePileDetail(@Header("AccessToken") String token, @Body RequestChargePileDetailBean bean);
+    Observable<BaseData<PileList>> getChargePileDetail( @Body RequestChargePileDetailBean bean);
 }

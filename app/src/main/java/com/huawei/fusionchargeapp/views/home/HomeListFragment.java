@@ -30,6 +30,7 @@ import com.huawei.fusionchargeapp.views.LoginActivity;
 import com.huawei.fusionchargeapp.views.interfaces.HomeListView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.Bind;
@@ -155,6 +156,7 @@ public class HomeListFragment extends BaseFragment<HomeListView, HomeListPresent
                         temp.add(list.get(i));
                     }
                 }
+                Collections.sort(temp);
                 list_datas = temp;
                 if(temp.size()==0){
                     lv_piles.setVisibility(View.GONE);
@@ -164,6 +166,7 @@ public class HomeListFragment extends BaseFragment<HomeListView, HomeListPresent
                 }
 
             } else {
+                Collections.sort(list);
                 list_datas = list;
                 adapter.replaceAll(list);
             }

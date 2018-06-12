@@ -51,7 +51,7 @@ public class GuaildPresenter extends BasePresenter<GuaildView> {
 
 
     public void getPileDetail(RequestChargePileDetailBean bean){
-        api.getChargePileDetail(UserHelper.getSavedUser().token,bean)
+        api.getChargePileDetail(bean)
                 .compose(new ResponseTransformer<>(this.<BaseData<PileList>>bindUntilEvent(ActivityEvent.DESTROY)))
                 .subscribe(new ResponseSubscriber<BaseData<PileList>>(view) {
                     @Override
@@ -66,7 +66,7 @@ public class GuaildPresenter extends BasePresenter<GuaildView> {
     }
 
     public void getStationDetail(RequestChargePileDetailBean bean){
-        api.getChargeStationDetail(UserHelper.getSavedUser().token,bean)
+        api.getChargeStationDetail(bean)
                 .compose(new ResponseTransformer<>(this.<BaseData<ChargeStationDetailBean>>bindUntilEvent(ActivityEvent.DESTROY)))
                 .subscribe(new ResponseSubscriber<BaseData<ChargeStationDetailBean>>(view){
 

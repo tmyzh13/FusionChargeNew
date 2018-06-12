@@ -41,11 +41,11 @@ public class HomeListAdpter extends QuickAdapter<MapDataBean> {
         ll_guild.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (UserHelper.getSavedUser() == null || Tools.isNull(UserHelper.getSavedUser().token)) {
-                    context.startActivity(LoginActivity.getLauncher(context));
-                } else {
+//                if (UserHelper.getSavedUser() == null || Tools.isNull(UserHelper.getSavedUser().token)) {
+//                    context.startActivity(LoginActivity.getLauncher(context));
+//                } else {
                     context.startActivity(GuildActivity.getLauncher(context, item.latitude, item.longitude, null, false,item.id,item.type));
-                }
+//                }
             }
         });
     }

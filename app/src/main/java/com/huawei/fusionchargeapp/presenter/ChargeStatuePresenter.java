@@ -86,7 +86,7 @@ public class ChargeStatuePresenter extends BasePresenter<ChargerStatueView> {
         bean.orderRecordNum=orderRecordNum;
         api.stopCharge(UserHelper.getSavedUser().token,bean)
                 .compose(new ResponseTransformer<>(this.<BaseData<String>>bindToLifeCycle()))
-                .subscribe(new ResponseSubscriber<BaseData<String>>() {
+                .subscribe(new ResponseSubscriber<BaseData<String>>(view) {
                     @Override
                     public void success(BaseData<String> baseData) {
                                 view.endChargeSuccess();

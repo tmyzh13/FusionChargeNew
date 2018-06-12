@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -360,6 +361,7 @@ public class ChagerStatueActivity extends BaseActivity<ChargerStatueView, Charge
         }else if(bean.isOff==1){
             //离线状态
             //结束按钮不可用
+            Log.e("yzh","1111111111111");
             disableEndButton();
             if(!commonOfflineDialog.isShowing()){
                 commonOfflineDialog.show();
