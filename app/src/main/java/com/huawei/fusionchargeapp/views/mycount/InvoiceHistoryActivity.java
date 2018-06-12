@@ -2,17 +2,21 @@ package com.huawei.fusionchargeapp.views.mycount;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.corelibs.base.BaseActivity;
 import com.corelibs.base.BasePresenter;
+import com.corelibs.subscriber.RxBusSubscriber;
+import com.corelibs.utils.rxbus.RxBus;
 import com.corelibs.views.cube.ptr.PtrFrameLayout;
 import com.corelibs.views.ptr.layout.PtrAutoLoadMoreLayout;
 import com.corelibs.views.ptr.loadmore.widget.AutoLoadMoreListView;
 import com.huawei.fusionchargeapp.R;
 import com.huawei.fusionchargeapp.adapter.InvoiceHistoryAdapter;
+import com.huawei.fusionchargeapp.constants.Constant;
 import com.huawei.fusionchargeapp.model.UserHelper;
 import com.huawei.fusionchargeapp.model.beans.InvoiceConsumeBean;
 import com.huawei.fusionchargeapp.model.beans.InvoiceHistoryBean;
@@ -77,7 +81,7 @@ public class InvoiceHistoryActivity extends BaseActivity<InvoiceHistoryView,Invo
                     intent.putExtra(ORDER_ID,adapter.getClickOrderNumber(i));
                     intent.putExtra(UNPAY_INVOICE,true);
                     startActivity(intent);
-                    finish();
+//                    finish();
                 } else {
                     //进入详细界面
                     Intent intent = new Intent(InvoiceHistoryActivity.this,InvoiceHistoryItemActivity.class);
@@ -112,6 +116,20 @@ public class InvoiceHistoryActivity extends BaseActivity<InvoiceHistoryView,Invo
         }
         showLoading();
         presenter.getInvoiceConsume(page);
+        RxBus.getDefault().toObservable(Boolean.class, Constant.REFRESH_APPLY_ORDER_LIST_ACTIVITY)
+                .compose(this.<Boolean>bindToLifecycle())
+                .subscribe(new RxBusSubscriber<Boolean>() {
+
+                    @Override
+                    public void receive(Boolean data) {
+                        if (data) {
+                            Log.e("liutao","Rxbus InvoiceHistoryActivity");
+                            page = FIRST_PAGE;
+                            ptrLayout.enableLoading();
+                            presenter.getInvoiceConsume(page);
+                        }
+                    }
+                });
     }
 
     @Override

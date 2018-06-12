@@ -141,22 +141,25 @@ public class ApplyOrderListActivity extends BaseActivity<InvoiceView,InvoicePres
         }
         showLoading();
         presenter.getInvoiceConsume(page);
-        RxBus.getDefault().toObservable(Object.class, Constant.REFRESH_APPLY_ORDER_LIST_ACTIVITY)
-                .compose(this.<Object>bindToLifecycle())
-                .subscribe(new RxBusSubscriber<Object>() {
+        RxBus.getDefault().toObservable(Boolean.class, Constant.REFRESH_APPLY_ORDER_LIST_ACTIVITY)
+                .compose(this.<Boolean>bindToLifecycle())
+                .subscribe(new RxBusSubscriber<Boolean>() {
 
                     @Override
-                    public void receive(Object data) {
-                        page = FIRST_PAGE;
-                        groupList.clear();
-                        itemList.clear();
-                        totalMoney = 0;
-                        totalNum = 0;
-                        adpter.resetSelectedStatus();
+                    public void receive(Boolean data) {
+                        if (!data) {
+                            Log.e("liutao","Rxbus ApplyOrderListActivity");
+                            page = FIRST_PAGE;
+                            groupList.clear();
+                            itemList.clear();
+                            totalMoney = 0;
+                            totalNum = 0;
+                            adpter.resetSelectedStatus();
 
-                        showLoading();
-                        ptrLayout.enableLoading();
-                        presenter.getInvoiceConsume(page);
+                            showLoading();
+                            ptrLayout.enableLoading();
+                            presenter.getInvoiceConsume(page);
+                        }
                     }
                 });
 

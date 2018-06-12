@@ -349,7 +349,7 @@ public class ApplyInvoiceActivity extends BaseActivity <ApplyInvoiceView,ApplyIn
 //        } else {
 //            //根据支付类型调用相应接口
 //        }
-        RxBus.getDefault().send(new Object(), Constant.REFRESH_APPLY_ORDER_LIST_ACTIVITY);
+        RxBus.getDefault().send(new Boolean(is_order_no_pay_but_had_invoiced), Constant.REFRESH_APPLY_ORDER_LIST_ACTIVITY);
         if(bean.payType==1){
             //支付宝
             payForAli(bean.orderInfo);
