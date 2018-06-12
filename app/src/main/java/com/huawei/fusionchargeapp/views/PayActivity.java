@@ -185,9 +185,13 @@ public class PayActivity extends BaseActivity<PayView,PayPresenter> implements P
             bean.imgRes=R.drawable.list_01;
             bean.name=tcBean.businessName;
             if (tcBean.limitType == 0) {
-                bean.hint = getString(R.string.remain_charge_num,tcBean.limitCondition+"");
+                bean.hint = getString(R.string.remain_charge_num,tcBean.businessRemain+"");
             } else {
-                bean.hint = getString(R.string.invalid_time,tcBean.businessStartTime.substring(0, Tools.DATE_LENGTH_FROM_SERVER)+"~"+tcBean.businessEndTime.substring(0, Tools.DATE_LENGTH_FROM_SERVER));
+                if (!Tools.isNull(tcBean.endTime)) {
+                    bean.hint = getString(R.string.invalid_time,tcBean.startTime.substring(0, Tools.BIRTHDAY_LENGTH)+"-"+tcBean.endTime.substring(0, Tools.BIRTHDAY_LENGTH));
+                } else {
+                    bean.hint = getString(R.string.invalid_time_perpetual);
+                }
             }
             List<PayStyleBean> temp = new ArrayList<>();
             temp.add(bean);

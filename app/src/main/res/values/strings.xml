@@ -541,6 +541,7 @@
     <string name="charger_consume">充电消费</string>
 
     <string name="invalid_time">有效期：%1$s</string>
+    <string name="invalid_time_perpetual">永久有效</string>
     <string name="remain_charge_num">剩余电量：%1$s度</string>
     <string name="remain_pay">余额支付</string>
     <string name="no_tao_can">没有套餐</string>
