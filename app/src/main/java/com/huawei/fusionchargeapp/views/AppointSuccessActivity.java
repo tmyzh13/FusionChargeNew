@@ -1,17 +1,27 @@
 package com.huawei.fusionchargeapp.views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.corelibs.base.BaseActivity;
 import com.corelibs.base.BasePresenter;
 import com.corelibs.common.AppManager;
+import com.corelibs.utils.PreferencesHelper;
+import com.corelibs.utils.rxbus.RxBus;
 import com.huawei.fusionchargeapp.MainActivity;
 import com.huawei.fusionchargeapp.R;
+import com.huawei.fusionchargeapp.constants.Constant;
 import com.huawei.fusionchargeapp.model.beans.HomeAppointmentBean;
+import com.huawei.fusionchargeapp.model.beans.HomeRefreshBean;
+import com.huawei.fusionchargeapp.utils.Tools;
 import com.huawei.fusionchargeapp.weights.NavBar;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -37,8 +47,8 @@ public class AppointSuccessActivity extends BaseActivity {
     private String runCode;
     private String address;
     private String reserveId;
-
-
+    private Timer timerAppointment;
+    private long appointmentTime;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_appoint_success;
@@ -70,6 +80,34 @@ public class AppointSuccessActivity extends BaseActivity {
 
         latitude = getIntent().getDoubleExtra("latitude",0);
         longitude = getIntent().getDoubleExtra("longitude",0);
+
+        timerAppointment = new Timer();
+        timerAppointment.schedule(new TimerTask() {
+            @Override
+            public void run() {
+
+                    if (Tools.isNull(PreferencesHelper.getData(Constant.TIME_APPOINTMENT))) {
+                        appointmentTime = 0;
+                    } else {
+                        appointmentTime = Long.parseLong(PreferencesHelper.getData(Constant.TIME_APPOINTMENT));
+                    }
+                    appointmentTime -= 1000;
+                    if (appointmentTime <= 0) {
+                        appointmentTime = 0;
+                    }
+//                        PreferencesHelper.saveData(Constant.TIME_APPOINTMENT,appointmentTime + "");
+                    PreferencesHelper.saveData(Constant.TIME_APPOINTMENT, appointmentTime + "");
+                    if (appointmentTime <= 0) {
+                        //预约超时
+                        timerAppointment.cancel();
+                        timerAppointment = null;
+                        HomeRefreshBean bean = new HomeRefreshBean();
+                        bean.type = 1;
+                        RxBus.getDefault().send(bean, Constant.HOME_STATUE_REFRESH);
+//                        cancelTimerAppointment();
+                    }
+            }
+        }, 1000, 1000);
     }
 
 
@@ -113,5 +151,15 @@ public class AppointSuccessActivity extends BaseActivity {
     @Override
     public void goLogin() {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (timerAppointment != null) {
+            timerAppointment.cancel();
+            timerAppointment = null;
+        }
     }
 }
