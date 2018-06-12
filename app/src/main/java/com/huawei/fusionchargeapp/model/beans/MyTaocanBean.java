@@ -18,7 +18,7 @@ public class MyTaocanBean {
 //        "msg": "Operation Successed."
     public String businessEndTime;
     public String businessName;
-    public int businessRemain;
+    public double businessRemain;
     public String businessStartTime;
     public int limitType;
     public int packageType;
