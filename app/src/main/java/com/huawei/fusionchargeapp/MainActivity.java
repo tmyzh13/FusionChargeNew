@@ -177,7 +177,7 @@ public class MainActivity extends BaseActivity {
         homeListFragment = new HomeListFragment();
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.content, mapFragment).commit();
+        ft.add(R.id.content, mapFragment).commitAllowingStateLoss();
 
         cb_charge_alternating.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

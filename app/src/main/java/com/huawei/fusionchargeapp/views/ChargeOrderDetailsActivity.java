@@ -148,7 +148,7 @@ public class ChargeOrderDetailsActivity extends BaseActivity<ChargeOrderDetailVi
     }
 
     private void initView() {
-        chargeStationName.setText(scanChargeInfo.getStationName());
+        chargeStationName.setText(scanChargeInfo.getChargingPileName());
         chargeZhuangNumber.setText(scanChargeInfo.getRunCode());
         String chargeCostStr = "<font color='#FF0000'>" + scanChargeInfo.getFee() + "</font>" + getString(R.string.yuan_du);
         chargeCost.setText(Html.fromHtml(chargeCostStr));
