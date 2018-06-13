@@ -214,20 +214,24 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                     if (!AppManager.getAppManager().currentActivity().getClass().equals(MainActivity.class)) {
                         return;
                     }
-                    if (Tools.isNull(PreferencesHelper.getData(Constant.TIME_APPOINTMENT))) {
-                        appointmentTime = 0;
-                    } else {
-                        appointmentTime = Long.parseLong(PreferencesHelper.getData(Constant.TIME_APPOINTMENT));
+
+                    if(appointmentTime==0){
+                        if (Tools.isNull(PreferencesHelper.getData(Constant.TIME_APPOINTMENT))) {
+                            appointmentTime = 0;
+                        } else {
+                            appointmentTime = Long.parseLong(PreferencesHelper.getData(Constant.TIME_APPOINTMENT));
+                        }
                     }
                     appointmentTime -= 1000;
                     if (appointmentTime <= 0) {
                         appointmentTime = 0;
                     }
-                    PreferencesHelper.saveData(Constant.TIME_APPOINTMENT, appointmentTime + "");
+                    //优化计时器操作 6-13
+//                    PreferencesHelper.saveData(Constant.TIME_APPOINTMENT, appointmentTime + "");
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            tv_appointment_time.setText(Tools.formatMinute(Long.parseLong(PreferencesHelper.getData(Constant.TIME_APPOINTMENT))));
+                            tv_appointment_time.setText(Tools.formatMinute(appointmentTime));
                         }
                     });
                     if (appointmentTime <= 0) {
@@ -273,6 +277,8 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
             }
         }, 1000, 1000);
     }
+
+
 
     //初始化通知接收
     private void initRxBus() {
@@ -505,6 +511,8 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
     public void onPause() {
         super.onPause();
         map.onPause();
+        //优化计时器操作 6-23
+        PreferencesHelper.saveData(Constant.TIME_APPOINTMENT, appointmentTime + "");
 //        if(mlocationClient!=null){
 //            mlocationClient.stopLocation();
 //        }
@@ -748,7 +756,9 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
             } else {
                 ll_appontment.setVisibility(View.VISIBLE);
                 long surplusTime = bean.reserveEndTime - bean.nowTime;
-                PreferencesHelper.saveData(Constant.TIME_APPOINTMENT, surplusTime + "");
+                //优化计时器操作 6-13
+                appointmentTime=surplusTime;
+//                PreferencesHelper.saveData(Constant.TIME_APPOINTMENT, surplusTime + "");
                 PreferencesHelper.saveData(Constant.APPOINTMENT_DURING, bean.reserveDuration);
                 tv_appointment_time.setText(Tools.formatMinute(surplusTime));
             }
