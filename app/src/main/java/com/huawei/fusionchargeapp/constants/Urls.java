@@ -26,7 +26,7 @@ public class Urls {
 //    public static final String ROOT="https://fusioncharge.rnd.huawei.com:8088/charger/api/v1/";
 //    public static final String ROOT="http://mcloud-sit.huawei.com/mcloud/umag/FreeProxyForText/safecampuse_charging/charger/api/v1/";
      //打包一并修改地址
-    public static final String IMAGE_URL="http://114.115.169.46:8088/charger/img/";
+    public static final String IMAGE_URL="http://114.115.144.154:8088/charger/img/";
 
    
     

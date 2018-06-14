@@ -289,7 +289,6 @@ public class ChagerStatueActivity extends BaseActivity<ChargerStatueView, Charge
                     isFirst=false;
                 }
 
-
 //            TimeServiceManager.getInstance().getTimerService().timerHour();
 //            if (Tools.isNull(bean.soc)) {
 //                progressView.setProgress(0);
@@ -298,6 +297,7 @@ public class ChagerStatueActivity extends BaseActivity<ChargerStatueView, Charge
 //                long l = (long) Math.floor(d);
 //                progressView.setProgress(l);
 //            }
+
                 progressView.startAnimation(0, 100, 1000);
                 if (bean.isStop == 1) {
                     if(checkEndStatueLoadingView.isShowing()){
