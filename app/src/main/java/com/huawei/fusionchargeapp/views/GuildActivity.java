@@ -430,12 +430,16 @@ public class GuildActivity extends BaseActivity<GuaildView, GuaildPresenter> imp
     protected void onResume() {
         super.onResume();
         map.onResume();
+        //6-14 地图功耗修改
+        RxBus.getDefault().send(true,Constant.START_OR_STOP_LOCATION);
     }
 
     @Override
     public void onPause() {
         super.onPause();
         map.onPause();
+        //6-14 地图功耗修改
+        RxBus.getDefault().send(false,Constant.START_OR_STOP_LOCATION);
     }
 
     @Override

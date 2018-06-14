@@ -84,6 +84,7 @@ import java.util.TimerTask;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import retrofit2.http.Body;
 
 /**
  * Created by issuser on 2018/4/19.
@@ -176,8 +177,8 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
         });
 
         timerAppointment = new Timer();
-        Intent intent = new Intent(getContext(), TimerService.class);
-        getContext().bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+//        Intent intent = new Intent(getContext(), TimerService.class);
+//        getContext().bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
 
         location();
         initMapData();
@@ -352,7 +353,14 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
                         rl_not_pay.setVisibility(View.GONE);
                     }
                 });
-
+        RxBus.getDefault().toObservable(Boolean.class,Constant.START_OR_STOP_LOCATION)
+                .compose(this.<Boolean>bindToLifecycle())
+                .subscribe(new RxBusSubscriber<Boolean>() {
+                    @Override
+                    public void receive(Boolean data) {
+                        controlLocation(data);
+                    }
+                });
     }
 
     //获取未支付 充电  预约情况
@@ -502,20 +510,38 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
             presenter.getUserScore();
         }
 
+        //优化地图功耗 6-14
+       controlLocation(true);
+    }
+
+    private void controlLocation(boolean b){
         if(mlocationClient!=null){
-            mlocationClient.startLocation();
+            if(b){
+                //设置为高精度定位模式
+                mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+                //设置定位参数
+                mlocationClient.setLocationOption(mLocationOption);
+                mlocationClient.startLocation();
+
+            }else{
+                //设置定位模式为AMapLocationMode.Battery_Saving，低功耗模式。
+                mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Battery_Saving);
+                mlocationClient.setLocationOption(mLocationOption);
+                mlocationClient.stopLocation();
+
+            }
         }
+
     }
 
     @Override
     public void onPause() {
         super.onPause();
         map.onPause();
-        //优化计时器操作 6-23
+        //优化计时器操作 6-13
         PreferencesHelper.saveData(Constant.TIME_APPOINTMENT, appointmentTime + "");
-//        if(mlocationClient!=null){
-//            mlocationClient.stopLocation();
-//        }
+        //优化地图功耗 6-14
+       controlLocation(false);
     }
 
     @Override
@@ -565,6 +591,8 @@ public class MapFragment extends BaseFragment<MapHomeView, MapPresenter> impleme
         if (mListener != null && aMapLocation != null) {
             if (aMapLocation != null
                     && aMapLocation.getErrorCode() == 0) {
+
+                Log.e("yzh","-----------");
                 mListener.onLocationChanged(aMapLocation);// 显示系统小蓝点
                 MyLocationBean bean = new MyLocationBean();
                 bean.latitude = aMapLocation.getLatitude();

@@ -215,12 +215,16 @@ public class ParkActivity extends BaseActivity<ParkView, ParkPresenter> implemen
     protected void onResume() {
         super.onResume();
         mapView.onResume();
+        //6-14 地图功耗修改
+        RxBus.getDefault().send(true,Constant.START_OR_STOP_LOCATION);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         mapView.onPause();
+        //6-14 地图功耗修改
+        RxBus.getDefault().send(false,Constant.START_OR_STOP_LOCATION);
     }
 
     @Override

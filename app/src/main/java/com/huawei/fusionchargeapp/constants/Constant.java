@@ -53,4 +53,6 @@ public class Constant {
     public static final String REFRESH_MAIN_HEAD_PHOTO = "refresh_main_head_photo";
     public static final String REFRESH_APPLY_ORDER_LIST_ACTIVITY = "refresh_apply_order_list_activity";
     public static final String PAY_SUCCESS_FINISH="pay_success_finish";
+
+    public static final String START_OR_STOP_LOCATION="start_or_stop_location";
 }
